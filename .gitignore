@@ -1,1 +1,9 @@
-/node_modules
+.DS_Store
+Icon?
+*.tmproj
+._*
+.Spotlight-V100
+.Trashes
+tmp/
+
+node_modules/
