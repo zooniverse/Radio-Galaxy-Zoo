@@ -25,3 +25,215 @@
 .classifier.loading .loader {
   display: block;
 }
+body.radio {
+  color: #fff;
+  background: #000;
+  font: 12px/26px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+body.radio a {
+  color: #fff;
+  text-decoration: none;
+}
+body.radio a:hover,
+body.radio a:active {
+  text-decoration: underline;
+}
+.radio--wrapper {
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.radio--header {
+  margin-top: 80px;
+  overflow: hidden;
+  text-align: center;
+  position: relative;
+  margin-bottom: 10px;
+}
+.radio--header .radio--header--nav {
+  margin: 0;
+  top: 28px;
+  display: block;
+  list-style: none;
+  position: absolute;
+}
+.radio--header .radio--header--nav .radio--header--nav--item {
+  width: 170px;
+  display: block;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.radio--header .radio--header--nav.radio--header--nav__left {
+  left: 0;
+}
+.radio--header .radio--header--nav.radio--header--nav__left .radio--header--nav--item {
+  float: left;
+}
+.radio--header .radio--header--nav.radio--header--nav__right {
+  right: 0;
+}
+.radio--header .radio--header--nav.radio--header--nav__right .radio--header--nav--item {
+  float: right;
+}
+.radio--row {
+  padding-top: 20px;
+  overflow: hidden;
+}
+.radio--options {
+  list-style: none;
+  text-align: center;
+  border-bottom: 1px solid #003c58;
+}
+.radio--options .radio--options--item {
+  display: inline-block;
+  padding: 0 12px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 36px;
+  letter-spacing: 1px;
+  padding-bottom: 10px;
+  text-transform: uppercase;
+}
+.radio--options .radio--options--item.radio--options--item__active,
+.radio--options .radio--options--item.radio--options--item__active a {
+  color: #00b2d3;
+}
+.radio--wizard {
+  padding-top: 25px;
+}
+.radio--wizard .radio--wizard--viewer {
+  float: left;
+  position: relative;
+}
+.radio--wizard .radio--wizard--viewer .radio--wizard--viewer--image {
+  top: 0;
+  left: 0;
+  max-width: 400px;
+  position: absolute;
+}
+.radio--wizard .radio--wizard--info {
+  width: 500px;
+  float: right;
+  color: #485359;
+  text-align: center;
+  border: 6px solid #003d59;
+}
+.radio--wizard .radio--wizard--info a {
+  color: #00b0eb;
+}
+.radio--wizard .radio--wizard--info p {
+  margin: 0;
+}
+.radio--wizard .radio--wizard--info h1 {
+  margin: 0;
+  color: #09181f;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+.radio--wizard .radio--wizard--info .radio--wizard--info--row {
+  padding: 18px 20px;
+  background: #ededed;
+  overflow: hidden;
+  border-top: 1px solid #f9f9f9;
+  border-bottom: 1px solid #dedede;
+}
+.radio--wizard .radio--wizard--info .radio--wizard--info--row.radio--wizard--info--row__inset {
+  background: #d4d4d4;
+}
+.radio--wizard .radio--wizard--info .radio--wizard--slide {
+  float: left;
+}
+.radio--wizard .radio--wizard--info .radio--wizard--slide .radio--wizard--slide--label {
+  display: inline-block;
+  font-weight: 600;
+}
+.radio--wizard .radio--wizard--info .radio--wizard--slide .radio--wizard--slide--line {
+  width: 110px;
+  height: 4px;
+  margin: 0 14px;
+  vertical-align: middle;
+  position: relative;
+  background: #ccc;
+  display: inline-block;
+}
+.radio--wizard .radio--wizard--info .radio--wizard--slide .radio--wizard--slide--line .radio--wizard--slide--dot {
+  top: 0;
+  left: 0;
+  position: absolute;
+  display: inline-block;
+}
+.radio--wizard .radio--wizard--info .radio--wizard--status {
+  float: right;
+}
+/*
+<!DOCTYPE>
+<html>
+  <head>
+    <title></title>
+    <link rel="stylesheet" href="./css/vendor/zooniverse.css" />
+    <link rel="stylesheet" href="./css/main.css" />
+  </head>
+  <body class="radio">
+    <header class="radio--header">
+      <ul class="radio--header--nav radio--header--nav__left">
+        <li class="radio--header--nav--item"><a href="#">Classify</a></li>
+        <li class="radio--header--nav--item"><a href="#">Science</a></li>
+      </ul>
+      <img class="radio--header--logo" src="./img/logo.png" alt="Galaxy Zoo" />
+      <ul class="radio--header--nav radio--header--nav__right">
+        <li class="radio--header--nav--item"><a href="#">Forum</a></li>
+        <li class="radio--header--nav--item"><a href="#">Davidmill</a></li>
+      </ul>
+    </header>
+    <div class="radio--content">
+      <ul class="radio--options">
+        <li class="radio--options--item"><a href="#">Radio</a></li>
+        <li class="radio--options--item"><a href="#">Hubble + SDSS</a></li>
+        <li class="radio--options--item"><a href="#">Lensing</a></li>
+      </ul>
+      <div class="radio--wizard">
+        <section class="radio--wizard--viewer">
+          <img src="http://radio.galaxyzoo.org/subjects/contour/1284.jpg" width="500" height="500" alt="" />
+        </section>
+        <section class="radio--wizard--info">
+          <div class="radio--wizard--info--row">
+            <div class="radio--wizard--slide">
+              <p class="radio--wizard--slide--label radio--wizard--slide--label__left">IR</p>
+              <p class="radio--wizard--slide--label radio--wizard--slide--label__left">R</p>
+              <div class="radio--wizard--slide--line">
+                <div class="radio--wizard--slide--dot"></div>
+              </div>
+            </div>
+            <p class="radio--wizard--status">Step 1 of 2</p>
+          </div>
+          <div class="radio--wizard--info--row">
+            <h1>Identify the infrared source.</h1>
+          </div>
+          <div class="radio--wizard--info--row radio--wizard--info--row__inset">
+            <p>Look for the region(s) where the isolines seem to emanate from.</p>
+            <ul>
+              <li><img src="" alt="" /></li>
+              <li><img src="" alt="" /></li>
+              <li><img src="" alt="" /></li>
+              <li><img src="" alt="" /></li>
+              <li><img src="" alt="" /></li>
+            </ul>
+          </div>
+          <div class="radio--wizard--info--row">
+            <button class="radio--wizard--info--button">No flux</button>
+            <button class="radio--wizard--info--button radio--wizard--info--button__default">Continue</button>
+          </div>
+        </section>
+      </div>
+    </div>
+    <script src="./js/vendor/jquery.js"></script>
+    <script src="./js/vendor/base64.js"></script>
+    <script src="./js/vendor/zooniverse.js"></script>
+    <script src="./js/views/classifier.js"></script>
+    <script src="./js/controllers/classifier.js"></script>
+    <script src="./js/main.js"></script>
+  </body>
+</html>
+*/
