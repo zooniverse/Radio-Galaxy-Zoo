@@ -1,13 +1,63 @@
 <!DOCTYPE>
-
 <html>
   <head>
     <title></title>
     <link rel="stylesheet" href="./css/vendor/zooniverse.css" />
     <link rel="stylesheet" href="./css/main.css" />
   </head>
-
   <body>
+    <header class="radio-header">
+      <ul class="radio-header--nav radio-header--nav__left">
+        <li class="radio-header--nav--item"><a href="#">Classify</a></li>
+        <li class="radio-header--nav--item"><a href="#">Science</a></li>
+      </ul>
+      <img class="radio-header--logo" src="./img/logo.png" alt="Galaxy Zoo" />
+      <ul class="radio-header--nav radio-header--nav__left">
+        <li class="radio-header--nav--item"><a href="#">Forum</a></li>
+        <li class="radio-header--nav--item"><a href="#">Davidmill</a></li>
+      </ul>
+    </header>
+    <div class="radio-body">
+      <ul class="radio-options">
+        <li><a href="#">Radio</a></li>
+        <li><a href="#">Hubble + SDSS</a></li>
+        <li><a href="#">Lensing</a></li>
+      </ul>
+      <div class="radio-wizard">
+        <section class="radio-wizard--viewer">
+          <img src="http://radio.galaxyzoo.org/subjects/contour/1284.jpg" width="500" height="500" alt="" />
+        </section>
+        <section class="radio-wizard--info">
+          <div class="radio-wizard--info--row">
+            <div class="radio-wizard--slide">
+              <p class="radio-wizard--slide--label radio-wizard--slide--label__left">IR</p>
+              <p class="radio-wizard--slide--label radio-wizard--slide--label__left">R</p>
+              <div class="radio-wizard--slide--line">
+                <div class="radio-wizard--slide--dot"></div>
+              </div>
+            </div>
+            <p class="radio-wizard--status">Step 1 of 2</p>
+          </div>
+          <div class="radio-wizard--info--row">
+            <h1>Identify the infrared source.</h1>
+          </div>
+          <div class="radio-wizard--info--row radio-wizard--info--row__inset">
+            <p>Look for the region(s) where the isolines seem to emanate from.</p>
+            <ul>
+              <li><img src="" alt="" /></li>
+              <li><img src="" alt="" /></li>
+              <li><img src="" alt="" /></li>
+              <li><img src="" alt="" /></li>
+              <li><img src="" alt="" /></li>
+            </ul>
+          </div>
+          <div class="radio-wizard--info--row">
+            <button class="radio-wizard--info--button">No flux</button>
+            <button class="radio-wizard--info--button radio-wizard--info--button__default">Continue</button>
+          </div>
+        </section>
+      </div>
+    </div>
     <script src="./js/vendor/jquery.js"></script>
     <script src="./js/vendor/base64.js"></script>
     <script src="./js/vendor/zooniverse.js"></script>

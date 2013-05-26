@@ -1,7 +1,7 @@
 window.app ?= {}
 window.app.views ?= {}
 
-window.app.views.Classifier = '''
+window.app.views.Classifier = """
   <div class="subject">
     <div class="loader">
       <strong>Loading...</strong>
@@ -22,4 +22,4 @@ window.app.views.Classifier = '''
       <button name="next">Next</button>
     </span>
   </div>
-'''
+"""

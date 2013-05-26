@@ -2,7 +2,7 @@ window.app ?= {}
 
 # First we'll set up the connection to the Zooniverse API.
 Api = zooniverse.Api
-api = new Api project: 'cancer_gene_runner'
+api = new Api project: "radio"
 
 # The top bar allows login and signup.
 TopBar = zooniverse.controllers.TopBar

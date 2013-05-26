@@ -9,7 +9,7 @@
   Api = zooniverse.Api;
 
   api = new Api({
-    project: 'cancer_gene_runner'
+    project: "radio"
   });
 
   TopBar = zooniverse.controllers.TopBar;

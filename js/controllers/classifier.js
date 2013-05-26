@@ -24,16 +24,16 @@
   $window = $(window);
 
   window.data = function(points) {
-    return $window.trigger('subject-data-load', [points]);
+    return $window.trigger("subject-data-load", [points]);
   };
 
   Classifier = (function() {
 
     Classifier.prototype.el = null;
 
-    Classifier.prototype.tagName = 'div';
+    Classifier.prototype.tagName = "div";
 
-    Classifier.prototype.className = 'classifier';
+    Classifier.prototype.className = "classifier";
 
     Classifier.prototype.svg = null;
 
@@ -63,24 +63,30 @@
       this.onGettingNextSubject = __bind(this.onGettingNextSubject, this);
 
       this.onUserChange = __bind(this.onUserChange, this);
+
+      this.render = __bind(this.render, this);
       this.el = $(document.createElement(this.tagName));
-      this.el.addClass('classifier');
-      this.el.addClass('loading');
+      this.el.addClass("classifier");
+      this.el.addClass("loading");
       this.el.append(template);
-      this.el.on('change', 'input[name="suspicious"]', this.onChangeSuspicious);
-      this.el.on('click', 'button[name="submit"]', this.onClickSubmit);
-      this.el.on('click', 'button[name="next"]', this.onClickNext);
-      User.on('change', this.onUserChange);
-      Subject.on('get-next', this.onGettingNextSubject);
-      Subject.on('select', this.onSubjectSelect);
-      $window.on('subject-data-load', this.onSubjectDataLoad);
-      Subject.on('no-more', this.onNoMoreSubjects);
-      this.svg = this.el.find('.subject svg');
-      this.path = this.el.find('.subject svg path');
-      this.suspiciousCheckbox = this.el.find('input[name="suspicious"]');
-      this.submitButton = this.el.find('button[name="submit"]');
-      this.nextButton = this.el.find('button[name="next"]');
+      this.el.on("change", "input[name='suspicious']", this.onChangeSuspicious);
+      this.el.on("click", "button[name='submit']", this.onClickSubmit);
+      this.el.on("click", "button[name='next']", this.onClickNext);
+      User.on("change", this.onUserChange);
+      Subject.on("get-next", this.onGettingNextSubject);
+      Subject.on("select", this.onSubjectSelect);
+      $window.on("subject-data-load", this.onSubjectDataLoad);
+      Subject.on("no-more", this.onNoMoreSubjects);
+      this.svg = this.el.find(".subject svg");
+      this.path = this.el.find(".subject svg path");
+      this.suspiciousCheckbox = this.el.find("input[name='suspicious']");
+      this.submitButton = this.el.find("button[name='submit']");
+      this.nextButton = this.el.find("button[name='next']");
     }
+
+    Classifier.prototype.render = function() {
+      return this.el.html("<div class=\"subject\">\n  <div class=\"loader\">\n    <strong>Loading...</strong>\n  </div>\n  <img src=\"" + Subject.current.location.standard + "\" style=\"max-width: 500px;\" />\n  <img src=\"" + Subject.current.location.contour + "\" style=\"max-width: 500px;\" />\n  <svg width=\"100%\" height=\"100%\">\n    <path d=\"M0,0\" fill=\"transparent\" stroke=\"black\" stroke-width=\"1\" />\n  </svg>\n</div>\n\n<div class=\"controls\">\n  <span class=\"classify\">\n    <label><input type=\"checkbox\" name=\"suspicious\" /> Suspicious!</label>\n    <button name=\"submit\">Submit</button>\n  </span>\n\n  <span class=\"move-on\">\n    <button name=\"next\">Next</button>\n  </span>\n</div>");
+    };
 
     Classifier.prototype.onUserChange = function() {
       return Subject.next();
@@ -96,22 +102,19 @@
       this.nextButton.attr({
         disabled: true
       });
-      return this.el.addClass('loading');
+      return this.el.addClass("loading");
     };
 
     Classifier.prototype.onSubjectSelect = function() {
-      var get,
-        _this = this;
       this.classification = new Classification({
         subject: Subject.current
       });
       this.annotation = this.classification.annotate({
         suspicious: false
       });
-      get = $.getScript(Subject.current.location.standard);
-      return get.always(function() {
-        return _this.el.removeClass('loading');
-      });
+      console.log(Subject.current.location.standard);
+      console.log(Subject.current.location.contour);
+      return this.render();
     };
 
     Classifier.prototype.onSubjectDataLoad = function(e, points) {
@@ -127,7 +130,7 @@
       });
       width = this.svg.parent().width();
       halfHeight = this.svg.parent().height() / 2;
-      pathData = 'M0,0';
+      pathData = "M0,0";
       _ref2 = points.slice(0, width);
       for (i = _i = 0, _len = _ref2.length; _i < _len; i = ++_i) {
         _ref3 = _ref2[i], x = _ref3[0], y = _ref3[1];
@@ -139,14 +142,14 @@
     };
 
     Classifier.prototype.onNoMoreSubjects = function() {
-      this.el.removeClass('loading');
-      return alert('Great work: we\'re currently out of data! Try again later.');
+      this.el.removeClass("loading");
+      return alert("Great work: we\"re currently out of data! Try again later.");
     };
 
     Classifier.prototype.onChangeSuspicious = function() {
       this.classification.removeAnnotation(this.annotation);
       return this.annotation = this.classification.annotate({
-        suspicious: !!this.suspiciousCheckbox.attr('checked')
+        suspicious: !!this.suspiciousCheckbox.attr("checked")
       });
     };
 
@@ -160,8 +163,8 @@
       this.nextButton.attr({
         disabled: false
       });
-      console.log('Sending classification', JSON.stringify(this.classification));
-      return this.el.addClass('finished');
+      console.log("Sending classification", JSON.stringify(this.classification));
+      return this.el.addClass("finished");
     };
 
     Classifier.prototype.onClickNext = function() {
@@ -169,7 +172,7 @@
         disabled: true
       });
       Subject.next();
-      return this.el.removeClass('finished');
+      return this.el.removeClass("finished");
     };
 
     return Classifier;
