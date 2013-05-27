@@ -85,7 +85,33 @@
     }
 
     Classifier.prototype.render = function() {
-      return this.el.html("<div class=\"subject\">\n  <div class=\"loader\">\n    <strong>Loading...</strong>\n  </div>\n  <img src=\"" + Subject.current.location.standard + "\" style=\"max-width: 500px;\" />\n  <img src=\"" + Subject.current.location.contour + "\" style=\"max-width: 500px;\" />\n  <svg width=\"100%\" height=\"100%\">\n    <path d=\"M0,0\" fill=\"transparent\" stroke=\"black\" stroke-width=\"1\" />\n  </svg>\n</div>\n\n<div class=\"controls\">\n  <span class=\"classify\">\n    <label><input type=\"checkbox\" name=\"suspicious\" /> Suspicious!</label>\n    <button name=\"submit\">Submit</button>\n  </span>\n\n  <span class=\"move-on\">\n    <button name=\"next\">Next</button>\n  </span>\n</div>");
+      return this.el.html(require("views/test"));
+      /*
+          @el.html """
+            <div class="subject">
+              <div class="loader">
+                <strong>Loading...</strong>
+              </div>
+              <img src="#{Subject.current.location.standard}" style="max-width: 500px;" />
+              <img src="#{Subject.current.location.contour}" style="max-width: 500px;" />
+              <svg width="100%" height="100%">
+                <path d="M0,0" fill="transparent" stroke="black" stroke-width="1" />
+              </svg>
+            </div>
+      
+            <div class="controls">
+              <span class="classify">
+                <label><input type="checkbox" name="suspicious" /> Suspicious!</label>
+                <button name="submit">Submit</button>
+              </span>
+      
+              <span class="move-on">
+                <button name="next">Next</button>
+              </span>
+            </div>
+          """
+      */
+
     };
 
     Classifier.prototype.onUserChange = function() {

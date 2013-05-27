@@ -4,7 +4,8 @@
   "dependencies": {
     "coffee-script": "~1.4.0",
     "serveup": "~0.0.5",
-    "stylus": "~0.32.0"
+    "stylus": "~0.32.0",
+    "eco": "~1.0"
   },
   "scripts": {
     "start": "cake serve"

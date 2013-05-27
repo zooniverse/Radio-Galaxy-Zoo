@@ -64,6 +64,8 @@ class Classifier
     @nextButton = @el.find "button[name='next']"
 
   render: =>
+    @el.html require("views/test")
+    ###
     @el.html """
       <div class="subject">
         <div class="loader">
@@ -87,6 +89,7 @@ class Classifier
         </span>
       </div>
     """
+    ###
 
   onUserChange: =>
     # Calling "next" will select the next subject
