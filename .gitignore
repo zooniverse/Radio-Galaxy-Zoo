@@ -1,9 +1,6 @@
 .DS_Store
-Icon?
-*.tmproj
-._*
-.Spotlight-V100
-.Trashes
-tmp/
-
+docs/
 node_modules/
+build/
+app/lib/
+public/data

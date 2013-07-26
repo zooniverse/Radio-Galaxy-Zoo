@@ -1,13 +1,17 @@
 {
-  "name": "radio",
+  "name": "Radio-Galaxy-Zoo",
+  "description": "Cross matching infrared and radio sources.",
+  "author": "Zooniverse <support@zooniverse.org>",
   "version": "0.0.1",
-  "dependencies": {
-    "coffee-script": "~1.4.0",
-    "serveup": "~0.0.5",
-    "stylus": "~0.32.0",
-    "eco": "~1.0"
-  },
   "scripts": {
-    "start": "cake serve"
-  }
+    "start": "haw serve"
+  },
+  "dependencies": {
+    "zooniverse": "git://github.com/zooniverse/Zooniverse.git#no-deps",
+    "zootorial": "0.3.x"
+  },
+  "devDependencies": {
+    "haw": "0.1.x"
+  },
+  "engine": "node >= 0.10.12"
 }

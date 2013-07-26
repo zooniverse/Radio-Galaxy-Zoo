@@ -1,0 +1,41 @@
+<html data-ng-app='radio-galaxy-zoo'>
+<head>
+  <meta charset='utf-8'>
+  
+  <title>Radio Galaxy Zoo</title>
+  <link rel="stylesheet" href="./application.css" type="text/css" charset="utf-8">
+</head>
+
+<body data-ng-controller='AppController'>
+  
+  <div class="navbar">
+    <div class="navbar-inner">
+      <a class="brand" href="#/">Radio Galaxy Zoo</a>
+      <ul class="nav">
+        <li data-ng-class="{active: slug == 'home'}"><a href="#/">Home</a></li>
+        <li data-ng-class="{active: slug == 'classify'}"><a href="#/classify">Classify</a></li>
+        <li data-ng-class="{active: slug == 'science'}"><a href="#/science">Science</a></li>
+        <li data-ng-class="{active: slug == 'team'}"><a href="#/team">Team</a></li>
+        <li data-ng-class="{active: slug == 'profile'}"><a href="#/profile">Profile</a></li>
+        <li><a href="http://radiotalk.galaxyzoo.org/">Discuss</a></li>
+        <li><a href="http://radioblog.galaxyzoo.org/">Blog</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class='container'>
+    <div class='row'>
+      <div class='span8'>
+        <ng-view></ng-view>
+      </div>
+      
+      <div class='span4'>
+        <p>We need your help to cross-match the remaining 10% of radio sources from our survey!</p>
+      </div>
+    </div>
+  </div>
+  
+  <script src="./application.js" type="text/javascript" charset="utf-8"></script>
+</body>
+
+</html>

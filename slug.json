@@ -1,0 +1,9 @@
+{
+  "port": 9294,
+  "libs": [
+    "./app/lib/angular.js",
+    "./app/lib/fits.js",
+    "./app/lib/conrec.js",
+    "./app/lib/kinetic.js"
+  ]
+}
