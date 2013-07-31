@@ -1,23 +1,29 @@
 
 # Import controllers
-AppController = require './controllers/app'
-ClassifierController = require './controllers/classifier'
+ClassifierCtrl  = require './controllers/classifier'
 
 # Import directives
-ContoursDirective = require './directives/contours'
+ImageOpacityDirective = require './directives/image_opacity'
+ContoursDirective     = require './directives/contours'
+
+# Import services
+ClassifierModel = require './services/classifier'
 
 # Import templates
-homeTemplate = require './partials/home'
-classifierTemplate = require './partials/classifier'
-profileTemplate = require './partials/profile'
-scienceTemplate = require './partials/science'
-teamTemplate = require './partials/team'
+homeTemplate        = require './partials/home'
+classifierTemplate  = require './partials/classifier'
+profileTemplate     = require './partials/profile'
+scienceTemplate     = require './partials/science'
+teamTemplate        = require './partials/team'
 
-# Setup application and connect controllers
+# Set up application module
 RadioGalaxyZoo = angular.module('radio-galaxy-zoo', [])
-RadioGalaxyZoo.controller('AppController', AppController)
-RadioGalaxyZoo.controller('ClassifierController', ClassifierController)
 
+# Connect controllers and services and directives
+RadioGalaxyZoo.controller('ClassifierCtrl', ["$scope", "classifierModel", ClassifierCtrl])
+RadioGalaxyZoo.service('classifierModel', ["$http", ClassifierModel])
+
+RadioGalaxyZoo.directive('imageOpacity', ImageOpacityDirective)
 RadioGalaxyZoo.directive('contours', ContoursDirective)
 
 # Configure routes

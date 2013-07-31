@@ -3,4 +3,6 @@ docs/
 node_modules/
 build/
 app/lib/
-public/data
+public/data*
+data-import/
+public/*.json
