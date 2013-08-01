@@ -11,7 +11,9 @@
     "zootorial": "0.3.x"
   },
   "devDependencies": {
-    "haw": "0.1.x"
+    "haw": "0.1.x",
+    "express": "3.3.x",
+    "nodemon": "0.7.x"
   },
   "engine": "node >= 0.10.12"
 }

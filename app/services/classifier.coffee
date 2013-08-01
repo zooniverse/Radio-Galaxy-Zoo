@@ -4,6 +4,8 @@ class ClassifierModel
   constructor: ($http) ->
     
     # TODO: Is this weird?
+    $http.defaults.useXDomain = true
+    delete $http.defaults.headers.common['X-Requested-With']
     @$http = $http
     
     @infraredSource = null
@@ -17,20 +19,36 @@ class ClassifierModel
     @contourMin = null
     @contourMax = null
     
+    # Classification parameters
+    @selectedContours = {}
+    
+    # Initialize canvas with Kinetic
+    @stage = new Kinetic.Stage
+      container: 'contours'
+      width: 500
+      height: 500
+    
     @getSubject()
   
-  getSubject: ->
+  getSubject: (id) ->
+    console.log 'getSubject'
     
-    @$http.get('test-subjects.json')
+    # Clear the stage
+    @stage.removeChildren()
+    
+    # Clear the classification parameters
+    @selectedContours = {}
+    
+    @$http.get('http://0.0.0.0:8000/')
       .success( (data) =>
+        @subject = data
         
-        # Choose a random subject for now
-        @subject = data[ Math.floor( Math.random() * data.length ) ]
         @infraredSource = @subject.location.ir
         @radioSource = @subject.location.radio
         
+        raw = "#{@subject.location.raw}"
         # Request raw data
-        new astro.FITS(@subject.location.raw, (f) =>
+        new astro.FITS(raw, (f) =>
           image = f.getDataUnit()
           
           @width = image.width
@@ -99,35 +117,56 @@ class ClassifierModel
     @drawContours(contours)
   
   drawContours: (contours) ->
-    stage = new Kinetic.Stage
-      container: 'contours'
-      width: 500
-      height: 500
-      
-    layer = new Kinetic.Layer()
-    factor = 500 / @width
+    # Clear the stage
+    @stage.removeChildren()
     
-    for contour in contours
+    factor = 500 / @width
+    layer = new Kinetic.Layer()
+    for contour, index in contours
       points = []
       
+      # Choose every N to save on draw time
       for point in contour by 4
         points.push factor * point.y
         points.push factor * point.x
-        
+      
       poly = new Kinetic.Polygon
+        id: index
         points: points
-        stroke: "#00FF00"
+        stroke: "#FAFAFA"
         fillEnabled: true
         strokeWidth: 1.5
         
-      poly.on("click", (e) ->
-        @setStroke("#FAFAFA")
+      poly.on("click", (e) =>
+        poly = e.targetNode
+        
+        stroke = poly.getStroke()
+        if stroke is "#00FF00"
+          # Polygon deselected
+          stroke = "#FAFAFA"
+          delete @selectedContours[poly.getId()]
+        else
+          # Polygon selected
+          stroke = "#00FF00"
+          @selectedContours[poly.getId()] = poly
+        
+        poly.setStroke(stroke)
         layer.draw()
       )
       
       layer.add(poly)
       
-    stage.add(layer)
-
+    @stage.add(layer)
+  
+  drawSelected: ->
+    @stage.removeChildren()
+    
+    layer = new Kinetic.Layer()
+    for id, poly of @selectedContours
+      poly.setListening(false)
+      layer.add(poly)
+    layer.draw()
+    
+    @stage.add(layer)
 
 module.exports = ClassifierModel

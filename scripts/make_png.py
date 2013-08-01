@@ -13,20 +13,18 @@ def make_png(f):
   
   # Get flux
   data = fits.getdata(f)
+  data = np.flipud(data)
   
-  # Stretch and scale images
-  # midpoint = 0.0625
-  # data = np.log10(data / midpoint + 1.) / np.log10(1. / midpoint + 1.)
-  midpoint = -0.033
-  data = np.arcsinh(data / midpoint) / np.arcsinh(1. / midpoint)
-  
-  minimum = np.nanmin(data)
-  maximum = np.nanmax(data)
-  data = (255 * (data - minimum) / (maximum - minimum)).astype('uint8')
+  vmin = -1.3
+  vmax = -0.5
+  data = np.log10(data)
+  data = np.clip(data, vmin, vmax)
+  data = (255 * (data - vmin) / (vmax - vmin)).astype('uint8')
   
   cmap = plt.get_cmap('gist_heat')
   data = (255 * cmap(data)).astype('uint8')
   im = Image.fromarray(data)
+  im = im.resize( (500, 500), Image.ANTIALIAS)
   im.save("%s.png" % (name))
 
 

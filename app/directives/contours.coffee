@@ -5,8 +5,8 @@ module.exports = ->
     link: (scope, elem, attrs) ->
       scope.$watch('showContours', (val) ->
         if val
-          elem.removeClass('hide')
+          elem.removeClass('fade')
         else
-          elem.addClass('hide')
+          elem.addClass('fade')
       )
   }

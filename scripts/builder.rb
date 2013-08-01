@@ -4,13 +4,13 @@ require 'json'
 # Open CSV describing data
 path = File::join(File.dirname(__FILE__), '..', 'data-import', 'rgz', 'input_ELAIS.dat_good.csv')
 
-subjects = []
+subjects = {}
 CSV.foreach(path, :headers => true) do |row|
   
   subject = {}
   
   subject['location'] = {}
-  subject['location']['ir'] = "data/#{row[0]}_heatmap+contours.png"
+  subject['location']['ir'] = "data/#{row[0]}_ir.png"
   subject['location']['radio'] = "data/#{row[0]}_radio.png"
   subject['location']['raw'] = "data/#{row[0]}_radio.fits"
   
@@ -20,7 +20,7 @@ CSV.foreach(path, :headers => true) do |row|
   subject['metadata']['cid'] = row[3]
   subject['metadata']['swire'] = row[4]
   
-  subjects.push subject
+  subjects[ row[0] ]  = subject
 end
 
 puts subjects.to_json()
