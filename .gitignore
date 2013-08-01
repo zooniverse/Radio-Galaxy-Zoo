@@ -8,3 +8,4 @@ data-import/
 public/*.json
 server/*.js
 *.map
+server/*.json
