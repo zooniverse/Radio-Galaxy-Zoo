@@ -24,6 +24,12 @@ Classifier = ($scope, $routeParams, classifierModel) ->
   $scope.getRadioSource = ->
     return classifierModel.radioSource
   
+  $scope.onContinue = ->
+    console.log 'Continue'
+    $scope.step = 2
+    classifierModel.drawSelectedContours()
+    classifierModel.createCircleLayer()
+  
   $scope.onNoFlux = ->
     console.log 'No Flux'
     
@@ -33,11 +39,6 @@ Classifier = ($scope, $routeParams, classifierModel) ->
     classifierModel.getSubject()
     
     $scope.step = 1
-  
-  $scope.onContinue = ->
-    console.log 'Continue'
-    $scope.step = 2
-    classifierModel.drawSelected()
   
   $scope.onDone = ->
     console.log 'Done'

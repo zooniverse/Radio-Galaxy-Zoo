@@ -77,6 +77,8 @@ class ClassifierModel
     return steps
   
   updateContourParam: (min, max, level) ->
+    return if level is @level
+    
     @level = level
     @contourMin = 0.001 * (@dataMax - @dataMin) * parseInt(min) + @dataMin
     @contourMax = 0.001 * (@dataMax - @dataMin) * parseInt(max) + @dataMin
@@ -158,15 +160,66 @@ class ClassifierModel
       
     @stage.add(layer)
   
-  drawSelected: ->
+  drawSelectedContours: ->
     @stage.removeChildren()
     
     layer = new Kinetic.Layer()
+    
     for id, poly of @selectedContours
       poly.setListening(false)
       layer.add(poly)
     layer.draw()
-    
     @stage.add(layer)
+  
+  createCircleLayer: ->
+    console.log 'createCircleLayer'
+    
+    el = @stage.getContainer()
+    layer = @stage.getLayers()[0]
+    
+    el.onmousemove = (e) ->
+      return unless @selectedCircle?
+      
+      x = e.layerX
+      y = e.layerY
+      
+      # Get center point of selected circle
+      
+      position = @selectedCircle.getAbsolutePosition()
+      xc = position.x
+      yc = position.y
+      
+      deltaX = x - xc
+      deltaY = y - yc
+      radius = Math.sqrt(deltaX * deltaX + deltaY * deltaY)
+      
+      @selectedCircle.setRadius(radius)
+      layer.draw()
+    
+    el.onmouseup = (e) -> @selectedCircle = null
+    el.onmouseout = (e) -> @selectedCircle = null
+    
+    el.onmousedown = (e) ->
+      
+      # Create circle on mousedown
+      circle = new Kinetic.Circle
+        x: e.layerX
+        y: e.layerY
+        radius: 10
+        fillEnabled: true
+        stroke: "#00FF00"
+        strokeWidth: 1
+        dashArray: [6, 2]
+        draggable: true
+      
+      circle.on("mousedown", (e) ->
+        e.cancelBubble = true
+      )
+      
+      layer.add(circle)
+      layer.draw()
+      
+      @selectedCircle = circle
+
 
 module.exports = ClassifierModel
