@@ -1,13 +1,20 @@
 
 template = """
 <div class="classifier row" data-ng-controller="ClassifierCtrl">
-  <div class="viewport span4">
+  <div class="viewport col-lg-4">
     <img data-ng-src="{{ getRadioSource() }}">
     <img class="image-opacity" data-ng-src="{{ getInfraredSource() }}">
     <div id="contours" class='contours'></div>
+      
+    <div id="svg-contours" class='contours'>
+      <svg xmlns="http://www.w3.org/2000/svg" class="svg-contours">
+        <path ng-repeat="c in contours" class="svg-contour blah" ng-click="onContour($event)" ng-attr-src="{{ src }}" ng-attr-d="{{ drawContour(c) }}"></path>
+      </svg>
+    </div>
+    
   </div>
   
-  <div class="workflow span4">
+  <div class="workflow col-lg-4">
     <input type="range" min="0" max="1" step="0.01" data-ng-model="opacity">
     <input type="checkbox" data-ng-model="showContours">
     
@@ -16,7 +23,6 @@ template = """
     <br><br>
     <input type="range" min="0" max="1000" step="1" data-ng-model="min" ng-mouseup="updateContourParam()">
     <input type="range" min="0" max="1000" step="1" data-ng-model="max" ng-mouseup="updateContourParam()">
-    
     
     <div ng-switch on="step">
       <div ng-switch-when="1">

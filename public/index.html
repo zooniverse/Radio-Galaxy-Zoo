@@ -9,27 +9,25 @@
 <body data-ng-app='radio-galaxy-zoo'>
   
   <div class="navbar">
-    <div class="navbar-inner">
-      <a class="brand" href="#/">Radio Galaxy Zoo</a>
-      <ul class="nav">
-        <li data-ng-class="{active: slug == 'home'}"><a href="#/">Home</a></li>
-        <li data-ng-class="{active: slug == 'classify'}"><a href="#/classify">Classify</a></li>
-        <li data-ng-class="{active: slug == 'science'}"><a href="#/science">Science</a></li>
-        <li data-ng-class="{active: slug == 'team'}"><a href="#/team">Team</a></li>
-        <li data-ng-class="{active: slug == 'profile'}"><a href="#/profile">Profile</a></li>
-        <li><a href="http://radiotalk.galaxyzoo.org/">Discuss</a></li>
-        <li><a href="http://radioblog.galaxyzoo.org/">Blog</a></li>
-      </ul>
-    </div>
+    <a class="navbar-brand" href="#/">Radio Galaxy Zoo</a>
+    <ul class="nav navbar-nav">
+      <li data-ng-class="{active: slug == 'home'}"><a href="#/">Home</a></li>
+      <li data-ng-class="{active: slug == 'classify'}"><a href="#/classify">Classify</a></li>
+      <li data-ng-class="{active: slug == 'science'}"><a href="#/science">Science</a></li>
+      <li data-ng-class="{active: slug == 'team'}"><a href="#/team">Team</a></li>
+      <li data-ng-class="{active: slug == 'profile'}"><a href="#/profile">Profile</a></li>
+      <li><a href="http://radiotalk.galaxyzoo.org/">Discuss</a></li>
+      <li><a href="http://radioblog.galaxyzoo.org/">Blog</a></li>
+    </ul>
   </div>
   
   <div class='container'>
     <div class='row'>
-      <div class='span10'>
+      <div class='col-lg-10'>
         <div data-ng-view></div>
       </div>
       
-      <div class='span2'>
+      <div class='col-lg-2'>
         <p>We need your help to cross-match the remaining 10% of radio sources from our survey!</p>
       </div>
     </div>

@@ -1,12 +1,15 @@
 
 class ClassifierModel
     
-  constructor: ($http) ->
+  constructor: ($rootScope, $http) ->
     
     # TODO: Is this weird?
+    @$http = $http
+    @$rootScope = $rootScope
+    
     $http.defaults.useXDomain = true
     delete $http.defaults.headers.common['X-Requested-With']
-    @$http = $http
+    
     
     @infraredSource = null
     @radioSource = null
@@ -18,6 +21,9 @@ class ClassifierModel
     @dataMax = null
     @contourMin = null
     @contourMax = null
+    
+    @contours = null
+    @src = null
     
     # Classification parameters
     @selectedContours = {}
@@ -43,6 +49,7 @@ class ClassifierModel
       .success( (data) =>
         @subject = data
         
+        @src = @subject.metadata.src
         @infraredSource = @subject.location.ir
         @radioSource = @subject.location.radio
         
@@ -114,112 +121,8 @@ class ClassifierModel
     
     conrec = new Conrec()
     conrec.contour(data, ilb, iub, jlb, jub, idx, jdx, z.length, z)
-    contours = conrec.contourList()
-    
-    @drawContours(contours)
-  
-  drawContours: (contours) ->
-    # Clear the stage
-    @stage.removeChildren()
-    
-    factor = 500 / @width
-    layer = new Kinetic.Layer()
-    for contour, index in contours
-      points = []
-      
-      # Choose every N to save on draw time
-      for point in contour by 4
-        points.push factor * point.y
-        points.push factor * point.x
-      
-      poly = new Kinetic.Polygon
-        id: index
-        points: points
-        stroke: "#FAFAFA"
-        fillEnabled: true
-        strokeWidth: 1.5
-        
-      poly.on("click", (e) =>
-        poly = e.targetNode
-        
-        stroke = poly.getStroke()
-        if stroke is "#00FF00"
-          # Polygon deselected
-          stroke = "#FAFAFA"
-          delete @selectedContours[poly.getId()]
-        else
-          # Polygon selected
-          stroke = "#00FF00"
-          @selectedContours[poly.getId()] = poly
-        
-        poly.setStroke(stroke)
-        layer.draw()
-      )
-      
-      layer.add(poly)
-      
-    @stage.add(layer)
-  
-  drawSelectedContours: ->
-    @stage.removeChildren()
-    
-    layer = new Kinetic.Layer()
-    
-    for id, poly of @selectedContours
-      poly.setListening(false)
-      layer.add(poly)
-    layer.draw()
-    @stage.add(layer)
-  
-  createCircleLayer: ->
-    console.log 'createCircleLayer'
-    
-    el = @stage.getContainer()
-    layer = @stage.getLayers()[0]
-    
-    el.onmousemove = (e) ->
-      return unless @selectedCircle?
-      
-      x = e.layerX
-      y = e.layerY
-      
-      # Get center point of selected circle
-      
-      position = @selectedCircle.getAbsolutePosition()
-      xc = position.x
-      yc = position.y
-      
-      deltaX = x - xc
-      deltaY = y - yc
-      radius = Math.sqrt(deltaX * deltaX + deltaY * deltaY)
-      
-      @selectedCircle.setRadius(radius)
-      layer.draw()
-    
-    el.onmouseup = (e) -> @selectedCircle = null
-    el.onmouseout = (e) -> @selectedCircle = null
-    
-    el.onmousedown = (e) ->
-      
-      # Create circle on mousedown
-      circle = new Kinetic.Circle
-        x: e.layerX
-        y: e.layerY
-        radius: 10
-        fillEnabled: true
-        stroke: "#00FF00"
-        strokeWidth: 1
-        dashArray: [6, 2]
-        draggable: true
-      
-      circle.on("mousedown", (e) ->
-        e.cancelBubble = true
-      )
-      
-      layer.add(circle)
-      layer.draw()
-      
-      @selectedCircle = circle
+    @contours = conrec.contourList()
+    @$rootScope.$broadcast('ready')
 
 
 module.exports = ClassifierModel
