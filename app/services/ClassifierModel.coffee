@@ -26,24 +26,29 @@ class ClassifierModel
     @src = null
     
     # Classification parameters
-    @selectedContours = {}
-    
-    # Initialize canvas with Kinetic
-    @stage = new Kinetic.Stage
-      container: 'contours'
-      width: 500
-      height: 500
-    
+    @selectedContours = []
+    @circles = []
     @getSubject()
+  
+  addContour: (value) ->
+    @selectedContours.push(value)
+  removeContour: (value) ->
+    index = @selectedContours.indexOf(value)
+    @selectedContours.splice(index, 1)
+    
+  addCircle: (x, y) ->
+    circle =
+      x: x
+      y: y
+      radius: 20
+    @circles.push(circle)
   
   getSubject: (id) ->
     console.log 'getSubject'
     
-    # Clear the stage
-    @stage.removeChildren()
-    
     # Clear the classification parameters
-    @selectedContours = {}
+    @selectedContours = []
+    @circles = []
     
     @$http.get('http://0.0.0.0:8000/')
       .success( (data) =>
@@ -123,6 +128,8 @@ class ClassifierModel
     conrec.contour(data, ilb, iub, jlb, jub, idx, jdx, z.length, z)
     @contours = conrec.contourList()
     @$rootScope.$broadcast('ready')
+  
+  
 
 
 module.exports = ClassifierModel

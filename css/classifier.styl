@@ -2,20 +2,26 @@ $subject-width = 500
 $subject-height = 500
 
 .svg-contour
-  fill: none
-  fill-opacity: 0
-  fill: #000
-  stroke: #FFF
-  stroke-width: 2px
+  fill #000
+  fill-opacity 0
+  stroke #FFF
+  stroke-width 2px
   
   &.selected
-    stroke: #00FF00
+    stroke #00FF00
 
+circle
+  fill none
+  fill-opacity 0
+  stroke #FAFAFA
+  stroke-width 1px
+  
 
 .classifier
   position relative
   
   .viewport
+    user-select none
     position relative
     width $subject-width
     height $subject-height

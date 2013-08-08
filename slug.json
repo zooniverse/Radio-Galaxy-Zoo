@@ -4,7 +4,6 @@
     "./app/lib/angular.js",
     "./app/lib/fits.js",
     "./app/lib/conrec.js",
-    "./app/lib/html5slider.js",
-    "./app/lib/kinetic.js"
+    "./app/lib/html5slider.js"
   ]
 }
