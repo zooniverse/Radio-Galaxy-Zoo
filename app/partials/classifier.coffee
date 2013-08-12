@@ -3,7 +3,7 @@ template = """
 <div class="classifier row" data-ng-controller="ClassifierCtrl">
   <div class="viewport col-lg-4">
     <img data-ng-src="{{ getRadioSource() }}">
-    <img class="image-opacity" data-ng-src="{{ getInfraredSource() }}">
+    <img class="infrared" data-ng-src="{{ getInfraredSource() }}">
     
     <div id="svg-contours" class='contours marking'>
       <svg xmlns="http://www.w3.org/2000/svg" class="svg-contours">
@@ -16,7 +16,7 @@ template = """
   </div>
   
   <div class="workflow col-lg-4">
-    <input type="range" min="0" max="1" step="0.01" data-ng-model="opacity">
+    <input class='image-opacity' type="range" min="0" max="1" step="0.01" value="0">
     <input type="checkbox" data-ng-model="showContours">
     
     <!--

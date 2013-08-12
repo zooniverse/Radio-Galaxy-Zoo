@@ -5,7 +5,6 @@ Classifier = ($scope, $routeParams, classifierModel) ->
   
   $scope.classifierModel = classifierModel
   $scope.showContours = true
-  $scope.opacity = 0
   $scope.step = 1
   $scope.level = 3
     
@@ -45,6 +44,7 @@ Classifier = ($scope, $routeParams, classifierModel) ->
   
   $scope.drawContour = (contour) ->
     return unless contour
+    console.log 'drawContour'
     
     factor = 500 / 301
     
