@@ -10,7 +10,6 @@ class ClassifierModel
     $http.defaults.useXDomain = true
     delete $http.defaults.headers.common['X-Requested-With']
     
-    
     @infraredSource = null
     @radioSource = null
     @level = 3
@@ -32,6 +31,7 @@ class ClassifierModel
   
   addContour: (value) ->
     @selectedContours.push(value)
+  
   removeContour: (value) ->
     index = @selectedContours.indexOf(value)
     @selectedContours.splice(index, 1)
@@ -44,13 +44,12 @@ class ClassifierModel
     @circles.push(circle)
   
   getSubject: (id) ->
-    console.log 'getSubject'
     
     # Clear the classification parameters
     @selectedContours = []
     @circles = []
     
-    @$http.get('http://0.0.0.0:8000/')
+    @$http.get('http://0.0.0.0:9000/')
       .success( (data) =>
         @subject = data
         
@@ -59,6 +58,7 @@ class ClassifierModel
         @radioSource = @subject.location.radio
         
         raw = "#{@subject.location.raw}"
+        
         # Request raw data
         new astro.FITS(raw, (f) =>
           image = f.getDataUnit()
@@ -98,6 +98,7 @@ class ClassifierModel
     @getContours()
   
   getContours: () ->
+    console.log 'getContours'
     arr = @arr
     
     z = @linspace(@contourMin, @contourMax, @level)
@@ -128,8 +129,6 @@ class ClassifierModel
     conrec.contour(data, ilb, iub, jlb, jub, idx, jdx, z.length, z)
     @contours = conrec.contourList()
     @$rootScope.$broadcast('ready')
-  
-  
 
 
 module.exports = ClassifierModel

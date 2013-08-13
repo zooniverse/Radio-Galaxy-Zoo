@@ -1,13 +1,13 @@
 
 
 Classifier = ($scope, $routeParams, classifierModel) ->
-  console.log 'Classifier'
   
   $scope.classifierModel = classifierModel
+  
   $scope.showContours = true
+  
   $scope.step = 1
   $scope.level = 3
-    
   $scope.min = 0
   $scope.max = 1000
   
@@ -18,21 +18,26 @@ Classifier = ($scope, $routeParams, classifierModel) ->
   if $routeParams.subject?
     classifierModel.getSubject($routeParams.subject)
   
+  # Listen for ready because controller does not seem to
+  # trigger when array or object is changed.  This could be 
+  # due to model embedded in SVG.
   $scope.$on('ready', (e) ->
     console.log 'ready'
-    $scope.circles = classifierModel.circles
     $scope.contours = classifierModel.contours
     $scope.src = classifierModel.src
+    console.log $scope.contours.length
     $scope.$digest()
   )
   
   $scope.addCircle = (x, y) ->
-    $scope.classifierModel.addCircle(x, y)
+    if $scope.step is 2
+      $scope.classifierModel.addCircle(x, y)
   
   $scope.onContour = (e) ->
+    return if $scope.step is 2
+    
     el = e.target
     classes = el.className.baseVal
-      
     contourid = el.getAttribute("contourid")
     
     if classes.indexOf('selected') > -1
@@ -66,6 +71,7 @@ Classifier = ($scope, $routeParams, classifierModel) ->
     console.log 'Continue'
     $scope.step = 2
     
+    # Draw only selected contours
     contours = []
     for index in classifierModel.selectedContours
       contours.push classifierModel.contours[index]

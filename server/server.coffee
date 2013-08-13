@@ -1,7 +1,7 @@
 express = require('express')
 http = require('http')
 
-PORT = 8000
+PORT = 9000
 
 app = express()
 server = http.createServer(app)
@@ -21,5 +21,7 @@ app.get "/", (req, res, next) ->
   
   randomIndex = Math.floor(Math.random() * keys.length)
   key = keys[randomIndex]
+  
+  console.log "Serving subject #{key}"
   subject = subjects[key]
   res.json(subject)

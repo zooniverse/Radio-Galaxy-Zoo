@@ -5,7 +5,7 @@ template = """
     <img data-ng-src="{{ getRadioSource() }}">
     <img class="infrared" data-ng-src="{{ getInfraredSource() }}">
     
-    <div id="svg-contours" class='contours marking'>
+    <div id="svg-contours" class='contours marking' ng-class="{dashed: step==2}">
       <svg xmlns="http://www.w3.org/2000/svg" class="svg-contours">
         <path ng-repeat="c in contours" class="svg-contour" ng-click="onContour($event)" ng-attr-contourid="{{$index}}" ng-attr-src="{{ src }}" ng-attr-d="{{ drawContour(c) }}"></path>
           
