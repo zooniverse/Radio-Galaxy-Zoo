@@ -25,13 +25,16 @@ Classifier = ($scope, $routeParams, classifierModel) ->
     console.log 'ready'
     $scope.contours = classifierModel.contours
     $scope.src = classifierModel.src
-    console.log $scope.contours.length
     $scope.$digest()
   )
   
   $scope.addCircle = (x, y) ->
     if $scope.step is 2
       $scope.classifierModel.addCircle(x, y)
+  
+  $scope.onCircle = (e) ->
+    console.log 'onCircle', e
+    e.stopPropagation()
   
   $scope.onContour = (e) ->
     return if $scope.step is 2

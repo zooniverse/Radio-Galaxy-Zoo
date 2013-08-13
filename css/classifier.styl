@@ -16,10 +16,19 @@ $subject-height = 500
       stroke-dasharray 5,5 
 
 circle
-  fill none
+  
+  &.handle
+    fill #FAFAFA
+    fill-opacity 0.8
+
+circle
+  fill #000
   fill-opacity 0
   stroke #FAFAFA
-  stroke-width 1px
+  stroke-width 2px
+  
+  &.selected
+    stroke #FAFAFA
   
 
 .classifier
