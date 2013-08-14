@@ -93,6 +93,7 @@ Classifier = ($scope, $routeParams, classifierModel) ->
     # Remove annotation
     d3.selectAll('path').remove()
     d3.selectAll('circle').remove()
+    d3.selectAll('text').remove()
   
   $scope.onDone = ->
     console.log 'Done'
@@ -106,6 +107,7 @@ Classifier = ($scope, $routeParams, classifierModel) ->
     # Remove annotation
     d3.selectAll('path').remove()
     d3.selectAll('circle').remove()
+    d3.selectAll('text').remove()
 
 
 module.exports = Classifier

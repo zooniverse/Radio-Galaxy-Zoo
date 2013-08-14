@@ -88,6 +88,25 @@ class ClassifierModel
       
     return steps
   
+  getLevels: (arr) ->
+    return [
+      3.0,
+      5.196152422706632,
+      8.999999999999998,
+      15.588457268119893,
+      26.999999999999993,
+      46.765371804359674,
+      80.99999999999997,
+      140.296115413079,
+      242.9999999999999,
+      420.88834623923697,
+      728.9999999999995,
+      1262.6650387177108,
+      2186.9999999999986,
+      3787.9951161531317,
+      6560.9999999999945
+    ]
+  
   updateContourParam: (min, max, level) ->
     return if level is @level
     
@@ -101,7 +120,7 @@ class ClassifierModel
     console.log 'getContours'
     arr = @arr
     
-    z = @linspace(@contourMin, @contourMax, @level)
+    z = @getLevels()
     j = @height
     
     data = []
