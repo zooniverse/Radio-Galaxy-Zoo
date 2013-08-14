@@ -49,12 +49,12 @@ class ClassifierModel
     @selectedContours = []
     @circles = []
     
-    @$http.get('http://0.0.0.0:9000/')
+    @$http.get('https://dev.zooniverse.org/projects/radio/subjects')
       .success( (data) =>
-        @subject = data
+        @subject = data[0]
         
         @src = @subject.metadata.src
-        @infraredSource = @subject.location.ir
+        @infraredSource = @subject.location.standard
         @radioSource = @subject.location.radio
         
         raw = "#{@subject.location.raw}"
@@ -88,23 +88,13 @@ class ClassifierModel
       
     return steps
   
+  # NOTE: These levels are pre-computed.  They will need to be updated according the science team need.
   getLevels: (arr) ->
     return [
-      3.0,
-      5.196152422706632,
-      8.999999999999998,
-      15.588457268119893,
-      26.999999999999993,
-      46.765371804359674,
-      80.99999999999997,
-      140.296115413079,
-      242.9999999999999,
-      420.88834623923697,
-      728.9999999999995,
-      1262.6650387177108,
-      2186.9999999999986,
-      3787.9951161531317,
-      6560.9999999999945
+      3.0, 5.196152422706632, 8.999999999999998, 15.588457268119893, 26.999999999999993,
+      46.765371804359674, 80.99999999999997, 140.296115413079, 242.9999999999999,
+      420.88834623923697, 728.9999999999995, 1262.6650387177108, 2186.9999999999986,
+      3787.9951161531317, 6560.9999999999945
     ]
   
   updateContourParam: (min, max, level) ->
