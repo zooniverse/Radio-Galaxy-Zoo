@@ -90,6 +90,19 @@ class ClassifierModel
       
     return steps
   
+  logspace: (start, stop, num) ->
+    start = Math.log(start)
+    end = Math.log(end)
+    
+    range = stop - start
+    step = range / (num - 1)
+    
+    steps = new Float32Array(num)
+    while num--
+      steps[num] = Math.exp(start + num * step)
+    
+    return steps
+  
   # NOTE: These levels are pre-computed.  They will need to be updated according the science team need.
   getLevels: (arr) ->
     return [
@@ -113,6 +126,9 @@ class ClassifierModel
     arr = @arr
     
     z = @getLevels()
+    # z = @linspace(@contourMin, @contourMax, @level)
+    # z = @logspace(@contourMin, @contourMax, @level)
+    
     j = @height
     
     data = []

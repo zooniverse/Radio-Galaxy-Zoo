@@ -34,6 +34,7 @@ template = """
         <div class="buttons">
           <button data-ng-click="onNoFlux()">No flux</button>
           <button data-ng-click="onContinue()">Continue</button>
+          <button data-ng-click="onNoFlux()">No Corresponding Infrared</button>
         </div>
       </div>
       

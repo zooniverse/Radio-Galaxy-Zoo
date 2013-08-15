@@ -14,7 +14,9 @@ $subject-height = 500
 .dashed
   svg
     path
-      stroke-dasharray 5,5 
+      stroke-dasharray 5,5
+      &.selected
+        fill-opacity 0
 
 g
   &.active
@@ -28,10 +30,7 @@ g
     
 
 path
-  stroke-width 2px
-  
-  &.outer
-    stroke-width 2px
+  stroke-width 1px
 
 circle
   fill #000
