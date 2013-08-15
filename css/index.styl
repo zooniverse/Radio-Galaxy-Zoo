@@ -3,6 +3,51 @@
 
 @import './home'
 @import './classifier'
+@import './svg'
 @import './science'
 @import './team'
 @import './profile'
+
+
+body
+  background url("images/gz_headerimage.jpg") no-repeat scroll 50% 0 #000
+  color: #EFEFEF
+  margin 0 0 50px 0
+  
+  #navigation
+    width 1000px
+    margin 0 auto
+    margin-top 40px
+    height 80px
+    padding 45px 0 0
+    
+    ul
+      padding 0
+      margin 0
+      
+      li
+        width 100px
+        line-height 76px
+        vertical-align middle
+        display inline-block
+        text-align center
+        margin-right 20px
+        position relative
+        
+        a
+          font-family "Helvetica"
+          font-size 12px
+          font-weight 700
+          color #EFEFEF
+          text-transform uppercase
+        
+        &.logo
+          min-width 235px
+          background-position center 50% 50%
+          height 76px
+          
+          img
+            border 0
+  
+  .container
+    margin-top 100px

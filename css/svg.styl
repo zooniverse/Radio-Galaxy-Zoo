@@ -1,15 +1,13 @@
-$subject-width = 500
-$subject-height = 500
 
+# All SVG styling
 .svg-contour
   
-  fill #00FF00
+  fill #000
   fill-opacity 0
   stroke #FFF
   
   &.selected
     stroke #00FF00
-    fill-opacity 0.4
   
 .dashed
   svg
@@ -61,37 +59,3 @@ text
   stroke #FF0000
   fill #FF0000
   pointer-events none
-  
-
-.classifier
-  position relative
-  
-  .viewport
-    user-select none
-    position relative
-    width $subject-width
-    height $subject-height
-    padding-bottom 10px
-    cursor crosshair
-    
-    div.contours
-      position absolute
-      width $subject-width
-      height $subject-height
-      opacity 1
-      
-      transition opacity 200ms linear
-      
-      &.fade
-        opacity 0
-    
-    img
-      position absolute
-  
-  .workflow
-    color #000
-    background-color #FAFAFA
-    height 380px
-    margin-top 60px
-    border-radius 5px
-  

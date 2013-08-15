@@ -58,6 +58,8 @@ class ClassifierModel
         @radioSource = @subject.location.radio
         
         raw = "#{@subject.location.raw}"
+        # raw = "data/#{@src}_radio.fits.gz"
+        console.log raw
         
         # Request raw data
         new astro.FITS(raw, (f) =>
@@ -136,7 +138,10 @@ class ClassifierModel
     
     conrec = new Conrec()
     conrec.contour(data, ilb, iub, jlb, jub, idx, jdx, z.length, z)
-    @contours = conrec.contourList()
+    @contours = conrec.contourList().reverse()
+    
+    # console.log @contours
+    # console.log JSON.stringify( @contours.map( (d) -> return {k: d.k, level: d.level} ) )
     @$rootScope.$broadcast('ready')
 
 

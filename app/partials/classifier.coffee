@@ -1,7 +1,8 @@
 
 template = """
 <div class="classifier row" data-ng-controller="ClassifierCtrl">
-  <div class="viewport col-lg-4">
+  
+  <div class="viewport col-md-6">
     <img data-ng-src="{{ getRadioSource() }}">
     <img class="infrared" data-ng-src="{{ getInfraredSource() }}">
     
@@ -13,20 +14,18 @@ template = """
     
   </div>
   
-  <div class="workflow col-lg-4">
+  <div class="workflow col-md-offset-6">
+    
+    <span>Infrared</span>
     <input class='image-opacity' type="range" min="0" max="1" step="0.01" value="0">
+    <span>Radio</span>
     <input type="checkbox" data-ng-model="showContours">
     
-    <!--
-    <br><br>
-    <input type="range" min="3" max="10" step="1" data-ng-model="level" ng-mouseup="updateContourParam()">
-    <br><br>
-    <input type="range" min="0" max="1000" step="1" data-ng-model="min" ng-mouseup="updateContourParam()">
-    <input type="range" min="0" max="1000" step="1" data-ng-model="max" ng-mouseup="updateContourParam()">
-    -->
-      
+    <span>Step 1 of 2</span>
+    
     <div ng-switch on="step">
       <div ng-switch-when="1">
+        
         <p>Select contour(s) representing the radio flux.</p>
         <div class="examples">
           <p>Here are some examples of marked sources.</p>

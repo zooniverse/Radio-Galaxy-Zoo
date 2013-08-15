@@ -71,7 +71,7 @@ module.exports = ->
             group = d3.select(this)
             
             isActive = group.attr("class")
-            console.log isActive
+            
             if isActive?
               group.attr("class", null)
             else
@@ -123,9 +123,10 @@ module.exports = ->
           a.attr("r", Math.sqrt(x * x + y * y))
         )
         .on("dragend", ->
-          # return if scope.step is 1
+          return if scope.step is 1
+          
           console.log "mainDrag dragend"
-          g = h = a = null
+          g = h = a = c = t = null
         )
       
       d3.select(elem[0]).call(mainDrag)

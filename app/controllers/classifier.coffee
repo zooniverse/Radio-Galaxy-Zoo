@@ -38,7 +38,6 @@ Classifier = ($scope, $routeParams, classifierModel) ->
   
   $scope.onContour = (e) ->
     return if $scope.step is 2
-    
     el = e.target
     classes = el.className.baseVal
     contourid = el.getAttribute("contourid")
@@ -49,6 +48,9 @@ Classifier = ($scope, $routeParams, classifierModel) ->
     else
       el.setAttribute('class', 'svg-contour selected')
       classifierModel.addContour(contourid)
+  
+  $scope.onBlah = (e) ->
+    console.log 'onBlah'
   
   $scope.drawContour = (contour) ->
     return unless contour
