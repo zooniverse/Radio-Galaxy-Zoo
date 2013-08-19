@@ -72,9 +72,26 @@ Classifier = ($scope, $routeParams, classifierModel) ->
   $scope.getRadioSource = ->
     return classifierModel.radioSource
   
+  $scope.getStepMessage = ->
+    if $scope.step is 3
+      return "Complete!"
+    else
+      return "Step #{$scope.step} of 2"
+  #
+  # Workflow handlers
+  #
+  
+  $scope.onNoFlux = ->
+    $scope.step = 3
+  
   $scope.onContinue = ->
-    console.log 'Continue'
-    $scope.step = 2
+    
+    # Check if any contours selected
+    if classifierModel.selectedContours.length is 0
+      $scope.step = 3
+      return
+    else
+      $scope.step = 2
     
     # Draw only selected contours
     contours = []
@@ -82,25 +99,14 @@ Classifier = ($scope, $routeParams, classifierModel) ->
       contours.push classifierModel.contours[index]
     $scope.contours = contours
   
-  $scope.onNoFlux = ->
-    console.log 'No Flux'
-    
-    # Post classification
-    
-    # Request next subject
-    classifierModel.getSubject()
-    
-    $scope.step = 1
-    
-    # Remove annotation
-    d3.selectAll('path').remove()
-    d3.selectAll('circle').remove()
-    d3.selectAll('text').remove()
+  $scope.onNoCorrespondingFlux = ->
+    $scope.step = 3
   
   $scope.onDone = ->
-    console.log 'Done'
-    
-    # Post classification
+    $scope.step = 3
+  
+  $scope.onNext = ->
+    # TODO: Post classification
     
     # Request next subject and return to step 1
     classifierModel.getSubject()
@@ -110,6 +116,14 @@ Classifier = ($scope, $routeParams, classifierModel) ->
     d3.selectAll('path').remove()
     d3.selectAll('circle').remove()
     d3.selectAll('text').remove()
+  
+  # TODO: Post Favorite
+  $scope.onFavorite = ->
+    console.log 'onFavorite'
+  
+  # TODO: Open in Talk
+  $scope.onDiscuss = ->
+    console.log 'onDiscuss'
 
 
 module.exports = Classifier

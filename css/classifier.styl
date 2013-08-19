@@ -88,9 +88,77 @@ text
       position absolute
   
   .workflow
-    color #000
-    background-color #FAFAFA
-    height 380px
-    margin-top 60px
-    border-radius 5px
+    color rgb(37, 52, 57)
+    background-color rgb(237, 237, 237)
+    border-radius 4px
+    padding 2%
+    margin-top 4%
+    
+    &:before
+     content ""
+     position absolute
+     right 100%
+     top 19%
+     width 0
+     height 0
+     border-top 10px solid transparent
+     border-right 10px solid rgb(237, 237, 237)
+     border-bottom 10px solid transparent
+     
+    .controls
+      border-bottom 1px solid #D3D3D3
+      box-shadow inset 0 0 0 #FFF, 0 1px 0 #FFF
+      
+      .image-slider
+        font-weight 700
+        font-size 12px
+        text-shadow 0 1px 0 #FAFAFA
+        
+        p
+          display inline-block
+          
+      input[type="range"]
+        vertical-align 1px
+        -webkit-appearance none
+        background-color rgb(212, 212, 212)
+        width 50%
+        height 6px
+        border-radius 3px
+        margin 0 6px
+        
+      input[type="range"]::-webkit-slider-thumb
+        -webkit-appearance none
+        background-color rgb(11, 180, 236)
+        border 1px solid rgb(87, 162, 187)
+        opacity 0.5
+        width 12px
+        height 12px
+        border-radius 6px
+        
+      .message
+        text-align right
+        color rgb(182, 182, 182)
+        text-shadow 0 1px 0 #FAFAFA
+        font-size 12px
+    
+    .instruction
+      margin 4% 0
+      p
+        margin 0
+        text-align center
+        font-size 22px
+        font-weight 500
+        text-shadow 0 1px 0 #FAFAFA
+        color rgb(6, 23, 29)
+        
+    .examples
+      background-color rgb(212, 212, 212)
+      margin 5% -5%
+      padding 30px
+      box-shadow inset 0 1px 0 rgb(205, 205, 205), 0 1px 0 rgb(205, 205, 205)
+      
+      img
+        width 90%
+        margin-left 5%
+    
   

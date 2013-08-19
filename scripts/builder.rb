@@ -47,9 +47,9 @@ CSV.foreach(path, :headers => true) do |row|
     project_id: project.id,
     workflow_ids: [workflow.id],
     location: {
-      standard: "http://radio.galaxyzoo.org.s3.amazonaws.com/beta/subjects/standard/#{row[0]}.png",
-      radio: "http://radio.galaxyzoo.org.s3.amazonaws.com/beta/subjects/radio/#{row[0]}.png",
-      raw: "http://radio.galaxyzoo.org.s3.amazonaws.com/beta/subjects/raw/#{row[0]}.fits"
+      standard: "http://radio.galaxyzoo.org.s3.amazonaws.com/beta/subjects/standard/#{row[0]}.jpg",
+      radio: "http://radio.galaxyzoo.org.s3.amazonaws.com/beta/subjects/radio/#{row[0]}.jpg",
+      raw: "http://radio.galaxyzoo.org.s3.amazonaws.com/beta/subjects/raw/#{row[0]}.fits.gz"
     },
     coords: [ row[1].to_f, row[2].to_f ],
     metadata: {

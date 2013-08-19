@@ -17,27 +17,27 @@ end
 
 path = File::join(File.dirname(__FILE__), '..', 'public', 'data')
 
-# files = Dir["#{ path }/*_ir.png"]
-# files.each_with_index do |path, index|
-#   basename = File.basename path
-#   basename.gsub!('_ir', '')
-#   obj = @bucket.objects["beta/subjects/standard/#{basename}"]
-#   obj.write(file: path, acl: :public_read)
-# end
-# 
-# files = Dir["#{path}/*_radio.png"]
-# files.each_with_index do |path, index|
-#   basename = File.basename path
-#   basename.gsub!('_radio', '')
-#   obj = @bucket.objects["beta/subjects/radio/#{basename}"]
-#   obj.write(file: path, acl: :public_read)
-# end
+files = Dir["#{ path }/*_ir.jpg"]
+files.each_with_index do |path, index|
+  basename = File.basename path
+  basename.gsub!('_ir', '')
+  obj = @bucket.objects["beta/subjects/standard/#{basename}"]
+  obj.write(file: path, acl: :public_read)
+end
 
-files = Dir["#{path}/*_radio.fits"]
+files = Dir["#{path}/*_radio.jpg"]
 files.each_with_index do |path, index|
   basename = File.basename path
   basename.gsub!('_radio', '')
-  obj = @bucket.objects["beta/subjects/raw/#{basename}"]
-  # obj.write(file: path, acl: :public_read, content_encoding: 'gzip', content_type: 'application/fits')
+  obj = @bucket.objects["beta/subjects/radio/#{basename}"]
   obj.write(file: path, acl: :public_read)
 end
+
+# files = Dir["#{path}/*_radio.fits.gz"]
+# files.each_with_index do |path, index|
+#   basename = File.basename path
+#   basename.gsub!('_radio', '')
+#   obj = @bucket.objects["beta/subjects/raw/#{basename}"]
+#   obj.write(file: path, acl: :public_read, content_encoding: 'gzip', content_type: 'application/json')
+#   # obj.write(file: path, acl: :public_read)
+# end

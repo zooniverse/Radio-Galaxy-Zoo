@@ -2,7 +2,7 @@
 template = """
 <div class="classifier row" data-ng-controller="ClassifierCtrl">
   
-  <div class="viewport col-md-6">
+  <div class="viewport col-md-7">
     <img data-ng-src="{{ getRadioSource() }}">
     <img class="infrared" data-ng-src="{{ getInfraredSource() }}">
     
@@ -14,38 +14,54 @@ template = """
     
   </div>
   
-  <div class="workflow col-md-offset-6">
+  <div class="workflow col-md-5 col-md-offset-1">
     
-    <span>Infrared</span>
-    <input class='image-opacity' type="range" min="0" max="1" step="0.01" value="0">
-    <span>Radio</span>
-    <input type="checkbox" data-ng-model="showContours">
-    
-    <span>Step 1 of 2</span>
-    
-    <div ng-switch on="step">
-      <div ng-switch-when="1">
-        
-        <p>Select contour(s) representing the radio flux.</p>
-        <div class="examples">
-          <p>Here are some examples of marked sources.</p>
-        </div>
-        
-        <div class="buttons">
-          <button data-ng-click="onNoFlux()">No flux</button>
-          <button data-ng-click="onContinue()">Continue</button>
-          <button data-ng-click="onNoFlux()">No Corresponding Infrared</button>
-        </div>
+    <div class="row controls">
+      <div class="image-slider col-md-9">
+        <p>IR</p>
+        <input class='image-opacity' type="range" min="0" max="1" step="0.01" value="0">
+        <p>Radio</p>
       </div>
       
-      <div ng-switch-when="2">
-        <p>Identify the infrared source.</p>
-        <div class="examples">
-          <p>Look for region(s) where the isolines seem to eminate from.</p>
+      <span class="message col-md-3">{{ getStepMessage() }}</span>
+    </div>
+    
+    <div class='row instruction'>
+      <div ng-switch on="step">
+        <div col-md-12 ng-switch-when="1">
+          <p>Select contours representing the radio flux.</p>
         </div>
-        <button data-ng-click="onDone()">Done</button>
+        
+        <div ng-switch-when="2">
+          <p>Identify the infrared source.</p>
+        </div>
+        
+        <div ng-switch-when="3">
+          <p>Great work, you helped science!</p>
+        </div>
       </div>
-      
+    </div>
+    
+    <div class='examples'>
+      <img src="http://imgs.xkcd.com/comics/balloon_internet.png">
+    </div>
+    
+    <div class='buttons row'>
+      <div ng-switch on="step">
+        <div ng-switch-when="1" class="col-md-6 col-md-offset-7">
+          <button type="button" class="btn btn-default" data-ng-click="onNoFlux()">No flux</button>
+          <button type="button" class="btn btn-primary" data-ng-click="onContinue()">Continue</button>
+        </div>
+        <div ng-switch-when="2" class="col-md-6 col-md-offset-7">
+          <button type="button" class="btn btn-default" data-ng-click="onNoCorrespondingFlux()">No Infrared</button>
+          <button type="button" class="btn btn-primary" data-ng-click="onDone()">Done</button>
+        </div>
+        <div ng-switch-when="3">
+          <button type="button" class="btn btn-default col-md-2" data-ng-click="onFavorite()">Favorite</button>
+          <button type="button" class="btn btn-default col-md-2" data-ng-click="onDiscuss()">Discuss</button>
+          <button type="button" class="btn btn-primary col-md-offset-6" data-ng-click="onNext()">Next</button>
+        </div>
+      </div>
     </div>
     
   </div>

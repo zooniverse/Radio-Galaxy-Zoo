@@ -56,10 +56,7 @@ class ClassifierModel
         @src = @subject.metadata.src
         @infraredSource = @subject.location.standard
         @radioSource = @subject.location.radio
-        
         raw = "#{@subject.location.raw}"
-        # raw = "data/#{@src}_radio.fits.gz"
-        console.log raw
         
         # Request raw data
         new astro.FITS(raw, (f) =>
