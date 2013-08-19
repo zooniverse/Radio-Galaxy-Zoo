@@ -120,10 +120,12 @@ Classifier = ($scope, $routeParams, classifierModel) ->
   # TODO: Post Favorite
   $scope.onFavorite = ->
     console.log 'onFavorite'
+    alert "OMG THIS PICTURE IS SOOOOO COOL!"
   
   # TODO: Open in Talk
   $scope.onDiscuss = ->
     console.log 'onDiscuss'
+    alert "Sorry, Talk doesn't work yet"
 
 
 module.exports = Classifier

@@ -5,6 +5,7 @@ ClassifierCtrl  = require './controllers/classifier'
 # Import directives
 ImageOpacityDirective = require './directives/image_opacity'
 ContoursDirective     = require './directives/contours'
+ContinueBtnDirective  = require './directives/continue_button'
 MarkingDirective      = require './directives/marking'
 
 # Import services
@@ -27,6 +28,7 @@ RadioGalaxyZoo.service('classifierModel', ["$rootScope", "$http", ClassifierMode
 RadioGalaxyZoo.directive('imageOpacity', ImageOpacityDirective)
 RadioGalaxyZoo.directive('contours', ContoursDirective)
 RadioGalaxyZoo.directive('marking', MarkingDirective)
+RadioGalaxyZoo.directive('continue', ContinueBtnDirective)
 
 
 # Configure routes

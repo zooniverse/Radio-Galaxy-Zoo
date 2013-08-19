@@ -57,7 +57,7 @@ module.exports = ->
       g = h = a = c = t = null
       mainDrag = d3.behavior.drag()
         .on("dragstart", ->
-          return if scope.step is 1
+          return unless scope.step is 2
           
           console.log 'mainDrag dragstart'
           x = d3.event.sourceEvent.layerX
@@ -111,7 +111,7 @@ module.exports = ->
           g.call(move)
         )
         .on("drag", ->
-          return if scope.step is 1
+          return unless scope.step is 2
           
           console.log "mainDrag drag"
           x = parseFloat( h.attr("cx") ) + d3.event.dx
@@ -123,7 +123,7 @@ module.exports = ->
           a.attr("r", Math.sqrt(x * x + y * y))
         )
         .on("dragend", ->
-          return if scope.step is 1
+          return unless scope.step is 2
           
           console.log "mainDrag dragend"
           g = h = a = c = t = null

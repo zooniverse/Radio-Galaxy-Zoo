@@ -50,7 +50,7 @@ template = """
       <div ng-switch on="step">
         <div ng-switch-when="1" class="col-md-6 col-md-offset-7">
           <button type="button" class="btn btn-default" data-ng-click="onNoFlux()">No flux</button>
-          <button type="button" class="btn btn-primary" data-ng-click="onContinue()">Continue</button>
+          <button type="button" class="btn btn-primary continue" data-ng-click="onContinue()" disabled>Continue</button>
         </div>
         <div ng-switch-when="2" class="col-md-6 col-md-offset-7">
           <button type="button" class="btn btn-default" data-ng-click="onNoCorrespondingFlux()">No Infrared</button>
