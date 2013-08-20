@@ -3,8 +3,11 @@
 
 import os
 import sys
+import json
 import urllib
+
 import numpy as np
+
 from astropy import wcs
 from astropy.io import fits
 from astropy.io import votable
@@ -32,21 +35,25 @@ def get_metadata_from_tap(f, src):
     'LANG': 'ADQL',
     # 'QUERY': "SELECT TOP 100 RAJ2000, DEJ2000, type, cz, e_cz FROM \"J/ApJS/199/26/table3\" WHERE 1=CONTAINS(POINT('ICRS',\"J/ApJS/199/26/table3\".RAJ2000,\"J/ApJS/199/26/table3\".DEJ2000), BOX('ICRS', %.6f, %.6f, %.6f, %.6f))" % (center[0], center[1], 0.5 * x_fov, 0.5 * y_fov)
     
-    'QUERY': "SELECT raj2000, dej2000, Jmag, Hmag, Kmag FROM \"II/246/out\" WHERE 1=CONTAINS(POINT('ICRS', raj2000, dej2000), BOX('ICRS', %.6f, %.6f, %.6f, %.6f))" % (center[0], center[1], 0.5 * x_fov, 0.5 * y_fov)
+    'QUERY': "SELECT Cntr, raj2000, dej2000, Jmag, Hmag, Kmag, Bmag, Rmag FROM \"II/246/out\" WHERE 1=CONTAINS(POINT('ICRS', raj2000, dej2000), BOX('ICRS', %.6f, %.6f, %.6f, %.6f))" % (center[0], center[1], 0.5 * x_fov, 0.5 * y_fov)
   }
   
-  metadata[src] = []
   
   f = urllib.urlopen(tap_endpoint, urllib.urlencode(params))
   vot = votable.parse(f)
   for resource in vot.resources:
     for table in resource.tables:
-      
+      cntrs = table.array['Cntr']
       ras  = table.array['RAJ2000']
       decs = table.array['DEJ2000']
       jmags = table.array['Jmag']
       hmags = table.array['Hmag']
       kmags = table.array['Kmag']
+      bmags = table.array['Bmag']
+      rmags = table.array['Rmag']
+      
+      if len(ras) > 0:
+        metadata[src] = []
       
       for index, ra in enumerate(ras):
         obj = {}
@@ -54,16 +61,18 @@ def get_metadata_from_tap(f, src):
         dec = decs[index]
         pixel = w.wcs_world2pix([[ra, dec]], 0)[0]
         
-        obj['ra'] = ra
-        obj['dec'] = dec
-        obj['x'] = pixel[0]
-        obj['y'] = pixel[1]
-        obj['Jmag'] = jmags[index]
-        obj['Hmag'] = hmags[index]
-        obj['Kmag'] = kmags[index]
+        obj['cntr'] = str(cntrs[index])
+        obj['ra'] = str(ra)
+        obj['dec'] = str(dec)
+        obj['x'] = str(pixel[0])
+        obj['y'] = str(pixel[1])
+        obj['Jmag'] = str(jmags[index])
+        obj['Hmag'] = str(hmags[index])
+        obj['Kmag'] = str(kmags[index])
+        obj['Bmag'] = str(bmags[index])
+        obj['Rmag'] = str(rmags[index])
         
         metadata[src].append(obj)
-  print metadata
 
 if __name__ == '__main__':
   
@@ -76,3 +85,6 @@ if __name__ == '__main__':
     print path
     get_metadata_from_tap(path, f.split("_ir.fits")[0])
   
+  out = open('2MASS-metadata.json', 'w')
+  out.write(json.dumps(metadata))
+  out.close()

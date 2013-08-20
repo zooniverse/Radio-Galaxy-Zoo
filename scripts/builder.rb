@@ -39,8 +39,13 @@ RadioSubject.destroy_all
 # Open CSV describing data
 path = File::join(File.dirname(__FILE__), '..', 'data-import', 'rgz', 'input_ELAIS.dat_good.csv')
 
+# Open 2MASS metadata file
+metadata_path = File::join(File.dirname(__FILE__), '2MASS-metadata.json')
+twomass_metadata = JSON.parse File.read(metadata_path)
+
 subjects = {}
 CSV.foreach(path, :headers => true) do |row|
+  src = row[0]
   
   subject_hash = {
     _id: next_id,
@@ -53,11 +58,16 @@ CSV.foreach(path, :headers => true) do |row|
     },
     coords: [ row[1].to_f, row[2].to_f ],
     metadata: {
-      src: row[0],
+      src: src,
       cid: row[3],
-      swire: row[4]
+      swire: row[4],
     }
   }
+  
+  # Append additional 2MASS catalog metadata if available
+  if twomass_metadata[src]
+    subject_hash[:metadata][:catalog] = twomass_metadata[src]
+  end
   
   RadioSubject.create subject_hash
 end

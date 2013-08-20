@@ -9,3 +9,4 @@ public/*.json
 server/*.js
 *.map
 server/*.json
+scripts/*.json
