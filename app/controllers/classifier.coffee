@@ -22,7 +22,6 @@ Classifier = ($scope, $routeParams, classifierModel) ->
   # trigger when array or object is changed.  This could be 
   # due to model embedded in SVG.
   $scope.$on('ready', (e) ->
-    console.log 'ready'
     $scope.contours = classifierModel.contours
     $scope.src = classifierModel.src
     $scope.$digest()
@@ -37,7 +36,8 @@ Classifier = ($scope, $routeParams, classifierModel) ->
     e.stopPropagation()
   
   $scope.onContour = (e) ->
-    return if $scope.step is 2
+    return unless $scope.step is 1
+    
     el = e.target
     classes = el.className.baseVal
     contourid = el.getAttribute("contourid")
@@ -48,9 +48,6 @@ Classifier = ($scope, $routeParams, classifierModel) ->
     else
       el.setAttribute('class', 'svg-contour selected')
       classifierModel.addContour(contourid)
-  
-  $scope.onBlah = (e) ->
-    console.log 'onBlah'
   
   $scope.drawContour = (contour) ->
     return unless contour
@@ -101,9 +98,11 @@ Classifier = ($scope, $routeParams, classifierModel) ->
   
   $scope.onNoCorrespondingFlux = ->
     $scope.step = 3
+    $scope.showContours = true
   
   $scope.onDone = ->
     $scope.step = 3
+    $scope.showContours = true
   
   $scope.onNext = ->
     # TODO: Post classification
@@ -119,12 +118,10 @@ Classifier = ($scope, $routeParams, classifierModel) ->
   
   # TODO: Post Favorite
   $scope.onFavorite = ->
-    console.log 'onFavorite'
     alert "OMG THIS PICTURE IS SOOOOO COOL!"
   
   # TODO: Open in Talk
   $scope.onDiscuss = ->
-    console.log 'onDiscuss'
     alert "Sorry, Talk doesn't work yet"
 
 

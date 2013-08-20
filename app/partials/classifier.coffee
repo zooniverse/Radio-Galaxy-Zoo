@@ -6,7 +6,7 @@ template = """
     <img data-ng-src="{{ getRadioSource() }}">
     <img class="infrared" data-ng-src="{{ getInfraredSource() }}">
     
-    <div id="svg-contours" class='contours marking' ng-class="{dashed: step==2, final: step==3}">
+    <div id="svg-contours" class='contours marking' ng-class="{dashed: step==2, final: step==3, 'fade-contour': !showContours}">
       <svg xmlns="http://www.w3.org/2000/svg" class="svg-contours">
         <path ng-repeat="c in contours" class="svg-contour" ng-click="onContour($event)" ng-attr-contourid="{{$index}}" ng-attr-src="{{ src }}" ng-attr-d="{{ drawContour(c) }}"></path>
       </svg>
@@ -22,7 +22,7 @@ template = """
         <input class='image-opacity' type="range" min="0" max="1" step="0.01" value="0">
         <p class="band" data-band="radio">Radio</p>
       </div>
-      <span class="toggle-contours col-md-3">hide contours</span>
+      <span class="toggle-contours col-md-3">{{showContours ? 'show' : 'hide'}} contours</span>
       
       <span class="message col-md-3">{{ getStepMessage() }}</span>
     </div>

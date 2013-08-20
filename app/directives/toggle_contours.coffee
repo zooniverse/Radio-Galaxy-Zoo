@@ -4,17 +4,9 @@ module.exports = ->
     restrict: 'C'
     link: (scope, elem, attrs) ->
       
-      el = document.querySelector("#svg-contours")
-      el = angular.element(el)
-      contoursShow = true
-      
       elem[0].onclick = (e) ->
-        if contoursShow
-          el.addClass('fade-contour')
-          @textContent = "show contours"
-          contoursShow = false
-        else
-          el.removeClass('fade-contour')
-          @textContent = "hide contours"
-          contoursShow = true
+        return if scope.step is 3
+        
+        scope.showContours = if scope.showContours then false else true
+        scope.$apply()
   }
