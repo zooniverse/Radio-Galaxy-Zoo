@@ -3,7 +3,6 @@ module.exports = ->
   return {
     restrict: 'C'
     link: (scope, elem, attrs) ->
-      console.log 'linking marking directive'
       
       # Regular expression for capturing group translation
       r = /translate\((-?\d+), (-?\d+)\)/
@@ -37,10 +36,24 @@ module.exports = ->
       
       move = d3.behavior.drag()
         .on("dragstart", ->
-          console.log "move dragstart"
           d3.event.sourceEvent.stopPropagation()
+          group = d3.select(this)
+          
+          this.initialX = d3.event.sourceEvent.x
+          this.initialY = d3.event.sourceEvent.y
         )
         .on("drag", dragmove)
+        .on("dragend", ->
+          # Toggle active state if group did not move
+          if this.initialX is d3.event.sourceEvent.x and
+             this.initialY is d3.event.sourceEvent.y
+            group = d3.select(this)
+            isActive = group.attr("class")
+            if isActive?
+              group.attr("class", null)
+            else
+              group.attr("class", "active")
+        )
       
       scale = d3.behavior.drag()
         .on("dragstart", ->
@@ -58,25 +71,17 @@ module.exports = ->
       mainDrag = d3.behavior.drag()
         .on("dragstart", ->
           return unless scope.step is 2
-          
           console.log 'mainDrag dragstart'
+          
+          # Deselect all previously existing groups
+          d3.selectAll("g").attr("class", null)
+          
           x = d3.event.sourceEvent.layerX
           y = d3.event.sourceEvent.layerY
           
           # Create new annotation group
           g = svg.append("g")
                 .attr("transform", "translate(#{x}, #{y})")
-          g.on("mousedown", ->
-            # Toggle active state
-            group = d3.select(this)
-            
-            isActive = group.attr("class")
-            
-            if isActive?
-              group.attr("class", null)
-            else
-              group.attr("class", "active")
-          )
           
           # Create the annotation
           a = g.append("circle")
@@ -102,6 +107,8 @@ module.exports = ->
               .on("mouseup", ->
                 d3.select(this.parentNode).remove()
               )
+          
+          # Create close text
           t = g.append("text")
                 .text("x")
                 .attr("x", -3)

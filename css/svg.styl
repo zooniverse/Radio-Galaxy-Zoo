@@ -1,59 +1,71 @@
-.svg-contour
+
+$green = #00FF00
+
+div.contours
   
-  fill #00FF00
-  fill-opacity 0
-  stroke #FFF
-  
-  &.selected
-    stroke #00FF00
-    fill-opacity 0.4
-  
-.dashed
   svg
-    path
-      stroke-dasharray 5,5
-      &.selected
-        fill-opacity 0
-
-g
-  &.active
-    circle
-      stroke #00FF00
-      &.remove
-        stroke #FFFFFF
-        display block
-    text
-      display block
+    width 100%
+    height 100%
+    fill $green
+    fill-opacity 0
+    stroke #FFF
     
-
-path
-  stroke-width 1.35px
-
-circle
-  fill #000
-  fill-opacity 0
-  stroke #FFFFFF
-  stroke-width 2px
-  cursor move
+    path
+      stroke-width 1.35px
+      opacity 1
+      transition opacity 200ms linear
+      
+      &.selected
+        stroke $green
+        fill-opacity 0.4
   
-  &.handle
-    fill #00FF00
-    fill-opacity 1
-    cursor pointer
+  &.fade
+    svg
+      path
+        opacity 0
   
-  &.selected
-    stroke #FAFAFA
-  
-  &.remove
-    display none
-    fill #FFFFFF
-    fill-opacity 1
-    stroke none
-    cursor pointer
+  &.dashed
+    svg
+      path
+        stroke-dasharray 5,5
+        
+        &.selected
+          fill-opacity 0
 
-text
-  display none
-  font-size 11px
-  stroke #FF0000
-  fill #FF0000
-  pointer-events none
+  g
+    circle
+      fill #000
+      stroke #FFF
+      stroke-width 2px
+      cursor move
+      
+      &.handle
+        fill $green
+        fill-opacity 1
+        cursor pointer
+      
+      &.remove
+        display none
+        fill #FFF
+        fill-opacity 1
+        stroke none
+        cursor pointer
+    
+    text
+      display none
+      font-size 11px
+      stroke #FF0000
+      pointer-events none
+    
+    &.active
+      
+      circle
+        &.annotation
+          stroke $green
+        
+        &.remove
+          stroke #FFFFFF
+          display block
+      
+      text
+        display block
