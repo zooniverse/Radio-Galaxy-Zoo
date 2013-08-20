@@ -10,11 +10,11 @@ module.exports = ->
       
       elem[0].onclick = (e) ->
         if contoursShow
-          el.addClass('fade')
+          el.addClass('fade-contour')
           @textContent = "show contours"
           contoursShow = false
         else
-          el.removeClass('fade')
+          el.removeClass('fade-contour')
           @textContent = "hide contours"
           contoursShow = true
   }
