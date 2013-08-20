@@ -1,18 +1,19 @@
-
-# All SVG styling
 .svg-contour
   
-  fill #000
+  fill #00FF00
   fill-opacity 0
   stroke #FFF
   
   &.selected
     stroke #00FF00
+    fill-opacity 0.4
   
 .dashed
   svg
     path
-      stroke-dasharray 5,5 
+      stroke-dasharray 5,5
+      &.selected
+        fill-opacity 0
 
 g
   &.active
@@ -23,12 +24,10 @@ g
         display block
     text
       display block
+    
 
 path
   stroke-width 1.35px
-  
-  &.outer
-    stroke-width 2px
 
 circle
   fill #000
