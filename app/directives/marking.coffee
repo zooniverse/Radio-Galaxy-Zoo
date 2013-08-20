@@ -22,7 +22,6 @@ module.exports = ->
       
       # Drag callback to scale annotation
       dragscale = ->
-        console.log "scale drag"
         x = d3.event.x
         y = d3.event.y
         
@@ -60,14 +59,9 @@ module.exports = ->
       scale = d3.behavior.drag()
         .on("dragstart", ->
           return unless scope.step is 2
-          
-          console.log "scale dragstart"
           d3.event.sourceEvent.stopPropagation()
         )
         .on("drag", dragscale)
-        .on("dragend", ->
-          console.log "scale dragend"
-        )
       
       svg = d3.select("svg")
       
@@ -75,7 +69,6 @@ module.exports = ->
       mainDrag = d3.behavior.drag()
         .on("dragstart", ->
           return unless scope.step is 2
-          console.log 'mainDrag dragstart'
           
           # Deselect all previously existing groups
           d3.selectAll("g").attr("class", null)
@@ -124,7 +117,6 @@ module.exports = ->
         .on("drag", ->
           return unless scope.step is 2
           
-          console.log "mainDrag drag"
           x = parseFloat( h.attr("cx") ) + d3.event.dx
           y = parseFloat( h.attr("cy") ) + d3.event.dy
           
@@ -136,7 +128,6 @@ module.exports = ->
         .on("dragend", ->
           return unless scope.step is 2
           
-          console.log "mainDrag dragend"
           g = h = a = c = t = null
         )
       

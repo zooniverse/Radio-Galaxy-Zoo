@@ -79,6 +79,7 @@ Classifier = ($scope, $routeParams, classifierModel) ->
   #
   
   $scope.onNoFlux = ->
+    $scope.showContours = true
     $scope.step = 3
   
   $scope.onContinue = ->
@@ -97,14 +98,15 @@ Classifier = ($scope, $routeParams, classifierModel) ->
     $scope.contours = contours
   
   $scope.onNoCorrespondingFlux = ->
-    $scope.step = 3
     $scope.showContours = true
+    $scope.step = 3
   
   $scope.onDone = ->
-    $scope.step = 3
     $scope.showContours = true
+    $scope.step = 3
   
   $scope.onNext = ->
+    
     # TODO: Post classification
     
     # Request next subject and return to step 1
