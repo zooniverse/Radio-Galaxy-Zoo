@@ -18,9 +18,9 @@ template = """
     
     <div class="row controls">
       <div class="image-slider col-md-6">
-        <p>IR</p>
+        <p class="band" data-band="infrared">IR</p>
         <input class='image-opacity' type="range" min="0" max="1" step="0.01" value="0">
-        <p>Radio</p>
+        <p class="band" data-band="radio">Radio</p>
       </div>
       <span class="toggle-contours col-md-3">hide contours</span>
       

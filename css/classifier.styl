@@ -48,8 +48,12 @@ $subject-height = 500
         font-size 12px
         text-shadow 0 1px 0 #FAFAFA
         
-        p
+        p.band
           display inline-block
+          cursor pointer
+          
+          &:hover
+            color red
           
       input[type="range"]
         vertical-align 1px
@@ -76,6 +80,9 @@ $subject-height = 500
         text-shadow 0 1px 0 #FAFAFA
         font-size 12px
         font-weight 200
+        
+        &:hover
+          color red
         
       .message
         text-align right
