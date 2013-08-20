@@ -36,6 +36,8 @@ module.exports = ->
       
       move = d3.behavior.drag()
         .on("dragstart", ->
+          return unless scope.step is 2
+          
           d3.event.sourceEvent.stopPropagation()
           group = d3.select(this)
           
@@ -57,6 +59,8 @@ module.exports = ->
       
       scale = d3.behavior.drag()
         .on("dragstart", ->
+          return unless scope.step is 2
+          
           console.log "scale dragstart"
           d3.event.sourceEvent.stopPropagation()
         )

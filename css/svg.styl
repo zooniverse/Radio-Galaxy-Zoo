@@ -32,7 +32,15 @@ div.contours
         
         &.selected
           fill-opacity 0
-
+  
+  &.final
+    svg
+      circle
+        &.annotation
+          stroke-dasharray 5,5
+        &.handle
+          display none
+  
   g
     opacity 1
     
