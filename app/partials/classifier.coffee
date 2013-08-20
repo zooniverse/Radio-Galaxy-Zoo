@@ -44,7 +44,7 @@ template = """
     </div>
     
     <div class='examples'>
-      <img src="http://imgs.xkcd.com/comics/balloon_internet.png">
+      <img src="http://imgs.xkcd.com/comics/balloon_internet.png" title="I run a business selling rural internet access. My infrastructure consists of a bunch of Verizon wifi hotspots that I sign up for and then cancel at the end of the 14-day return period.">
     </div>
     
     <div class='buttons row'>

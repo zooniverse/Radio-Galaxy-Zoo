@@ -22,6 +22,7 @@ teamTemplate        = require './partials/team'
 RadioGalaxyZoo = angular.module('radio-galaxy-zoo', [])
 
 # Connect controllers and services and directives
+
 RadioGalaxyZoo.controller('ClassifierCtrl', ["$scope", "$routeParams", "classifierModel", ClassifierCtrl])
 RadioGalaxyZoo.service('classifierModel', ["$rootScope", "$http", ClassifierModel])
 
@@ -32,16 +33,13 @@ RadioGalaxyZoo.directive('toggleContours', toggleContoursDirective)
 
 
 # Configure routes
-RadioGalaxyZoo.config ($routeProvider) ->
+RadioGalaxyZoo.config(['$routeProvider', ($routeProvider) ->
   
   $routeProvider
     .when("/home",
       template: homeTemplate
     )
     .when("/classify",
-      template: classifierTemplate
-    )
-    .when("/classify/:subject",
       template: classifierTemplate
     )
     .when("/science",
@@ -54,3 +52,4 @@ RadioGalaxyZoo.config ($routeProvider) ->
       template: profileTemplate
     )
     .otherwise redirectTo: "/home"
+])

@@ -1,5 +1,6 @@
 
 Classifier = ($scope, $routeParams, classifierModel) ->
+  console.log 'Classifier'
   
   $scope.classifierModel = classifierModel
   

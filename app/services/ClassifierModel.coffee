@@ -153,8 +153,6 @@ class ClassifierModel
     conrec.contour(data, ilb, iub, jlb, jub, idx, jdx, z.length, z)
     @contours = conrec.contourList().reverse()
     
-    # console.log @contours
-    # console.log JSON.stringify( @contours.map( (d) -> return {k: d.k, level: d.level} ) )
     @$rootScope.$broadcast('ready')
 
 
