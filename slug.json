@@ -5,6 +5,7 @@
     "./app/lib/fits.js",
     "./app/lib/conrec.js",
     "./app/lib/d3.js",
-    "./app/lib/html5slider.js"
+    "./app/lib/html5slider.js",
+    "./app/lib/popcorn-complete.js"
   ]
 }

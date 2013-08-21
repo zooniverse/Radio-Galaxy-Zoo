@@ -7,6 +7,7 @@ ImageOpacityDirective = require './directives/image_opacity'
 ContinueBtnDirective  = require './directives/continue_button'
 MarkingDirective      = require './directives/marking'
 toggleContoursDirective  = require './directives/toggle_contours'
+scienceDirective      = require './directives/science'
 
 # Import services
 ClassifierModel = require './services/ClassifierModel'
@@ -26,11 +27,12 @@ RadioGalaxyZoo = angular.module('radio-galaxy-zoo', [])
 RadioGalaxyZoo.controller('ClassifierCtrl', ["$scope", "$routeParams", "classifierModel", ClassifierCtrl])
 RadioGalaxyZoo.service('classifierModel', ["$rootScope", "$http", ClassifierModel])
 
+
+RadioGalaxyZoo.directive('science', scienceDirective)
 RadioGalaxyZoo.directive('imageOpacity', ImageOpacityDirective)
 RadioGalaxyZoo.directive('marking', MarkingDirective)
 RadioGalaxyZoo.directive('continue', ContinueBtnDirective)
 RadioGalaxyZoo.directive('toggleContours', toggleContoursDirective)
-
 
 # Configure routes
 RadioGalaxyZoo.config(['$routeProvider', ($routeProvider) ->
