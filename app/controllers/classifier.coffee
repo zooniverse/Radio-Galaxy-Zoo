@@ -74,6 +74,29 @@ Classifier = ($scope, $routeParams, classifierModel) ->
       return "Complete!"
     else
       return "Step #{$scope.step} of 2"
+  
+  $scope.drawCatalogSources = ->
+    console.log 'drawCatalogSources'
+    catalog = classifierModel.subject.metadata.catalog
+    return unless catalog?
+    
+    svg = d3.select("svg")
+    factor = 500 / 300
+    
+    for object in catalog
+      cx = factor * parseFloat(object.x)
+      cy = 500 - factor * parseFloat(object.y)
+      
+      do (object) ->
+        svg.append("circle")
+            .attr("cx", cx)
+            .attr("cy", cy)
+            .attr("r", 10)
+            .attr("class", "source")
+            .on("click", ->
+              alert "This is a source from the 2MASS catalog with Bmag: #{object.Bmag}, Rmag: #{object.Rmag}, Jmag: #{object.Jmag}, Hmag: #{object.Hmag}, Kmag: #{object.Kmag}"
+            )
+  
   #
   # Workflow handlers
   #
@@ -81,15 +104,10 @@ Classifier = ($scope, $routeParams, classifierModel) ->
   $scope.onNoFlux = ->
     $scope.showContours = true
     $scope.step = 3
+    $scope.drawCatalogSources()
   
   $scope.onContinue = ->
-    
-    # Check if any contours selected
-    if classifierModel.selectedContours.length is 0
-      $scope.step = 3
-      return
-    else
-      $scope.step = 2
+    $scope.step = 2
     
     # Draw only selected contours
     contours = []
@@ -100,10 +118,13 @@ Classifier = ($scope, $routeParams, classifierModel) ->
   $scope.onNoCorrespondingFlux = ->
     $scope.showContours = true
     $scope.step = 3
+    $scope.drawCatalogSources()
   
   $scope.onDone = ->
     $scope.showContours = true
     $scope.step = 3
+    
+    $scope.drawCatalogSources()
   
   $scope.onNext = ->
     
