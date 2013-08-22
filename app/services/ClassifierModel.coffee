@@ -1,4 +1,7 @@
 
+Subject = zooniverse.models.Subject
+
+
 class ClassifierModel
     
   constructor: ($rootScope, $http) ->
@@ -28,8 +31,10 @@ class ClassifierModel
     @selectedContours = []
     @circles = []
     
+    Subject.on "fetch", @getSubjects
+    
     # TESTING an initial load of multiple subjects
-    @getInitialSubjects()
+    Subject.fetch()
     @getSubject()
   
   addContour: (value) ->
@@ -51,14 +56,10 @@ class ClassifierModel
     @selectedContours = []
     @circles = []
   
-  getInitialSubjects: ->
-    @$http.get("https://dev.zooniverse.org/projects/radio/subjects?limit=4").
-      success( (data) =>
-        console.log "data", data
-      ).
-      error( (data, status, headers, config) =>
-        console.log "ERROR:", data, status, headers, config
-      )
+  # Request subjects from API
+  getSubjects: (e, subjects) ->
+    console.log 'getSubjects', subjects
+  
   
   getSubject: (id) ->
     @reset()
