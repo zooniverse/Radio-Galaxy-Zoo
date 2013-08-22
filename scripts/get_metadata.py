@@ -14,6 +14,13 @@ from astropy.io import votable
 
 metadata = {}
 
+QUERY_FIRST = """
+SELECT TOP 100 "VIII/90/first12".recno,  "VIII/90/first12".FIRST,  "VIII/90/first12".RAJ2000,  "VIII/90/first12".DEJ2000,  "VIII/90/first12"."p(S)",  "VIII/90/first12".Fpeak,  "VIII/90/first12".Fint, 
+"VIII/90/first12".Rms,  "VIII/90/first12".MajAxis,  "VIII/90/first12".MinAxis,  "VIII/90/first12".PA,  "VIII/90/first12".N1,  "VIII/90/first12".c1,  "VIII/90/first12".N2
+FROM "VIII/90/first12"
+WHERE 1=CONTAINS(POINT('ICRS',"VIII/90/first12".RAJ2000,"VIII/90/first12".DEJ2000), BOX('ICRS', 210.0, 54.9, 0.01., 0.01.))"
+"""
+
 
 def get_metadata_from_tap(f, src):
   tap_endpoint = "http://tapvizier.u-strasbg.fr/TAPVizieR/tap/sync"
