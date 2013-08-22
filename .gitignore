@@ -14,3 +14,4 @@ server/*.json
 scripts/*.json
 public/videos/
 css/bootstrap.css
+css/zooniverse

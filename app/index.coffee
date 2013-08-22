@@ -27,12 +27,30 @@ RadioGalaxyZoo = angular.module('radio-galaxy-zoo', [])
 RadioGalaxyZoo.controller('ClassifierCtrl', ["$scope", "$routeParams", "classifierModel", ClassifierCtrl])
 RadioGalaxyZoo.service('classifierModel', ["$rootScope", "$http", ClassifierModel])
 
-
 RadioGalaxyZoo.directive('science', scienceDirective)
 RadioGalaxyZoo.directive('imageOpacity', ImageOpacityDirective)
 RadioGalaxyZoo.directive('marking', MarkingDirective)
 RadioGalaxyZoo.directive('continue', ContinueBtnDirective)
 RadioGalaxyZoo.directive('toggleContours', toggleContoursDirective)
+
+# Configure Zooniverse API
+if window.location.origin is "http://0.0.0.0:9294"
+  api = new zooniverse.Api
+    project: 'radio'
+    host: "https://dev.zooniverse.org"
+    path: '/proxy'
+else
+  # new Analytics
+  #   account: "UA-XXXXXXX-XX"
+  
+  api = new zooniverse.Api
+    project: 'radio'
+    host: "https://api.zooniverse.org"
+    path: '/proxy'
+
+topBar = new zooniverse.controllers.TopBar
+zooniverse.models.User.fetch()
+topBar.el.appendTo 'body'
 
 # Configure routes
 RadioGalaxyZoo.config(['$routeProvider', ($routeProvider) ->
