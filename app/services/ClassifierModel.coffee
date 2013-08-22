@@ -27,6 +27,9 @@ class ClassifierModel
     # Classification parameters
     @selectedContours = []
     @circles = []
+    
+    # TESTING an initial load of multiple subjects
+    @getInitialSubjects()
     @getSubject()
   
   addContour: (value) ->
@@ -43,11 +46,22 @@ class ClassifierModel
       radius: 20
     @circles.push(circle)
   
-  getSubject: (id) ->
-    
-    # Clear the classification parameters
+  # Clear variables after classification
+  reset: ->
     @selectedContours = []
     @circles = []
+  
+  getInitialSubjects: ->
+    @$http.get("https://dev.zooniverse.org/projects/radio/subjects?limit=4").
+      success( (data) =>
+        console.log "data", data
+      ).
+      error( (data, status, headers, config) =>
+        console.log "ERROR:", data, status, headers, config
+      )
+  
+  getSubject: (id) ->
+    @reset()
     
     @$http.get('https://dev.zooniverse.org/projects/radio/subjects')
       .success( (data) =>
