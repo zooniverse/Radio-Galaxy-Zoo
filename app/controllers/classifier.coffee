@@ -1,40 +1,13 @@
 
 Classifier = ($scope, $routeParams, classifierModel) ->
-  console.log 'Classifier'
-  
   $scope.classifierModel = classifierModel
   
   $scope.showContours = true
   
   $scope.step = 1
-  $scope.level = 3
   $scope.min = 0
   $scope.max = 1000
   $scope.sed = false
-  
-  $scope.contours = classifierModel.contours
-  $scope.src = classifierModel.src
-  $scope.circles = classifierModel.circles
-  
-  if $routeParams.subject?
-    classifierModel.getSubject($routeParams.subject)
-  
-  # Listen for ready because controller does not seem to
-  # trigger when array or object is changed.  This could be 
-  # due to model embedded in SVG.
-  $scope.$on('ready', (e) ->
-    $scope.contours = classifierModel.contours
-    $scope.src = classifierModel.src
-    $scope.$digest()
-  )
-  
-  $scope.addCircle = (x, y) ->
-    if $scope.step is 2
-      $scope.classifierModel.addCircle(x, y)
-  
-  $scope.onCircle = (e) ->
-    console.log 'onCircle', e
-    e.stopPropagation()
   
   $scope.onContour = (e) ->
     return unless $scope.step is 1
@@ -61,21 +34,20 @@ Classifier = ($scope, $routeParams, classifierModel) ->
       path.push "#{factor * point.y}, #{factor * point.x}"
     return "M#{path.join(" L")}"
   
-  $scope.updateContourParam = ->
-    classifierModel.updateContourParam($scope.min, $scope.max, $scope.level)
-  
   $scope.getInfraredSource = ->
     return classifierModel.infraredSource
   
   $scope.getRadioSource = ->
     return classifierModel.radioSource
   
+  # TODO: Move to template
   $scope.getStepMessage = ->
     if $scope.step is 3
       return "Complete!"
     else
       return "Step #{$scope.step} of 2"
   
+  # TODO: Move to service
   $scope.drawCatalogSources = ->
     console.log 'drawCatalogSources'
     
@@ -185,14 +157,6 @@ Classifier = ($scope, $routeParams, classifierModel) ->
                       .data(data, (d) -> return d.wavelength)
                       .transition()
                       .attr("cy", (d) -> return y(d.mag))
-              
-              # sed.selectAll(".dot")
-              #     .data(data)
-              #   .enter().append("circle")
-              #     .attr("class", "dot")
-              #     .attr("r", 3.5)
-              #     .attr("cx", (d) -> return x(d.wavelength))
-              #     .attr("cy", (d) -> return y(d.mag))
             )
   
   #
@@ -210,7 +174,7 @@ Classifier = ($scope, $routeParams, classifierModel) ->
     # Draw only selected contours
     contours = []
     for index in classifierModel.selectedContours
-      contours.push classifierModel.contours[index]
+      contours.push classifierModel.subjectContours[0][index]
     $scope.contours = contours
   
   $scope.onNoCorrespondingFlux = ->

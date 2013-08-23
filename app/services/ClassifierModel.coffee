@@ -13,29 +13,21 @@ class ClassifierModel
     $http.defaults.useXDomain = true
     delete $http.defaults.headers.common['X-Requested-With']
     
+    @src = null
     @infraredSource = null
     @radioSource = null
-    @level = 3
-    @arr = null
-    @width = null
-    @height = null
-    @dataMin = null
-    @dataMax = null
-    @contourMin = null
-    @contourMax = null
+    
+    # Storage for contours to be used for current and subsequent subjects
+    @subjectContours = []
     
     @contours = null
-    @src = null
     
-    # Classification parameters
-    @selectedContours = []
-    @circles = []
+    # Call function when new subject is presented
+    Subject.on("fetch", @onSubjectFetch)
+    Subject.on("select", @onSubjectSelect)
     
-    Subject.on "fetch", @getSubjects
-    
-    # TESTING an initial load of multiple subjects
-    Subject.fetch()
-    @getSubject()
+    # Execute initial fetch
+    Subject.fetch( -> Subject.next())
   
   addContour: (value) ->
     @selectedContours.push(value)
@@ -43,77 +35,33 @@ class ClassifierModel
   removeContour: (value) ->
     index = @selectedContours.indexOf(value)
     @selectedContours.splice(index, 1)
-    
-  addCircle: (x, y) ->
-    circle =
-      x: x
-      y: y
-      radius: 20
-    @circles.push(circle)
   
   # Clear variables after classification
   reset: ->
     @selectedContours = []
     @circles = []
   
-  # Request subjects from API
-  getSubjects: (e, subjects) ->
-    console.log 'getSubjects', subjects
+  onSubjectFetch: (e, subjects) ->
+    # Ensure unique subjects are served
+    Subject.instances = _.unique(Subject.instances, false, (d) -> return d.id)    
   
-  
-  getSubject: (id) ->
+  onSubjectSelect: (e, subject) =>
     @reset()
     
-    @$http.get('https://dev.zooniverse.org/projects/radio/subjects')
-      .success( (data) =>
-        @subject = data[0]
-        
-        @src = @subject.metadata.src
-        @infraredSource = @subject.location.standard
-        @radioSource = @subject.location.radio
-        raw = "#{@subject.location.raw}"
-        
-        # Request raw data
-        new astro.FITS(raw, (f) =>
-          image = f.getDataUnit()
-          
-          @width = image.width
-          @height = image.height
-          
-          image.getFrame(0, (arr) =>
-            extent = image.getExtent(arr)
-            @dataMin = @contourMin = extent[0]
-            @dataMax = @contourMax = extent[1]
-            
-            @arr = arr
-            
-            @getContours()
-          )
-        )
-      )
+    @currentSubject = subject
+    @src = subject.metadata.src
+    @infraredSource = subject.location.standard
+    @radioSource = subject.location.radio
+    
+    new astro.FITS(subject.location.raw, @onFITS)
   
-  linspace: (start, stop, num) ->
-    range = stop - start
-    step = range / (num - 1)
-    
-    steps = new Float32Array(num)
-    while num--
-      steps[num] = start + num * step
-      
-    return steps
-  
-  logspace: (start, stop, num) ->
-    start = Math.log(start)
-    end = Math.log(end)
-    
-    range = stop - start
-    step = range / (num - 1)
-    
-    steps = new Float32Array(num)
-    while num--
-      steps[num] = Math.exp(start + num * step)
-    
-    return steps
+  # Callback for when a FITS file has been received
+  onFITS: (f) =>
+    image = f.getDataUnit(0)
+    image.getFrame(0, (arr) =>
+      extent = image.getExtent(arr)
+      @getContours(image.width, image.height, extent[0], extent[1], arr)
+    )
   
   # NOTE: These levels are pre-computed.  They will need to be updated according the science team need.
   getLevels: (arr) ->
@@ -124,29 +72,14 @@ class ClassifierModel
       3787.9951161531317, 6560.9999999999945
     ]
   
-  updateContourParam: (min, max, level) ->
-    return if level is @level
-    
-    @level = level
-    @contourMin = 0.001 * (@dataMax - @dataMin) * parseInt(min) + @dataMin
-    @contourMax = 0.001 * (@dataMax - @dataMin) * parseInt(max) + @dataMin
-    
-    @getContours()
-  
-  getContours: () ->
-    console.log 'getContours'
-    arr = @arr
-    
+  getContours: (width, height, min, max, arr) ->
     z = @getLevels()
-    # z = @linspace(@contourMin, @contourMax, @level)
-    # z = @logspace(@contourMin, @contourMax, @level)
-    
-    j = @height
+    j = height
     
     data = []
     while j--
-      start = j * @width
-      data.push arr.subarray(start, start + @width)
+      start = j * width
+      data.push arr.subarray(start, start + width)
       
     # Set conrec arguments
     ilb = jlb = 0
@@ -166,9 +99,13 @@ class ClassifierModel
     
     conrec = new Conrec()
     conrec.contour(data, ilb, iub, jlb, jub, idx, jdx, z.length, z)
-    @contours = conrec.contourList().reverse()
     
-    @$rootScope.$broadcast('ready')
+    # Reverse the list so that contours are drawn in correct order (largest first)
+    @subjectContours.push conrec.contourList().reverse()
+    
+    @$rootScope.contours = @subjectContours[0]
+    @$rootScope.src = @src
+    @$rootScope.$apply()
 
 
 module.exports = ClassifierModel
