@@ -25,8 +25,8 @@ class ClassifierModel
     @subjectContours = []
     
     @contours = null
-    
-    @promises = {}
+    @contourPromise = null
+    @nextPromise = null
     
     # Call function when new subject is presented
     Subject.on("fetch", @onSubjectFetch)
@@ -48,18 +48,23 @@ class ClassifierModel
   # This is done to request FITS and compute contours ahead 
   # of time for perceived performance.
   onSubjectSelect: (e, subject) =>
-    dfd = @$q.defer()
-    @promises.contours = dfd.promise
-    new astro.FITS(subject.location.raw, @onFITS, {dfd: dfd, subject: subject})
+    dfd1 = @$q.defer()
+    @nextDeferred = @$q.defer()
+    @contourPromise = dfd1.promise
+    @nextPromise = @nextDeferred.promise
+    new astro.FITS(subject.location.raw, @onFITS, {dfd: dfd1, subject: subject})
   
   getSubject: ->
     console.log 'getSubject'
-    @$q.all(@promises).then( (obj) =>
-      # NOTE: This is symantically weird!
-      subject = obj.contours
+    
+    @$q.all([@contourPromise, @nextPromise]).then( (subject) =>
+      console.log 'IN THEN FUNCTION', subject
+      subject = subject[0]
       
       @subjectContours.shift()
       
+      # TODO: Move some of this outside of then function
+      #       so that at least image shows while waiting for contours.
       @currentSubject = subject
       @src = subject.metadata.src
       @infraredSource = subject.location.standard
@@ -69,14 +74,24 @@ class ClassifierModel
       @$rootScope.src = @src
       
       @$rootScope.contours = @subjectContours[0]
+      
+      # TODO: Missing some here that communicates to rootScope.
+      
+      @nextDeferred = null
+      @contourPromise = null
+      @nextPromise = null
     )
+    @nextDeferred.resolve()
   
   # Callback for when a FITS file has been received
   onFITS: (f, opts) =>
     image = f.getDataUnit(0)
+    
     image.getFrame(0, (arr) =>
       extent = image.getExtent(arr)
+      
       @getContours(image.width, image.height, extent[0], extent[1], arr)
+      console.log 'RESOLVING?', opts.dfd, opts.subject
       opts.dfd.resolve(opts.subject)
       
       unless @initialSelectComplete
