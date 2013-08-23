@@ -1,4 +1,6 @@
 
+Subject = zooniverse.models.Subject
+
 Classifier = ($scope, $routeParams, classifierModel) ->
   $scope.classifierModel = classifierModel
   
@@ -23,6 +25,7 @@ Classifier = ($scope, $routeParams, classifierModel) ->
       el.setAttribute('class', 'svg-contour selected')
       classifierModel.addContour(contourid)
   
+  # TODO: Move to service
   $scope.drawContour = (contour) ->
     return unless contour
     console.log 'drawContour'
@@ -51,7 +54,7 @@ Classifier = ($scope, $routeParams, classifierModel) ->
   $scope.drawCatalogSources = ->
     console.log 'drawCatalogSources'
     
-    catalog = classifierModel.subject.metadata.catalog
+    catalog = classifierModel.currentSubject.metadata.catalog
     return unless catalog?
     
     bandLookup =
@@ -151,8 +154,6 @@ Classifier = ($scope, $routeParams, classifierModel) ->
                 datum['mag'] = object["#{band}mag"]
                 data.push datum
               
-              console.log data.map( (d) -> d.mag)
-              
               dots = d3.selectAll(".dot")
                       .data(data, (d) -> return d.wavelength)
                       .transition()
@@ -167,6 +168,7 @@ Classifier = ($scope, $routeParams, classifierModel) ->
     $scope.showContours = true
     $scope.step = 3
     $scope.drawCatalogSources()
+    Subject.next()
   
   $scope.onContinue = ->
     $scope.step = 2
@@ -181,12 +183,13 @@ Classifier = ($scope, $routeParams, classifierModel) ->
     $scope.showContours = true
     $scope.step = 3
     $scope.drawCatalogSources()
+    Subject.next()
   
   $scope.onDone = ->
     $scope.showContours = true
     $scope.step = 3
-    
     $scope.drawCatalogSources()
+    Subject.next()
   
   $scope.onNext = ->
     

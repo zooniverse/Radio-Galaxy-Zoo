@@ -25,7 +25,7 @@ RadioGalaxyZoo = angular.module('radio-galaxy-zoo', [])
 # Connect controllers and services and directives
 
 RadioGalaxyZoo.controller('ClassifierCtrl', ["$scope", "$routeParams", "classifierModel", ClassifierCtrl])
-RadioGalaxyZoo.service('classifierModel', ["$rootScope", "$http", ClassifierModel])
+RadioGalaxyZoo.service('classifierModel', ["$rootScope", "$http", "$q", ClassifierModel])
 
 RadioGalaxyZoo.directive('science', scienceDirective)
 RadioGalaxyZoo.directive('imageOpacity', ImageOpacityDirective)
