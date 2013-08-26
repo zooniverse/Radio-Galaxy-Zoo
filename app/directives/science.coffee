@@ -4,6 +4,10 @@ module.exports = ->
     restrict: 'C'
     link: (scope, elem, attrs) ->
       
+      
+      
+      return
+      
       pop = Popcorn("#blackhole")
       
       pop.footnote({

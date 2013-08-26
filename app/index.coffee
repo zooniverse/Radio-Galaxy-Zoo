@@ -1,6 +1,7 @@
 
 # Import controllers
 ClassifierCtrl  = require './controllers/classifier'
+ScienceCtrl  = require './controllers/science'
 
 # Import directives
 ImageOpacityDirective = require './directives/image_opacity'
@@ -25,6 +26,7 @@ RadioGalaxyZoo = angular.module('radio-galaxy-zoo', [])
 # Connect controllers and services and directives
 
 RadioGalaxyZoo.controller('ClassifierCtrl', ["$scope", "$routeParams", "classifierModel", ClassifierCtrl])
+RadioGalaxyZoo.controller('ScienceCtrl', ["$scope", "$routeParams", ScienceCtrl])
 RadioGalaxyZoo.service('classifierModel', ["$rootScope", "$http", "$q", ClassifierModel])
 
 RadioGalaxyZoo.directive('science', scienceDirective)
@@ -63,6 +65,9 @@ RadioGalaxyZoo.config(['$routeProvider', ($routeProvider) ->
       template: classifierTemplate
     )
     .when("/science",
+      template: scienceTemplate
+    )
+    .when("/science/:category",
       template: scienceTemplate
     )
     .when("/team",
