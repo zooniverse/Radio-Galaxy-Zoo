@@ -59,7 +59,6 @@ class ClassifierModel
     # Create deferred object to be resolved after contours are computed.
     dfd1 = @$q.defer()
     @contourPromise = dfd1.promise
-    
     new astro.FITS(subject.location.raw, @onFITS, {dfd: dfd1, subject: subject})
   
   getSubject: ->
@@ -69,7 +68,6 @@ class ClassifierModel
     @radioSource = @nextSubject.location.radio
     
     @contourPromise.then( (subject) =>
-      console.log 'IN THEN FUNCTION', subject
       @subjectContours.shift()
       @contourPromise = null
       @drawContours( @subjectContours[0] )
@@ -144,6 +142,7 @@ class ClassifierModel
     
     # Factor is needed because JPGs have been upscaled from
     # FITS resolution.
+    # NOTE: Number needs updating if image resolution changes.
     factor = 500 / 301
     
     pathFn = d3.svg.line()

@@ -114,7 +114,7 @@ Classifier = ($scope, $routeParams, classifierModel) ->
               for band, wavelength of bandLookup
                 datum = {}
                 datum['wavelength'] = wavelength
-                datum['mag'] = object["#{band}mag"]
+                datum['mag'] = if isNaN(parseFloat(object["#{band}mag"])) then 0 else object["#{band}mag"]
                 data.push datum
               
               dots = d3.selectAll(".dot")
