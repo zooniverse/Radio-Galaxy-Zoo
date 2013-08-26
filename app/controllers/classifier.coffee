@@ -5,50 +5,13 @@ Classifier = ($scope, $routeParams, classifierModel) ->
   $scope.classifierModel = classifierModel
   
   $scope.showContours = true
-  
   $scope.step = 1
   $scope.min = 0
   $scope.max = 1000
   $scope.sed = false
   
-  $scope.onContour = (e) ->
-    return unless $scope.step is 1
-    
-    el = e.target
-    classes = el.className.baseVal
-    contourid = el.getAttribute("contourid")
-    
-    if classes.indexOf('selected') > -1
-      el.setAttribute('class', 'svg-contour')
-      classifierModel.removeContour(contourid)
-    else
-      el.setAttribute('class', 'svg-contour selected')
-      classifierModel.addContour(contourid)
-  
-  # TODO: Move to service
-  $scope.drawContour = (contour) ->
-    return unless contour
-    console.log 'drawContour'
-    
-    factor = 500 / 301
-    
-    path = []
-    for point, index in contour
-      path.push "#{factor * point.y}, #{factor * point.x}"
-    return "M#{path.join(" L")}"
-  
-  $scope.getInfraredSource = ->
-    return classifierModel.infraredSource
-  
-  $scope.getRadioSource = ->
-    return classifierModel.radioSource
-  
-  # TODO: Move to template
-  $scope.getStepMessage = ->
-    if $scope.step is 3
-      return "Complete!"
-    else
-      return "Step #{$scope.step} of 2"
+  $scope.getInfraredSource = -> return classifierModel.infraredSource
+  $scope.getRadioSource = -> return classifierModel.radioSource
   
   # TODO: Move to service
   $scope.drawCatalogSources = ->

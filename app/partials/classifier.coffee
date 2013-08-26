@@ -7,9 +7,7 @@ template = """
     <img class="infrared" data-ng-src="{{ getInfraredSource() }}">
     
     <div id="svg-contours" class='contours marking' ng-class="{dashed: step==2, final: step==3, 'fade-contour': !showContours}">
-      <svg xmlns="http://www.w3.org/2000/svg" class="svg-contours">
-        <path ng-repeat="c in contours" class="svg-contour" ng-click="onContour($event)" ng-attr-contourid="{{$index}}" ng-attr-d="{{ drawContour(c) }}"></path>
-      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" class="svg-contours"></svg>
     </div>
     
   </div>
@@ -23,8 +21,7 @@ template = """
         <p class="band" data-band="radio">Radio</p>
       </div>
       <span class="toggle-contours col-md-3">{{showContours ? 'show' : 'hide'}} contours</span>
-      
-      <span class="message col-md-3">{{ getStepMessage() }}</span>
+      <span class="message col-md-3">{{step==3 ? 'Complete!' : "Step " + step + " of 2"}}</span>
     </div>
     
     <div class='row instruction'>

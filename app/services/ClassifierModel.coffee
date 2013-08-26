@@ -27,6 +27,7 @@ class ClassifierModel
     
     # Storage for contours to be used for current and next subject
     @subjectContours = []
+    @selectedContours = []
     
     # Reading of FITS is async causing contour computation to be async
     @contourPromise = null
@@ -66,13 +67,12 @@ class ClassifierModel
     @currentSubject = @nextSubject
     @infraredSource = @nextSubject.location.standard
     @radioSource = @nextSubject.location.radio
-    @$rootScope.contours = null
     
     @contourPromise.then( (subject) =>
       console.log 'IN THEN FUNCTION', subject
       @subjectContours.shift()
       @contourPromise = null
-      @$rootScope.contours = @subjectContours[0] 
+      @drawContours( @subjectContours[0] )
     )
   
   # Callback for when a FITS file has been received
@@ -95,9 +95,8 @@ class ClassifierModel
           @currentSubject = subject
           @infraredSource = subject.location.standard
           @radioSource = subject.location.radio
-          
-          @$rootScope.contours = @subjectContours[0]
         )
+        @drawContours( @subjectContours[0] )
     )
   
   # NOTE: These levels are pre-computed.  They will need to be updated according the science team need.
@@ -140,6 +139,38 @@ class ClassifierModel
     # Reverse the list so that contours are drawn in correct order (largest first)
     @subjectContours.push conrec.contourList().reverse()
     
+  drawContours: (contours) ->
+    svg = d3.select("svg.svg-contours")
+    
+    # Factor is needed because JPGs have been upscaled from
+    # FITS resolution.
+    factor = 500 / 301
+    
+    pathFn = d3.svg.line()
+                    .x( (d) -> return factor * d.y)
+                    .y( (d) -> return factor * d.x)
+                    .interpolate("linear")
+    
+    for contour, index in contours
+      svg.append("path")
+          .attr("d", pathFn(contour))
+          .attr("class", "svg-contour")
+          .attr("contourid", index)
+          .on("click", =>
+            # TODO: Disable event when past step 1
+            
+            el = d3.select(d3.event.target)
+            classes = el.attr("class")
+            contourid = el.attr("contourid")
+            
+            if classes.indexOf('selected') > -1
+              el.attr("class", "svg-contour")
+              @removeContour(contourid)
+            else
+              el.attr("class", "svg-contour selected")
+              @addContour(contourid)
+          )
+  
   addContour: (value) ->
     @selectedContours.push(value)
     
