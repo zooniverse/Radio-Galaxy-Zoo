@@ -8,7 +8,7 @@ template = """
     
     <div id="svg-contours" class='contours marking' ng-class="{dashed: step==2, final: step==3, 'fade-contour': !showContours}">
       <svg xmlns="http://www.w3.org/2000/svg" class="svg-contours">
-        <path ng-repeat="c in contours" class="svg-contour" ng-click="onContour($event)" ng-attr-contourid="{{$index}}" ng-attr-src="{{ src }}" ng-attr-d="{{ drawContour(c) }}"></path>
+        <path ng-repeat="c in contours" class="svg-contour" ng-click="onContour($event)" ng-attr-contourid="{{$index}}" ng-attr-d="{{ drawContour(c) }}"></path>
       </svg>
     </div>
     

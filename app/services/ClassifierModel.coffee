@@ -3,36 +3,39 @@ Subject = zooniverse.models.Subject
 
 
 class ClassifierModel
-    
+  COMPLETE: true
+  
   constructor: ($rootScope, $http, $q) ->
     
-    # TODO: Is this weird?
+    # Store injected services on object
     @$http = $http
     @$rootScope = $rootScope
     @$q = $q
     
-    $http.defaults.useXDomain = true
-    delete $http.defaults.headers.common['X-Requested-With']
+    # Boolean to check if on initial subject
+    # TODO: Would be nice to use `one` event binding instead
+    @initialSelect = false
     
-    # Initial subject select
-    initialSelectComplete = false
-    
-    @src = null
+    # Attributes describing the current subject
     @infraredSource = null
     @radioSource = null
+    @contours = null
     
-    # Storage for contours to be used for current and subsequent subjects
+    # Store current and next subject objects
+    @currentSubject = null
+    @nextSubject = null
+    
+    # Storage for contours to be used for current and next subject
     @subjectContours = []
     
-    @contours = null
+    # Reading of FITS is async causing contour computation to be async
     @contourPromise = null
-    @nextPromise = null
     
     # Call function when new subject is presented
     Subject.on("fetch", @onSubjectFetch)
     Subject.on("select", @onSubjectSelect)
     
-    # Execute initial fetch
+    # Fetch initial subjects and explicitly request next triggering onSubjectSelect
     Subject.fetch( -> Subject.next())
   
   # Clear variables after classification
@@ -40,48 +43,37 @@ class ClassifierModel
     @selectedContours = []
     @circles = []
   
+  # Ensure unique subjects are served
+  # TODO: Might be a better place for this.
   onSubjectFetch: (e, subjects) ->
-    # Ensure unique subjects are served
     Subject.instances = _.unique(Subject.instances, false, (d) -> return d.id)
   
-  # Triggered one step before new subject is rendered.
-  # This is done to request FITS and compute contours ahead 
-  # of time for perceived performance.
+  # This function is triggered one step before the next subject
+  # is rendered (i.e. during step 3 of classification). This is done so that
+  # the async process of requesting FITS and computing contours is perceived 
+  # to be faster.
   onSubjectSelect: (e, subject) =>
+    @nextSubject = subject
+    
+    # Create deferred object to be resolved after contours are computed.
     dfd1 = @$q.defer()
-    @nextDeferred = @$q.defer()
     @contourPromise = dfd1.promise
-    @nextPromise = @nextDeferred.promise
+    
     new astro.FITS(subject.location.raw, @onFITS, {dfd: dfd1, subject: subject})
   
   getSubject: ->
-    console.log 'getSubject'
     
-    @$q.all([@contourPromise, @nextPromise]).then( (subject) =>
+    @currentSubject = @nextSubject
+    @infraredSource = @nextSubject.location.standard
+    @radioSource = @nextSubject.location.radio
+    @$rootScope.contours = null
+    
+    @contourPromise.then( (subject) =>
       console.log 'IN THEN FUNCTION', subject
-      subject = subject[0]
-      
       @subjectContours.shift()
-      
-      # TODO: Move some of this outside of then function
-      #       so that at least image shows while waiting for contours.
-      @currentSubject = subject
-      @src = subject.metadata.src
-      @infraredSource = subject.location.standard
-      @radioSource = subject.location.radio
-      
-      @$rootScope.contours = @subjectContours[0]
-      @$rootScope.src = @src
-      
-      @$rootScope.contours = @subjectContours[0]
-      
-      # TODO: Missing some here that communicates to rootScope.
-      
-      @nextDeferred = null
       @contourPromise = null
-      @nextPromise = null
+      @$rootScope.contours = @subjectContours[0] 
     )
-    @nextDeferred.resolve()
   
   # Callback for when a FITS file has been received
   onFITS: (f, opts) =>
@@ -89,26 +81,23 @@ class ClassifierModel
     
     image.getFrame(0, (arr) =>
       extent = image.getExtent(arr)
-      
       @getContours(image.width, image.height, extent[0], extent[1], arr)
-      console.log 'RESOLVING?', opts.dfd, opts.subject
-      opts.dfd.resolve(opts.subject)
       
-      unless @initialSelectComplete
-        @initialSelectComplete = true
-        
-        # TODO: This subject stuff is convoluted.
+      if @initialSelect is @COMPLETE
+        @$rootScope.$apply( ->
+          opts.dfd.resolve(opts.subject)
+        )
+      else
+        @initialSelect = true
         subject = opts.subject
         
-        @currentSubject = subject
-        @src = subject.metadata.src
-        @infraredSource = subject.location.standard
-        @radioSource = subject.location.radio
-        
-        @$rootScope.contours = @subjectContours[0]
-        @$rootScope.src = @src
-        
-        @$rootScope.$apply()
+        @$rootScope.$apply( =>
+          @currentSubject = subject
+          @infraredSource = subject.location.standard
+          @radioSource = subject.location.radio
+          
+          @$rootScope.contours = @subjectContours[0]
+        )
     )
   
   # NOTE: These levels are pre-computed.  They will need to be updated according the science team need.
