@@ -127,7 +127,7 @@ module.exports = ->
         )
         .on("dragend", ->
           return unless scope.step is 2
-          
+          g.remove() if a.attr("r") is "1"
           g = h = a = c = t = null
         )
       

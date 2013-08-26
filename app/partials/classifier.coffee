@@ -16,9 +16,9 @@ template = """
     
     <div class="row controls">
       <div class="image-slider col-md-6">
-        <p class="band" data-band="infrared">IR</p>
-        <input class='image-opacity' type="range" min="0" max="1" step="0.01" value="0">
         <p class="band" data-band="radio">Radio</p>
+        <input class='image-opacity' type="range" min="0" max="1" step="0.01" value="0">
+        <p class="band" data-band="infrared">IR</p>
       </div>
       <span class="toggle-contours col-md-3">{{showContours ? 'show' : 'hide'}} contours</span>
       <span class="message col-md-3">{{step==3 ? 'Complete!' : "Step " + step + " of 2"}}</span>
@@ -27,11 +27,11 @@ template = """
     <div class='row instruction'>
       <div ng-switch on="step">
         <div col-md-12 ng-switch-when="1">
-          <p>Select contours representing the radio flux.</p>
+          <p>Select the contour(s) representing a radio flux.</p>
         </div>
         
         <div ng-switch-when="2">
-          <p>Identify the infrared source.</p>
+          <p>Identify the infrared source(s).</p>
         </div>
         
         <div ng-switch-when="3">

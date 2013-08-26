@@ -48,9 +48,9 @@ else
     host: "https://api.zooniverse.org"
     path: '/proxy'
 
-# topBar = new zooniverse.controllers.TopBar
-# zooniverse.models.User.fetch()
-# topBar.el.appendTo 'body'
+topBar = new zooniverse.controllers.TopBar
+zooniverse.models.User.fetch()
+topBar.el.appendTo 'body'
 
 # Configure routes
 RadioGalaxyZoo.config(['$routeProvider', ($routeProvider) ->
