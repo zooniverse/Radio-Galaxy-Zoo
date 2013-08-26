@@ -30,15 +30,18 @@ div.contours
       path
         opacity 0
   
-  &.dashed
+  &.step-2, &.step-3
     svg
       path
+        pointer-events none
+        display none
         stroke-dasharray 5,5
         
         &.selected
+          display block
           fill-opacity 0
   
-  &.final
+  &.step-3
     svg
       circle
         &.annotation

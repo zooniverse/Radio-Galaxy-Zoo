@@ -170,6 +170,7 @@ class ClassifierModel
               @addContour(contourid)
           )
   
+  # TODO: Remove need to store selected.  Can use DOM to extract the selected.
   addContour: (value) ->
     @selectedContours.push(value)
     

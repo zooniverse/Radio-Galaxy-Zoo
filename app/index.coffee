@@ -34,7 +34,7 @@ RadioGalaxyZoo.directive('continue', ContinueBtnDirective)
 RadioGalaxyZoo.directive('toggleContours', toggleContoursDirective)
 
 # Configure Zooniverse API
-if window.location.origin is "http://0.0.0.0:9294"
+if window.location.hostname in ["0.0.0.0", "radio.galaxyzoo.org"]
   api = new zooniverse.Api
     project: 'radio'
     host: "https://dev.zooniverse.org"
@@ -48,9 +48,9 @@ else
     host: "https://api.zooniverse.org"
     path: '/proxy'
 
-topBar = new zooniverse.controllers.TopBar
-zooniverse.models.User.fetch()
-topBar.el.appendTo 'body'
+# topBar = new zooniverse.controllers.TopBar
+# zooniverse.models.User.fetch()
+# topBar.el.appendTo 'body'
 
 # Configure routes
 RadioGalaxyZoo.config(['$routeProvider', ($routeProvider) ->

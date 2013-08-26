@@ -6,7 +6,7 @@ template = """
     <img data-ng-src="{{ getRadioSource() }}">
     <img class="infrared" data-ng-src="{{ getInfraredSource() }}">
     
-    <div id="svg-contours" class='contours marking' ng-class="{dashed: step==2, final: step==3, 'fade-contour': !showContours}">
+    <div id="svg-contours" class='contours marking step-{{step}}' ng-class="{'fade-contour': !showContours}">
       <svg xmlns="http://www.w3.org/2000/svg" class="svg-contours"></svg>
     </div>
     
