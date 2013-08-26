@@ -14,15 +14,16 @@ template = """
     -->
     
     <ul class="nav nav-tabs">
-      <li class="active"><a href="#/science">Science</a></li>
-      <li><a href="#/science/compact-sources">Compact Sources</a></li>
-      <li><a href="#/science/aligned-symmetric-sources">Aligned / Symmetric Sources</a></li>
-      <li><a href="#/science/merging-overlapping-sources">Merging and Overlapping Sources</a></li>
-      <li><a href="#/science/irregularly-shaped-sources">Irregularly Shaped Sources</a></li>
-      <li><a href="#/science/diffuse-sources">Diffuse Sources</a></li>
+      <li ng-class="{'active': category==null}"><a href="#/science">Science</a></li>
+      <li ng-class="{'active': category=='compact-sources'}"><a href="#/science/compact-sources">Compact Sources</a></li>
+      <li ng-class="{'active': category=='aligned-symmetric-sources'}"><a href="#/science/aligned-symmetric-sources">Aligned / Symmetric Sources</a></li>
+      <li ng-class="{'active': category=='merging-overlapping-sources'}"><a href="#/science/merging-overlapping-sources">Merging and Overlapping Sources</a></li>
+      <li ng-class="{'active': category=='irregularly-shaped-sources'}"><a href="#/science/irregularly-shaped-sources">Irregularly Shaped Sources</a></li>
+      <li ng-class="{'active': category=='diffuse-sources'}"><a href="#/science/diffuse-sources">Diffuse Sources</a></li>
     </ul>
     
     <div ng-show="category==null">
+    <h4>Yea, Science!</h4>
     <p>Lorem ipsum dolor sit amet, populo oportere ex duo, vivendum voluptaria pri at. Ex autem porro vis. Sapientem mnesarchum nam an. Duo et sint feugiat, ut sit velit novum. Quo ut doming probatus facilisis, odio vivendo no vix. Id usu iudico nusquam, duo eu iusto integre ponderum. Quas legimus sapientem id vix. Invidunt menandri assueverit nam at, id illud feugiat constituam qui. An nonumes epicuri adipisci duo, has alia omittantur ad. Ne cibo accumsan philosophia usu. Ut vide mazim suscipit eos.</p>
 
     <p>Docendi definiebas nam ei. An mei iisque hendrerit, meis nostro mei ut, equidem copiosae eam ea. No adhuc impedit pri, semper integre vel id. No per sonet essent dissentiet, tation option cu pri. Sed no utamur legendos facilisis.</p>
