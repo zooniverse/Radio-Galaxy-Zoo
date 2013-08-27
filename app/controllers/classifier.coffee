@@ -1,7 +1,7 @@
 
 Subject = zooniverse.models.Subject
 
-Classifier = ($scope, $routeParams, classifierModel) ->
+Classifier = ($scope, classifierModel) ->
   $scope.classifierModel = classifierModel
   
   $scope.showContours = true
@@ -43,6 +43,7 @@ Classifier = ($scope, $routeParams, classifierModel) ->
     Subject.next()
   
   $scope.onNext = ->
+    console.log "onNext"
     
     # TODO: Post classification
     

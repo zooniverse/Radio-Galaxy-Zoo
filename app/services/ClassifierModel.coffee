@@ -37,7 +37,10 @@ class ClassifierModel
     Subject.on("select", @onSubjectSelect)
     
     # Fetch initial subjects and explicitly request next triggering onSubjectSelect
-    Subject.fetch( -> Subject.next())
+    Subject.fetch( ->
+      console.log 'initial fetch callback'
+      Subject.next()
+    )
   
   # Clear variables after classification
   reset: ->
@@ -54,6 +57,7 @@ class ClassifierModel
   # the async process of requesting FITS and computing contours is perceived 
   # to be faster.
   onSubjectSelect: (e, subject) =>
+    console.log "onSubjectSelect"
     @nextSubject = subject
     
     # Create deferred object to be resolved after contours are computed.

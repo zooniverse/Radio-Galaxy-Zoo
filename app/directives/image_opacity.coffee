@@ -19,9 +19,15 @@ module.exports = ->
         elem[0].value = 1
         elem[0].onchange()
       
+      elem[0].onmousedown = ->
+        img.addClass("no-transition")
+        
       elem[0].onchange = (e) ->
         value = elem[0].value
         img.css('opacity', value)
+        
+      elem[0].onmouseup = ->
+        img.removeClass("no-transition")
       
       # Watch scope.step to update image opacity accordingly
       scope.$watch('step', (step) ->
