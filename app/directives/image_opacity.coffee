@@ -30,7 +30,7 @@ module.exports = ->
         img.removeClass("no-transition")
       
       # Watch scope.step to update image opacity accordingly
-      scope.$watch('step', (step) ->
+      scope.$watch('model.step', (step) ->
         if step is 1
           radioEl.onclick()
         else if step is 2

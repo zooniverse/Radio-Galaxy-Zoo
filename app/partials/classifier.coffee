@@ -6,7 +6,7 @@ template = """
     <img data-ng-src="{{ getRadioSource() }}">
     <img class="infrared" data-ng-src="{{ getInfraredSource() }}">
     
-    <div id="svg-contours" class='contours marking step-{{step}}' ng-class="{'fade-contour': !showContours}">
+    <div id="svg-contours" class='contours marking step-{{getStep()}}' ng-class="{'fade-contour': !getShowContours()}">
       <svg xmlns="http://www.w3.org/2000/svg" class="svg-contours"></svg>
     </div>
     
@@ -21,11 +21,11 @@ template = """
         <p class="band" data-band="infrared">IR</p>
       </div>
       <span class="toggle-contours col-md-3">{{showContours ? 'show' : 'hide'}} contours</span>
-      <span class="message col-md-3">{{step==3 ? 'Complete!' : "Step " + step + " of 2"}}</span>
+      <span class="message col-md-3">{{getStep()==3 ? 'Complete!' : "Step " + getStep() + " of 2"}}</span>
     </div>
     
     <div class='row instruction'>
-      <div ng-switch on="step">
+      <div ng-switch on="getStep()">
         <div col-md-12 ng-switch-when="1">
           <p>Select the contour(s) representing a radio flux.</p>
         </div>
@@ -46,7 +46,7 @@ template = """
     </div>
     
     <div class='buttons row'>
-      <div ng-switch on="step">
+      <div ng-switch on="getStep()">
         <div ng-switch-when="1" class="col-md-6 col-md-offset-7">
           <button type="button" class="btn btn-default" data-ng-click="onNoFlux()">No flux</button>
           <button type="button" class="btn btn-primary continue" data-ng-click="onContinue()" disabled>Continue</button>

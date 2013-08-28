@@ -1,16 +1,24 @@
 
 Subject = zooniverse.models.Subject
 
+# TODO: Might need to split this into another service (or factory).  One would
+#       be used to preserve state, the other for larger logical operations.
 
 class ClassifierModel
   COMPLETE: true
   
   constructor: ($rootScope, $http, $q) ->
+    console.log "ClassifierModel"
     
     # Store injected services on object
     @$http = $http
     @$rootScope = $rootScope
     @$q = $q
+    
+    # Set state variables
+    @showContours = true
+    @step = 1
+    @showSED = false
     
     # Boolean to check if on initial subject
     # TODO: Would be nice to use `one` event binding instead

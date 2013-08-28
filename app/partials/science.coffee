@@ -15,11 +15,9 @@ template = """
     
     <ul class="nav nav-tabs">
       <li ng-class="{'active': category==null}"><a href="#/science">Science</a></li>
-      <li ng-class="{'active': category=='compact-sources'}"><a href="#/science/compact-sources">Compact Sources</a></li>
-      <li ng-class="{'active': category=='aligned-symmetric-sources'}"><a href="#/science/aligned-symmetric-sources">Aligned / Symmetric Sources</a></li>
-      <li ng-class="{'active': category=='merging-overlapping-sources'}"><a href="#/science/merging-overlapping-sources">Merging and Overlapping Sources</a></li>
-      <li ng-class="{'active': category=='irregularly-shaped-sources'}"><a href="#/science/irregularly-shaped-sources">Irregularly Shaped Sources</a></li>
-      <li ng-class="{'active': category=='diffuse-sources'}"><a href="#/science/diffuse-sources">Diffuse Sources</a></li>
+      <li ng-class="{'active': category=='single-compact-sources'}"><a href="#/science/single-compact-sources">Single Compact Sources</a></li>
+      <li ng-class="{'active': category=='multiple-compact-sources'}"><a href="#/science/multiple-compact-sources">Multiple Compact Sources</a></li>
+      <li ng-class="{'active': category=='extended-sources'}"><a href="#/science/extended-sources">Extended Sources</a></li>
     </ul>
     
     <div ng-show="category==null">
@@ -31,8 +29,14 @@ template = """
     <p>Qui veniam repudiandae ex, ne equidem epicuri pri, cu usu eloquentiam instructior. In minim nominavi quaestio vis, harum evertitur liberavisse eu vel. No appareat iracundia eos. Ius eius tantas consul ut, eu unum constituto mea. Ei mel nihil nusquam mediocrem. Ei dicta noluisse adipiscing mea, vel detraxit signiferumque in. Vis elitr soleat iuvaret ad. Dicta rationibus adipiscing quo id. Mnesarchum eloquentiam conclusionemque qui no, eu congue postulant pro.</p>
     </div>
     
-    <div ng-show="category=='compact-sources'">
-      <h4>Compact Sources</h4>
+    <div ng-show="category=='single-compact-sources'">
+      <h4>Single Compact Sources</h4>
+      <p>Lorem ipsum dolor sit amet, populo oportere ex duo, vivendum voluptaria pri at. Ex autem porro vis. Sapientem mnesarchum nam an. Duo et sint feugiat, ut sit velit novum. Quo ut doming probatus facilisis, odio vivendo no vix. Id usu iudico nusquam, duo eu iusto integre ponderum. Quas legimus sapientem id vix. Invidunt menandri assueverit nam at, id illud feugiat constituam qui. An nonumes epicuri adipisci duo, has alia omittantur ad. Ne cibo accumsan philosophia usu. Ut vide mazim suscipit eos.</p>
+
+      <p>Docendi definiebas nam ei. An mei iisque hendrerit, meis nostro mei ut, equidem copiosae eam ea. No adhuc impedit pri, semper integre vel id. No per sonet essent dissentiet, tation option cu pri. Sed no utamur legendos facilisis.</p>
+
+      <p>Qui veniam repudiandae ex, ne equidem epicuri pri, cu usu eloquentiam instructior. In minim nominavi quaestio vis, harum evertitur liberavisse eu vel. No appareat iracundia eos. Ius eius tantas consul ut, eu unum constituto mea. Ei mel nihil nusquam mediocrem. Ei dicta noluisse adipiscing mea, vel detraxit signiferumque in. Vis elitr soleat iuvaret ad. Dicta rationibus adipiscing quo id. Mnesarchum eloquentiam conclusionemque qui no, eu congue postulant pro.</p>
+      
       <div class="row">
         <img class="col-md-3" src="images/science/1009_heatmap+contours.png">
         <p class="col-md-3">Compact radio sources most frequently look like this. A relatively faint radio source sits squarely on an IR source. Both the IR and radio emission are likely to come from the same object. The tiny specks towards the upper left corner are noise and probably do not reflect true emission.</p>
@@ -59,9 +63,14 @@ template = """
       </div>
     </div>
     
-    <div ng-show="category=='aligned-symmetric-sources'">
-    <h4>Aligned / Symmetric Sources</h4>
-    
+    <div ng-show="category=='multiple-compact-sources'">
+    <h4>Multiple Compact Sources</h4>
+      <p>Lorem ipsum dolor sit amet, populo oportere ex duo, vivendum voluptaria pri at. Ex autem porro vis. Sapientem mnesarchum nam an. Duo et sint feugiat, ut sit velit novum. Quo ut doming probatus facilisis, odio vivendo no vix. Id usu iudico nusquam, duo eu iusto integre ponderum. Quas legimus sapientem id vix. Invidunt menandri assueverit nam at, id illud feugiat constituam qui. An nonumes epicuri adipisci duo, has alia omittantur ad. Ne cibo accumsan philosophia usu. Ut vide mazim suscipit eos.</p>
+
+      <p>Docendi definiebas nam ei. An mei iisque hendrerit, meis nostro mei ut, equidem copiosae eam ea. No adhuc impedit pri, semper integre vel id. No per sonet essent dissentiet, tation option cu pri. Sed no utamur legendos facilisis.</p>
+
+      <p>Qui veniam repudiandae ex, ne equidem epicuri pri, cu usu eloquentiam instructior. In minim nominavi quaestio vis, harum evertitur liberavisse eu vel. No appareat iracundia eos. Ius eius tantas consul ut, eu unum constituto mea. Ei mel nihil nusquam mediocrem. Ei dicta noluisse adipiscing mea, vel detraxit signiferumque in. Vis elitr soleat iuvaret ad. Dicta rationibus adipiscing quo id. Mnesarchum eloquentiam conclusionemque qui no, eu congue postulant pro.</p>
+      
       <div class="row">
         <img class="col-md-3" src="images/science/1854_heatmap+contours.png">
         <p class="col-md-3">A nice example of an aligned, symmetric radio source. Three components are visible, and the central components coincides with a IR source, which can be identified as the counterpart. Many fainter IR sources can be seen behind the northern and southern lobe, but they are unrelated.A nice example of an aligned, symmetric radio source. Three components are visible, and the central components coincides with a IR source, which can be identified as the counterpart. Many fainter IR sources can be seen behind the northern and southern lobe, but they are unrelated.</p>
@@ -78,97 +87,14 @@ template = """
       </div>
     </div>
     
-    <div ng-show="category=='merging-overlapping-sources'">
-      <h4>Merging and Overlapping Sources</h4>
-      <div class="row">
-        <img class="col-md-3" src="images/science/1762_heatmap+contours.png">
-        <p class="col-md-3">Lorem ipsum dolor sit amet, populo oportere ex duo, vivendum voluptaria pri at. Ex autem porro vis. Sapientem mnesarchum nam an. Duo et sint feugiat, ut sit velit novum. Quo ut doming probatus facilisis, odio vivendo no vix.</p>
-      </div>
-    
-      <div class="row">
-        <img class="col-md-3" src="images/science/1759_heatmap+contours.png">
-        <p class="col-md-3">Two faint, compact radio components with good IR identifications.</p>
-      </div>
-    
-      <div class="row">
-        <img class="col-md-3" src="images/science/1556_heatmap+contours.png">
-        <p class="col-md-3">Lorem ipsum dolor sit amet, populo oportere ex duo, vivendum voluptaria pri at. Ex autem porro vis. Sapientem mnesarchum nam an. Duo et sint feugiat, ut sit velit novum. Quo ut doming probatus facilisis, odio vivendo no vix.</p>
-      </div>
-    
-      <div class="row">
-        <img class="col-md-3" src="images/science/1458_heatmap+contours.png">
-        <p class="col-md-3">Lorem ipsum dolor sit amet, populo oportere ex duo, vivendum voluptaria pri at. Ex autem porro vis. Sapientem mnesarchum nam an. Duo et sint feugiat, ut sit velit novum. Quo ut doming probatus facilisis, odio vivendo no vix.</p>
-      </div>
-    
-      <div class="row">
-        <img class="col-md-3" src="images/science/1502_heatmap+contours.png">
-        <p class="col-md-3">Lorem ipsum dolor sit amet, populo oportere ex duo, vivendum voluptaria pri at. Ex autem porro vis. Sapientem mnesarchum nam an. Duo et sint feugiat, ut sit velit novum. Quo ut doming probatus facilisis, odio vivendo no vix.</p>
-      </div>
+    <div ng-show="category=='extended-sources'">
+      <h4>Extended Sources</h4>
+      <p>Lorem ipsum dolor sit amet, populo oportere ex duo, vivendum voluptaria pri at. Ex autem porro vis. Sapientem mnesarchum nam an. Duo et sint feugiat, ut sit velit novum. Quo ut doming probatus facilisis, odio vivendo no vix. Id usu iudico nusquam, duo eu iusto integre ponderum. Quas legimus sapientem id vix. Invidunt menandri assueverit nam at, id illud feugiat constituam qui. An nonumes epicuri adipisci duo, has alia omittantur ad. Ne cibo accumsan philosophia usu. Ut vide mazim suscipit eos.</p>
+
+      <p>Docendi definiebas nam ei. An mei iisque hendrerit, meis nostro mei ut, equidem copiosae eam ea. No adhuc impedit pri, semper integre vel id. No per sonet essent dissentiet, tation option cu pri. Sed no utamur legendos facilisis.</p>
+
+      <p>Qui veniam repudiandae ex, ne equidem epicuri pri, cu usu eloquentiam instructior. In minim nominavi quaestio vis, harum evertitur liberavisse eu vel. No appareat iracundia eos. Ius eius tantas consul ut, eu unum constituto mea. Ei mel nihil nusquam mediocrem. Ei dicta noluisse adipiscing mea, vel detraxit signiferumque in. Vis elitr soleat iuvaret ad. Dicta rationibus adipiscing quo id. Mnesarchum eloquentiam conclusionemque qui no, eu congue postulant pro.</p>
     </div>
-    
-    <div ng-show="category=='irregularly-shaped-sources'">
-      <h4>Irregularly Shaped Sources</h4>
-    
-      <div class="row">
-        <img class="col-md-3" src="images/science/1818_heatmap+contours.png">
-        <p class="col-md-3">The putative radio relic</p>
-      </div>
-    
-      <div class="row">
-        <img class="col-md-3" src="images/science/1114_heatmap+contours.png">
-        <p class="col-md-3">Looks like something is merging </p>
-      </div>
-    
-      <div class="row">
-        <img class="col-md-3" src="images/science/1092_heatmap+contours.png">
-        <p class="col-md-3">A spiral?</p>
-      </div>
-    
-      <div class="row">
-        <img class="col-md-3" src="images/science/1071_heatmap+contours.png">
-        <p class="col-md-3">A bloody mess.</p>
-      </div>
-    
-      <div class="row">
-        <img class="col-md-3" src="images/science/1844_heatmap+contours.png">
-        <p class="col-md-3">Lorem ipsum dolor sit amet, populo oportere ex duo, vivendum voluptaria pri at. Ex autem porro vis. Sapientem mnesarchum nam an. Duo et sint feugiat, ut sit velit novum. Quo ut doming probatus facilisis, odio vivendo no vix.</p>
-      </div>
-    </div>
-    
-    <div ng-show="category=='diffuse-sources'">
-      <h4>Diffuse Sources</h4>
-      
-      <div class="row">
-        <img class="col-md-3" src="images/science/1692_heatmap+contours.png">
-        <p class="col-md-3">Lorem ipsum dolor sit amet, populo oportere ex duo, vivendum voluptaria pri at. Ex autem porro vis. Sapientem mnesarchum nam an. Duo et sint feugiat, ut sit velit novum. Quo ut doming probatus facilisis, odio vivendo no vix.</p>
-      </div>
-      
-      <div class="row">
-        <img class="col-md-3" src="images/science/1544_heatmap+contours.png">
-        <p class="col-md-3">Lorem ipsum dolor sit amet, populo oportere ex duo, vivendum voluptaria pri at. Ex autem porro vis. Sapientem mnesarchum nam an. Duo et sint feugiat, ut sit velit novum. Quo ut doming probatus facilisis, odio vivendo no vix.</p>
-      </div>
-      
-      <div class="row">
-        <img class="col-md-3" src="images/science/1544_heatmap+contours.png">
-        <p class="col-md-3">Lorem ipsum dolor sit amet, populo oportere ex duo, vivendum voluptaria pri at. Ex autem porro vis. Sapientem mnesarchum nam an. Duo et sint feugiat, ut sit velit novum. Quo ut doming probatus facilisis, odio vivendo no vix.</p>
-      </div>
-      
-      <div class="row">
-        <img class="col-md-3" src="images/science/1284_heatmap+contours.png">
-        <p class="col-md-3">Lorem ipsum dolor sit amet, populo oportere ex duo, vivendum voluptaria pri at. Ex autem porro vis. Sapientem mnesarchum nam an. Duo et sint feugiat, ut sit velit novum. Quo ut doming probatus facilisis, odio vivendo no vix.</p>
-      </div>
-      
-      <div class="row">
-        <img class="col-md-3" src="images/science/1381_heatmap+contours.png">
-        <p class="col-md-3">Lorem ipsum dolor sit amet, populo oportere ex duo, vivendum voluptaria pri at. Ex autem porro vis. Sapientem mnesarchum nam an. Duo et sint feugiat, ut sit velit novum. Quo ut doming probatus facilisis, odio vivendo no vix.</p>
-      </div>
-      
-      <div class="row">
-        <img class="col-md-3" src="images/science/1208_heatmap+contours.png">
-        <p class="col-md-3">Lorem ipsum dolor sit amet, populo oportere ex duo, vivendum voluptaria pri at. Ex autem porro vis. Sapientem mnesarchum nam an. Duo et sint feugiat, ut sit velit novum. Quo ut doming probatus facilisis, odio vivendo no vix.</p>
-      </div>
-    </div>
-    
   </div>
 """
 

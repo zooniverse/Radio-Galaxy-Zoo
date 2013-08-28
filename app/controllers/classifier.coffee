@@ -1,45 +1,52 @@
 
 Subject = zooniverse.models.Subject
 
-Classifier = ($scope, classifierModel) ->
-  $scope.classifierModel = classifierModel
+Classifier = ($scope, model) ->
+  console.log "ClassifierCtrl"
   
-  $scope.showContours = true
-  $scope.step = 1
-  $scope.min = 0
-  $scope.max = 1000
-  $scope.sed = false
+  $scope.model = model
+  $scope.showContours = model.showContours
+  $scope.step = model.step
+  $scope.showSED = model.showSED
   
-  $scope.getInfraredSource = -> return classifierModel.infraredSource
-  $scope.getRadioSource = -> return classifierModel.radioSource
-  
-  # TODO: Move to service
-  $scope.drawCatalogSources = ->
-    classifierModel.drawCatalogSources()
+  $scope.getInfraredSource = ->
+    return model.infraredSource
+  $scope.getRadioSource = ->
+    return model.radioSource
+  $scope.getStep = ->
+    return model.step
+  $scope.getShowContours = ->
+    return model.showContours
   
   #
   # Workflow handlers
   #
   
+  # TODO: Set state on model for every user action.
+  #       This needs to be done because the controller is stateless
+  #       so it cannot recover without the model.
+  
   $scope.onNoFlux = ->
-    $scope.showContours = true
-    $scope.step = 3
-    $scope.drawCatalogSources()
+    model.showContours = true
+    model.step = 3
+    
+    # NOTE: This is symatically weird.
+    model.drawCatalogSources()
     Subject.next()
   
   $scope.onContinue = ->
-    $scope.step = 2
+    model.step = 2
   
   $scope.onNoCorrespondingFlux = ->
-    $scope.showContours = true
-    $scope.step = 3
-    $scope.drawCatalogSources()
+    model.showContours = true
+    model.step = 3
+    model.drawCatalogSources()
     Subject.next()
   
   $scope.onDone = ->
-    $scope.showContours = true
-    $scope.step = 3
-    $scope.drawCatalogSources()
+    model.showContours = true
+    model.step = 3
+    model.drawCatalogSources()
     Subject.next()
   
   $scope.onNext = ->
@@ -48,7 +55,7 @@ Classifier = ($scope, classifierModel) ->
     # TODO: Post classification
     
     # Request next subject and return to step 1
-    classifierModel.getSubject()
+    model.getSubject()
     
     # Remove annotation
     d3.select("div.sed svg").remove()
@@ -57,8 +64,8 @@ Classifier = ($scope, classifierModel) ->
     d3.selectAll('text').remove()
     
     # Update state to first step
-    $scope.step = 1
-    $scope.sed = false
+    model.step = 1
+    model.showSED = false
     
   # TODO: Post Favorite
   $scope.onFavorite = ->

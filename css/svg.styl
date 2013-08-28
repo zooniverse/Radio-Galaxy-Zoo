@@ -43,10 +43,17 @@ div.contours
   
   &.step-3
     svg
-      circle
-        &.annotation
-          stroke-dasharray 5,5
-        &.handle
+      g, g.active
+        circle
+          cursor crosshair
+          
+          &.annotation
+            stroke #FFF
+            stroke-dasharray 5,5
+          &.handle, &.remove
+            display none
+            cursor crosshair
+        text
           display none
   
   g
@@ -75,6 +82,9 @@ div.contours
       font-size 11px
       stroke #FF0000
       pointer-events none
+    
+    &.hide
+      opacity 0
     
     &.active
       

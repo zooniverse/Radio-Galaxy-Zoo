@@ -5,13 +5,13 @@ module.exports = ->
     link: (scope, elem, attrs) ->
       
       # Regular expression for capturing group translation
-      r = /translate\((-?\d+), (-?\d+)\)/
+      translateRegEx = /translate\((-?\d+), (-?\d+)\)/
       
       # Drag callback to move annotation
       dragmove = ->
         g = d3.select(this)
         transform = g.attr("transform")
-        match = transform.match(r)
+        match = transform.match(translateRegEx)
         
         x = parseInt match[1]
         y = parseInt match[2]
@@ -35,7 +35,7 @@ module.exports = ->
       
       move = d3.behavior.drag()
         .on("dragstart", ->
-          return unless scope.step is 2
+          return unless scope.model.step is 2
           
           d3.event.sourceEvent.stopPropagation()
           group = d3.select(this)
@@ -58,7 +58,7 @@ module.exports = ->
       
       scale = d3.behavior.drag()
         .on("dragstart", ->
-          return unless scope.step is 2
+          return unless scope.model.step is 2
           d3.event.sourceEvent.stopPropagation()
         )
         .on("drag", dragscale)
@@ -68,7 +68,7 @@ module.exports = ->
       g = h = a = c = t = null
       mainDrag = d3.behavior.drag()
         .on("dragstart", ->
-          return unless scope.step is 2
+          return unless scope.model.step is 2
           
           # Deselect all previously existing groups
           d3.selectAll("g").attr("class", null)
@@ -78,6 +78,7 @@ module.exports = ->
           
           # Create new annotation group
           g = svg.append("g")
+                .attr("class", "hide")
                 .attr("transform", "translate(#{x}, #{y})")
           
           # Create the annotation
@@ -115,7 +116,7 @@ module.exports = ->
           g.call(move)
         )
         .on("drag", ->
-          return unless scope.step is 2
+          return unless scope.model.step is 2
           
           x = parseFloat( h.attr("cx") ) + d3.event.dx
           y = parseFloat( h.attr("cy") ) + d3.event.dy
@@ -123,10 +124,12 @@ module.exports = ->
           h.attr("cx", x)
           h.attr("cy", y)
           
-          a.attr("r", Math.sqrt(x * x + y * y))
+          r = Math.sqrt(x * x + y * y)
+          g.attr("class", "active") if r > 2
+          a.attr("r", r)
         )
         .on("dragend", ->
-          return unless scope.step is 2
+          return unless scope.model.step is 2
           g.remove() if a.attr("r") is "1"
           g = h = a = c = t = null
         )
