@@ -17,6 +17,10 @@ Classifier = ($scope, model) ->
     return model.step
   $scope.getShowContours = ->
     return model.showContours
+  $scope.getNextInfraredSource = ->
+    return model.nextInfraredSource
+  $scope.getNextRadioSource = ->
+    return model.nextRadioSource
   
   #
   # Recover last state
@@ -45,7 +49,6 @@ Classifier = ($scope, model) ->
     
     # NOTE: This is symatically weird.
     model.drawCatalogSources()
-    Subject.next()
   
   $scope.onContinue = ->
     model.step = 2
@@ -54,13 +57,11 @@ Classifier = ($scope, model) ->
     model.showContours = true
     model.step = 3
     model.drawCatalogSources()
-    Subject.next()
   
   $scope.onDone = ->
     model.showContours = true
     model.step = 3
     model.drawCatalogSources()
-    Subject.next()
   
   $scope.onNext = ->
     console.log "onNext"

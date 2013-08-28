@@ -44,11 +44,23 @@ class ClassifierModel
     # Call function when new subject is presented
     Subject.on("fetch", @onSubjectFetch)
     Subject.on("select", @onSubjectSelect)
+    Subject.one("fetch", @onInitialFetch)
     
-    # Fetch initial subjects and explicitly request next triggering onSubjectSelect
-    Subject.fetch( ->
-      console.log 'initial fetch callback'
-      Subject.next()
+    # Make initial fetch for subjects
+    Subject.fetch()
+  
+  onInitialFetch: =>
+    console.log "onInitialFetch"
+    
+    @subject = Subject.instances.shift()
+    @nextSubject = Subject.instances.shift()
+    
+    # Request FITS for first subject
+    new astro.FITS(@subject.location.raw, @onFITS)
+    
+    @$rootScope.$apply( =>
+      @infraredSource = @subject.location.standard
+      @radioSource = @subject.location.radio
     )
   
   # Clear variables after classification
@@ -69,21 +81,29 @@ class ClassifierModel
     console.log "onSubjectSelect"
     @nextSubject = subject
     
-    # Create deferred object to be resolved after contours are computed.
-    dfd1 = @$q.defer()
-    @contourPromise = dfd1.promise
-    new astro.FITS(subject.location.raw, @onFITS, {dfd: dfd1, subject: subject})
+    # Create deferred object to be resolved after contours for next subject are computed.
+    dfd = @$q.defer()
+    @contourPromise = dfd.promise
+    new astro.FITS(subject.location.raw, @onFITS, {dfd: dfd, subject: subject})
+    
+    # Set variable to prefetch images for next subject
+    @$rootScope.$apply( =>
+      @nextInfraredSource = @nextSubject.location.standard
+      @nextRadioSource = @nextSubject.location.radio
+    )
   
   getSubject: ->
+    console.log "getSubject"
     
-    @currentSubject = @nextSubject
-    @infraredSource = @nextSubject.location.standard
-    @radioSource = @nextSubject.location.radio
+    @subject = @nextSubject
+    @infraredSource = @subject.location.standard
+    @radioSource = @subject.location.radio
     
     @contourPromise.then( (subject) =>
-      @subjectContours.shift()
       @contourPromise = null
+      @subjectContours.shift()
       @drawContours( @subjectContours[0] )
+      Subject.next()
     )
   
   # Callback for when a FITS file has been received
@@ -100,14 +120,18 @@ class ClassifierModel
         )
       else
         @initialSelect = true
-        subject = opts.subject
-        
-        @$rootScope.$apply( =>
-          @currentSubject = subject
-          @infraredSource = subject.location.standard
-          @radioSource = subject.location.radio
-        )
         @drawContours( @subjectContours[0] )
+        
+        # Request FITS and precompute contours for next subject
+        dfd = @$q.defer()
+        @contourPromise = dfd.promise
+        new astro.FITS(@nextSubject.location.raw, @onFITS, {dfd: dfd, subject: @nextSubject})
+        
+        # Set variable to prefetch images for next subject
+        @$rootScope.$apply( =>
+          @nextInfraredSource = @nextSubject.location.standard
+          @nextRadioSource = @nextSubject.location.radio
+        )
     )
   
   # NOTE: These levels are pre-computed.  They will need to be updated according the science team need.
@@ -192,7 +216,7 @@ class ClassifierModel
     @selectedContours.splice(index, 1)
 
   drawCatalogSources: ->
-    catalog = @currentSubject.metadata.catalog
+    catalog = @subject.metadata.catalog
     return unless catalog?
     
     bandLookup =
@@ -300,5 +324,6 @@ class ClassifierModel
                       .transition()
                       .attr("cy", (d) -> return y(d.mag))
             )
+
 
 module.exports = ClassifierModel
