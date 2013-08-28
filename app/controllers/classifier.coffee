@@ -19,6 +19,19 @@ Classifier = ($scope, model) ->
     return model.showContours
   
   #
+  # Recover last state
+  #
+  
+  if model.subjectContours.length > 0
+    
+    # Draw contours if they exist
+    model.drawContours model.subjectContours[0]
+    
+    for contourid in model.selectedContours
+      path = d3.select("path[contourid='#{contourid}']")
+      path.attr("class", "svg-contour selected")
+  
+  #
   # Workflow handlers
   #
   

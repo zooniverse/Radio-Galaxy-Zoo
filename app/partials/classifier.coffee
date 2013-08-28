@@ -20,7 +20,7 @@ template = """
         <input class='image-opacity' type="range" min="0" max="1" step="0.01" value="0">
         <p class="band" data-band="infrared">IR</p>
       </div>
-      <span class="toggle-contours col-md-3">{{showContours ? 'show' : 'hide'}} contours</span>
+      <span class="toggle-contours col-md-3">{{getShowContours() ? 'show' : 'hide'}} contours</span>
       <span class="message col-md-3">{{getStep()==3 ? 'Complete!' : "Step " + getStep() + " of 2"}}</span>
     </div>
     

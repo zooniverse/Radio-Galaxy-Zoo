@@ -33,7 +33,7 @@ module.exports = ->
       scope.$watch('model.step', (step) ->
         if step is 1
           radioEl.onclick()
-        else if step is 2
+        else if step in [2, 3]
           infraredEl.onclick()
       )
   }

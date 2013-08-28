@@ -9,7 +9,10 @@ module.exports = ->
         
         # Count number of selected contours
         if scope.model.selectedContours.length > 0
-          angular.element(elem).removeAttr("disabled")
+          elem.removeAttr("disabled")
         else
-          angular.element(elem).attr("disabled", "disabled")
+          elem.attr("disabled", "disabled")
+      
+      # Recover state for continue button
+      el.onclick()
   }

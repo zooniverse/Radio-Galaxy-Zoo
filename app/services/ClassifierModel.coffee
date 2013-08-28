@@ -7,6 +7,7 @@ Subject = zooniverse.models.Subject
 class ClassifierModel
   COMPLETE: true
   
+  
   constructor: ($rootScope, $http, $q) ->
     console.log "ClassifierModel"
     
