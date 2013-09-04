@@ -70,9 +70,8 @@ class ClassifierModel
   startTutorial: =>
     console.log 'startTutorial'
     
-    # Get tutorial subject
-    # TODO: Instead of using an object attribute find way to pass parameter to fetch callback.
-    @onTutorialSubject = true
+    # Create tutorial subject before fetch
+    require "../content/tutorial_subject"
     Subject.fetch()
     
     @tutorial = new Tutorial
@@ -89,10 +88,6 @@ class ClassifierModel
   onInitialFetch: =>
     console.log "onInitialFetch"
     
-    if @onTutorialSubject
-      @onTutorialSubject = false
-      Subject.instances[0] = require "../content/tutorial_subject"
-    
     @subject = Subject.instances.shift()
     @nextSubject = Subject.instances.shift()
     
@@ -107,6 +102,7 @@ class ClassifierModel
   # Ensure unique subjects are served
   # TODO: There might be a better place for this.
   onSubjectFetch: (e, subjects) ->
+    console.log "onSubjectFetch"
     Subject.instances = _.unique(Subject.instances, false, (d) -> return d.id)
   
   # This function is triggered one step before the next subject
