@@ -1,8 +1,12 @@
 
-Subject = zooniverse.models.Subject
-
 # TODO: Might need to split this into another service (or factory).  One would
 #       be used to preserve state, the other for larger logical operations.
+
+Subject   = zooniverse.models.Subject
+User      = zooniverse.models.User
+Tutorial  =  zootorial.Tutorial
+TutorialSteps = require '../content/tutorial_steps'
+
 
 class ClassifierModel
   COMPLETE: true
@@ -41,16 +45,53 @@ class ClassifierModel
     # Reading of FITS is async causing contour computation to be async
     @contourPromise = null
     
-    # Call function when new subject is presented
+    # Callback functions when new subject is presented
     Subject.on("fetch", @onSubjectFetch)
     Subject.on("select", @onSubjectSelect)
     Subject.one("fetch", @onInitialFetch)
     
-    # Make initial fetch for subjects
+    # Callback for user change
+    User.on "change", @onUserChange
+  
+  onUserChange: =>
+    console.log 'onUserChange'
+    
+    # # SPOOF tutorial flag for testing
+    # User.current?.project.tutorial_done = true
+    
+    if User.current?.project.tutorial_done is true
+      # Clear out subjects before fetch
+      Subject.instances?.length = 0
+      Subject.fetch()
+      return
+    
+    @startTutorial()
+  
+  startTutorial: =>
+    console.log 'startTutorial'
+    
+    # Get tutorial subject
+    # TODO: Instead of using an object attribute find way to pass parameter to fetch callback.
+    @onTutorialSubject = true
     Subject.fetch()
+    
+    @tutorial = new Tutorial
+      id: 'tutorial'
+      firstStep: 'welcome'
+      steps: TutorialSteps
+    
+    @tutorial.el.bind('end-tutorial', @onTutorialEnd)
+    @tutorial.start()
+  
+  onTutorialEnd: =>
+    console.log "onTutorialEnd"
   
   onInitialFetch: =>
     console.log "onInitialFetch"
+    
+    if @onTutorialSubject
+      @onTutorialSubject = false
+      Subject.instances[0] = require "../content/tutorial_subject"
     
     @subject = Subject.instances.shift()
     @nextSubject = Subject.instances.shift()
@@ -63,13 +104,8 @@ class ClassifierModel
       @radioSource = @subject.location.radio
     )
   
-  # Clear variables after classification
-  reset: ->
-    @selectedContours = []
-    @circles = []
-  
   # Ensure unique subjects are served
-  # TODO: Might be a better place for this.
+  # TODO: There might be a better place for this.
   onSubjectFetch: (e, subjects) ->
     Subject.instances = _.unique(Subject.instances, false, (d) -> return d.id)
   
@@ -96,6 +132,9 @@ class ClassifierModel
     @subject = @nextSubject
     @infraredSource = @subject.location.standard
     @radioSource = @subject.location.radio
+    
+    # Clear the array of selected contours
+    @selectedContours.length = 0
     
     @contourPromise.then( (subject) =>
       @contourPromise = null

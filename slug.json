@@ -5,6 +5,7 @@
     "./app/lib/underscore.js",
     "./app/lib/angular.js",
     "./app/lib/zooniverse.js",
+    "./app/lib/zootorial.js",
     "./app/lib/fits.js",
     "./app/lib/conrec.js",
     "./app/lib/d3.js",

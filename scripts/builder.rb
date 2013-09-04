@@ -5,6 +5,7 @@ require 'bson'
 
 @base_id = '520be919e4bb21ddd3'
 @index = 0
+tutorial_id = BSON::ObjectId("520be919e4bb21ddd3000314")
 
 def next_id
   BSON::ObjectId("#{ @base_id }#{ @index.to_s(16).rjust(6, '0') }").tap{ @index += 1 }
@@ -46,9 +47,10 @@ twomass_metadata = JSON.parse File.read(metadata_path)
 subjects = {}
 CSV.foreach(path, :headers => true) do |row|
   src = row[0]
+  id = next_id
   
   subject_hash = {
-    _id: next_id,
+    _id: id,
     project_id: project.id,
     workflow_ids: [workflow.id],
     location: {
@@ -63,6 +65,8 @@ CSV.foreach(path, :headers => true) do |row|
       swire: row[4],
     }
   }
+  
+  subject_hash[:tutorial] = true if id == tutorial_id
   
   # Append additional 2MASS catalog metadata if available
   if twomass_metadata[src]
