@@ -87,10 +87,8 @@ class ClassifierModel
     new astro.FITS(subject.location.raw, @onFITS, {dfd: dfd, subject: subject})
     
     # Set variable to prefetch images for next subject
-    @$rootScope.$apply( =>
-      @nextInfraredSource = @nextSubject.location.standard
-      @nextRadioSource = @nextSubject.location.radio
-    )
+    @nextInfraredSource = @nextSubject.location.standard
+    @nextRadioSource = @nextSubject.location.radio
   
   getSubject: ->
     console.log "getSubject"
