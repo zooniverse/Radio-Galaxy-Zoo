@@ -76,16 +76,45 @@ module.exports =
   task1: new Step
     number: 5
     header: "Select Radio Contours"
-    details: "We need your help to find these correspondences. Select the two emissions from the radio jets by clicking on the contours."
+    details: "We need your help to find these correspondences. Select the two emissions from the radio jets by clicking on the contours. Click 'Continue' when done."
     onEnter: ->
+      # Switch image back to radio
       document.querySelector("p[data-band='radio']").click()
-    next:
-      "click #svg-contours": (e, tutorial, step) ->
+      
+      # Block the continue button
+      buttonEl = angular.element( document.querySelector("button.continue") )
+      buttonEl.attr("disabled", "disabled")
+      
+      $("#svg-contours").on("click", ->
         ids = d3.selectAll("path.selected")[0].map( (el) -> return d3.select(el).attr("contourid") )
-        return if "26" in ids and "27" in ids and ids.length is 2 then "complete" else false
-    
+        if "26" in ids and "27" in ids and ids.length is 2
+          buttonEl.removeAttr("disabled")
+        else
+          buttonEl.attr("disabled", "disabled")
+      )
+    onExit: ->
+      $("#svg-contours").off("click")
+    next:
+      "click button.continue": "task2"
+  
+  task2: new Step
+    number: 6
+    header: "Select Infrared Source"
+    details: "Now select the corresponding IR source by clicking and dragging from the center of the IR source."
+    next:
+      "mouseup #svg-contours": (e, tutorial, step) ->
+        g = d3.select("g")
+        transform = g.attr("transform")
+        translateRegEx = /translate\((-?\d+), (-?\d+)\)/
+        match = transform.match(translateRegEx)
+        x = parseInt match[1]
+        y = parseInt match[2]
+        
+        if x > 245 and x < 260 and y > 240 and y < 255
+          return "complete"
+        return false
+  
   complete: new Step
     number: 2
-    header: "Awesome Job!"
-    details: "whta what"
-    attachment: "center center .viewport center center"
+    header: "Well done!"
+    details: "You helped make a correspondence between two radio jets and it's host galaxy."
