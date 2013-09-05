@@ -341,7 +341,7 @@ class ClassifierModel
               
               # TODO: Figure out how to update $rootScope.sed
               @$rootScope.$apply( =>
-                @sed = true
+                @showSED = true
               )
               
               # Format the data
