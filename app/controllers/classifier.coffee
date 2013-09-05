@@ -51,8 +51,8 @@ Classifier = ($scope, model) ->
     model.showContours = true
     model.step = 3
     
-    # NOTE: This is symatically weird.
-    model.drawCatalogSources()
+    # # NOTE: This is symatically weird.
+    # model.drawCatalogSources()
   
   $scope.onContinue = ->
     model.step = 2
@@ -60,17 +60,18 @@ Classifier = ($scope, model) ->
   $scope.onNoCorrespondingFlux = ->
     model.showContours = true
     model.step = 3
-    model.drawCatalogSources()
+    # model.drawCatalogSources()
   
   $scope.onDone = ->
     model.showContours = true
     model.step = 3
-    model.drawCatalogSources()
+    # model.drawCatalogSources()
   
   $scope.onNext = ->
     console.log "onNext"
     
     # TODO: Post classification
+    model.getClassification()
     
     # Request next subject and return to step 1
     model.getSubject()

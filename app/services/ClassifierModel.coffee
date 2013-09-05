@@ -253,7 +253,12 @@ class ClassifierModel
   removeContour: (value) ->
     index = @selectedContours.indexOf(value)
     @selectedContours.splice(index, 1)
-
+  
+  getClassification: ->
+    selected = d3.selectAll("path.selected")[0]
+    for contour in selected
+      console.log contour.getBBox()
+  
   drawCatalogSources: ->
     catalog = @subject.metadata.catalog
     return unless catalog?
