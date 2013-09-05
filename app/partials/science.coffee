@@ -16,7 +16,7 @@ template = """
     <ul class="nav nav-tabs">
       <li ng-class="{'active': category==null}"><a href="#/science">Science</a></li>
       <li ng-class="{'active': category=='single-compact-sources'}"><a href="#/science/single-compact-sources">Single Compact Sources</a></li>
-      <li ng-class="{'active': category=='multiple-compact-sources'}"><a href="#/science/multiple-compact-sources">Multiple Compact Sources</a></li>
+      <li ng-class="{'active': category=='multiple-sources'}"><a href="#/science/multiple-sources">Multiple Sources</a></li>
       <li ng-class="{'active': category=='extended-sources'}"><a href="#/science/extended-sources">Extended Sources</a></li>
     </ul>
     
@@ -63,8 +63,8 @@ template = """
       </div>
     </div>
     
-    <div ng-show="category=='multiple-compact-sources'">
-    <h4>Multiple Compact Sources</h4>
+    <div ng-show="category=='multiple-sources'">
+    <h4>Multiple Sources</h4>
       <p>Lorem ipsum dolor sit amet, populo oportere ex duo, vivendum voluptaria pri at. Ex autem porro vis. Sapientem mnesarchum nam an. Duo et sint feugiat, ut sit velit novum. Quo ut doming probatus facilisis, odio vivendo no vix. Id usu iudico nusquam, duo eu iusto integre ponderum. Quas legimus sapientem id vix. Invidunt menandri assueverit nam at, id illud feugiat constituam qui. An nonumes epicuri adipisci duo, has alia omittantur ad. Ne cibo accumsan philosophia usu. Ut vide mazim suscipit eos.</p>
 
       <p>Docendi definiebas nam ei. An mei iisque hendrerit, meis nostro mei ut, equidem copiosae eam ea. No adhuc impedit pri, semper integre vel id. No per sonet essent dissentiet, tation option cu pri. Sed no utamur legendos facilisis.</p>

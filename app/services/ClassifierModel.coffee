@@ -12,11 +12,10 @@ class ClassifierModel
   COMPLETE: true
   
   
-  constructor: ($rootScope, $http, $q) ->
+  constructor: ($rootScope, $q) ->
     console.log "ClassifierModel"
     
     # Store injected services on object
-    @$http = $http
     @$rootScope = $rootScope
     @$q = $q
     
@@ -59,14 +58,19 @@ class ClassifierModel
     # # SPOOF tutorial flag for testing
     # User.current?.project.tutorial_done = true
     
-    if User.current?.project.tutorial_done is true
-      # Clear out subjects before fetch
-      Subject.instances?.length = 0
-      Subject.fetch()
-      return
+    # Close tutorial if open
+    @tutorial?.end()
+    
+    if User.current
+      if User.current.project.tutorial_done is true
+        # Clear out subjects before fetch
+        Subject.instances?.length = 0
+        Subject.fetch()
+        return
     
     @startTutorial()
   
+  # TODO: Preserve tutorial state when ng-view changes
   startTutorial: =>
     console.log 'startTutorial'
     
@@ -78,12 +82,14 @@ class ClassifierModel
       id: 'tutorial'
       firstStep: 'welcome'
       steps: TutorialSteps
+      parent: document.querySelector(".classifier")
     
     @tutorial.el.bind('end-tutorial', @onTutorialEnd)
     @tutorial.start()
   
   onTutorialEnd: =>
     console.log "onTutorialEnd"
+    @tutorial = undefined
   
   onInitialFetch: =>
     console.log "onInitialFetch"

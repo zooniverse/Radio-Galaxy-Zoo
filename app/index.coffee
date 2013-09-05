@@ -22,15 +22,13 @@ scienceTemplate     = require './partials/science'
 teamTemplate        = require './partials/team'
 
 # Set up application module
-RadioGalaxyZoo = angular.module('radio-galaxy-zoo', [])
+RadioGalaxyZoo = angular.module("radio-galaxy-zoo", [])
+RadioGalaxyZoo.run(["classifierModel", (classifierModel) ->])
 
 # Controllers
 RadioGalaxyZoo.controller('ClassifierCtrl', ["$scope", "classifierModel", ClassifierCtrl])
 RadioGalaxyZoo.controller('ScienceCtrl', ["$scope", "$routeParams", ScienceCtrl])
 RadioGalaxyZoo.controller('TeamCtrl', ["$scope", TeamCtrl])
-
-# Services
-RadioGalaxyZoo.service('classifierModel', ["$rootScope", "$http", "$q", ClassifierModel])
 
 # Directives
 RadioGalaxyZoo.directive('science', scienceDirective)
@@ -38,6 +36,9 @@ RadioGalaxyZoo.directive('imageOpacity', ImageOpacityDirective)
 RadioGalaxyZoo.directive('marking', MarkingDirective)
 RadioGalaxyZoo.directive('continue', ContinueBtnDirective)
 RadioGalaxyZoo.directive('toggleContours', toggleContoursDirective)
+
+# Services
+RadioGalaxyZoo.service('classifierModel', ["$rootScope", "$q", ClassifierModel])
 
 # Configure Zooniverse API
 if window.location.hostname in ["0.0.0.0", "radio.galaxyzoo.org"]
