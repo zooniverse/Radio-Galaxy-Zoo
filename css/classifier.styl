@@ -10,8 +10,12 @@ $subject-height = 500
     position relative
     width $subject-width
     height $subject-height
-    padding-bottom 10px
+    padding 0 0 10px 0
     cursor crosshair
+    
+    &.block
+      pointer-events none
+      cursor not-allowed
     
     div.contours
       position absolute
