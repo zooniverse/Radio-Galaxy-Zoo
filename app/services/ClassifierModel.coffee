@@ -23,6 +23,7 @@ class ClassifierModel
     @showContours = true
     @step = 1
     @showSED = false
+    @hasTutorial = false
     
     # Boolean to check if on initial subject
     # TODO: Would be nice to use `one` event binding instead
@@ -55,15 +56,15 @@ class ClassifierModel
   onUserChange: =>
     console.log 'onUserChange'
     
-    # # SPOOF tutorial flag for testing
-    # User.current?.project.tutorial_done = true
+    # SPOOF tutorial flag for testing
+    User.current?.project.tutorial_done = true
     
     # Close tutorial if open
     @tutorial?.end()
     
     if User.current
       if User.current.project.tutorial_done is true
-        # Clear out subjects before fetch
+        # Clear subjects before fetch
         Subject.instances?.length = 0
         Subject.fetch()
         return
@@ -72,9 +73,13 @@ class ClassifierModel
   
   # TODO: Preserve tutorial state when ng-view changes
   startTutorial: =>
+    @hasTutorial = true
     console.log 'startTutorial'
     
-    # Create tutorial subject before fetch
+    # Clear subjects before fetch
+    Subject.instances?.length = 0
+    
+    # Create tutorial subject and fetch
     require "../content/tutorial_subject"
     Subject.fetch()
     
@@ -89,7 +94,7 @@ class ClassifierModel
   
   onTutorialEnd: =>
     console.log "onTutorialEnd"
-    @tutorial = undefined
+    @hasTutorial = false
   
   onInitialFetch: =>
     console.log "onInitialFetch"
