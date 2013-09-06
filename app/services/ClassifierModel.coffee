@@ -165,10 +165,9 @@ class ClassifierModel
   onFITS: (f, opts) =>
     image = f.getDataUnit(0)
     image.getFrame(0, (arr) =>
-      extent = image.getExtent(arr)
-      @getContoursAsync(image.width, image.height, extent[0], extent[1], arr)
-      @getContours(image.width, image.height, extent[0], extent[1], arr)
-      @onGetContours(opts)
+      @getContoursAsync(image.width, image.height, arr, opts)
+      # @getContours(image.width, image.height, arr)
+      # @onGetContours(opts)
     )
   
   onGetContours: (opts) =>
@@ -201,10 +200,77 @@ class ClassifierModel
       3787.9951161531317, 6560.9999999999945
     ]
   
-  getContoursAsync: (width, height, min, max, arr) ->
+  getContoursAsync: (width, height, arr, opts) ->
     console.log 'getContoursAsync'
+    
+    # Define function to be executed on worker thread
+    onmessage = (e) ->
+      importScripts("http://0.0.0.0:9296/workers/conrec.js")
+      
+      # Get variables sent from main thread
+      width = e.data.width
+      height = e.data.height
+      arr = e.data.arr
+      
+      levels = [
+        3.0, 5.196152422706632, 8.999999999999998, 15.588457268119893, 26.999999999999993,
+        46.765371804359674, 80.99999999999997, 140.296115413079, 242.9999999999999,
+        420.88834623923697, 728.9999999999995, 1262.6650387177108, 2186.9999999999986,
+        3787.9951161531317, 6560.9999999999945
+      ]
+      
+      j = height
+      data = []
+      while j--
+        start = j * width
+        data.push arr.subarray(start, start + width)
+        
+      # Set conrec arguments
+      ilb = jlb = 0
+      iub = data.length - 1
+      jub = data[0].length - 1
+      
+      idx = new Uint16Array(data.length)
+      jdx = new Uint16Array(data[0].length)
+      
+      i = j = 0
+      while i < idx.length
+        idx[i] = i + 1
+        i += 1
+      while j < jdx.length
+        jdx[j] = j + 1
+        j += 1
+        
+      conrec = new Conrec()
+      conrec.contour(data, ilb, iub, jlb, jub, idx, jdx, levels.length, levels)
+      
+      postMessage( conrec.contourList().reverse() )
+    
+    # Trick to format function for worker
+    fn = onmessage.toString().replace("return postMessage", "postMessage")
+    fn = "onmessage = #{fn}"
+    
+    # Construct blob for an inline worker function
+    mime = "application/javascript"
+    blob = new Blob([fn], {type: mime})
+    
+    URL = window.URL or window.webkitURL
+    urlOnMessage = URL.createObjectURL(blob)
+    
+    worker = new Worker(urlOnMessage)
+    msg =
+      width: width
+      height: height
+      arr: arr
+    
+    worker.onmessage = (e) =>
+      @subjectContours.push e.data
+      @onGetContours(opts)
+    
+    # TODO: Use transferable objects!!!
+    worker.postMessage(msg)
   
-  getContours: (width, height, min, max, arr) ->
+  getContours: (width, height, arr) ->
     z = @getLevels()
     j = height
     
