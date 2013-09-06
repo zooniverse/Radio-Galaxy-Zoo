@@ -54,6 +54,8 @@ module.exports = ->
               group.attr("class", null)
             else
               group.attr("class", "active")
+            
+          scope.model.updateAnnotation()
         )
       
       scale = d3.behavior.drag()
@@ -62,6 +64,9 @@ module.exports = ->
           d3.event.sourceEvent.stopPropagation()
         )
         .on("drag", dragscale)
+        .on("dragend", ->
+          scope.model.updateAnnotation()
+        )
       
       svg = d3.select("svg")
       
@@ -104,6 +109,7 @@ module.exports = ->
               .on("mousedown", -> d3.event.stopPropagation() )
               .on("mouseup", ->
                 d3.select(this.parentNode).remove()
+                scope.model.updateAnnotation()
               )
           
           # Create close text
@@ -130,8 +136,14 @@ module.exports = ->
         )
         .on("dragend", ->
           return unless scope.model.step is 2
+          console.log "dragend"
+          
           g.remove() if a.attr("r") is "1"
           g = h = a = c = t = null
+        )
+        .on("dragend", ->
+          return unless scope.model.step is 2
+          scope.model.updateAnnotation()
         )
       
       d3.select(elem[0]).call(mainDrag)

@@ -15,3 +15,5 @@ scripts/*.json
 public/videos/
 css/bootstrap.css
 css/zooniverse
+public/subjects/
+scripts/radio-galaxy-zoo-*

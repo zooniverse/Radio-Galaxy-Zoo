@@ -1,4 +1,5 @@
 
+
 # Import controllers
 ClassifierCtrl  = require './controllers/classifier'
 ScienceCtrl  = require './controllers/science'
@@ -41,10 +42,11 @@ RadioGalaxyZoo.directive('toggleContours', toggleContoursDirective)
 RadioGalaxyZoo.service('classifierModel', ["$rootScope", "$q", ClassifierModel])
 
 # Configure Zooniverse API
+host = if window.location.port is "9296" then "http://0.0.0.0:3000" else "https://dev.zooniverse.org"
 if window.location.hostname in ["0.0.0.0", "radio.galaxyzoo.org"]
   api = new zooniverse.Api
     project: 'radio'
-    host: "https://dev.zooniverse.org"
+    host: host
     path: '/proxy'
 else
   # new Analytics

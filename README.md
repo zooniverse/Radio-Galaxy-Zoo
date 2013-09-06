@@ -10,3 +10,7 @@
     # Run application on a local web server
     npm start
     
+
+# TODO
+  
+  * Redraw IR annotations after view has been switched

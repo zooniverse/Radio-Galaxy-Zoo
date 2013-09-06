@@ -11,11 +11,17 @@ def next_id
   BSON::ObjectId("#{ @base_id }#{ @index.to_s(16).rjust(6, '0') }").tap{ @index += 1 }
 end
 
+redis = Ouroboros.redis["radio_#{ Rails.env }"] || Ouroboros.redis[Rails.env]
+redis.keys('radio*').each do |key|
+  redis.del key
+end
+
 if Rails.env == "development"
-  redis = Ouroboros.redis["radio_#{ Rails.env }"] || Ouroboros.redis[Rails.env]
-  redis.keys('radio*').each do |key|
-    redis.del key
-  end
+  subject_url_prefix = "0.0.0.0:9296/subjects"
+  fits_extension = "fits"
+else
+  subject_url_prefix = "radio.galaxyzoo.org.s3.amazonaws.com/beta/subjects"
+  fits_extension = "fits.gz"
 end
 
 project = Project.where(name: 'radio').first || Project.create({
@@ -54,9 +60,9 @@ CSV.foreach(path, :headers => true) do |row|
     project_id: project.id,
     workflow_ids: [workflow.id],
     location: {
-      standard: "http://radio.galaxyzoo.org.s3.amazonaws.com/beta/subjects/standard/#{row[0]}.jpg",
-      radio: "http://radio.galaxyzoo.org.s3.amazonaws.com/beta/subjects/radio/#{row[0]}.jpg",
-      raw: "//radio.galaxyzoo.org.s3.amazonaws.com/beta/subjects/raw/#{row[0]}.fits.gz"
+      standard: "http://#{subject_url_prefix}/standard/#{row[0]}.jpg",
+      radio: "http://#{subject_url_prefix}/radio/#{row[0]}.jpg",
+      raw: "//#{subject_url_prefix}/raw/#{row[0]}.#{fits_extension}"
     },
     coords: [ row[1].to_f, row[2].to_f ],
     metadata: {
@@ -76,5 +82,5 @@ CSV.foreach(path, :headers => true) do |row|
   RadioSubject.create subject_hash
 end
 
-# RadioSubject.activate_randomly
-SubjectImporter.perform_async 'RadioSubject'
+RadioSubject.activate_randomly
+# SubjectImporter.perform_async 'RadioSubject'

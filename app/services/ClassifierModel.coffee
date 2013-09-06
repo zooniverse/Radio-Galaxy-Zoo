@@ -2,10 +2,12 @@
 # TODO: Might need to split this into another service (or factory).  One would
 #       be used to preserve state, the other for larger logical operations.
 
-Subject   = zooniverse.models.Subject
-User      = zooniverse.models.User
-Tutorial  =  zootorial.Tutorial
-TutorialSteps = require '../content/tutorial_steps'
+User            = zooniverse.models.User
+Subject         = zooniverse.models.Subject
+Classification  = zooniverse.models.Classification
+Tutorial        =  zootorial.Tutorial
+
+TutorialSteps   = require '../content/tutorial_steps'
 
 
 class ClassifierModel
@@ -38,9 +40,12 @@ class ClassifierModel
     @currentSubject = null
     @nextSubject = null
     
+    @classification = null
+    
     # Storage for contours to be used for current and next subject
     @subjectContours = []
     @selectedContours = []
+    @annotations = []
     
     # Reading of FITS is async causing contour computation to be async
     @contourPromise = null
@@ -56,8 +61,8 @@ class ClassifierModel
   onUserChange: =>
     console.log 'onUserChange'
     
-    # SPOOF tutorial flag for testing
-    User.current?.project.tutorial_done = true
+    # # SPOOF tutorial flag for testing
+    # User.current?.project.tutorial_done = false
     
     # Close tutorial if open
     @tutorial?.end()
@@ -80,7 +85,10 @@ class ClassifierModel
     Subject.instances?.length = 0
     
     # Create tutorial subject and fetch
-    require "../content/tutorial_subject"
+    subject = require "../content/tutorial_subject"
+    console.log subject
+    @classification = new Classification {subject}
+    
     Subject.fetch()
     
     @tutorial = new Tutorial
@@ -140,8 +148,11 @@ class ClassifierModel
     @infraredSource = @subject.location.standard
     @radioSource = @subject.location.radio
     
-    # Clear the array of selected contours
+    # Clear the user action arrays
     @selectedContours.length = 0
+    @annotations.length = 0
+    
+    @classification = new Classification {@subject}
     
     @contourPromise.then( (subject) =>
       @contourPromise = null
@@ -153,30 +164,33 @@ class ClassifierModel
   # Callback for when a FITS file has been received
   onFITS: (f, opts) =>
     image = f.getDataUnit(0)
-    
     image.getFrame(0, (arr) =>
       extent = image.getExtent(arr)
+      @getContoursAsync(image.width, image.height, extent[0], extent[1], arr)
       @getContours(image.width, image.height, extent[0], extent[1], arr)
-      
-      if @initialSelect is @COMPLETE
-        @$rootScope.$apply( ->
-          opts.dfd.resolve(opts.subject)
-        )
-      else
-        @initialSelect = true
-        @drawContours( @subjectContours[0] )
-        
-        # Request FITS and precompute contours for next subject
-        dfd = @$q.defer()
-        @contourPromise = dfd.promise
-        new astro.FITS(@nextSubject.location.raw, @onFITS, {dfd: dfd, subject: @nextSubject})
-        
-        # Set variable to prefetch images for next subject
-        @$rootScope.$apply( =>
-          @nextInfraredSource = @nextSubject.location.standard
-          @nextRadioSource = @nextSubject.location.radio
-        )
+      @onGetContours(opts)
     )
+  
+  onGetContours: (opts) =>
+    
+    if @initialSelect is @COMPLETE
+      @$rootScope.$apply( ->
+        opts.dfd.resolve(opts.subject)
+      )
+    else
+      @initialSelect = true
+      @drawContours( @subjectContours[0] )
+      
+      # Request FITS and precompute contours for next subject
+      dfd = @$q.defer()
+      @contourPromise = dfd.promise
+      new astro.FITS(@nextSubject.location.raw, @onFITS, {dfd: dfd, subject: @nextSubject})
+      
+      # Set variable to prefetch images for next subject
+      @$rootScope.$apply( =>
+        @nextInfraredSource = @nextSubject.location.standard
+        @nextRadioSource = @nextSubject.location.radio
+      )
   
   # NOTE: These levels are pre-computed.  They will need to be updated according the science team need.
   getLevels: (arr) ->
@@ -186,6 +200,9 @@ class ClassifierModel
       420.88834623923697, 728.9999999999995, 1262.6650387177108, 2186.9999999999986,
       3787.9951161531317, 6560.9999999999945
     ]
+  
+  getContoursAsync: (width, height, min, max, arr) ->
+    console.log 'getContoursAsync'
   
   getContours: (width, height, min, max, arr) ->
     z = @getLevels()
@@ -259,10 +276,47 @@ class ClassifierModel
     index = @selectedContours.indexOf(value)
     @selectedContours.splice(index, 1)
   
+  # This function is called from the marking directive whenever an annotation
+  # changes (e.g. create, move, scale, remove).
+  updateAnnotation: ->
+    console.log "updateAnnotation"
+    translateRegEx = /translate\((-?\d+), (-?\d+)\)/
+    @annotations.length = 0
+    
+    for annotation in d3.selectAll("circle.annotation")[0]
+      circle = d3.select(annotation)
+      parent = d3.select(circle.node().parentNode)
+      
+      # TODO: Generalize function for getting transform coordinates
+      #       it's now been written in three separate places in code
+      transform = parent.attr("transform")
+      match = transform.match(translateRegEx)
+      
+      obj =
+        r: circle.attr("r")
+        x: match[1]
+        y: match[2]
+      
+      @annotations.push obj
+  
   getClassification: ->
-    selected = d3.selectAll("path.selected")[0]
-    for contour in selected
-      console.log contour.getBBox()
+    # Create array for matches
+    # TODO: Currently multiple matches is not supported in interface.
+    matches = []
+    
+    radio = []
+    contours = d3.selectAll("path.selected")[0]
+    for contour in contours
+      radio.push contour.getBBox()
+    
+    match =
+      radio: radio
+      infrared: @annotations
+    matches.push match
+    console.log matches
+    
+    @classification.annotate matches
+    @classification.send()
   
   drawCatalogSources: ->
     catalog = @subject.metadata.catalog

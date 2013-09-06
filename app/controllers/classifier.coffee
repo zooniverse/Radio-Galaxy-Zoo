@@ -29,7 +29,7 @@ Classifier = ($scope, model) ->
   if model.subjectContours.length > 0
     
     # Start tutorial if exists
-    if model.hasTutorial
+    if model.hasTutorial?
       model.startTutorial()
     
     # Draw contours if they exist
