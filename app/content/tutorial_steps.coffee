@@ -16,17 +16,27 @@ module.exports =
   welcome: new Step
     number: 1
     header: "Welcome to Radio Galaxy Zoo!"
-    details: "We need your help cross-matching radio sources with their infrared counterpart."
+    details: "Astronomers need your help to discover super massive black holes in large galaxies. These black holes emit enormous jets of plasma, which are detected by radio telescope. The host galaxies are often not seen by radio telescopes, but are detected by infrared telescopes.  We need your help to identify radio emissions, and associated it with the host galaxy."
     attachment: "center center .viewport center center"
     onEnter: -> addBlock()
     onExit: -> removeBlock()
-    next: "radio"
+    next: "radio1"
   
-  radio: new Step
+  radio1: new Step
     number: 2
-    header: "Radio Sky"
-    details: "The image shown is a radio image containing four strong emissions.  The two leftmost blobs are powerful radio jets emitting from a single galaxy."
-    attachment: "center center .viewport center left"
+    header: "Radio Emissions"
+    details: "This is a radio image containing four strong radio emissions."
+    attachment: "center top .viewport center -0.1"
+    onEnter: -> addBlock()
+    onExit: -> removeBlock()
+    next: "radio2"
+  
+  radio2: new Step
+    number: 3
+    header: "Radio Emissions"
+    details: "The two large emissions in the center of the image are plasma jets being propelled from the nucleus of a host galaxy."
+    attachment: "center top .viewport center -0.1"
+    className: "arrow-bottom"
     onEnter: ->
       addBlock()
       
@@ -39,47 +49,43 @@ module.exports =
       for id in ["26", "27"]
         el = d3.select("#svg-contours path[contourid='#{id}']")
         el.attr("class", "svg-contour")
-    next: "slide"
-  
-  slide: new Step
-    number: 3
-    header: "Infrared Sky"
-    details: "To see the host galaxy use the slider to switch to the infrared image."
-    attachment: "right center .image-slider left center"
-    className: "arrow-right"
-    onEnter: -> addBlock()
-    onExit: -> removeBlock()
-    next:
-      "change input.image-opacity": (e, tutorial, step) ->
-        value = parseFloat(e.target.value)
-        return if value > 0.9 then "infrared" else false
+    next: "infrared"
   
   infrared: new Step
     number: 4
-    header: "Infrared Sky"
-    details: "The host galaxy lies in-between the radio emissions. Woot!"
+    header: "Infrared Galaxy"
+    details: "Switching to a corresponding infrared image, taken by the Spitzer Space Telescope, we can see the host galaxy lying between the two radio emissions."
+    attachment: "center top .viewport center -0.1"
     onEnter: ->
       addBlock()
+      infraredEl = document.querySelector("p.band[data-band='infrared']")
+      contoursEl = document.querySelector(".toggle-contours")
+      infraredEl.click()
+      contoursEl.click()
       
+      # Highlight the host galaxy
       svg = d3.select(".svg-contours")
       svg.append("circle")
         .attr("class", "tutorial")
         .attr("r", 10)
         .attr("cx", 213)
         .attr("cy", 211)
+      
     onExit: ->
       removeBlock()
-      
       d3.select("circle.tutorial").remove()
-    next: "task1"
+    next: "matching1"
   
-  task1: new Step
+  matching1: new Step
     number: 5
-    header: "Select Radio Contours"
-    details: "We need your help to find these correspondences. Select the two emissions from the radio jets by clicking on the contours. Click 'Continue' when done."
+    header: "Matching Radio and Infrared Sources"
+    details: "We need your help to match radio emissions with their host galaxy. <b>Click</b> the two large emissions in the center of the image, then <b>click</b> 'Continue'."
+    attachment: "center top .viewport center -0.1"
     onEnter: ->
-      # Switch image back to radio
-      document.querySelector("p[data-band='radio']").click()
+      radioEl = document.querySelector("p.band[data-band='radio']")
+      contoursEl = document.querySelector(".toggle-contours")
+      radioEl.click()
+      contoursEl.click()
       
       # Block the continue button
       buttonEl = angular.element( document.querySelector("button.continue") )
@@ -92,15 +98,15 @@ module.exports =
         else
           buttonEl.attr("disabled", "disabled")
       )
-    onExit: ->
-      $("#svg-contours").off("click")
+      
     next:
-      "click button.continue": "task2"
+      "click button.continue": "matching2"
   
-  task2: new Step
+  matching2: new Step
     number: 6
-    header: "Select Infrared Source"
-    details: "Now select the corresponding IR source by clicking and dragging from the center of the IR source."
+    header: "Matching Radio and Infrared Sources"
+    details: "Select the corresponding infrared source by <b>clicking and dragging</b> from the center of the IR source."
+    attachment: "center top .viewport center -0.1"
     next:
       "mouseup #svg-contours": (e, tutorial, step) ->
         g = d3.select("g")
@@ -115,6 +121,17 @@ module.exports =
         return false
   
   complete: new Step
-    number: 2
+    number: 7
     header: "Well done!"
-    details: "You helped make a correspondence between two radio jets and it's host galaxy."
+    details: "<p>You helped match a galaxy with two radio jets emanating from it's center!</p> Click 'Done' to continue."
+    attachment: "center top .viewport center -0.1"
+    next:
+      "click button.done": "finish"
+  
+  finish: new Step
+    number: 8
+    header: "Great job!"
+    details: "Thanks for helping! Click 'Next' to help match the next patch of sky."
+    attachment: "center top .viewport center -0.1"
+    next:
+      "click button.next": true

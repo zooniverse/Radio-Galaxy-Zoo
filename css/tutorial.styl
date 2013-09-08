@@ -1,0 +1,106 @@
+.zootorial-dialog
+  background $white
+  color $black
+  width $img-dim - 100
+  z-index 50
+  box-sizing content-box
+  box-shadow 0 0 0 5px rgba(100, 100, 100, 0.7)
+  border-radius 3px
+  letter-spacing 1px
+  outline 1px solid transparent
+  
+  &.narrow
+    width $img-dim - 120
+  
+  .progress
+    display none
+  
+  .dialog-content
+    padding 20px
+    font-size 11px
+    font-weight 400
+    line-height 15px
+    
+    .header
+      padding-bottom 10px
+      font-size 14px
+      font-weight 700
+    .details
+      padding-bottom 24px
+  
+  &.arrow-right > .dialog-arrow
+    border-top 10px solid transparent
+    border-bottom 10px solid transparent
+    border-left 10px solid white
+    position absolute
+    right -10px
+    top 45%
+
+  &.arrow-left > .dialog-arrow
+    border-top 10px solid transparent
+    border-bottom 10px solid transparent
+    border-right 10px solid white
+    position absolute
+    left -10px
+    top 45%
+
+  &.arrow-top > .dialog-arrow
+    border-left 10px solid transparent
+    border-right 10px solid transparent
+    border-bottom 10px solid white
+    position absolute
+    left 45%
+    top -10px
+
+  &.arrow-bottom > .dialog-arrow
+    border-left 10px solid transparent
+    border-right 10px solid transparent
+    border-top 10px solid white
+    position absolute
+    left 45%
+    bottom -10px
+
+  .dialog-arrow
+    width 0
+    height 0
+  
+  button
+    position absolute
+    right 0
+    margin 10px 8px 12px 15px
+    padding 4px 8px
+    font-family helvetica
+    font-weight 700
+    border-radius 3px
+    border 1px solid $black
+    background-color rgb(214, 247, 0)
+    box-shadow inset 0px 1px 0px rgba(255, 255, 255, .2)
+    color $white
+    cursor pointer
+    
+    &:hover
+      background-color rgb(224, 257, 10)
+  
+  button[name='close-dialog']
+    margin-top 6px
+    padding 2px 6px
+    color $black
+    border none
+    background-color Transparent
+    
+    &:hover
+      color #0366F7
+  
+  button[name='next-step']
+    bottom 0
+  
+  &.hidden
+    display none
+
+.zootorial-blocker
+  position relative
+  opacity 0
+  z-index 5
+
+.zootorial-focuser
+  display none

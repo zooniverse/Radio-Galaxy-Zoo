@@ -20,7 +20,7 @@ template = """
         <input class='image-opacity' type="range" min="0" max="1" step="0.01" value="0">
         <p class="band" data-band="infrared">IR</p>
       </div>
-      <span class="toggle-contours col-md-3">{{getShowContours() ? 'show' : 'hide'}} contours</span>
+      <span class="toggle-contours col-md-3">{{getShowContours() ? 'hide' : 'show'}} contours</span>
       <span class="message col-md-3">{{getStep()==3 ? 'Complete!' : "Step " + getStep() + " of 2"}}</span>
     </div>
     
@@ -53,12 +53,12 @@ template = """
         </div>
         <div ng-switch-when="2" class="col-md-6 col-md-offset-7">
           <button type="button" class="btn btn-default" data-ng-click="onNoCorrespondingFlux()">No Infrared</button>
-          <button type="button" class="btn btn-primary" data-ng-click="onDone()">Done</button>
+          <button type="button" class="btn btn-primary done" data-ng-click="onDone()">Done</button>
         </div>
         <div ng-switch-when="3">
           <button type="button" class="btn btn-default" data-ng-click="onFavorite()">Favorite</button>
           <button type="button" class="btn btn-default" data-ng-click="onDiscuss()">Discuss</button>
-          <button type="button" class="btn btn-primary col-md-offset-6" data-ng-click="onNext()">Next</button>
+          <button type="button" class="btn btn-primary col-md-offset-6 next" data-ng-click="onNext()">Next</button>
         </div>
       </div>
     </div>

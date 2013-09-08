@@ -159,7 +159,7 @@ module.exports = [
     name: "Heinz Andernach"
     institution: "University of Guanajuato"
     twitter: null
-    bio: "Alcohol geek. Hipster-friendly coffee buff. Food evangelist. Bacon fanatic. Wannabe pop culture expert. Explorer. Internet junkie. Professional twitter ninja."
+    bio: ""
   }
 ]
   

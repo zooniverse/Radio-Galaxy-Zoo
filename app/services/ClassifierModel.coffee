@@ -92,7 +92,7 @@ class ClassifierModel
     
     @tutorial = new Tutorial
       id: 'tutorial'
-      firstStep: 'welcome'
+      firstStep: 'radio1'
       steps: TutorialSteps
       parent: document.querySelector(".classifier")
     
@@ -208,6 +208,7 @@ class ClassifierModel
       
       # TODO: Update URL for beta site
       importScripts("http://0.0.0.0:9296/workers/conrec.js")
+      # importScripts("http://radio.galaxyzoo.org/beta/workers/conrec.js")
       
       # Get variables sent from main thread
       width = e.data.width
@@ -391,8 +392,8 @@ class ClassifierModel
     matches.push match
     console.log matches
     
-    @classification.annotate matches
-    @classification.send()
+    @classification?.annotate matches
+    @classification?.send()
   
   drawCatalogSources: ->
     catalog = @subject.metadata.catalog
