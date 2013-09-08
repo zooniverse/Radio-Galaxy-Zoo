@@ -25,7 +25,7 @@ def make_png(f):
   data = (255 * cmap(data)).astype('uint8')
   im = Image.fromarray(data)
   im = im.resize( (500, 500), Image.ANTIALIAS)
-  im.save("%s.png" % (name))
+  im.save("%s.png" % (name.replace("_ir", "")))
 
 
 if __name__ == '__main__':

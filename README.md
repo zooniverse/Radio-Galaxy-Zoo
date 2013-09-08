@@ -14,3 +14,9 @@
 # TODO
   
   * Redraw IR annotations after view has been switched
+
+# Data Preparation
+
+    python make_png.py ../data-import/rgz_fits/
+    
+  

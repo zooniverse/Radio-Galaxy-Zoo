@@ -307,7 +307,7 @@ class ClassifierModel
     # Factor is needed because JPGs have been upscaled from
     # FITS resolution.
     # NOTE: Number needs updating if image resolution changes.
-    factor = 500 / 301
+    factor = 424 / 301
     
     pathFn = d3.svg.line()
                     .x( (d) -> return factor * d.y)
@@ -462,10 +462,10 @@ class ClassifierModel
         .attr("cy", (d) -> return y(d.mag))
     
     svg = d3.select("svg")
-    factor = 500 / 300
+    factor = 424 / 300
     for object in catalog
       cx = factor * parseFloat(object.x)
-      cy = 500 - factor * parseFloat(object.y)
+      cy = 424 - factor * parseFloat(object.y)
       
       do (object) =>
         svg.append("circle")
