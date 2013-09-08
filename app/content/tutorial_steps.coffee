@@ -65,8 +65,8 @@ module.exports =
       svg.append("circle")
         .attr("class", "tutorial")
         .attr("r", 10)
-        .attr("cx", 251)
-        .attr("cy", 249)
+        .attr("cx", 213)
+        .attr("cy", 211)
     onExit: ->
       removeBlock()
       
@@ -110,7 +110,7 @@ module.exports =
         x = parseInt match[1]
         y = parseInt match[2]
         
-        if x > 245 and x < 260 and y > 240 and y < 255
+        if x > 203 and x < 223 and y > 201 and y < 221
           return "complete"
         return false
   

@@ -86,7 +86,6 @@ class ClassifierModel
     
     # Create tutorial subject and fetch
     subject = require "../content/tutorial_subject"
-    console.log subject
     @classification = new Classification {subject}
     
     Subject.fetch()
@@ -98,7 +97,6 @@ class ClassifierModel
       parent: document.querySelector(".classifier")
     
     @tutorial.el.bind('end-tutorial', @onTutorialEnd)
-    @tutorial.start()
   
   onTutorialEnd: =>
     console.log "onTutorialEnd"
@@ -165,6 +163,8 @@ class ClassifierModel
   onFITS: (f, opts) =>
     image = f.getDataUnit(0)
     image.getFrame(0, (arr) =>
+      
+      # TESTING: Workers versus main thread computation
       @getContoursAsync(image.width, image.height, arr, opts)
       # @getContours(image.width, image.height, arr)
       # @onGetContours(opts)
@@ -205,12 +205,14 @@ class ClassifierModel
     
     # Define function to be executed on worker thread
     onmessage = (e) ->
+      
+      # TODO: Update URL for beta site
       importScripts("http://0.0.0.0:9296/workers/conrec.js")
       
       # Get variables sent from main thread
       width = e.data.width
       height = e.data.height
-      arr = e.data.arr
+      arr = new Float32Array(e.data.buffer)
       
       levels = [
         3.0, 5.196152422706632, 8.999999999999998, 15.588457268119893, 26.999999999999993,
@@ -261,14 +263,13 @@ class ClassifierModel
     msg =
       width: width
       height: height
-      arr: arr
+      buffer: arr.buffer
     
     worker.onmessage = (e) =>
       @subjectContours.push e.data
       @onGetContours(opts)
     
-    # TODO: Use transferable objects!!!
-    worker.postMessage(msg)
+    worker.postMessage(msg, [arr.buffer])
   
   getContours: (width, height, arr) ->
     z = @getLevels()
@@ -333,6 +334,15 @@ class ClassifierModel
               el.attr("class", "svg-contour selected")
               @addContour(contourid)
           )
+    
+    # TODO: Find better place for this
+    # NOTE: Tutorial animation lags due to SVG drawing. Placing tutorial start here
+    #       allows drawing to complete before rendering tutorial. Also needed because
+    #       tutorial depends on contours already having been drawn.
+    setTimeout ( =>
+      @tutorial.start() if @hasTutorial
+    ), 0
+    
   
   # TODO: Remove need to store selected.  Can use DOM to extract the selected.
   addContour: (value) ->
