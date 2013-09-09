@@ -108,6 +108,8 @@ class ClassifierModel
     @subject = Subject.instances.shift()
     @nextSubject = Subject.instances.shift()
     
+    @classification = new Classification {@subject}
+    
     # Request FITS for first subject
     new astro.FITS(@subject.location.raw, @onFITS)
     
