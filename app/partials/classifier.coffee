@@ -42,12 +42,10 @@ template = """
     
     <div class='examples row'>
       <div class="row">
-        <p class="col-md-4">Examples:</p>
-      </div>
-      <div class="row">
+        <p class="col-md-2">Examples:</p>
         <span class="col-md-4 example" ng-class="{'active': getExample()=='single-compact-source'}" data-type="single-compact-source">Single Compact Source</span>
-        <span class="col-md-4 example" ng-class="{'active': getExample()=='multiple-sources'}" data-type="multiple-sources">Multiple Sources</span>
-        <span class="col-md-4 example" ng-class="{'active': getExample()=='extended-source'}" data-type="extended-source">Extended Source</span>
+        <span class="col-md-3 example" ng-class="{'active': getExample()=='multiple-sources'}" data-type="multiple-sources">Multiple Sources</span>
+        <span class="col-md-3 example" ng-class="{'active': getExample()=='extended-source'}" data-type="extended-source">Extended Source</span>          
       </div>
       
       <div class="row content" ng-show=getExample()=="single-compact-source">
@@ -75,7 +73,7 @@ template = """
     <div class='buttons row'>
       <div ng-switch on="getStep()">
         <div ng-switch-when="1" class="col-md-6 col-md-offset-8">
-          <button type="button" class="btn btn-default" data-ng-click="onNoFlux()">No flux</button>
+          <button type="button" class="btn btn-default no-flux" data-ng-click="onNoFlux()">No flux</button>
           <button type="button" class="btn btn-primary continue" data-ng-click="onContinue()" disabled>Continue</button>
         </div>
         <div ng-switch-when="2" class="col-md-6 col-md-offset-8">

@@ -4,10 +4,17 @@ Step = zootorial.Step
 
 addBlock = ->
   el = angular.element( document.querySelector(".viewport") )
-  el.addClass('block')
+  el.addClass("block")
+  
+  el = angular.element( document.querySelector("button.no-flux") )
+  el.addClass("block")
+  
 removeBlock = ->
   el = angular.element( document.querySelector(".viewport") )
-  el.removeClass('block')
+  el.removeClass("block")
+  
+  el = angular.element( document.querySelector("button.no-flux") )
+  el.removeClass("block")
 
 
 module.exports =
