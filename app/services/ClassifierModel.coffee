@@ -26,6 +26,7 @@ class ClassifierModel
     @showContours = true
     @step = 1
     @showSED = false
+    @example = 'single-compact-source'
     @hasTutorial = false
     
     # Boolean to check if on initial subject

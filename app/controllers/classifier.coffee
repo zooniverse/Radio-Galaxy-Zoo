@@ -1,6 +1,7 @@
 
 Subject = zooniverse.models.Subject
 
+
 Classifier = ($scope, model) ->
   console.log "ClassifierCtrl"
   
@@ -8,6 +9,7 @@ Classifier = ($scope, model) ->
   $scope.showContours = model.showContours
   $scope.step = model.step
   $scope.showSED = model.showSED
+  $scope.example = model.example
   
   $scope.getInfraredSource = ->
     return model.infraredSource
@@ -21,6 +23,8 @@ Classifier = ($scope, model) ->
     return model.nextInfraredSource
   $scope.getNextRadioSource = ->
     return model.nextRadioSource
+  $scope.getExample = ->
+    return model.example
   
   #
   # Recover last state
@@ -70,7 +74,6 @@ Classifier = ($scope, model) ->
   $scope.onNext = ->
     console.log "onNext"
     
-    # TODO: Post classification
     model.getClassification()
     
     # Request next subject and return to step 1
@@ -88,7 +91,7 @@ Classifier = ($scope, model) ->
     
   # TODO: Post Favorite
   $scope.onFavorite = ->
-    alert "OMG THIS PICTURE IS SOOOOO COOL!"
+    alert "Sorry, you cannot save favorites yet."
   
   # TODO: Open in Talk
   $scope.onDiscuss = ->

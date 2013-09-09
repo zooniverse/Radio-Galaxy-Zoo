@@ -2,7 +2,7 @@
 template = """
 <div class="classifier row" data-ng-controller="ClassifierCtrl">
   
-  <div class="viewport col-md-7">
+  <div class="viewport col-md-5">
     <img data-ng-src="{{ getRadioSource() }}">
     <img class="infrared" data-ng-src="{{ getInfraredSource() }}">
     
@@ -12,7 +12,7 @@ template = """
     
   </div>
   
-  <div class="workflow col-md-5 col-md-offset-1">
+  <div class="workflow col-md-6 col-md-offset-1">
     
     <div class="row controls">
       <div class="image-slider col-md-6">
@@ -40,25 +40,52 @@ template = """
       </div>
     </div>
     
-    <div class='examples'>
-      <div class="sed" ng-show=sed></div>
-      <img ng-show=!sed src="http://imgs.xkcd.com/comics/balloon_internet.png" title="I run a business selling rural internet access. My infrastructure consists of a bunch of Verizon wifi hotspots that I sign up for and then cancel at the end of the 14-day return period.">
+    <div class='examples row'>
+      <div class="row">
+        <p class="col-md-4">Examples:</p>
+      </div>
+      <div class="row">
+        <span class="col-md-4 example" ng-class="{'active': getExample()=='single-compact-source'}" data-type="single-compact-source">Single Compact Source</span>
+        <span class="col-md-4 example" ng-class="{'active': getExample()=='multiple-sources'}" data-type="multiple-sources">Multiple Sources</span>
+        <span class="col-md-4 example" ng-class="{'active': getExample()=='extended-source'}" data-type="extended-source">Extended Source</span>
+      </div>
+      
+      <div class="row content" ng-show=getExample()=="single-compact-source">
+        <div class="col-md-5 image">
+          <img src="images/example/single-compact-source.jpg">
+        </div>
+        <div class="col-md-7">Docendi definiebas nam ei. An mei iisque hendrerit, meis nostro mei ut, equidem copiosae eam ea. No adhuc impedit pri, semper integre vel id. No per sonet essent dissentiet, tation option cu pri. Sed no utamur legendos facilisis.</div>
+      </div>
+      
+      <div class="row content" ng-show=getExample()=="multiple-sources">
+        <div class="col-md-5 image">
+          <img src="images/example/multiple-sources.jpg">
+        </div>
+        <div class="col-md-7">Docendi definiebas nam ei. An mei iisque hendrerit, meis nostro mei ut, equidem copiosae eam ea. No adhuc impedit pri, semper integre vel id. No per sonet essent dissentiet, tation option cu pri. Sed no utamur legendos facilisis.</div>
+      </div>
+      
+      <div class="row content" ng-show=getExample()=="extended-source">
+        <div class="col-md-5 image">
+          <img src="images/example/extended-source.jpg">
+        </div>
+        <div class="col-md-7">Docendi definiebas nam ei. An mei iisque hendrerit, meis nostro mei ut, equidem copiosae eam ea. No adhuc impedit pri, semper integre vel id. No per sonet essent dissentiet, tation option cu pri. Sed no utamur legendos facilisis.</div>
+      </div>
     </div>
     
     <div class='buttons row'>
       <div ng-switch on="getStep()">
-        <div ng-switch-when="1" class="col-md-6 col-md-offset-7">
+        <div ng-switch-when="1" class="col-md-6 col-md-offset-8">
           <button type="button" class="btn btn-default" data-ng-click="onNoFlux()">No flux</button>
           <button type="button" class="btn btn-primary continue" data-ng-click="onContinue()" disabled>Continue</button>
         </div>
-        <div ng-switch-when="2" class="col-md-6 col-md-offset-7">
+        <div ng-switch-when="2" class="col-md-6 col-md-offset-8">
           <button type="button" class="btn btn-default" data-ng-click="onNoCorrespondingFlux()">No Infrared</button>
           <button type="button" class="btn btn-primary done" data-ng-click="onDone()">Done</button>
         </div>
         <div ng-switch-when="3">
           <button type="button" class="btn btn-default" data-ng-click="onFavorite()">Favorite</button>
           <button type="button" class="btn btn-default" data-ng-click="onDiscuss()">Discuss</button>
-          <button type="button" class="btn btn-primary col-md-offset-6 next" data-ng-click="onNext()">Next</button>
+          <button type="button" class="btn btn-primary col-md-offset-7 next" data-ng-click="onNext()">Next</button>
         </div>
       </div>
     </div>

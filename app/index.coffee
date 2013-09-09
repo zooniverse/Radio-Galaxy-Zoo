@@ -1,4 +1,5 @@
 
+# Have to check browser because Chrome, FF, and Safari differ in the order in which contours are computed!
 testAgent = (agent) ->
   browserOrder = ['opera', 'chrome', 'safari', 'firefox', 'msie']
   
@@ -23,8 +24,9 @@ TeamCtrl  = require './controllers/team'
 ImageOpacityDirective = require './directives/image_opacity'
 ContinueBtnDirective  = require './directives/continue_button'
 MarkingDirective      = require './directives/marking'
-toggleContoursDirective  = require './directives/toggle_contours'
-scienceDirective      = require './directives/science'
+ToggleContoursDirective  = require './directives/toggle_contours'
+ExampleDirective      = require './directives/example'
+ScienceDirective      = require './directives/science'
 
 # Import services
 ClassifierModel = require './services/ClassifierModel'
@@ -54,11 +56,12 @@ RadioGalaxyZoo.controller('ScienceCtrl', ["$scope", "$routeParams", ScienceCtrl]
 RadioGalaxyZoo.controller('TeamCtrl', ["$scope", TeamCtrl])
 
 # Directives
-RadioGalaxyZoo.directive('science', scienceDirective)
+RadioGalaxyZoo.directive('science', ScienceDirective)
 RadioGalaxyZoo.directive('imageOpacity', ImageOpacityDirective)
 RadioGalaxyZoo.directive('marking', MarkingDirective)
 RadioGalaxyZoo.directive('continue', ContinueBtnDirective)
-RadioGalaxyZoo.directive('toggleContours', toggleContoursDirective)
+RadioGalaxyZoo.directive('toggleContours', ToggleContoursDirective)
+RadioGalaxyZoo.directive('example', ExampleDirective)
 
 # Services
 RadioGalaxyZoo.service('classifierModel', ["$rootScope", "$q", "imageDimension", "tutorialContours", ClassifierModel])
