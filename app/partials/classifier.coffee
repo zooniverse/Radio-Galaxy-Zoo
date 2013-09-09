@@ -81,7 +81,7 @@ template = """
           <button type="button" class="btn btn-primary done" data-ng-click="onDone()">Done</button>
         </div>
         <div ng-switch-when="3">
-          <button type="button" class="btn btn-default" data-ng-click="onFavorite()">Favorite</button>
+          <button type="button" class="btn btn-default" data-ng-click="onFavorite($event)">Favorite</button>
           <button type="button" class="btn btn-default" data-ng-click="onDiscuss()">Discuss</button>
           <button type="button" class="btn btn-primary col-md-offset-7 next" data-ng-click="onNext()">Next</button>
         </div>

@@ -350,6 +350,9 @@ class ClassifierModel
     ), 0
     
   
+  toggleFavorite: ->
+    @classification.favorite = if @classification.favorite then false else true
+  
   # TODO: Remove need to store selected.  Can use DOM to extract the selected.
   addContour: (value) ->
     @selectedContours.push(value)

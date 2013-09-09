@@ -33,8 +33,7 @@ Classifier = ($scope, model) ->
   if model.subjectContours.length > 0
     
     # Start tutorial if exists
-    if model.hasTutorial
-      model.startTutorial()
+    model.startTutorial() if model.hasTutorial
     
     # Draw contours if they exist
     model.drawContours model.subjectContours[0]
@@ -90,8 +89,9 @@ Classifier = ($scope, model) ->
     model.showSED = false
     
   # TODO: Post Favorite
-  $scope.onFavorite = ->
-    alert "Sorry, you cannot save favorites yet."
+  $scope.onFavorite = (e) ->
+    angular.element(e.target).toggleClass("active")
+    model.toggleFavorite()
   
   # TODO: Open in Talk
   $scope.onDiscuss = ->
