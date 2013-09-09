@@ -109,9 +109,10 @@ module.exports = [
   },
   {
     name: "Ray Norris"
+    title: "Chief Research Scientist"
     institution: "CSIRO Astronomy and Space Space"
     twitter: null
-    bio: "Avid internet junkie. Evil beer expert. Travel fanatic. Music lover. Food maven. Incurable entrepreneur. Zombie fanatic."
+    bio: "Ray researches how galaxies formed and evolved after the Big Bang, using radio, infrared, and optical telescopes. As a sideline, he also researches the astronomy of Australian Aboriginal people, frequently appears on radio and TV, and has recently published a novel, Graven Images. His current all-consuming task is to lead the Evolutionary Map of the Universe (EMU) project to image the faintest radio galaxies in the Universe, using the new ASKAP radio telescope being built in Western Australia. EMU will multiply mankind’s knowledge of the radio sky from about 2.5 million radio sources to about 70 million, but to turn that data into understanding will require us to cross-match them against images from optical and infrared telescopes."
   },
   {
     name: "Larry Rudnick"
