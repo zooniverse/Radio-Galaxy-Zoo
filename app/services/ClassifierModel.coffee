@@ -14,12 +14,13 @@ class ClassifierModel
   COMPLETE: true
   
   
-  constructor: ($rootScope, $q) ->
-    console.log "ClassifierModel"
+  constructor: ($rootScope, $q, imageDimension, tutorialContours) ->
     
     # Store injected services on object
     @$rootScope = $rootScope
     @$q = $q
+    @imageDimension = imageDimension
+    @tutorialContours = tutorialContours
     
     # Set state variables
     @showContours = true
@@ -96,6 +97,7 @@ class ClassifierModel
       steps: TutorialSteps
       parent: document.querySelector(".classifier")
     
+    @tutorial.contours = @tutorialContours
     @tutorial.el.bind('end-tutorial', @onTutorialEnd)
   
   onTutorialEnd: =>
@@ -311,7 +313,7 @@ class ClassifierModel
     # Factor is needed because JPGs have been upscaled from
     # FITS resolution.
     # NOTE: Number needs updating if image resolution changes.
-    factor = 424 / 301
+    factor = @imageDimension / 301
     
     pathFn = d3.svg.line()
                     .x( (d) -> return factor * d.y)
@@ -475,10 +477,10 @@ class ClassifierModel
   #       .attr("cy", (d) -> return y(d.mag))
   #   
   #   svg = d3.select("svg")
-  #   factor = 424 / 300
+  #   factor = @imageDimension / 300
   #   for object in catalog
   #     cx = factor * parseFloat(object.x)
-  #     cy = 424 - factor * parseFloat(object.y)
+  #     cy = @imageDimension - factor * parseFloat(object.y)
   #     
   #     do (object) =>
   #       svg.append("circle")

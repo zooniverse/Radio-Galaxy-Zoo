@@ -16,7 +16,7 @@ module.exports =
   welcome: new Step
     number: 1
     header: "Welcome to Radio Galaxy Zoo!"
-    details: "Astronomers need your help to discover super massive black holes in large galaxies. These black holes emit enormous jets of plasma, which are detected by radio telescope. The host galaxies are often not seen by radio telescopes, but are detected by infrared telescopes.  We need your help to identify radio emissions, and associated it with the host galaxy."
+    details: "Astronomers need your help to discover super massive black holes in large galaxies. These black holes emit enormous jets of plasma, which are detected by radio telescopes. The host galaxies are often not seen by radio telescopes, but are detected by infrared telescopes.  We need your help to identify radio emissions, and associate it with the host galaxy."
     attachment: "center center .viewport center center"
     onEnter: -> addBlock()
     onExit: -> removeBlock()
@@ -37,16 +37,16 @@ module.exports =
     details: "The two large emissions in the center of the image are plasma jets being propelled from the nucleus of a host galaxy."
     attachment: "center top .viewport center -0.1"
     className: "arrow-bottom"
-    onEnter: ->
+    onEnter: (tutorial) ->
       addBlock()
       
-      for id in ["26", "27"]
+      for id in tutorial.contours
         el = d3.select("#svg-contours path[contourid='#{id}']")
         el.attr("class", "svg-contour radiate")
-    onExit: ->
+    onExit: (tutorial) ->
       removeBlock()
       
-      for id in ["26", "27"]
+      for id in tutorial.contours
         el = d3.select("#svg-contours path[contourid='#{id}']")
         el.attr("class", "svg-contour")
     next: "infrared"
@@ -81,7 +81,7 @@ module.exports =
     header: "Matching Radio and Infrared Sources"
     details: "We need your help to match radio emissions with their host galaxy. <b>Click</b> the two large emissions in the center of the image, then <b>click</b> 'Continue'."
     attachment: "center top .viewport center -0.1"
-    onEnter: ->
+    onEnter: (tutorial) ->
       radioEl = document.querySelector("p.band[data-band='radio']")
       contoursEl = document.querySelector(".toggle-contours")
       radioEl.click()
@@ -91,9 +91,10 @@ module.exports =
       buttonEl = angular.element( document.querySelector("button.continue") )
       buttonEl.attr("disabled", "disabled")
       
+      contours = tutorial.contours
       $("#svg-contours").on("click", ->
         ids = d3.selectAll("path.selected")[0].map( (el) -> return d3.select(el).attr("contourid") )
-        if "26" in ids and "27" in ids and ids.length is 2
+        if contours[0] in ids and contours[1] in ids and ids.length is 2
           buttonEl.removeAttr("disabled")
         else
           buttonEl.attr("disabled", "disabled")
