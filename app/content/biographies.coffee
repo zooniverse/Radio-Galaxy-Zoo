@@ -80,7 +80,7 @@ module.exports = [
     name: "Chris Lintott"
     institution: "Oxford University"
     twitter: "chrislintott"
-    bio: "Hardcore explorer. Pop culture trailblazer. Hipster-friendly coffee buff. Alcohol guru. Extreme writer."
+    bio: "Runs the Zooniverse collaboration and works on how galaxies form and evolve; particularly interested in the effects of active galactic nuclei and mergers. In his 'spare' time, he hunts for planets, presents the BBC's long-running Sky at Night program and cooks."
   },
   {
     name: "Vicky Lo"
@@ -146,7 +146,7 @@ module.exports = [
     name: "Arfon Smith"
     institution: "Adler Planetarium"
     twitter: "arfon"
-    bio: "Infuriatingly humble creator. Incurable beer trailblazer. Bacon expert. Wannabe music guru. Extreme travel fanatic. Devoted internet nerd."
+    bio: "As an undergraduate, Arfon studied Chemistry at the University of Sheffield before completing his Ph.D. in Astrochemistry at The University of Nottingham in 2006. He worked as a senior developer at the Wellcome Trust Sanger Institute (Human Genome Project) in Cambridge before joining the Galaxy Zoo team in Oxford. Over the past 3 years he has been responsible for leading the development of a platform for citizen science called Zooniverse. In August of 2011 he took up the position of Director of Citizen Science at the Adler Planetarium where he continues to lead the software and infrastructure development for the Zooniverse."
   },
   {
     name: "Kyle Willett"
