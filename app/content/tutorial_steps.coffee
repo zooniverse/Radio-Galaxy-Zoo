@@ -105,8 +105,17 @@ module.exports =
   matching2: new Step
     number: 6
     header: "Matching Radio and Infrared Sources"
-    details: "Select the corresponding infrared source by <b>clicking and dragging</b> from the center of the IR source."
+    details: "Create a circle around the corresponding infrared source by <b>clicking and dragging</b> from its center."
     attachment: "center top .viewport center -0.1"
+    onEnter: ->
+      svg = d3.select(".svg-contours")
+      svg.append("circle")
+        .attr("class", "tutorial radiate")
+        .attr("r", 10)
+        .attr("cx", 213)
+        .attr("cy", 211)
+    onExit: ->
+      d3.select("circle.tutorial").remove()
     next:
       "mouseup #svg-contours": (e, tutorial, step) ->
         g = d3.select("g")

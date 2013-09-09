@@ -1,7 +1,7 @@
 
 $green = #00FF00
 
-@-webkit-keyframes pulsate {
+@keyframes pulsate {
     0% { opacity: 0.0}
     10% { opacity: .20}
     20% { opacity: .40}
@@ -38,10 +38,6 @@ div.contours
       &.radiate
         stroke $green
         fill-opacity 0.4
-        // -webkit-animation-name pulsate
-        // -webkit-animation-duration 1s
-        // -webkit-animation-timing-function ease-in-out
-        // -webkit-animation-iteration-count 2
         
         animation-name pulsate
         animation-duration 1s
@@ -52,6 +48,13 @@ div.contours
       stroke-width 2px
       stroke $green
       cursor pointer
+    
+    circle.tutorial.radiate
+      opacity 0
+      animation-name pulsate
+      animation-duration 1s
+      animation-timing-function ease-in-out
+      animation-iteration-count 2
   
   &.fade-contour
     svg

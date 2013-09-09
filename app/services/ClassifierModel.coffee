@@ -92,7 +92,7 @@ class ClassifierModel
     
     @tutorial = new Tutorial
       id: 'tutorial'
-      firstStep: 'radio1'
+      firstStep: 'welcome'
       steps: TutorialSteps
       parent: document.querySelector(".classifier")
     
@@ -392,118 +392,118 @@ class ClassifierModel
     matches.push match
     console.log matches
     
-    @classification?.annotate matches
-    @classification?.send()
+    @classification.annotate(matches)
+    @classification.send()
   
-  drawCatalogSources: ->
-    catalog = @subject.metadata.catalog
-    return unless catalog?
-    
-    bandLookup =
-      B: 445
-      R: 658
-      J: 1220
-      H: 1630
-      K: 2190
-    
-    # Setup svg plot
-    margin =
-      top: 10
-      right: 10
-      bottom: 40
-      left: 40
-    
-    width = 400 - margin.left - margin.right
-    height = 131 - margin.top - margin.bottom
-    
-    x = d3.scale.linear().range([0, width]).domain([200, 2400])
-    y = d3.scale.linear().range([height, 0]).domain([0, 30])
-    
-    xAxis = d3.svg.axis()
-      .scale(x)
-      .orient("bottom")
-      .ticks(4)
-    yAxis = d3.svg.axis()
-      .scale(y)
-      .orient("left")
-      .ticks(4)
-    
-    sed = d3.select("div.sed").append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-          .append("g")
-            .attr("transform", "translate(#{margin.left}, #{margin.top})")
-    
-    sed.append("g")
-        .attr("class", "x axis")
-        .attr("transform", "translate(0, #{height})")
-        .call(xAxis)
-      .append("text")
-        .attr("class", "label")
-        .attr("x", width)
-        .attr("y", -6)
-        .style("text-anchor", "end")
-        .text("wavelength (nanometer)")
-        
-    sed.append("g")
-        .attr("class", "y axis")
-        .call(yAxis)
-      .append("text")
-        .attr("class", "label")
-        .attr("transform", "rotate(-90)")
-        .attr("y", 6)
-        .attr("dy", ".71em")
-        .style("text-anchor", "end")
-        .text("magnitude")
-        
-    # Format the data
-    data = []
-    for band, wavelength of bandLookup
-      datum = {}
-      datum['wavelength'] = wavelength
-      datum['mag'] = 0
-      data.push datum
-    
-    sed.selectAll(".dot")
-        .data(data)
-      .enter().append("circle")
-        .attr("class", "dot")
-        .attr("r", 3.5)
-        .attr("cx", (d) -> return x(d.wavelength))
-        .attr("cy", (d) -> return y(d.mag))
-    
-    svg = d3.select("svg")
-    factor = 424 / 300
-    for object in catalog
-      cx = factor * parseFloat(object.x)
-      cy = 424 - factor * parseFloat(object.y)
-      
-      do (object) =>
-        svg.append("circle")
-            .attr("cx", cx)
-            .attr("cy", cy)
-            .attr("r", 10)
-            .attr("class", "source")
-            .on("click", =>
-              
-              # TODO: Figure out how to update $rootScope.sed
-              @$rootScope.$apply( =>
-                @showSED = true
-              )
-              
-              # Format the data
-              data = []
-              for band, wavelength of bandLookup
-                datum = {}
-                datum['wavelength'] = wavelength
-                datum['mag'] = if isNaN(parseFloat(object["#{band}mag"])) then 0 else object["#{band}mag"]
-                data.push datum
-              
-              dots = d3.selectAll(".dot")
-                      .data(data, (d) -> return d.wavelength)
-                      .transition()
-                      .attr("cy", (d) -> return y(d.mag))
-            )
+  # drawCatalogSources: ->
+  #   catalog = @subject.metadata.catalog
+  #   return unless catalog?
+  #   
+  #   bandLookup =
+  #     B: 445
+  #     R: 658
+  #     J: 1220
+  #     H: 1630
+  #     K: 2190
+  #   
+  #   # Setup svg plot
+  #   margin =
+  #     top: 10
+  #     right: 10
+  #     bottom: 40
+  #     left: 40
+  #   
+  #   width = 400 - margin.left - margin.right
+  #   height = 131 - margin.top - margin.bottom
+  #   
+  #   x = d3.scale.linear().range([0, width]).domain([200, 2400])
+  #   y = d3.scale.linear().range([height, 0]).domain([0, 30])
+  #   
+  #   xAxis = d3.svg.axis()
+  #     .scale(x)
+  #     .orient("bottom")
+  #     .ticks(4)
+  #   yAxis = d3.svg.axis()
+  #     .scale(y)
+  #     .orient("left")
+  #     .ticks(4)
+  #   
+  #   sed = d3.select("div.sed").append("svg")
+  #           .attr("width", width + margin.left + margin.right)
+  #           .attr("height", height + margin.top + margin.bottom)
+  #         .append("g")
+  #           .attr("transform", "translate(#{margin.left}, #{margin.top})")
+  #   
+  #   sed.append("g")
+  #       .attr("class", "x axis")
+  #       .attr("transform", "translate(0, #{height})")
+  #       .call(xAxis)
+  #     .append("text")
+  #       .attr("class", "label")
+  #       .attr("x", width)
+  #       .attr("y", -6)
+  #       .style("text-anchor", "end")
+  #       .text("wavelength (nanometer)")
+  #       
+  #   sed.append("g")
+  #       .attr("class", "y axis")
+  #       .call(yAxis)
+  #     .append("text")
+  #       .attr("class", "label")
+  #       .attr("transform", "rotate(-90)")
+  #       .attr("y", 6)
+  #       .attr("dy", ".71em")
+  #       .style("text-anchor", "end")
+  #       .text("magnitude")
+  #       
+  #   # Format the data
+  #   data = []
+  #   for band, wavelength of bandLookup
+  #     datum = {}
+  #     datum['wavelength'] = wavelength
+  #     datum['mag'] = 0
+  #     data.push datum
+  #   
+  #   sed.selectAll(".dot")
+  #       .data(data)
+  #     .enter().append("circle")
+  #       .attr("class", "dot")
+  #       .attr("r", 3.5)
+  #       .attr("cx", (d) -> return x(d.wavelength))
+  #       .attr("cy", (d) -> return y(d.mag))
+  #   
+  #   svg = d3.select("svg")
+  #   factor = 424 / 300
+  #   for object in catalog
+  #     cx = factor * parseFloat(object.x)
+  #     cy = 424 - factor * parseFloat(object.y)
+  #     
+  #     do (object) =>
+  #       svg.append("circle")
+  #           .attr("cx", cx)
+  #           .attr("cy", cy)
+  #           .attr("r", 10)
+  #           .attr("class", "source")
+  #           .on("click", =>
+  #             
+  #             # TODO: Figure out how to update $rootScope.sed
+  #             @$rootScope.$apply( =>
+  #               @showSED = true
+  #             )
+  #             
+  #             # Format the data
+  #             data = []
+  #             for band, wavelength of bandLookup
+  #               datum = {}
+  #               datum['wavelength'] = wavelength
+  #               datum['mag'] = if isNaN(parseFloat(object["#{band}mag"])) then 0 else object["#{band}mag"]
+  #               data.push datum
+  #             
+  #             dots = d3.selectAll(".dot")
+  #                     .data(data, (d) -> return d.wavelength)
+  #                     .transition()
+  #                     .attr("cy", (d) -> return y(d.mag))
+  #           )
 
 
 module.exports = ClassifierModel
