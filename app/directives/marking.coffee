@@ -140,9 +140,6 @@ module.exports = ->
           
           g.remove() if a.attr("r") is "1"
           g = h = a = c = t = null
-        )
-        .on("dragend", ->
-          return unless scope.model.step is 2
           scope.model.updateAnnotation()
         )
       
