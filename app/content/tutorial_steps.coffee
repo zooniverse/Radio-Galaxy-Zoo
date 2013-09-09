@@ -26,7 +26,7 @@ module.exports =
     number: 2
     header: "Radio Emissions"
     details: "This is a radio image containing four strong radio emissions."
-    attachment: "center top .viewport center -0.1"
+    attachment: "center top .viewport center -0.12"
     onEnter: -> addBlock()
     onExit: -> removeBlock()
     next: "radio2"
@@ -35,7 +35,7 @@ module.exports =
     number: 3
     header: "Radio Emissions"
     details: "The two large emissions in the center of the image are plasma jets being propelled from the nucleus of a host galaxy."
-    attachment: "center top .viewport center -0.1"
+    attachment: "center top .viewport center -0.12"
     className: "arrow-bottom"
     onEnter: (tutorial) ->
       addBlock()
@@ -55,7 +55,7 @@ module.exports =
     number: 4
     header: "Infrared Galaxy"
     details: "Switching to a corresponding infrared image, taken by the Spitzer Space Telescope, we can see the host galaxy lying between the two radio emissions."
-    attachment: "center top .viewport center -0.1"
+    attachment: "center top .viewport center -0.12"
     onEnter: ->
       addBlock()
       infraredEl = document.querySelector("p.band[data-band='infrared']")
@@ -79,8 +79,9 @@ module.exports =
   matching1: new Step
     number: 5
     header: "Matching Radio and Infrared Sources"
-    details: "We need your help to match radio emissions with their host galaxy. <b>Click</b> the two large emissions in the center of the image, then <b>click</b> 'Continue'."
-    attachment: "center top .viewport center -0.1"
+    details: "<p>We need your help to match radio emissions with their host galaxy. Let's match the radio emissions in the center of the image.</p><b>Click</b> the two large emissions in the center of the image, then <b>click</b> 'Continue'."
+    attachment: "center top .viewport center -0.12"
+    className: "arrow-bottom"
     onEnter: (tutorial) ->
       radioEl = document.querySelector("p.band[data-band='radio']")
       contoursEl = document.querySelector(".toggle-contours")
@@ -107,7 +108,7 @@ module.exports =
     number: 6
     header: "Matching Radio and Infrared Sources"
     details: "Create a circle around the corresponding infrared source by <b>clicking and dragging</b> from its center."
-    attachment: "center top .viewport center -0.1"
+    attachment: "center top .viewport center -0.12"
     onEnter: ->
       svg = d3.select(".svg-contours")
       svg.append("circle")
@@ -134,7 +135,7 @@ module.exports =
     number: 7
     header: "Well done!"
     details: "<p>You helped match a galaxy with two radio jets emanating from it's center!</p> Click 'Done' to continue."
-    attachment: "center top .viewport center -0.1"
+    attachment: "center top .viewport center -0.12"
     next:
       "click button.done": "finish"
   
@@ -142,6 +143,6 @@ module.exports =
     number: 8
     header: "Great job!"
     details: "Thanks for helping! Click 'Next' to help match the next patch of sky."
-    attachment: "center top .viewport center -0.1"
+    attachment: "center top .viewport center -0.12"
     next:
       "click button.next": true
