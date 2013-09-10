@@ -3,7 +3,6 @@ Subject = zooniverse.models.Subject
 
 
 Classifier = ($scope, model) ->
-  console.log "ClassifierCtrl"
   
   $scope.model = model
   $scope.showContours = model.showContours
@@ -71,7 +70,6 @@ Classifier = ($scope, model) ->
     # model.drawCatalogSources()
   
   $scope.onNext = ->
-    console.log "onNext"
     
     model.getClassification()
     

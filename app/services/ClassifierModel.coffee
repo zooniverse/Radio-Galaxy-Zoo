@@ -61,7 +61,6 @@ class ClassifierModel
     User.on "change", @onUserChange
   
   onUserChange: =>
-    console.log 'onUserChange'
     
     # # SPOOF tutorial flag for testing
     # User.current?.project.tutorial_done = false
@@ -81,7 +80,6 @@ class ClassifierModel
   # TODO: Preserve tutorial state when ng-view changes
   startTutorial: =>
     @hasTutorial = true
-    console.log 'startTutorial'
     
     # Clear subjects before fetch
     Subject.instances?.length = 0
@@ -102,11 +100,9 @@ class ClassifierModel
     @tutorial.el.bind('end-tutorial', @onTutorialEnd)
   
   onTutorialEnd: =>
-    console.log "onTutorialEnd"
     @hasTutorial = false
   
   onInitialFetch: =>
-    console.log "onInitialFetch"
     
     @subject = Subject.instances.shift()
     @nextSubject = Subject.instances.shift()
@@ -124,7 +120,6 @@ class ClassifierModel
   # Ensure unique subjects are served
   # TODO: There might be a better place for this.
   onSubjectFetch: (e, subjects) ->
-    console.log "onSubjectFetch"
     Subject.instances = _.unique(Subject.instances, false, (d) -> return d.id)
   
   # This function is triggered one step before the next subject
@@ -132,7 +127,6 @@ class ClassifierModel
   # the async process of requesting FITS and computing contours is perceived 
   # to be faster.
   onSubjectSelect: (e, subject) =>
-    console.log "onSubjectSelect"
     @nextSubject = subject
     
     # Create deferred object to be resolved after contours for next subject are computed.
@@ -145,7 +139,6 @@ class ClassifierModel
     @nextRadioSource = @nextSubject.location.radio
   
   getSubject: ->
-    console.log "getSubject"
     
     @subject = @nextSubject
     @infraredSource = @subject.location.standard
@@ -206,7 +199,6 @@ class ClassifierModel
     ]
   
   getContoursAsync: (width, height, arr, opts) ->
-    console.log 'getContoursAsync'
     
     # Define function to be executed on worker thread
     onmessage = (e) ->
@@ -364,7 +356,6 @@ class ClassifierModel
   # This function is called from the marking directive whenever an annotation
   # changes (e.g. create, move, scale, remove).
   updateAnnotation: ->
-    console.log "updateAnnotation"
     translateRegEx = /translate\((-?\d+), (-?\d+)\)/
     @annotations.length = 0
     
@@ -398,7 +389,6 @@ class ClassifierModel
       radio: radio
       infrared: @annotations
     matches.push match
-    console.log matches
     
     @classification.annotate(matches)
     @classification.send()

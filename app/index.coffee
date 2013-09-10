@@ -26,7 +26,6 @@ ContinueBtnDirective  = require './directives/continue_button'
 MarkingDirective      = require './directives/marking'
 ToggleContoursDirective  = require './directives/toggle_contours'
 ExampleDirective      = require './directives/example'
-ScienceDirective      = require './directives/science'
 
 # Import services
 ClassifierModel = require './services/ClassifierModel'
@@ -56,7 +55,6 @@ RadioGalaxyZoo.controller('ScienceCtrl', ["$scope", "$routeParams", ScienceCtrl]
 RadioGalaxyZoo.controller('TeamCtrl', ["$scope", TeamCtrl])
 
 # Directives
-RadioGalaxyZoo.directive('science', ScienceDirective)
 RadioGalaxyZoo.directive('imageOpacity', ImageOpacityDirective)
 RadioGalaxyZoo.directive('marking', MarkingDirective)
 RadioGalaxyZoo.directive('continue', ContinueBtnDirective)
