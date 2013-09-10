@@ -1,8 +1,96 @@
 
-.home
+$gutter-size = 20px
+$column-size = 65px
+$one-half = ($column-size * 6) + ($gutter-size * 5)
 
-  p
-    color #FAFAFA
-    text-shadow 0 1px 0 #505050
-    font-size 15px
+$green = #C1EA00
+$dark-gray = #01050F
+$dark-blue = #003C57
+
+.home
+  
+  .headline
+    font-family: "Open Sans"
+    font-weight: 700
+    font-size: 36px
+    color: #EFEFEF
+    width: 100%
+    text-align: center
+    margin-top: 30px
+    padding: 0px
+    
+    p.call-to-action
+      font-family: "Open Sans"
+      font-weight: 400
+      font-size: 14px
+      color: #efefef
+      padding: 0px
+      margin: 0px
+    
+  .slider
+    display: block
+    border-top: 1px solid $dark-blue
+    border-bottom: 1px solid $dark-blue
+    margin-top: 34px
+    margin 34px 93px 0 60px
+    padding: $gutter-size 0px
+    
+    .slide-element
+      min-height: 240px
+      
+      &.galaxy-zoo
+        background: url("images/gz_slider1.jpg") #000 no-repeat
+      
+      .right
+        display inline-block
+        width: $one-half
+        text-align right
+        
+        p
+          font-size 14px
+      
+      .left
+        display inline-block
+        width: $one-half
+        padding-top: 25px
+        
+        .header-blue
+          font-family: "Open Sans"
+          font-weight: 800
+          font-size: 12px
+          color: #0079ae
+          text-transform: uppercase
+          padding: 0
+          margin: 0
+          
+        .header-title
+          font-family: "Open Sans"
+          font-weight: 600
+          font-size: 20px
+          color: #EFEFEF
+          padding: 0px
+          margin: 0
+          line-height: 55px
+          
+        .description
+          font-family: "Open Sans"
+          font-weight: 400
+          font-size: 11px
+          line-height: 18px
+          color: #efefef
+          width: 300px
+          
+        .blue-button
+          display: inline-block
+          background-color: $green
+          font-family: "Open Sans"
+          font-weight: 800
+          font-size: 12px
+          line-height: 18px
+          color: $dark-gray
+          text-decoration: none
+          margin-top: 5px
+          padding: 4px 10px
+          -webkit-border-radius: 3px
+          border-radius: 3px
   
