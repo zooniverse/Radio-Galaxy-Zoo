@@ -157,6 +157,13 @@ module.exports = [
     bio: "Kyle has either been studying galaxies, using radio telescopes, or working with citizen science projects for his entire astronomical career so far. As a result, he’s particularly excited about RadioQuest. As a postdoctoral researcher at UMN, he led the analysis and reduction of the Galaxy Zoo 2 project as well as helping to design and implement new analysis tools for the Zooniverse volunteers. He’s interested in the connection between massive radio jets and the black holes producing them, and understanding the physics that bridge the gap between such massive spatial scales."
   },
   {
+    name: "Laura Whyte"
+    title: "Educator and Developer"
+    institution: "Adler Planetarium"
+    twitter: "whytewithawhy"
+    bio: "As a former high school teacher and adult educator, with a PhD in galaxy classification (seriously), joining the Zooniverse as an educator was a natural fit for Laura. Based at the Adler Planetarium in Chicago, she's working to encourage and support teachers to use Zooniverse citizen science projects in the classroom."
+  },
+  {
     name: "Heinz Andernach"
     institution: "University of Guanajuato"
     twitter: null
