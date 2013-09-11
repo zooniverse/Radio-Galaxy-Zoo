@@ -1,0 +1,68 @@
+.content-block
+  clearfix()
+  display block
+  width 100%
+  clear both
+  margin 34px 93px 0 60px
+  
+  .left, .right
+    .heading
+      font-family "Open Sans Condensed"
+      font-weight 400
+      font-size 32px
+      line-height 55px
+      color #efefef
+      border-bottom 1px solid $dark-blue
+      margin-bottom 10px
+      
+    .recents, .description
+      font-family "Open Sans"
+      font-weight 400
+      font-size 12px
+      line-height 20px
+      color #efefef
+      float left
+      
+      a
+        text-transform uppercase
+        text-decoration none
+        font-weight bold
+        
+      img
+        border 1px solid #003C57
+        margin 12px 0 0 10px
+        
+        &.first
+          margin-left 0px
+          
+      ul
+        list-style none
+        font-family "Open Sans"
+        font-weight 400
+        font-size 12px
+        line-height 20px
+        color #efefef
+        float left
+        padding 0px
+        margin 0px
+        width $one-half
+        
+        li
+          list-style none
+          display block
+          
+          a
+            text-align right
+            float right
+            text-transform uppercase
+            font-weight 600
+            text-decoration none
+            
+.left
+  width $one-half
+  float left
+
+.right
+  width $one-half
+  float left
+  margin-left $gutter-size
