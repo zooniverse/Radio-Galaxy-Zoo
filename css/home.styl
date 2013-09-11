@@ -7,43 +7,49 @@ $green = #C1EA00
 $dark-gray = #01050F
 $dark-blue = #003C57
 
+clearfix()
+  &:after
+    content: ''
+    display: block
+    clear: both
+
 .home
   
   .headline
-    font-family: "Open Sans"
-    font-weight: 700
-    font-size: 36px
-    color: #EFEFEF
-    width: 100%
-    text-align: center
-    margin-top: 30px
-    padding: 0px
+    font-family "Open Sans"
+    font-weight 700
+    font-size 36px
+    color #EFEFEF
+    width 100%
+    text-align center
+    margin-top 30px
+    padding 0px
     
     p.call-to-action
-      font-family: "Open Sans"
-      font-weight: 400
-      font-size: 14px
-      color: #efefef
-      padding: 0px
-      margin: 0px
+      font-family "Open Sans"
+      font-weight 400
+      font-size 14px
+      color #efefef
+      padding 0px
+      margin 0px
     
   .slider
-    display: block
-    border-top: 1px solid $dark-blue
-    border-bottom: 1px solid $dark-blue
-    margin-top: 34px
+    display block
+    border-top 1px solid $dark-blue
+    border-bottom 1px solid $dark-blue
+    margin-top 34px
     margin 34px 93px 0 60px
-    padding: $gutter-size 0px
+    padding $gutter-size 0px
     
     .slide-element
-      min-height: 240px
+      min-height 240px
       
       &.radio-galaxy-zoo
-        background: url("images/rgz_slider.jpg") #000 no-repeat
+        background url("images/rgz_slider.jpg") #000 no-repeat
       
       .right
         display inline-block
-        width: $one-half
+        width $one-half
         text-align right
         
         p
@@ -52,46 +58,127 @@ $dark-blue = #003C57
       
       .left
         display inline-block
-        width: $one-half
-        padding-top: 25px
+        width $one-half
+        padding-top 25px
         
         .header-blue
-          font-family: "Open Sans"
-          font-weight: 800
-          font-size: 12px
-          color: #0079ae
-          text-transform: uppercase
-          padding: 0
-          margin: 0
+          font-family "Open Sans"
+          font-weight 800
+          font-size 12px
+          color #0079ae
+          text-transform uppercase
+          padding 0
+          margin 0
           
         .header-title
-          font-family: "Open Sans"
-          font-weight: 600
-          font-size: 20px
-          color: #EFEFEF
-          padding: 0px
-          margin: 0
-          line-height: 55px
+          font-family "Open Sans"
+          font-weight 600
+          font-size 20px
+          color #EFEFEF
+          padding 0px
+          margin -30px 0 0 0
+          line-height 55px
           
         .description
-          font-family: "Open Sans"
-          font-weight: 400
-          font-size: 11px
-          line-height: 18px
-          color: #efefef
-          width: 300px
+          font-family "Open Sans"
+          font-weight 400
+          font-size 11px
+          line-height 18px
+          color #efefef
+          width 300px
           
         .blue-button
-          display: inline-block
-          background-color: $green
-          font-family: "Open Sans"
-          font-weight: 800
-          font-size: 12px
-          line-height: 18px
-          color: $dark-gray
-          text-decoration: none
-          margin-top: 5px
-          padding: 4px 10px
-          -webkit-border-radius: 3px
-          border-radius: 3px
-  
+          display inline-block
+          background-color $green
+          font-family "Open Sans"
+          font-weight 800
+          font-size 12px
+          line-height 18px
+          color $dark-gray
+          text-decoration none
+          margin-top 5px
+          padding 4px 10px
+          -webkit-border-radius 3px
+          border-radius 3px
+
+  .content-block
+    clearfix()
+    display block
+    width 100%
+    clear both
+    margin 34px 93px 0 60px
+    
+    .left, .right
+      .heading
+        font-family "Open Sans Condensed"
+        font-weight 400
+        font-size 32px
+        line-height 55px
+        color #efefef
+        border-bottom 1px solid $dark-blue
+        margin-bottom 10px
+        
+      .recents, .description
+        font-family "Open Sans"
+        font-weight 400
+        font-size 12px
+        line-height 20px
+        color #efefef
+        float left
+        
+        a
+          text-transform uppercase
+          text-decoration none
+          font-weight bold
+          
+        img
+          border 1px solid #003C57
+          margin 12px 0 0 10px
+          
+          &.first
+            margin-left 0px
+            
+        ul
+          list-style none
+          font-family "Open Sans"
+          font-weight 400
+          font-size 12px
+          line-height 20px
+          color #efefef
+          float left
+          padding 0px
+          margin 0px
+          width $one-half
+          
+          li
+            list-style none
+            display block
+            
+            a
+              text-align right
+              float right
+              text-transform uppercase
+              font-weight 600
+              text-decoration none
+              
+    .left
+      width $one-half
+      float left
+      
+      .galaxify
+        display inline-block
+        padding 5px 10px
+        background $green
+        color #000000
+        font-weight 700
+        font-family "Open Sans"
+        font-size 20px
+        text-decoration none
+        box-shadow inset 0px 1px 0px #daff2a
+        -webkit-border-radius 3px
+        border-radius 3px
+        
+    .right
+      width $one-half
+      float left
+      margin-left $gutter-size
