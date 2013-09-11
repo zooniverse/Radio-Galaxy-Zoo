@@ -6,14 +6,11 @@ template = """
     </div>
     
     <div class="slider">
-      <div class="slide-element">
+      <div class="slide-element radio-galaxy-zoo">
         <div class="left">
-          <p class="header-title">Discover Black Holes</p>
-          <p class="description">Eos an munere nostrud ponderum. Ad quo malorum vituperata, mucius maiestatis quo at, probo invenire dignissim vis te. Ei vix primis ceteros vituperata, quo simul blandit eleifend no. Meliore abhorreant accommodare ut per, velit legere ut nam.</p>
-          <a class="blue-button" href="#/classify">Begin Classifying</a>
-        </div>
-        <div class="right">
-          <p>Hidden deep within the nuclei of a tiny fraction of giant galaxies, supermassive black holes spew out enormous jets of relativistic plasmas. But which few of all the otherwise normal-looking galaxies are undergoing this monstrous surge of activity? This is the mission of Radio Galaxy Zoo &ndash; to find those galaxies &ndash; and enable radio, optical, and X-ray astronomers to study them in more detail, and determine how these monsters erupt. Our best clues come from faint radio emission far outside the galaxy nuclei, but figuring out which galaxy goes with which radio emission is a process needing the keen eyes of Radio Galaxy Zooites around the world. So join &hellip;</p>
+          <p class="header-title">Search for Black Holes</p>
+          <p class="description">Black holes are found at the center of most, if not all, galaxies. The bigger the galaxy, the bigger the black hole and the more sensational the effect it has on the host galaxy. These supermassive black holes drag in nearby materials, growing to be billions of times the size of our sun and occasionally producing spectacular jets of materials travelling nearly as fast as the speed of light. Often invisible in visible light, but detectable in radio wavelengths, astronomers need help to find these jets and match them to the galaxy that hosts them.</p>
+          <a class="blue-button" href="#/classify">Begin Hunting</a>
         </div>
       </div>
     </div>
