@@ -23,7 +23,7 @@ module.exports =
   welcome: new Step
     number: 1
     header: "Welcome to Radio Galaxy Zoo!"
-    details: "Astronomers need your help to discover super massive black holes in large galaxies. These black holes emit enormous jets of plasma, which are detected by radio telescopes. The host galaxies are often not seen by radio telescopes, but are detected by infrared telescopes.  We need your help to identify radio emissions, and associate it with the host galaxy."
+    details: "Astronomers need your help to discover supermassive black holes in large galaxies. These black holes emit enormous jets of plasma, which can be detected by radio telescopes. The host galaxies themselves are often not seen in radio wavelengths, but are detected by infrared telescopes.  We need your help to combine the two: identify emission in radio wavelengths, and then associate that with its host galaxy."
     attachment: "center center .viewport center center"
     onEnter: -> addBlock()
     onExit: -> removeBlock()
@@ -86,7 +86,7 @@ module.exports =
   matching1: new Step
     number: 5
     header: "Matching Radio and Infrared Sources"
-    details: "<p>We need your help to match radio components with their host galaxy. Let's match the radio emissions in the center of the image.</p><b>Click</b> the two large components in the center of the image, then <b>click</b> 'Continue'."
+    details: "<p>We need your help to match radio components with their host galaxy. Let's match the radio components in the center of the image.</p><b>Click</b> the two large components in the center of the image, then <b>click</b> 'Continue'."
     attachment: "center top .viewport center -0.12"
     className: "arrow-bottom"
     onEnter: (tutorial) ->
@@ -114,7 +114,7 @@ module.exports =
   matching2: new Step
     number: 6
     header: "Matching Radio and Infrared Sources"
-    details: "Create a circle around the corresponding infrared source by <b>clicking and dragging</b> from its center."
+    details: "Draw a circle around the corresponding infrared source by <b>clicking and dragging</b> from its center."
     attachment: "center top .viewport center -0.12"
     onEnter: ->
       svg = d3.select(".svg-contours")
@@ -141,7 +141,7 @@ module.exports =
   complete: new Step
     number: 7
     header: "Well done!"
-    details: "<p>You helped match a galaxy with two radio jets emanating from an invisible supermassive black hole at its center!</p> Click 'Done' to continue."
+    details: "<p>You helped match a galaxy to the two radio jets emanating from an invisible supermassive black hole at its center!</p> Click 'Done' to continue."
     attachment: "center top .viewport center -0.12"
     next:
       "click button.done": "finish"

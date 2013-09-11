@@ -59,14 +59,14 @@ template = """
         <div class="col-md-5 image">
           <img src="images/example/multiple-sources.jpg">
         </div>
-        <div class="col-md-7">This radio source shows a "core-jet" structure, which means that a bright, compact radio component (the core) has a single-sided, long extension (the jet). Here the core coincides with a bright infrared object, which is identified as the counterpart.</div>
+        <div class="col-md-7">This radio source shows a "core-jet" structure, which means that a bright, compact radio component (the core) has a single-sided, long extension toward the lower right (the jet). Here, the core coincides with a bright infrared object, which is identified as its counterpart.<br><br>A second, compact radio source is seen in the upper left; since there's another infrared counterpart and it isn't aligned with the first jet, this is likely a separate source in the same field.</div>
       </div>
       
       <div class="row content" ng-show=getExample()=="extended-source">
         <div class="col-md-5 image">
           <img src="images/example/extended-source.jpg">
         </div>
-        <div class="col-md-7">Docendi definiebas nam ei. An mei iisque hendrerit, meis nostro mei ut, equidem copiosae eam ea. No adhuc impedit pri, semper integre vel id. No per sonet essent dissentiet, tation option cu pri. Sed no utamur legendos facilisis.</div>
+        <div class="col-md-7">This radio source has a bright peak near the center, but also shows extended emission on both sides of its jet. In particular, the radio emission to the lower left has begun expanding and is much wider than the jet closer to the source. The bright infrared image toward the center is likely the only counterpart.</div>
       </div>
     </div>
     
