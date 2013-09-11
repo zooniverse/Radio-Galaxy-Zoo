@@ -32,7 +32,7 @@ module.exports =
   radio1: new Step
     number: 2
     header: "Radio Emissions"
-    details: "This is a radio image containing four strong radio emissions."
+    details: "This is a radio image containing four strong components of emission."
     attachment: "center top .viewport center -0.12"
     onEnter: -> addBlock()
     onExit: -> removeBlock()
@@ -41,7 +41,7 @@ module.exports =
   radio2: new Step
     number: 3
     header: "Radio Emissions"
-    details: "The two large emissions in the center of the image are plasma jets being propelled from the nucleus of a host galaxy."
+    details: "The two large components in the center of the image actually come from the same host galaxy, due to jets of plasma coming from the supermassive black hole."
     attachment: "center top .viewport center -0.12"
     className: "arrow-bottom"
     onEnter: (tutorial) ->
@@ -61,7 +61,7 @@ module.exports =
   infrared: new Step
     number: 4
     header: "Infrared Galaxy"
-    details: "Switching to a corresponding infrared image, taken by the Spitzer Space Telescope, we can see the host galaxy lying between the two radio emissions."
+    details: "Switching to the corresponding infrared image, taken by the Spitzer Space Telescope, we can see the host galaxy lying between the two radio components."
     attachment: "center top .viewport center -0.12"
     onEnter: ->
       addBlock()
@@ -86,7 +86,7 @@ module.exports =
   matching1: new Step
     number: 5
     header: "Matching Radio and Infrared Sources"
-    details: "<p>We need your help to match radio emissions with their host galaxy. Let's match the radio emissions in the center of the image.</p><b>Click</b> the two large emissions in the center of the image, then <b>click</b> 'Continue'."
+    details: "<p>We need your help to match radio components with their host galaxy. Let's match the radio emissions in the center of the image.</p><b>Click</b> the two large components in the center of the image, then <b>click</b> 'Continue'."
     attachment: "center top .viewport center -0.12"
     className: "arrow-bottom"
     onEnter: (tutorial) ->
@@ -141,7 +141,7 @@ module.exports =
   complete: new Step
     number: 7
     header: "Well done!"
-    details: "<p>You helped match a galaxy with two radio jets emanating from it's center!</p> Click 'Done' to continue."
+    details: "<p>You helped match a galaxy with two radio jets emanating from an invisible supermassive black hole at its center!</p> Click 'Done' to continue."
     attachment: "center top .viewport center -0.12"
     next:
       "click button.done": "finish"

@@ -52,14 +52,14 @@ template = """
         <div class="col-md-5 image">
           <img src="images/example/single-compact-source.jpg">
         </div>
-        <div class="col-md-7">Docendi definiebas nam ei. An mei iisque hendrerit, meis nostro mei ut, equidem copiosae eam ea. No adhuc impedit pri, semper integre vel id. No per sonet essent dissentiet, tation option cu pri. Sed no utamur legendos facilisis.</div>
+        <div class="col-md-7">Compact radio sources most frequently look like this. A relatively faint radio source sits squarely on an infrared source. Both the infrared and radio emission are likely to come from the same object. The tiny specks towards the upper left corner are noise and probably do not reflect true emission.</div>
       </div>
       
       <div class="row content" ng-show=getExample()=="multiple-sources">
         <div class="col-md-5 image">
           <img src="images/example/multiple-sources.jpg">
         </div>
-        <div class="col-md-7">Docendi definiebas nam ei. An mei iisque hendrerit, meis nostro mei ut, equidem copiosae eam ea. No adhuc impedit pri, semper integre vel id. No per sonet essent dissentiet, tation option cu pri. Sed no utamur legendos facilisis.</div>
+        <div class="col-md-7">This radio source shows a "core-jet" structure, which means that a bright, compact radio component (the core) has a single-sided, long extension (the jet). Here the core coincides with a bright infrared object, which is identified as the counterpart.</div>
       </div>
       
       <div class="row content" ng-show=getExample()=="extended-source">
