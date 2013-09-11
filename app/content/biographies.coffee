@@ -62,7 +62,7 @@ module.exports = [
     institution: "CSIRO Astronomy and Space Science"
     location: "Australia"
     twitter: null
-    bio: "Robert is an Education and Outreach specialist with CSIRO Astronomy and Space Science. He is interested in how the public and schools students interact with and interpret radio astronomy data using citizen science. The feedback from this project will help guide the development of future projects utilising the massive data sets from ASKAP and the SKA. He also coordinates the PULSE&#64;Parkes project where students use the Parkes radio telescope to observe pulsars."
+    bio: "Robert is an Education and Outreach specialist with CSIRO Astronomy and Space Science. He is interested in how the public and schools students interact with and interpret radio astronomy data using citizen science. The feedback from this project will help guide the development of future projects utilising the massive data sets from ASKAP and the SKA. He also coordinates the PULSE@Parkes project where students use the Parkes radio telescope to observe pulsars."
   },
   {
     name: "Matt Jarvis"
@@ -120,7 +120,7 @@ module.exports = [
     institution: "University of Minnesota"
     location: "Minnesota, United States"
     twitter: null
-    bio: "Larry has been classifying radio galaxies since the mid-70s. He's saturated, and is thrilled with this effort to bring lots of fresh eyes to the massive new samples coming from modern radio telescopes. Larry's research work has focussed on radio galaxies, clusters of galaxies and supernova remnants, combining data from many different wavebands. He was a frequent on-screen expert for U.S. Public Television's  &quot;Newton’s Apple,&quot; and has been heavily involved in training elementary school teachers to use hand’s on science and in working with local planetariums."
+    bio: "Larry has been classifying radio galaxies since the mid-70s. He's saturated, and is thrilled with this effort to bring lots of fresh eyes to the massive new samples coming from modern radio telescopes. Larry's research work has focussed on radio galaxies, clusters of galaxies and supernova remnants, combining data from many different wavebands. He was a frequent on-screen expert for U.S. Public Television's Newton’s Apple and has been heavily involved in training elementary school teachers to use hands-on science and in working with local planetariums."
   },
   {
     name: "Kevin Schawinski"
@@ -154,7 +154,7 @@ module.exports = [
     institution: "University of Minnesota"
     location: "Minnesota, United States"
     twitter: "kwwillett"
-    bio: "Kyle has either been studying galaxies, using radio telescopes, or working with citizen science projects for his entire astronomical career so far. As a result, he’s particularly excited about RadioQuest. As a postdoctoral researcher at UMN, he led the analysis and reduction of the Galaxy Zoo 2 project as well as helping to design and implement new analysis tools for the Zooniverse volunteers. He’s interested in the connection between massive radio jets and the black holes producing them, and understanding the physics that bridge the gap between such massive spatial scales."
+    bio: "Kyle has either been studying galaxies, using radio telescopes, or working with citizen science projects for his entire astronomical career so far. As a result, he’s particularly excited about Radio Galaxy Zoo. As a postdoctoral researcher at UMN, he led the analysis and reduction of the Galaxy Zoo 2 project as well as helping to design and implement new analysis tools for the Zooniverse volunteers. He’s interested in the connection between massive radio jets and the black holes producing them, and understanding the physics that bridge the gap between such massive spatial scales."
   },
   {
     name: "Laura Whyte"
