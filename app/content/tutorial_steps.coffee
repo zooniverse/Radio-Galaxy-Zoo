@@ -48,13 +48,13 @@ module.exports =
       addBlock()
       
       for id in tutorial.contours
-        el = d3.select("#svg-contours path[contourid='#{id}']")
+        el = d3.select("#svg-contours g[id='#{id}'] path:last-child")
         el.attr("class", "svg-contour radiate")
     onExit: (tutorial) ->
       removeBlock()
       
       for id in tutorial.contours
-        el = d3.select("#svg-contours path[contourid='#{id}']")
+        el = d3.select("#svg-contours g[id='#{id}'] path:last-child")
         el.attr("class", "svg-contour")
     next: "infrared"
   
@@ -101,7 +101,8 @@ module.exports =
       
       contours = tutorial.contours
       $("#svg-contours").on("click", ->
-        ids = d3.selectAll("path.selected")[0].map( (el) -> return d3.select(el).attr("contourid") )
+        
+        ids = d3.selectAll("path.selected")[0].map( (el) -> return d3.select(el.parentNode).attr("id") )
         if contours[0] in ids and contours[1] in ids and ids.length is 2
           buttonEl.removeAttr("disabled")
         else

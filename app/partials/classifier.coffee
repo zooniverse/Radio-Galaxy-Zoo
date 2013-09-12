@@ -27,11 +27,11 @@ template = """
     <div class='row instruction'>
       <div ng-switch on="getStep()">
         <div col-md-12 ng-switch-when="1">
-          <p>Select the contour(s) representing a radio flux.</p>
+          <p>Select the contour(s) representing the radio emission.</p>
         </div>
         
         <div ng-switch-when="2">
-          <p>Identify the infrared source(s).</p>
+          <p>Identify the infrared source.</p>
         </div>
         
         <div ng-switch-when="3">
