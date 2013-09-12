@@ -269,6 +269,7 @@ class ClassifierModel
       buffer: arr.buffer
     
     worker.onmessage = (e) =>
+      @cluster e.data
       @subjectContours.push e.data
       @onGetContours(opts)
     
@@ -339,8 +340,6 @@ class ClassifierModel
       contours.push group
   
   drawContours: (contours) ->
-    @cluster contours
-    
     svg = d3.select("svg.svg-contours")
     
     # Factor is needed because JPGs have been upscaled from FITS resolution.
