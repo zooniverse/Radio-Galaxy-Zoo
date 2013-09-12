@@ -77,6 +77,7 @@ template = """
           <button type="button" class="btn btn-primary continue" data-ng-click="onContinue()" disabled>Continue</button>
         </div>
         <div ng-switch-when="2" class="col-md-6 col-md-offset-8">
+          <button type="button" class="btn btn-primary next-radio" data-ng-click="onNextRadio()">Select Another Radio</button>
           <button type="button" class="btn btn-default" data-ng-click="onNoCorrespondingFlux()">No Infrared</button>
           <button type="button" class="btn btn-primary done" data-ng-click="onDone()">Done</button>
         </div>

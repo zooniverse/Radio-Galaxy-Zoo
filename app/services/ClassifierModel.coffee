@@ -46,7 +46,10 @@ class ClassifierModel
     
     # Storage for contours to be used for current and next subject
     @subjectContours = []
+    
     @selectedContours = []
+    @allSelectedContours = []
+    
     @annotations = []
     
     # Reading of FITS is async causing contour computation to be async
@@ -145,6 +148,7 @@ class ClassifierModel
     @radioSource = @subject.location.radio
     
     # Clear the user action arrays
+    @allSelectedContours.length = 0
     @selectedContours.length = 0
     @annotations.length = 0
     
@@ -313,8 +317,14 @@ class ClassifierModel
                     .y( (d) -> return factor * d.x)
                     .interpolate("linear")
     
+    # Group all contours
+    group = svg.append("g").attr("class", "contours")
+    
+    # Create defs tag for clip paths
+    group.append("defs").append("clipPath").attr("id", "clip")
+    
     for contour, index in contours
-      svg.append("path")
+      group.append("path")
           .attr("d", pathFn(contour))
           .attr("class", "svg-contour")
           .attr("contourid", index)
@@ -344,6 +354,25 @@ class ClassifierModel
   
   toggleFavorite: ->
     @classification.favorite = if @classification.favorite then false else true
+  
+  getMatch: ->
+    console.log 'getMatch'
+    
+    # Get clip path and selected contours
+    clipPath = d3.select("#clip")
+    contours = d3.selectAll("path.selected")[0]
+    
+    for contour, index in contours
+      bbox = contour.getBBox()
+      
+      # Create clip path definition
+      clipPath.append("rect")
+        .attr("x", bbox.x)
+        .attr("y", bbox.y)
+        .attr("width", bbox.width)
+        .attr("height", bbox.height)
+      # d3.select(contour.parentNode).attr("clip-path", "url(#clip)")
+    d3.select("g.contours").attr("clip-path", "url(#clip)")
   
   # TODO: Remove need to store selected.  Can use DOM to extract the selected.
   addContour: (value) ->
@@ -392,116 +421,6 @@ class ClassifierModel
     
     @classification.annotate(matches)
     @classification.send()
-  
-  # drawCatalogSources: ->
-  #   catalog = @subject.metadata.catalog
-  #   return unless catalog?
-  #   
-  #   bandLookup =
-  #     B: 445
-  #     R: 658
-  #     J: 1220
-  #     H: 1630
-  #     K: 2190
-  #   
-  #   # Setup svg plot
-  #   margin =
-  #     top: 10
-  #     right: 10
-  #     bottom: 40
-  #     left: 40
-  #   
-  #   width = 400 - margin.left - margin.right
-  #   height = 131 - margin.top - margin.bottom
-  #   
-  #   x = d3.scale.linear().range([0, width]).domain([200, 2400])
-  #   y = d3.scale.linear().range([height, 0]).domain([0, 30])
-  #   
-  #   xAxis = d3.svg.axis()
-  #     .scale(x)
-  #     .orient("bottom")
-  #     .ticks(4)
-  #   yAxis = d3.svg.axis()
-  #     .scale(y)
-  #     .orient("left")
-  #     .ticks(4)
-  #   
-  #   sed = d3.select("div.sed").append("svg")
-  #           .attr("width", width + margin.left + margin.right)
-  #           .attr("height", height + margin.top + margin.bottom)
-  #         .append("g")
-  #           .attr("transform", "translate(#{margin.left}, #{margin.top})")
-  #   
-  #   sed.append("g")
-  #       .attr("class", "x axis")
-  #       .attr("transform", "translate(0, #{height})")
-  #       .call(xAxis)
-  #     .append("text")
-  #       .attr("class", "label")
-  #       .attr("x", width)
-  #       .attr("y", -6)
-  #       .style("text-anchor", "end")
-  #       .text("wavelength (nanometer)")
-  #       
-  #   sed.append("g")
-  #       .attr("class", "y axis")
-  #       .call(yAxis)
-  #     .append("text")
-  #       .attr("class", "label")
-  #       .attr("transform", "rotate(-90)")
-  #       .attr("y", 6)
-  #       .attr("dy", ".71em")
-  #       .style("text-anchor", "end")
-  #       .text("magnitude")
-  #       
-  #   # Format the data
-  #   data = []
-  #   for band, wavelength of bandLookup
-  #     datum = {}
-  #     datum['wavelength'] = wavelength
-  #     datum['mag'] = 0
-  #     data.push datum
-  #   
-  #   sed.selectAll(".dot")
-  #       .data(data)
-  #     .enter().append("circle")
-  #       .attr("class", "dot")
-  #       .attr("r", 3.5)
-  #       .attr("cx", (d) -> return x(d.wavelength))
-  #       .attr("cy", (d) -> return y(d.mag))
-  #   
-  #   svg = d3.select("svg")
-  #   factor = @imageDimension / 300
-  #   for object in catalog
-  #     cx = factor * parseFloat(object.x)
-  #     cy = @imageDimension - factor * parseFloat(object.y)
-  #     
-  #     do (object) =>
-  #       svg.append("circle")
-  #           .attr("cx", cx)
-  #           .attr("cy", cy)
-  #           .attr("r", 10)
-  #           .attr("class", "source")
-  #           .on("click", =>
-  #             
-  #             # TODO: Figure out how to update $rootScope.sed
-  #             @$rootScope.$apply( =>
-  #               @showSED = true
-  #             )
-  #             
-  #             # Format the data
-  #             data = []
-  #             for band, wavelength of bandLookup
-  #               datum = {}
-  #               datum['wavelength'] = wavelength
-  #               datum['mag'] = if isNaN(parseFloat(object["#{band}mag"])) then 0 else object["#{band}mag"]
-  #               data.push datum
-  #             
-  #             dots = d3.selectAll(".dot")
-  #                     .data(data, (d) -> return d.wavelength)
-  #                     .transition()
-  #                     .attr("cy", (d) -> return y(d.mag))
-  #           )
 
 
 module.exports = ClassifierModel

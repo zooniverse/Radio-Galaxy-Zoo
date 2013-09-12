@@ -52,9 +52,6 @@ Classifier = ($scope, model) ->
   $scope.onNoFlux = ->
     model.showContours = true
     model.step = 3
-    
-    # # NOTE: This is symatically weird.
-    # model.drawCatalogSources()
   
   $scope.onContinue = ->
     model.step = 2
@@ -62,15 +59,16 @@ Classifier = ($scope, model) ->
   $scope.onNoCorrespondingFlux = ->
     model.showContours = true
     model.step = 3
-    # model.drawCatalogSources()
+  
+  $scope.onNextRadio = ->
+    model.getMatch()
+    model.step = 1
   
   $scope.onDone = ->
     model.showContours = true
     model.step = 3
-    # model.drawCatalogSources()
   
   $scope.onNext = ->
-    
     model.getClassification()
     
     # Request next subject and return to step 1
