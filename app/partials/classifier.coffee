@@ -76,10 +76,10 @@ template = """
           <button type="button" class="btn btn-default no-flux" data-ng-click="onNoFlux()">No flux</button>
           <button type="button" class="btn btn-primary continue" data-ng-click="onContinue()" disabled>Continue</button>
         </div>
-        <div ng-switch-when="2" class="col-md-6 col-md-offset-8">
-          <button type="button" class="btn btn-primary next-radio" data-ng-click="onNextRadio()">Select Another Radio</button>
-          <button type="button" class="btn btn-default" data-ng-click="onNoCorrespondingFlux()">No Infrared</button>
-          <button type="button" class="btn btn-primary done" data-ng-click="onDone()">Done</button>
+        <div ng-switch-when="2">
+          <button type="button" class="btn btn-primary next-radio" data-ng-click="onNextRadio()">Select Another Radio Component</button>
+          <button type="button" class="btn btn-default col-md-offset-3" data-ng-click="onNoCorrespondingFlux()">No Infrared</button>
+          <button type="button" class="btn btn-primary col-med-offset-5 done" data-ng-click="onDone()">Done</button>
         </div>
         <div ng-switch-when="3">
           <button type="button" class="btn btn-default" data-ng-click="onFavorite($event)">Favorite</button>

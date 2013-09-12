@@ -26,6 +26,11 @@ div.contours
     stroke #FFF
     opacity 1
     
+    g.contours
+      g
+        &.selected
+          display none
+    
     path
       stroke-width 1.35px
       opacity 1
@@ -91,45 +96,50 @@ div.contours
         text
           display none
   
-  g
-    opacity 1
+  g.infrared
     
-    circle
-      fill #000
-      stroke #FFF
-      stroke-width 2px
-      cursor move
-      
-      &.handle
-        fill $green
-        fill-opacity 1
-        cursor pointer
-      
-      &.remove
-        display none
-        fill #FFF
-        fill-opacity 1
-        stroke none
-        cursor pointer
-    
-    text
-      display none
-      font-size 11px
-      stroke #FF0000
-      pointer-events none
-    
-    &.hide
-      opacity 0
-    
-    &.active
+    g
+      opacity 1
       
       circle
-        &.annotation
-          stroke $green
+        fill #000
+        stroke #FFF
+        stroke-width 2px
+        cursor move
+        
+        &.handle
+          fill $green
+          fill-opacity 1
+          cursor pointer
         
         &.remove
-          stroke #FFFFFF
-          display block
+          display none
+          fill #FFF
+          fill-opacity 1
+          stroke none
+          cursor pointer
       
       text
-        display block
+        display none
+        font-size 11px
+        stroke #FF0000
+        pointer-events none
+      
+      &.hide
+        opacity 0
+      
+      &.matched
+        display none
+      
+      &.active
+        
+        circle
+          &.annotation
+            stroke $green
+          
+          &.remove
+            stroke #FFFFFF
+            display block
+            
+        text
+          display block

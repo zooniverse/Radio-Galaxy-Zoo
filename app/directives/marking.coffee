@@ -68,21 +68,24 @@ module.exports = ->
           scope.model.updateAnnotation()
         )
       
-      svg = d3.select("svg")
+      # Create group for infrared annotations
+      infraredGroup = d3.select("svg").append("g")
+        .attr("class", "infrared")
       
       g = h = a = c = t = null
       mainDrag = d3.behavior.drag()
         .on("dragstart", ->
           return unless scope.model.step is 2
+          return if scope.model.nCircles is 1
           
-          # Deselect all previously existing groups
-          d3.selectAll("g").attr("class", null)
+          # # Deselect all previously existing groups
+          # d3.selectAll("g.infrared g:not(.matched)").attr("class", null)
           
           x = d3.event.sourceEvent.layerX
           y = d3.event.sourceEvent.layerY
           
           # Create new annotation group
-          g = svg.append("g")
+          g = infraredGroup.append("g")
                 .attr("class", "hide")
                 .attr("transform", "translate(#{x}, #{y})")
           
@@ -110,6 +113,7 @@ module.exports = ->
               .on("mouseup", ->
                 d3.select(this.parentNode).remove()
                 scope.model.updateAnnotation()
+                scope.model.nCircles -= 1
               )
           
           # Create close text
@@ -123,6 +127,7 @@ module.exports = ->
         )
         .on("drag", ->
           return unless scope.model.step is 2
+          return if scope.model.nCircles is 1
           
           x = parseFloat( h.attr("cx") ) + d3.event.dx
           y = parseFloat( h.attr("cy") ) + d3.event.dy
@@ -136,10 +141,12 @@ module.exports = ->
         )
         .on("dragend", ->
           return unless scope.model.step is 2
+          return if scope.model.nCircles is 1
           
           g.remove() if a.attr("r") is "1"
           g = h = a = c = t = null
           scope.model.updateAnnotation()
+          scope.model.nCircles += 1
         )
       
       d3.select(elem[0]).call(mainDrag)

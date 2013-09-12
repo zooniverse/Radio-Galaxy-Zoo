@@ -8,7 +8,7 @@ module.exports = ->
       el.onclick = (e) ->
         
         # Count number of selected contours
-        if scope.model.selectedContours.length > 0
+        if scope.model.selectedContours.length > 0 or scope.model.matches.length > 0
           elem.removeAttr("disabled")
         else
           elem.attr("disabled", "disabled")

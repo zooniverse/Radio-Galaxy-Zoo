@@ -76,6 +76,7 @@ Classifier = ($scope, model) ->
     
     # Remove annotation
     d3.select("div.sed svg").remove()
+    d3.select("g.contours").remove()
     d3.selectAll('path').remove()
     d3.selectAll('circle').remove()
     d3.selectAll('text').remove()

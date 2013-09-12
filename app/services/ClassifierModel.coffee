@@ -47,8 +47,9 @@ class ClassifierModel
     # Storage for contours to be used for current and next subject
     @subjectContours = []
     
+    @nCircles = 0
     @selectedContours = []
-    @allSelectedContours = []
+    @matches = []
     
     @annotations = []
     
@@ -148,7 +149,7 @@ class ClassifierModel
     @radioSource = @subject.location.radio
     
     # Clear the user action arrays
-    @allSelectedContours.length = 0
+    @matches.length = 0
     @selectedContours.length = 0
     @annotations.length = 0
     
@@ -303,45 +304,81 @@ class ClassifierModel
     
     # Reverse the list so that contours are drawn in correct order (largest first)
     @subjectContours.push conrec.contourList().reverse()
+  
+  cluster: (contours) ->
     
+    getBBox = (arr) ->
+      extentX = d3.extent(arr, (d) -> d.x )
+      extentY = d3.extent(arr, (d) -> d.y )
+      return [extentX, extentY]
+    
+    k0contours = []
+    subcontours = []
+    
+    while contours.length
+      contour = contours.shift()
+      if contour.k is "0"
+        k0contours.push contour
+      else
+        subcontours.push contour
+    
+    for k0contour in k0contours
+      group = []
+      
+      [ [xmin, xmax], [ymin, ymax] ] = getBBox(k0contour)
+      
+      for subcontour, index in subcontours
+        
+        # Check only the first point
+        x = subcontour[0].x
+        y = subcontour[0].y
+        if x > xmin and x < xmax and y > ymin and y < ymax
+          group.push subcontour
+      
+      group.push k0contour
+      contours.push group
+  
   drawContours: (contours) ->
+    @cluster contours
+    
     svg = d3.select("svg.svg-contours")
     
-    # Factor is needed because JPGs have been upscaled from
-    # FITS resolution.
-    # NOTE: Number needs updating if image resolution changes.
+    # Factor is needed because JPGs have been upscaled from FITS resolution.
     factor = @imageDimension / 301
-    
     pathFn = d3.svg.line()
-                    .x( (d) -> return factor * d.y)
-                    .y( (d) -> return factor * d.x)
-                    .interpolate("linear")
+                .x( (d) -> return factor * d.y)
+                .y( (d) -> return factor * d.x)
+                .interpolate("linear")
     
-    # Group all contours
-    group = svg.append("g").attr("class", "contours")
+    # Group for all contour groups
+    group = svg.append("g")
+      .attr("class", "contours")
     
-    # Create defs tag for clip paths
-    group.append("defs").append("clipPath").attr("id", "clip")
-    
-    for contour, index in contours
-      group.append("path")
+    for contourGroup, index in contours
+      
+      # Append new contour group
+      g = group.append("g")
+        .attr("class", "contourGroup")
+        .attr("id", "#{index}")
+      
+      for contour in contourGroup
+        path = g.append("path")
           .attr("d", pathFn(contour))
           .attr("class", "svg-contour")
-          .attr("contourid", index)
-          .on("click", =>
-            # TODO: Disable event when past step 1
-            
-            el = d3.select(d3.event.target)
-            classes = el.attr("class")
-            contourid = el.attr("contourid")
-            
-            if classes.indexOf('selected') > -1
-              el.attr("class", "svg-contour")
-              @removeContour(contourid)
-            else
-              el.attr("class", "svg-contour selected")
-              @addContour(contourid)
-          )
+        path.on("click", =>
+          el = d3.select(d3.event.target)
+          classes = el.attr("class")
+          group = d3.select(d3.event.target.parentNode)
+          
+          contourGroupId = group.attr("id")
+          
+          if classes.indexOf('selected') > -1
+            el.attr("class", "svg-contour")
+            @removeContourGroup(contourGroupId)
+          else
+            el.attr("class", "svg-contour selected")
+            @addContourGroup(contourGroupId)
+        )
     
     # TODO: Find better place for this
     # NOTE: Tutorial animation lags due to SVG drawing. Placing tutorial start here
@@ -358,29 +395,32 @@ class ClassifierModel
   getMatch: ->
     console.log 'getMatch'
     
-    # Get clip path and selected contours
-    clipPath = d3.select("#clip")
-    contours = d3.selectAll("path.selected")[0]
+    radio = []
+    while @selectedContours.length
+      id = @selectedContours.shift()
+      group = d3.select("g[id='#{id}']")
+      group.attr("class", "contourGroup selected")
+      path = d3.select("g[id='#{id}'] path.selected").node()
+      radio.push path.getBBox()
     
-    for contour, index in contours
-      bbox = contour.getBBox()
-      
-      # Create clip path definition
-      clipPath.append("rect")
-        .attr("x", bbox.x)
-        .attr("y", bbox.y)
-        .attr("width", bbox.width)
-        .attr("height", bbox.height)
-      # d3.select(contour.parentNode).attr("clip-path", "url(#clip)")
-    d3.select("g.contours").attr("clip-path", "url(#clip)")
+    g = d3.select("g.infrared g:not(.matched)")
+          .attr("class", "matched")
+    
+    @nCircles = 0
+    obj =
+      radio: radio
+      infrared: @annotations.shift()
+    @matches.push obj
   
   # TODO: Remove need to store selected.  Can use DOM to extract the selected.
-  addContour: (value) ->
+  addContourGroup: (value) ->
     @selectedContours.push(value)
+    console.log @selectedContours
     
-  removeContour: (value) ->
+  removeContourGroup: (value) ->
     index = @selectedContours.indexOf(value)
     @selectedContours.splice(index, 1)
+    console.log @selectedContours
   
   # This function is called from the marking directive whenever an annotation
   # changes (e.g. create, move, scale, remove).
@@ -405,21 +445,10 @@ class ClassifierModel
       @annotations.push obj
   
   getClassification: ->
-    # Create array for matches
-    # TODO: Currently multiple matches is not supported in interface.
-    matches = []
-    
-    radio = []
-    contours = d3.selectAll("path.selected")[0]
-    for contour in contours
-      radio.push contour.getBBox()
-    
-    match =
-      radio: radio
-      infrared: @annotations
-    matches.push match
-    
-    @classification.annotate(matches)
+    console.log "matches"
+    for match in @matches
+      console.log match
+    @classification.annotate(@matches)
     @classification.send()
 
 
