@@ -392,7 +392,6 @@ class ClassifierModel
     @classification.favorite = if @classification.favorite then false else true
   
   getMatch: ->
-    console.log 'getMatch'
     
     radio = []
     while @selectedContours.length
@@ -414,12 +413,10 @@ class ClassifierModel
   # TODO: Remove need to store selected.  Can use DOM to extract the selected.
   addContourGroup: (value) ->
     @selectedContours.push(value)
-    console.log @selectedContours
     
   removeContourGroup: (value) ->
     index = @selectedContours.indexOf(value)
     @selectedContours.splice(index, 1)
-    console.log @selectedContours
   
   # This function is called from the marking directive whenever an annotation
   # changes (e.g. create, move, scale, remove).
@@ -444,9 +441,6 @@ class ClassifierModel
       @annotations.push obj
   
   getClassification: ->
-    console.log "matches"
-    for match in @matches
-      console.log match
     @classification.annotate(@matches)
     @classification.send()
 

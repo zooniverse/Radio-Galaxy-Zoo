@@ -12,49 +12,49 @@ module.exports = [
     name: "Melanie Gendre"
     institution: "Jodrell Bank Center for Astrophysics"
     twitter: null
-    bio: "Unapologetic beer geek. Passionate creator. Hipster-friendly travel guru. Reader."
+    bio: null
   },
   {
     name: "Steven Bamford"
     institution: "University of Nottingham"
     twitter: "thebamf"
-    bio: "Devoted internet buff. Web lover. Incurable social media guru. Travel junkie. Bacon geek. Evil coffee ninja. Organizer."
+    bio: null
   },
   {
     name: "Julie Banfield"
     institution: "CSIRO Astronomy and Space Science"
     twitter: null
-    bio: "Alcohol junkie. Hipster-friendly food scholar. Internetaholic. Coffee nerd. Unable to type with boxing gloves on. Zombie practitioner. Travel trailblazer."
+    bio: null
   },
   {
     name: "Tania Burchell"
     institution: "National Radio Astronomy Observatory"
     twitter: null
-    bio: "Troublemaker. Bacon buff. Student. Introvert. Avid music aficionado. Certified beer maven. Gamer."
+    bio: null
   },
   {
     name: "Loretta Dunne"
     institution: "University of Nottingham"
     twitter: null
-    bio: "Analyst. Unapologetic reader. Certified thinker. Web aficionado. Troublemaker. Coffee specialist. Music buff. Hardcore problem solver."
+    bio: null
   },
   {
     name: "Lucy Fortson"
     institution: "University of Minnesota"
     twitter: null
-    bio: "Avid tv maven. Web advocate. Bacon aficionado. Award-winning student. Proud travel practitioner."
+    bio: null
   },
   {
     name: "Samuel George"
     institution: "University of Cambridge"
     twitter: null
-    bio: "Friendly alcohol guru. Social media fanatic. Amateur musicaholic. Proud creator."
+    bio: null
   },
   {
     name: "Ian Heywood"
     institution: "Oxford University"
     twitter: null
-    bio: "Professional introvert. Award-winning writer. Troublemaker. Unapologetic coffee aficionado. Problem solver. Creator."
+    bio: null
   },
   {
     name: "Robert Hollow"
@@ -68,13 +68,13 @@ module.exports = [
     name: "Matt Jarvis"
     institution: "University of Hertfordshire"
     twitter: null
-    bio: "Social media junkie. Internet geek. Lifelong beer nerd. Extreme web ninja. Passionate entrepreneur."
+    bio: null
   },
   {
     name: "Hans-Rainer Klöckner"
     institution: "Max-Planck-Institut für Radioastronomie"
     twitter: null
-    bio: "Travel trailblazer. Music scholar. Bacon enthusiast. Incurable zombie aficionado. Food geek."
+    bio: null
   },
   {
     name: "Chris Lintott"
@@ -86,19 +86,20 @@ module.exports = [
     name: "Vicky Lo"
     institution: "CSIRO Astronomy and Space Space"
     twitter: null
-    bio: "Total introvert. Music expert. Award-winning explorer. Unable to type with boxing gloves on."
+    bio: null
   },
   {
     name: "Minnie Mao"
     institution: "NRAO"
     twitter: null
-    bio: "Alcohol aficionado. Gamer. Social media scholar. Web expert. Friend of animals everywhere."
+    bio: null
   },
   {
     name: "Karen Masters"
-    institution: "University of Portsmouth"
+    title: "Astronomer"
+    institution: "Institute of Cosmology and Gravitation, University of Portsmouth"
     twitter: "KarenLMasters"
-    bio: "Amateur tv fan. Lifelong troublemaker. Gamer. Certified zombie guru. Twitter lover. General organizer. Typical alcoholaholic."
+    bio: "Karen is the Project Scientist for Galaxy Zoo. Her research uses data from large surveys to search for clues as to how galaxies form and evolve - she’s particularly worked on red spirals, and galactic bars in recent years using classifications from Galaxy Zoo. Karen has a background in radio astronomy (her first telescope was Arecibo - http://www.naic.edu/general/) and is really excited to see Galaxy Zoo expand into radio frequencies."
   },
   {
     name: "Enno Middelberg"
@@ -134,13 +135,13 @@ module.exports = [
     name: "Nick Seymour"
     institution: "CSIRO Astronomy and Space Science"
     twitter: null
-    bio: "Bacon geek. General beeraholic. Unable to type with boxing gloves on. Communicator. Evil creator. Reader."
+    bio: null
   },
   {
     name: "Stas Shabala"
     institution: "University of Tasmania"
     twitter: null
-    bio: "Food evangelist. Devoted tv junkie. Beer trailblazer. Evil organizer."
+    bio: null
   },
   {
     name: "Arfon Smith"
@@ -165,9 +166,19 @@ module.exports = [
   },
   {
     name: "Heinz Andernach"
-    institution: "University of Guanajuato"
+    institution: "University of Guanajuato, Mexico"
     twitter: null
-    bio: ""
+    bio: "Heinz has been studying radio galaxies since the late 1970's, mainly those
+    in clusters of galaxies.  Over the past 25 years he has been collecting (or
+    digitizing by himself) the radio source lists of over 2000 different
+    research papers with the aim (still pending) to create the largest
+    public database on celestial radio sources. Recently he supervised two
+    summer students to visually inspect three radio surveys (NVSS, SUMSS and
+    WENSS) that cover the entire sky to search for emission features likely
+    to indicate giant radio galaxies. In only six weeks they were able to
+    duplicate the number of known such objects from 100 to 200, even finding
+    the yet largest of these with a diameter of 19 million light years. He
+    is eager to know what thousands of eyes on the radio sky can reveal."
   }
 ]
   
