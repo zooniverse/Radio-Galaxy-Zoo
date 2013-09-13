@@ -42,7 +42,10 @@ RadioGalaxyZoo = angular.module("radio-galaxy-zoo", [])
 
 # Wacky browser dependent value
 agent = testAgent(navigator.userAgent)
-tutorialContours = if agent.browser is "chrome" then ["8", "9"] else ["7", "8"]
+if agent.browser is "chrome"
+  tutorialContours = [ ["8", "9"], "13", "1"]
+else
+  tutorialContours = [ ["7", "8"], "5", "0"]
 
 RadioGalaxyZoo.constant("tutorialContours", tutorialContours)
 RadioGalaxyZoo.constant("imageDimension", 424)

@@ -2,9 +2,21 @@
 $green = #00FF00
 
 @keyframes pulsate {
-    0% { opacity: 1.0}
+    0% { opacity: 1}
     50% { opacity: 0}
-    100% { opacity: 1.0}
+    100% { opacity: 1}
+}
+
+@keyframes pulsate-and-hide {
+    0% { opacity: 0}
+    50% { opacity: 1}
+    100% { opacity: 0}
+}
+
+@keyframes pulsate-to-white {
+    0% { opacity: 1}
+    50% { opacity: 0}
+    100% { opacity: 1}
 }
 
 
@@ -28,12 +40,20 @@ div.contours
       stroke $green
       cursor pointer
     
-    circle.tutorial.radiate
-      opacity 1
-      animation-name pulsate
+    circle.tutorial
       animation-duration 1s
       animation-timing-function ease-in-out
       animation-iteration-count 2
+      &.pulsate
+        opacity 1
+        animation-name pulsate
+      &.pulsate-and-hide
+        opacity 0
+        animation-name pulsate-and-hide
+        
+        path
+          stroke $green
+          fill-opacity 0.4
     
     g.contours
       transition opacity 200ms linear
@@ -49,7 +69,7 @@ div.contours
             fill-opacity 0.08
         &.matched
           display none
-        &.radiate
+        &.pulsate
           opacity 1
           animation-name pulsate
           animation-duration 1.25s
@@ -59,6 +79,14 @@ div.contours
           path
             stroke $green
             fill-opacity 0.08
+        
+        &.pulsate-to-white
+          opacity 1
+          animation-name pulsate-to-white
+          animation-duration 1.25s
+          animation-timing-function ease-in-out
+          animation-iteration-count 2
+          stroke #FFF
     
     g.infrared
       g
@@ -132,6 +160,8 @@ div.contours
           &.matched
             display block
             stroke $green
+            opacity 0.8
+            
       g.infrared
         g.matched
           circle.annotation
@@ -143,3 +173,19 @@ div.contours
             display none
           text
             display none
+  
+  &.strays
+    svg
+      g.infrared
+        display none
+      g.contours
+        g.contour-group
+          display block
+          stroke $green
+          animation-name pulsate
+          animation-duration 1.25s
+          animation-timing-function ease-in-out
+          animation-iteration-count 2
+          &.matched
+            display none
+          
