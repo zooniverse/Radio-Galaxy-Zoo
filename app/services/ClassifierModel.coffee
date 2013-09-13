@@ -96,8 +96,7 @@ class ClassifierModel
     
     @tutorial = new Tutorial
       id: 'tutorial'
-      firstStep: 'matching3'
-      # firstStep: 'welcome'
+      firstStep: 'welcome'
       steps: TutorialSteps
       parent: document.querySelector(".classifier")
     
