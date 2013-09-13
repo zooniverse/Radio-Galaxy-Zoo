@@ -357,27 +357,27 @@ class ClassifierModel
       
       # Append new contour group
       g = group.append("g")
-        .attr("class", "contourGroup")
+        .attr("class", "contour-group")
         .attr("id", "#{index}")
       
       for contour in contourGroup
         path = g.append("path")
           .attr("d", pathFn(contour))
           .attr("class", "svg-contour")
-        path.on("click", =>
-          el = d3.select(d3.event.target)
-          classes = el.attr("class")
-          group = d3.select(d3.event.target.parentNode)
-          
-          contourGroupId = group.attr("id")
-          
-          if classes.indexOf('selected') > -1
-            el.attr("class", "svg-contour")
-            @removeContourGroup(contourGroupId)
-          else
-            el.attr("class", "svg-contour selected")
-            @addContourGroup(contourGroupId)
-        )
+      
+      # Behavior for clicking on contours
+      g.on("click", =>
+        el = d3.select(d3.event.target.parentNode)
+        classes = el.attr("class")
+        contourGroupId = el.attr("id")
+        
+        if classes.indexOf("selected") > -1
+          el.attr("class", "contour-group")
+          @removeContourGroup(contourGroupId)
+        else
+          el.attr("class", "contour-group selected")
+          @addContourGroup(contourGroupId)
+      )
     
     # TODO: Find better place for this
     # NOTE: Tutorial animation lags due to SVG drawing. Placing tutorial start here
@@ -397,12 +397,13 @@ class ClassifierModel
     while @selectedContours.length
       id = @selectedContours.shift()
       group = d3.select("g[id='#{id}']")
-      group.attr("class", "contourGroup selected")
-      path = d3.select("g[id='#{id}'] path.selected").node()
+      group.attr("class", "contour-group matched")
+      path = d3.select("g[id='#{id}'] path:last-child").node()
       radio.push path.getBBox()
     
-    g = d3.select("g.infrared g:not(.matched)")
-          .attr("class", "matched")
+    # Add matched class to infrared annotation
+    d3.select("g.infrared g:not(.matched)")
+      .attr("class", "matched")
     
     @nCircles = 0
     obj =

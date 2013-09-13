@@ -48,14 +48,14 @@ module.exports =
       addBlock()
       
       for id in tutorial.contours
-        el = d3.select("#svg-contours g[id='#{id}'] path:last-child")
-        el.attr("class", "svg-contour radiate")
+        el = d3.select("#svg-contours g[id='#{id}']")
+        el.attr("class", "contour-group radiate")
     onExit: (tutorial) ->
       removeBlock()
       
       for id in tutorial.contours
-        el = d3.select("#svg-contours g[id='#{id}'] path:last-child")
-        el.attr("class", "svg-contour")
+        el = d3.select("#svg-contours g[id='#{id}']")
+        el.attr("class", "contour-group")
     next: "infrared"
   
   infrared: new Step

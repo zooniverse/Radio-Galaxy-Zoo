@@ -77,11 +77,8 @@ Classifier = ($scope, model) ->
     model.getSubject()
     
     # Remove annotation
-    d3.select("div.sed svg").remove()
     d3.select("g.contours").remove()
-    d3.selectAll('path').remove()
-    d3.selectAll('circle').remove()
-    d3.selectAll('text').remove()
+    d3.selectAll("g.infrared g").remove()
     
     # Update state to first step
     model.step = 1

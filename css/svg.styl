@@ -2,21 +2,18 @@
 $green = #00FF00
 
 @keyframes pulsate {
-    0% { opacity: 0.0}
-    10% { opacity: .20}
-    20% { opacity: .40}
-    30% { opacity: .60}
-    40% { opacity: .80}
-    50% { opacity: 1.0}
-    60% { opacity: .80}
-    70% { opacity: .60}
-    80% { opacity: .40}
-    90% { opacity: .20}
-    100% { opacity: 0.0}
+    0% { opacity: 1.0}
+    50% { opacity: 0}
+    100% { opacity: 1.0}
 }
 
 
 div.contours
+  
+  &.fade-contour
+    svg
+      g.contours
+        opacity 0
   
   svg
     width 100%
@@ -27,119 +24,110 @@ div.contours
     opacity 1
     
     g.contours
-      g
-        &.selected
-          display none
-    
-    path
-      stroke-width 1.35px
-      opacity 1
       transition opacity 200ms linear
       
-      &.selected
-        stroke $green
-        fill-opacity 0.4
-      
-      &.matched
-        opacity 0
-      
-      &.radiate
-        stroke $green
-        fill-opacity 0.4
-        opacity 0
-        
-        animation-name pulsate
-        animation-duration 1s
-        animation-timing-function ease-in-out
-        animation-iteration-count 2
-    
-    circle.source, circle.tutorial
-      stroke-width 2px
-      stroke $green
-      cursor pointer
-    
-    circle.tutorial.radiate
-      opacity 0
-      animation-name pulsate
-      animation-duration 1s
-      animation-timing-function ease-in-out
-      animation-iteration-count 2
-  
-  &.fade-contour
-    svg
-      path
-        opacity 0
-  
-  &.step-2, &.step-3
-    svg
-      path
-        pointer-events none
-        display none
-        stroke-dasharray 5,5
-        
+      g.contour-group
+        path
+          stroke-width 1.35px
+          opacity 1
+          
         &.selected
-          display block
-          fill-opacity 0
-  
-  &.step-3
-    svg
-      g, g.active
-        circle
-          cursor crosshair
-          
-          &.annotation
-            stroke #FFF
-            stroke-dasharray 5,5
-          &.handle, &.remove
-            display none
-            cursor crosshair
-        text
-          display none
-  
-  g.infrared
-    
-    g
-      opacity 1
-      
-      circle
-        fill #000
-        stroke #FFF
-        stroke-width 2px
-        cursor move
-        
-        &.handle
-          fill $green
-          fill-opacity 1
-          cursor pointer
-        
-        &.remove
-          display none
-          fill #FFF
-          fill-opacity 1
-          stroke none
-          cursor pointer
-      
-      text
-        display none
-        font-size 11px
-        stroke #FF0000
-        pointer-events none
-      
-      &.hide
-        opacity 0
-      
-      &.matched
-        display none
-      
-      &.active
-        
-        circle
-          &.annotation
+          path
             stroke $green
+            fill-opacity 0.08
+        &.matched
+          display none
+        &.radiate
+          opacity 1
+          animation-name pulsate
+          animation-duration 1.25s
+          animation-timing-function ease-in-out
+          animation-iteration-count 2
           
+          path
+            stroke $green
+            fill-opacity 0.08
+    
+    g.infrared
+      g
+        opacity 1
+        
+        circle
+          fill #000
+          stroke #FFF
+          stroke-width 2px
+          cursor move
+          
+          &.handle
+            fill $green
+            fill-opacity 1
+            cursor pointer
+            
           &.remove
-            stroke #FFFFFF
-            display block
+            display none
+            fill #FFF
+            fill-opacity 1
+            stroke none
+            cursor pointer
             
         text
-          display block
+          display none
+          font-size 11px
+          stroke #FF0000
+          pointer-events none
+          
+        &.hide
+          opacity 0
+        &.active
+          circle
+            &.annotation
+              stroke $green
+            &.remove
+              stroke #FFFFFF
+              display block
+          text
+            display block
+
+  &.step-2, &.step-3
+    svg
+      g.contours
+        g.contour-group
+          pointer-events none
+          display none
+          
+          &.selected
+            display block
+            path
+              display none
+            path:last-child
+              display block
+              fill-opacity 0
+              stroke-dasharray 5,5
+  
+  &.step-1, &.step-2
+    svg
+      g.infrared
+        g.matched
+          display none
+          
+  &.step-3
+    svg
+      g.contours
+        g.contour-group
+          pointer-events none
+          display none
+          
+          &.matched
+            display block
+            stroke $green
+      g.infrared
+        g.matched
+          circle.annotation
+            stroke #FFF
+            stroke-dasharray 5,5
+          circle.handle
+            display none
+          circle.remove
+            display none
+          text
+            display none
