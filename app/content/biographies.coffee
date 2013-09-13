@@ -40,9 +40,10 @@ module.exports = [
   },
   {
     name: "Lucy Fortson"
+    title: "Astrophysicist"
     institution: "University of Minnesota"
     twitter: null
-    bio: null
+    bio: "Interested in galaxy evolution, black holes and the jets of material beaming from the centers of active galactic nuclei. We need radio galaxy zoo data to help us understand these jets! Started the Zooniverse effort at the Adler Planetarium, now bringing the light to the University of Minnesota. On the odd weekend, when she's not preparing lecture or writing grants, Lucy can be found hanging out with her husband and son at one of Minneapolis' fine dining establishments."
   },
   {
     name: "Samuel George"
