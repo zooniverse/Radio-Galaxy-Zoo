@@ -73,7 +73,7 @@ module.exports =
       # Highlight the host galaxy
       svg = d3.select(".svg-contours")
       svg.append("circle")
-        .attr("class", "tutorial")
+        .attr("class", "tutorial radiate")
         .attr("r", 10)
         .attr("cx", 213)
         .attr("cy", 211)
@@ -102,7 +102,7 @@ module.exports =
       contours = tutorial.contours
       $("#svg-contours").on("click", ->
         
-        ids = d3.selectAll("path.selected")[0].map( (el) -> return d3.select(el.parentNode).attr("id") )
+        ids = d3.selectAll("g.contour-group.selected")[0].map( (el) -> return d3.select(el).attr("id") )
         if contours[0] in ids and contours[1] in ids and ids.length is 2
           buttonEl.removeAttr("disabled")
         else
@@ -128,7 +128,7 @@ module.exports =
       d3.select("circle.tutorial").remove()
     next:
       "mouseup #svg-contours": (e, tutorial, step) ->
-        g = d3.select("g")
+        g = d3.select("g.infrared g")
         transform = g.attr("transform")
         translateRegEx = /translate\((-?\d+), (-?\d+)\)/
         match = transform.match(translateRegEx)

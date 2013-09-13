@@ -23,6 +23,18 @@ div.contours
     stroke #FFF
     opacity 1
     
+    circle.source, circle.tutorial
+      stroke-width 2px
+      stroke $green
+      cursor pointer
+    
+    circle.tutorial.radiate
+      opacity 1
+      animation-name pulsate
+      animation-duration 1s
+      animation-timing-function ease-in-out
+      animation-iteration-count 2
+    
     g.contours
       transition opacity 200ms linear
       
