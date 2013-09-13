@@ -327,8 +327,6 @@ class ClassifierModel
       else
         subcontours.push contour
     
-    # console.log "k0contours", k0contours
-    
     for k0contour in k0contours
       group = []
       
@@ -344,7 +342,6 @@ class ClassifierModel
       
       group.push k0contour
       contours.push group
-    console.log contours
   
   drawContours: (contours) ->
     svg = d3.select("svg.svg-contours")
