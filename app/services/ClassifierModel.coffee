@@ -168,9 +168,9 @@ class ClassifierModel
     image.getFrame(0, (arr) =>
       
       # TESTING: Workers versus main thread computation
-      @getContoursAsync(image.width, image.height, arr, opts)
-      # @getContours(image.width, image.height, arr)
-      # @onGetContours(opts)
+      # @getContoursAsync(image.width, image.height, arr, opts)
+      @getContours(image.width, image.height, arr)
+      @onGetContours(opts)
     )
   
   onGetContours: (opts) =>
@@ -304,7 +304,9 @@ class ClassifierModel
     conrec.contour(data, ilb, iub, jlb, jub, idx, jdx, z.length, z)
     
     # Reverse the list so that contours are drawn in correct order (largest first)
-    @subjectContours.push conrec.contourList().reverse()
+    contours = conrec.contourList().reverse()
+    @cluster contours
+    @subjectContours.push contours
   
   cluster: (contours) ->
     
@@ -318,10 +320,14 @@ class ClassifierModel
     
     while contours.length
       contour = contours.shift()
+      contour.level
+      
       if contour.k is "0"
         k0contours.push contour
       else
         subcontours.push contour
+    
+    # console.log "k0contours", k0contours
     
     for k0contour in k0contours
       group = []
@@ -338,6 +344,7 @@ class ClassifierModel
       
       group.push k0contour
       contours.push group
+    console.log contours
   
   drawContours: (contours) ->
     svg = d3.select("svg.svg-contours")
