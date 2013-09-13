@@ -5,7 +5,7 @@ module.exports = [
     title: "Project Scientist: Astronomer"
     institution: "CSIRO Astronomy and Space Science"
     location: "Australia"
-    twitter: null
+    twitter: "owning_ivy"
     bio: "A science team member of the Galaxy Zoo project whose research interests revolve around what causes galaxies to start and to stop forming stars.  She is interested in galaxies that have suddenly stopped forming stars (aka ‘post-starburst’ galaxies) and blue spheroidal galaxies. Therefore, she is very keen to find out how the massive radio jets emitting from central supermassive black holes affect its host galaxy as well as neighbouring galaxies."
   },
   {
