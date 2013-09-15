@@ -97,7 +97,6 @@ class ClassifierModel
     @tutorial = new Tutorial
       id: 'tutorial'
       firstStep: 'welcome'
-      # firstStep: 'matching6'
       steps: TutorialSteps
       parent: document.querySelector(".classifier")
     
@@ -170,8 +169,6 @@ class ClassifierModel
       
       # TESTING: Workers versus main thread computation
       @getContoursAsync(image.width, image.height, arr, opts)
-      # @getContours(image.width, image.height, arr)
-      # @onGetContours(opts)
     )
   
   onGetContours: (opts) =>
@@ -195,23 +192,14 @@ class ClassifierModel
         @nextRadioSource = @nextSubject.location.radio
       )
   
-  # NOTE: These levels are pre-computed.  They will need to be updated according the science team need.
-  getLevels: (arr) ->
-    return [
-      3.0, 5.196152422706632, 8.999999999999998, 15.588457268119893, 26.999999999999993,
-      46.765371804359674, 80.99999999999997, 140.296115413079, 242.9999999999999,
-      420.88834623923697, 728.9999999999995, 1262.6650387177108, 2186.9999999999986,
-      3787.9951161531317, 6560.9999999999945
-    ]
-  
   getContoursAsync: (width, height, arr, opts) ->
     
     # Define function to be executed on worker thread
     onmessage = (e) ->
       
       # TODO: Update URL for beta site
-      importScripts("http://0.0.0.0:9296/workers/conrec.js")
-      # importScripts("http://radio.galaxyzoo.org/beta/workers/conrec.js")
+      # importScripts("http://0.0.0.0:9296/workers/conrec.js")
+      importScripts("http://radio.galaxyzoo.org/beta/workers/conrec.js")
       
       # Get variables sent from main thread
       width = e.data.width
@@ -326,73 +314,6 @@ class ClassifierModel
     
     worker.postMessage(msg, [arr.buffer])
   
-  getContours: (width, height, arr) ->
-    z = @getLevels()
-    j = height
-    
-    data = []
-    while j--
-      start = j * width
-      data.push arr.subarray(start, start + width)
-      
-    # Set conrec arguments
-    ilb = jlb = 0
-    iub = data.length - 1
-    jub = data[0].length - 1
-    
-    idx = new Uint16Array(data.length)
-    jdx = new Uint16Array(data[0].length)
-    
-    i = j = 0
-    while i < idx.length
-      idx[i] = i + 1
-      i += 1
-    while j < jdx.length
-      jdx[j] = j + 1
-      j += 1
-    
-    conrec = new Conrec()
-    conrec.contour(data, ilb, iub, jlb, jub, idx, jdx, z.length, z)
-    
-    # Reverse the list so that contours are drawn in correct order (largest first)
-    contours = conrec.contourList().reverse()
-    @cluster contours
-    @subjectContours.push contours
-  
-  cluster: (contours) ->
-    
-    getBBox = (arr) ->
-      extentX = d3.extent(arr, (d) -> d.x )
-      extentY = d3.extent(arr, (d) -> d.y )
-      return [extentX, extentY]
-    
-    k0contours = []
-    subcontours = []
-    
-    while contours.length
-      contour = contours.shift()
-      
-      if contour.k is "0"
-        k0contours.push contour
-      else
-        subcontours.push contour
-    
-    for k0contour in k0contours
-      group = []
-      
-      [ [xmin, xmax], [ymin, ymax] ] = getBBox(k0contour)
-      
-      for subcontour, index in subcontours
-        
-        # Check only the first point
-        x = subcontour[0].x
-        y = subcontour[0].y
-        if x > xmin and x < xmax and y > ymin and y < ymax
-          group.push subcontour
-      
-      group.push k0contour
-      contours.push group
-  
   drawContours: (contours) ->
     svg = d3.select("svg.svg-contours")
     
@@ -440,7 +361,6 @@ class ClassifierModel
     setTimeout ( =>
       @tutorial.start() if @hasTutorial
     ), 0
-    
   
   toggleFavorite: ->
     @classification.favorite = if @classification.favorite then false else true
@@ -465,7 +385,6 @@ class ClassifierModel
       infrared: @annotations.shift()
     @matches.push obj
   
-  # TODO: Remove need to store selected.  Can use DOM to extract the selected.
   addContourGroup: (value) ->
     @selectedContours.push(value)
     

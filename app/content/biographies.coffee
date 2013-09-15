@@ -3,7 +3,7 @@ module.exports = [
   {
     name: "Ivy Wong"
     title: "Project Scientist: Astronomer"
-    institution: "CSIRO Astronomy and Space Science"
+    institution: "CSIRO Astronomy and Space Science, Australia"
     location: "Australia"
     twitter: "owning_ivy"
     bio: "A science team member of the Galaxy Zoo project whose research interests revolve around what causes galaxies to start and to stop forming stars.  She is interested in galaxies that have suddenly stopped forming stars (aka ‘post-starburst’ galaxies) and blue spheroidal galaxies. Therefore, she is very keen to find out how the massive radio jets emitting from central supermassive black holes affect its host galaxy as well as neighbouring galaxies."
@@ -22,9 +22,10 @@ module.exports = [
   },
   {
     name: "Julie Banfield"
-    institution: "CSIRO Astronomy and Space Science"
-    twitter: null
-    bio: null
+    title: "Astronomer"
+    institution: "CSIRO Astronomy and Space Science, Australia, Australia"
+    twitter: "42jkb"
+    bio: "Julie is interested in the evolution of radio galaxies and how they impact their surrounding environment as they grow and evolve.  She is excited about Radio Galaxy Zoo as it will provide the necessary link between the radio galaxy and the host galaxy required to solve the puzzle of radio galaxy evolution.  Julie also participates in Scientists in Schools and is keen to get her students and teachers involved in Radio Galaxy Zoo."
   },
   {
     name: "Tania Burchell"
@@ -60,10 +61,10 @@ module.exports = [
   {
     name: "Robert Hollow"
     title: "Astronomy Educator"
-    institution: "CSIRO Astronomy and Space Science"
+    institution: "CSIRO Astronomy and Space Science, Australia"
     location: "Australia"
     twitter: null
-    bio: "Robert is an Education and Outreach specialist with CSIRO Astronomy and Space Science. He is interested in how the public and schools students interact with and interpret radio astronomy data using citizen science. The feedback from this project will help guide the development of future projects utilising the massive data sets from ASKAP and the SKA. He also coordinates the PULSE@Parkes project where students use the Parkes radio telescope to observe pulsars."
+    bio: "Robert is an Education and Outreach specialist with CSIRO Astronomy and Space Science, Australia. He is interested in how the public and schools students interact with and interpret radio astronomy data using citizen science. The feedback from this project will help guide the development of future projects utilising the massive data sets from ASKAP and the SKA. He also coordinates the PULSE@Parkes project where students use the Parkes radio telescope to observe pulsars."
   },
   {
     name: "Matt Jarvis"
@@ -134,7 +135,7 @@ module.exports = [
   },
   {
     name: "Nick Seymour"
-    institution: "CSIRO Astronomy and Space Science"
+    institution: "CSIRO Astronomy and Space Science, Australia"
     twitter: null
     bio: null
   },

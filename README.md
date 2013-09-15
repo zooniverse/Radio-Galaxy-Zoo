@@ -22,8 +22,13 @@
   * Credit Hercules A to NRAO
   * Add Julie Banfield's bio
   * Check Javascript APIs and alert if browser not supported
+    * Web Workers
+    * Blob Constructor
+    * Typed Arrays
+  * Change dragged circle to simple marker
   * Permit multiple IR identifications (limit to 3, 4, 5?)
-
+  * Tutorial not always triggering.
+  
 # Data Preparation
 
     python make_png.py ../data-import/rgz_fits/
