@@ -169,9 +169,9 @@ class ClassifierModel
     image.getFrame(0, (arr) =>
       
       # TESTING: Workers versus main thread computation
-      # @getContoursAsync(image.width, image.height, arr, opts)
-      @getContours(image.width, image.height, arr)
-      @onGetContours(opts)
+      @getContoursAsync(image.width, image.height, arr, opts)
+      # @getContours(image.width, image.height, arr)
+      # @onGetContours(opts)
     )
   
   onGetContours: (opts) =>
@@ -210,8 +210,8 @@ class ClassifierModel
     onmessage = (e) ->
       
       # TODO: Update URL for beta site
-      # importScripts("http://0.0.0.0:9296/workers/conrec.js")
-      importScripts("http://radio.galaxyzoo.org/beta/workers/conrec.js")
+      importScripts("http://0.0.0.0:9296/workers/conrec.js")
+      # importScripts("http://radio.galaxyzoo.org/beta/workers/conrec.js")
       
       # Get variables sent from main thread
       width = e.data.width
@@ -249,8 +249,59 @@ class ClassifierModel
         
       conrec = new Conrec()
       conrec.contour(data, ilb, iub, jlb, jub, idx, jdx, levels.length, levels)
+      contours = conrec.contourList().reverse()
       
-      postMessage( conrec.contourList().reverse() )
+      # Get bounding box for a contour
+      getBBox = (arr) ->
+        i = arr.length - 1
+        
+        lastElement = arr[i--]
+        xmin = xmax = lastElement.x
+        ymin = ymax = lastElement.y
+        
+        while i--
+          x = arr[i].x
+          y = arr[i].y
+          
+          xmin = x if x < xmin
+          xmax = x if x > xmax
+          ymin = y if y < ymin
+          ymax = y if y > ymax
+        
+        return [ [xmin, xmax], [ymin, ymax] ]
+      
+      # 
+      # Cluster contours
+      #
+      
+      k0contours = []
+      subcontours = []
+      
+      while contours.length
+        contour = contours.shift()
+        
+        if contour.k is "0"
+          k0contours.push contour
+        else
+          subcontours.push contour
+          
+      for k0contour in k0contours
+        group = []
+        
+        [ [xmin, xmax], [ymin, ymax] ] = getBBox(k0contour)
+        
+        for subcontour, index in subcontours
+          
+          # Check only the first point
+          x = subcontour[0].x
+          y = subcontour[0].y
+          if x > xmin and x < xmax and y > ymin and y < ymax
+            group.push subcontour
+            
+        group.push k0contour
+        contours.push group
+      
+      postMessage( contours )
     
     # Trick to format function for worker
     fn = onmessage.toString().replace("return postMessage", "postMessage")
@@ -270,7 +321,6 @@ class ClassifierModel
       buffer: arr.buffer
     
     worker.onmessage = (e) =>
-      @cluster e.data
       @subjectContours.push e.data
       @onGetContours(opts)
     
@@ -321,7 +371,6 @@ class ClassifierModel
     
     while contours.length
       contour = contours.shift()
-      contour.level
       
       if contour.k is "0"
         k0contours.push contour

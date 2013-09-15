@@ -43,7 +43,7 @@ module.exports =
   
   radio1: new Step
     number: 2
-    header: "Radio Emissions"
+    header: "Radio Emission"
     details: "This is a radio image containing four strong components of emission."
     attachment: "center top .viewport center -0.12"
     onEnter: ->
@@ -56,7 +56,7 @@ module.exports =
   
   radio2: new Step
     number: 3
-    header: "Radio Emissions"
+    header: "Radio Emission"
     details: "The two large components in the center of the image actually come from the same host galaxy, due to jets of plasma coming from the supermassive black hole."
     attachment: "center top .viewport center -0.12"
     className: "arrow-bottom"
