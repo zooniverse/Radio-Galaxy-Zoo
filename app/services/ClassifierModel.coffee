@@ -65,6 +65,7 @@ class ClassifierModel
     User.on "change", @onUserChange
   
   onUserChange: =>
+    console.log 'onUserChange'
     
     # # SPOOF tutorial flag for testing
     # User.current?.project.tutorial_done = false
