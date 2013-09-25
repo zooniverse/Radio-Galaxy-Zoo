@@ -371,10 +371,12 @@ class ClassifierModel
     radio = []
     while @selectedContours.length
       id = @selectedContours.shift()
+      
       group = d3.select("g[id='#{id}']")
-      group.attr("class", "contour-group matched")
       path = d3.select("g[id='#{id}'] path:last-child").node()
-      radio.push path.getBBox()
+      radio.push path.getBBox() # Get bounding box before hiding element otherwise FF throws error
+      
+      group.attr("class", "contour-group matched")
     
     # Add matched class to infrared annotation
     d3.select("g.infrared g:not(.matched)")
