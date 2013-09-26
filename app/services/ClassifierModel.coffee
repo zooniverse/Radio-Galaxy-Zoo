@@ -82,6 +82,9 @@ class ClassifierModel
     
     @startTutorial()
   
+  getCloudFront: (location) ->
+    return location.replace("radio.galaxyzoo.org.s3.amazonaws.com", "d2wsl82y2jqayq.cloudfront.net")
+  
   # TODO: Preserve tutorial state when ng-view changes
   startTutorial: =>
     @hasTutorial = true
@@ -115,11 +118,11 @@ class ClassifierModel
     @classification = new Classification {@subject}
     
     # Request FITS for first subject
-    new astro.FITS(@subject.location.raw, @onFITS)
+    new astro.FITS( @getCloudFront( @subject.location.raw ), @onFITS)
     
     @$rootScope.$apply( =>
-      @infraredSource = @subject.location.standard
-      @radioSource = @subject.location.radio
+      @infraredSource = @getCloudFront( @subject.location.standard )
+      @radioSource = @getCloudFront( @subject.location.radio )
     )
   
   # Ensure unique subjects are served
@@ -137,17 +140,17 @@ class ClassifierModel
     # Create deferred object to be resolved after contours for next subject are computed.
     dfd = @$q.defer()
     @contourPromise = dfd.promise
-    new astro.FITS(subject.location.raw, @onFITS, {dfd: dfd, subject: subject})
+    new astro.FITS( @getCloudFront( subject.location.raw ), @onFITS, {dfd: dfd, subject: subject})
     
     # Set variable to prefetch images for next subject
-    @nextInfraredSource = @nextSubject.location.standard
-    @nextRadioSource = @nextSubject.location.radio
+    @nextInfraredSource = @getCloudFront( @nextSubject.location.standard )
+    @nextRadioSource = @getCloudFront( @nextSubject.location.radio )
   
   getSubject: ->
     
     @subject = @nextSubject
-    @infraredSource = @subject.location.standard
-    @radioSource = @subject.location.radio
+    @infraredSource = @getCloudFront( @subject.location.standard )
+    @radioSource = @getCloudFront( @subject.location.radio )
     
     # Clear the user action arrays
     @matches.length = 0
@@ -185,12 +188,12 @@ class ClassifierModel
       # Request FITS and precompute contours for next subject
       dfd = @$q.defer()
       @contourPromise = dfd.promise
-      new astro.FITS(@nextSubject.location.raw, @onFITS, {dfd: dfd, subject: @nextSubject})
+      new astro.FITS( @getCloudFront( @nextSubject.location.raw ), @onFITS, {dfd: dfd, subject: @nextSubject})
       
       # Set variable to prefetch images for next subject
       @$rootScope.$apply( =>
-        @nextInfraredSource = @nextSubject.location.standard
-        @nextRadioSource = @nextSubject.location.radio
+        @nextInfraredSource = @getCloudFront( @nextSubject.location.standard )
+        @nextRadioSource = @getCloudFront( @nextSubject.location.radio )
       )
   
   getContoursAsync: (width, height, arr, opts) ->
