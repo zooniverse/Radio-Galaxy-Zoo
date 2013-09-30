@@ -16,18 +16,23 @@
   * Bolder contours on example images
   * Add "Tutorial" button to trigger tutorial whenever
   * Back button?
-  * Remove "Radio Emissions" from tutorial language
   * Position tutorial box in less obtrusive place
   * Set up Google Analytics
   * Credit Hercules A to NRAO
-  * Add Julie Banfield's bio
   * Check Javascript APIs and alert if browser not supported
     * Web Workers
     * Blob Constructor
     * Typed Arrays
   * Change dragged circle to simple marker
   * Permit multiple IR identifications (limit to 3, 4, 5?)
-  * Tutorial not always triggering.
+  
+# BUGS
+  
+  * Home page formatting hides image if screen width is too small
+  * Tutorial doesn't always trigger when going to classify page from another page.
+    This is because the DOM element doesn't exist!
+  * Classification page needs better formatting for smaller devices
+  
   
 # Data Preparation
 

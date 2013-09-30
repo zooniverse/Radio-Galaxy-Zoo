@@ -80,23 +80,23 @@ class ClassifierModel
         Subject.fetch()
         return
     
-    @startTutorial()
-  
-  getCloudFront: (location) ->
-    return location.replace("radio.galaxyzoo.org.s3.amazonaws.com", "d2wsl82y2jqayq.cloudfront.net")
-  
-  # TODO: Preserve tutorial state when ng-view changes
-  startTutorial: =>
-    @hasTutorial = true
-    
     # Clear subjects before fetch
     Subject.instances?.length = 0
     
     # Create tutorial subject and fetch
     subject = require "../content/tutorial_subject"
     @classification = new Classification {subject}
-    
     Subject.fetch()
+    
+    @startTutorial()
+  
+  # Testing AWS CloudFront
+  getCloudFront: (location) ->
+    return location.replace("radio.galaxyzoo.org.s3.amazonaws.com", "d2wsl82y2jqayq.cloudfront.net")
+  
+  # TODO: Preserve tutorial state when ng-view changes
+  startTutorial: =>
+    @hasTutorial = true
     
     @tutorial = new Tutorial
       id: 'tutorial'
@@ -202,8 +202,8 @@ class ClassifierModel
     onmessage = (e) ->
       
       # TODO: Update URL for beta site
-      # importScripts("http://0.0.0.0:9296/workers/conrec.js")
-      importScripts("http://radio.galaxyzoo.org/beta/workers/conrec.js")
+      importScripts("http://0.0.0.0:9296/workers/conrec.js")
+      # importScripts("http://radio.galaxyzoo.org/beta/workers/conrec.js")
       
       # Get variables sent from main thread
       width = e.data.width
