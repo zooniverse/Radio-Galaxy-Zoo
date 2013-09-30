@@ -94,7 +94,6 @@ class ClassifierModel
   getCloudFront: (location) ->
     return location.replace("radio.galaxyzoo.org.s3.amazonaws.com", "d2wsl82y2jqayq.cloudfront.net")
   
-  # TODO: Preserve tutorial state when ng-view changes
   startTutorial: =>
     @hasTutorial = true
     

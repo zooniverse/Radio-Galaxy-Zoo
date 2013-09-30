@@ -87,6 +87,17 @@ topBar = new zooniverse.controllers.TopBar
 zooniverse.models.User.fetch()
 topBar.el.appendTo 'body'
 
+# Check for necessary APIs
+checkDataView = window.DataView?
+checkBlob = window.Blob?
+checkWorker = window.Worker?
+checkURL = window.URL or window.webkitURL
+checkTypedArray = window.Uint8Array?
+
+check = checkDataView and checkBlob and checkWorker and checkURL and checkTypedArray
+unless check
+  alert "Sorry, but your browser is not supported."
+
 # Configure routes
 RadioGalaxyZoo.config(['$routeProvider', ($routeProvider) ->
   
