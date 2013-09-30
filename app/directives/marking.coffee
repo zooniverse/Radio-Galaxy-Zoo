@@ -7,10 +7,24 @@ module.exports = ->
       # Regular expression for capturing group translation
       translateRegEx = /translate\((-?\d+), (-?\d+)\)/
       
-      # Drag callback to move annotation
-      dragmove = ->
-        g = d3.select(this)
-        transform = g.attr("transform")
+      svg = d3.select("svg.svg-contours")
+      console.log svg
+      
+      # Create group for infrared annotations
+      infraredGroup = d3.select("svg").append("g")
+        .attr("class", "infrared")
+      
+      # Define drag callback to move the annotation
+      onAnnotationDragStart = ->
+        d3.event.sourceEvent.stopPropagation()
+        return unless scope.model.step is 2
+      
+      onAnnotationDrag = ->
+        d3.event.sourceEvent.stopPropagation()
+        return unless scope.model.step is 2
+        
+        group = d3.select(this)
+        transform = group.attr("transform")
         match = transform.match(translateRegEx)
         
         x = parseInt match[1]
@@ -18,136 +32,38 @@ module.exports = ->
         
         x += d3.event.dx
         y += d3.event.dy
-        g.attr("transform", "translate(#{x}, #{y})")
-      
-      # Drag callback to scale annotation
-      dragscale = ->
-        x = d3.event.x
-        y = d3.event.y
-        
-        h = d3.select(this)
-                  .attr("cx", x)
-                  .attr("cy", y)
-        
-        sibling = h.node().previousSibling
-        a = d3.select(sibling)
-        a.attr("r", Math.sqrt(x * x + y * y))
+        group.attr("transform", "translate(#{x}, #{y})")
       
       move = d3.behavior.drag()
-        .on("dragstart", ->
-          return unless scope.model.step is 2
-          
-          d3.event.sourceEvent.stopPropagation()
-          group = d3.select(this)
-          
-          this.initialX = d3.event.sourceEvent.x
-          this.initialY = d3.event.sourceEvent.y
-        )
-        .on("drag", dragmove)
-        .on("dragend", ->
-          # Toggle active state if group did not move
-          if this.initialX is d3.event.sourceEvent.x and
-             this.initialY is d3.event.sourceEvent.y
-            group = d3.select(this)
-            isActive = group.attr("class")
-            if isActive?
-              group.attr("class", null)
-            else
-              group.attr("class", "active")
-            
-          scope.model.updateAnnotation()
-        )
+        .on("dragstart", onAnnotationDragStart)
+        .on("drag", onAnnotationDrag)
       
-      scale = d3.behavior.drag()
-        .on("dragstart", ->
-          return unless scope.model.step is 2
-          d3.event.sourceEvent.stopPropagation()
-        )
-        .on("drag", dragscale)
-        .on("dragend", ->
-          scope.model.updateAnnotation()
-        )
+      dx = dy = null
+      onDragStart = ->
+        return unless scope.model.step is 2
+        # return if scope.model.nCircles is 1
+        dx = d3.event.sourceEvent.layerX
+        dy = d3.event.sourceEvent.layerY
       
-      # Create group for infrared annotations
-      infraredGroup = d3.select("svg").append("g")
-        .attr("class", "infrared")
+      onDragEnd = ->
+        x = d3.event.sourceEvent.layerX
+        y = d3.event.sourceEvent.layerY
+        dx -= x
+        dy -= y
+        
+        if dx is 0 and dy is 0
+          group = infraredGroup.append("g")
+            .attr("transform", "translate(#{x}, #{y})")
+          circle = group.append("circle")
+                    .attr("class", "annotation")
+                    .attr("cx", 0)
+                    .attr("cy", 0)
+                    .attr("r", 10)
+          group.call(move)
       
-      g = h = a = c = t = null
-      mainDrag = d3.behavior.drag()
-        .on("dragstart", ->
-          return unless scope.model.step is 2
-          return if scope.model.nCircles is 1
-          
-          # # Deselect all previously existing groups
-          # d3.selectAll("g.infrared g:not(.matched)").attr("class", null)
-          
-          x = d3.event.sourceEvent.layerX
-          y = d3.event.sourceEvent.layerY
-          
-          # Create new annotation group
-          g = infraredGroup.append("g")
-                .attr("class", "hide")
-                .attr("transform", "translate(#{x}, #{y})")
-          
-          # Create the annotation
-          a = g.append("circle")
-              .attr("class", "annotation")
-              .attr("r", 1)
-              .attr("cx", 0)
-              .attr("cy", 0)
-          
-          # Create the annotation handle
-          h = g.append("circle")
-              .attr("class", "handle")
-              .attr("r", 6)
-              .attr("cx", 0)
-              .attr("cy", 0)
-          
-          # Create the annotation close
-          c = g.append("circle")
-              .attr("class", "remove")
-              .attr("r", "6")
-              .attr("cx", "0")
-              .attr("cy", "0")
-              .on("mousedown", -> d3.event.stopPropagation() )
-              .on("mouseup", ->
-                d3.select(this.parentNode).remove()
-                scope.model.updateAnnotation()
-                scope.model.nCircles -= 1
-              )
-          
-          # Create close text
-          t = g.append("text")
-                .text("x")
-                .attr("x", -3)
-                .attr("y", 3)
-          
-          h.call(scale)
-          g.call(move)
-        )
-        .on("drag", ->
-          return unless scope.model.step is 2
-          return if scope.model.nCircles is 1
-          
-          x = parseFloat( h.attr("cx") ) + d3.event.dx
-          y = parseFloat( h.attr("cy") ) + d3.event.dy
-          
-          h.attr("cx", x)
-          h.attr("cy", y)
-          
-          r = Math.sqrt(x * x + y * y)
-          g.attr("class", "active") if r > 2
-          a.attr("r", r)
-        )
-        .on("dragend", ->
-          return unless scope.model.step is 2
-          return if scope.model.nCircles is 1
-          
-          g.remove() if a.attr("r") is "1"
-          g = h = a = c = t = null
-          scope.model.updateAnnotation()
-          scope.model.nCircles += 1
-        )
+      create = d3.behavior.drag()
+        .on("dragstart", onDragStart)
+        .on("dragend", onDragEnd)
       
-      d3.select(elem[0]).call(mainDrag)
+      svg.call(create)
   }

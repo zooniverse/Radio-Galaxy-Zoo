@@ -18,10 +18,6 @@
   * Back button?
   * Position tutorial box in less obtrusive place
   * Set up Google Analytics
-  * Check Javascript APIs and alert if browser not supported
-    * Web Workers
-    * Blob Constructor
-    * Typed Arrays
   * Change dragged circle to simple marker
   * Permit multiple IR identifications (limit to 3, 4, 5?)
   
