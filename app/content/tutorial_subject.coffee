@@ -26,14 +26,14 @@ module.exports =
     id: "520be919e4bb21ddd30003bb"
     project_id: "520be12ce4bb21ddcd000001"
     workflow_ids: ["520be12ce4bb21ddcd000002"]
-    location:
-      standard: "http://0.0.0.0:9296/subjects/standard/S1110.jpg"
-      radio: "http://0.0.0.0:9296/subjects/radio/S1110.jpg"
-      raw: "//0.0.0.0:9296/subjects/raw/S1110.fits"
     # location:
-    #   standard: "http://radio.galaxyzoo.org.s3.amazonaws.com/beta/subjects/standard/S1110.jpg"
-    #   radio: "http://radio.galaxyzoo.org.s3.amazonaws.com/beta/subjects/radio/S1110.jpg"
-    #   raw: "//radio.galaxyzoo.org.s3.amazonaws.com/beta/subjects/raw/S1110.fits.gz"
+    #   standard: "http://0.0.0.0:9296/subjects/standard/S1110.jpg"
+    #   radio: "http://0.0.0.0:9296/subjects/radio/S1110.jpg"
+    #   raw: "//0.0.0.0:9296/subjects/raw/S1110.fits"
+    location:
+      standard: "http://radio.galaxyzoo.org.s3.amazonaws.com/beta/subjects/standard/S1110.jpg"
+      radio: "http://radio.galaxyzoo.org.s3.amazonaws.com/beta/subjects/radio/S1110.jpg"
+      raw: "//radio.galaxyzoo.org.s3.amazonaws.com/beta/subjects/raw/S1110.fits.gz"
     coords: [8.27627083333, -43.17495]
     metadata:
       src: "S1110"

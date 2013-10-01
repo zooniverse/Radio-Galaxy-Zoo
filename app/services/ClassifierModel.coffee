@@ -201,8 +201,8 @@ class ClassifierModel
     onmessage = (e) ->
       
       # TODO: Update URL for beta site
-      importScripts("http://0.0.0.0:9296/workers/conrec.js")
-      # importScripts("http://radio.galaxyzoo.org/beta/workers/conrec.js")
+      # importScripts("http://0.0.0.0:9296/workers/conrec.js")
+      importScripts("http://radio.galaxyzoo.org/beta2/workers/conrec.js")
       
       # Get variables sent from main thread
       width = e.data.width

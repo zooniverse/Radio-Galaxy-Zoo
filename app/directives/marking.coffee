@@ -8,7 +8,6 @@ module.exports = ->
       translateRegEx = /translate\((-?\d+), (-?\d+)\)/
       
       svg = d3.select("svg.svg-contours")
-      console.log svg
       
       # Create group for infrared annotations
       infraredGroup = d3.select("svg").append("g")
