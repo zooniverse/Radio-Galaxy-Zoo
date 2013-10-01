@@ -38,13 +38,26 @@ module.exports = ->
         .on("drag", onAnnotationDrag)
       
       dx = dy = null
+      img = document.querySelector("img.infrared")
+      img = angular.element(img)
+      elem = document.querySelector("input.image-opacity")
+      
       onDragStart = ->
+        img.addClass("no-transition")
+        
         return unless scope.model.step is 2
         # return if scope.model.nCircles is 1
         dx = d3.event.sourceEvent.layerX
         dy = d3.event.sourceEvent.layerY
       
+      onDrag = ->
+        value = parseFloat( elem.value ) + d3.event.dx / 200
+        elem.value = value
+        img.css("opacity", value)
+      
       onDragEnd = ->
+        img.removeClass("no-transition")
+        
         x = d3.event.sourceEvent.layerX
         y = d3.event.sourceEvent.layerY
         dx -= x
@@ -62,6 +75,7 @@ module.exports = ->
       
       create = d3.behavior.drag()
         .on("dragstart", onDragStart)
+        .on("drag", onDrag)
         .on("dragend", onDragEnd)
       
       svg.call(create)
