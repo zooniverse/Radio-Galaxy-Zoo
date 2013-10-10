@@ -1,6 +1,6 @@
 template = """
 <div class='team' data-ng-controller="TeamCtrl">
-  <h3>The Radio Galaxy Zoo Team</h3>
+  <h2>The Radio Galaxy Zoo Team</h2>
   
   <div ng-repeat="index in getTeamLength()">
     <div ng-if="$index % 3 == 0" class="row">
