@@ -87,6 +87,9 @@ topBar = new zooniverse.controllers.TopBar
 zooniverse.models.User.fetch()
 topBar.el.appendTo 'body'
 
+footer = new zooniverse.controllers.Footer
+footer.el.appendTo '#footer'
+
 # Check for necessary APIs
 checkDataView = window.DataView?
 checkBlob = window.Blob?
