@@ -2,17 +2,18 @@
 template = """
 <div class="classifier row" data-ng-controller="ClassifierCtrl">
   
-  <div class="viewport col-md-5">
-    <img data-ng-src="{{ getRadioSource() }}">
-    <img class="infrared" data-ng-src="{{ getInfraredSource() }}">
-    
-    <div id="svg-contours" class='contours marking step-{{getStep()}}' ng-class="{'fade-contour': !getShowContours()}">
-      <svg xmlns="http://www.w3.org/2000/svg" class="svg-contours"></svg>
+  <div class="col-md-6">
+    <div class="viewport">
+      <img data-ng-src="{{ getRadioSource() }}">
+      <img class="infrared" data-ng-src="{{ getInfraredSource() }}">
+      
+      <div id="svg-contours" class='contours marking step-{{getStep()}}' ng-class="{'fade-contour': !getShowContours()}">
+        <svg xmlns="http://www.w3.org/2000/svg" class="svg-contours"></svg>
+      </div>
     </div>
-    
   </div>
   
-  <div class="workflow col-md-6 col-md-offset-1">
+  <div class="workflow col-md-6">
     
     <div class="row controls">
       <div class="image-slider col-md-6">
@@ -41,11 +42,11 @@ template = """
     </div>
     
     <div class='examples row'>
-      <div class="row">
+      <div class="row example-selection">
         <p class="col-md-2">Examples:</p>
-        <span class="col-md-4 example" ng-class="{'active': getExample()=='single-compact-source'}" data-type="single-compact-source">Single Compact Source</span>
-        <span class="col-md-3 example" ng-class="{'active': getExample()=='multiple-sources'}" data-type="multiple-sources">Multiple Sources</span>
-        <span class="col-md-3 example" ng-class="{'active': getExample()=='extended-source'}" data-type="extended-source">Extended Source</span>          
+        <span class="col-md-4 example" ng-class="{'active': getExample()=='single-compact-source'}" data-type="single-compact-source">Single Compact Srcs</span>
+        <span class="col-md-3 example" ng-class="{'active': getExample()=='multiple-sources'}" data-type="multiple-sources">Multiple Srcs</span>
+        <span class="col-md-3 example" ng-class="{'active': getExample()=='extended-source'}" data-type="extended-source">Extended Srcs</span>          
       </div>
       
       <div class="row content" ng-show=getExample()=="single-compact-source">
@@ -72,8 +73,8 @@ template = """
     
     <div class='buttons row step-{{getStep()}}'>
       <div ng-switch on="getStep()">
-        <div ng-switch-when="1" class="col-md-6 col-md-offset-8">
-          <button type="button" class="btn btn-default no-flux" data-ng-click="onNoFlux()">No flux</button>
+        <div ng-switch-when="1" class="col-md-6 col-md-offset-6">
+          <button type="button" class="btn btn-default no-flux" data-ng-click="onNoFlux()">Nothing here</button>
           <button type="button" class="btn btn-primary continue" data-ng-click="onContinue()" disabled>Continue</button>
         </div>
         <div ng-switch-when="2">
