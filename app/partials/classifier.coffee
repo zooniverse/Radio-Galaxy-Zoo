@@ -74,8 +74,7 @@ template = """
     <div class='buttons row step-{{getStep()}}'>
       <div ng-switch on="getStep()">
         <div ng-switch-when="1" class="col-xs-12">
-          <button type="button" class="btn btn-default no-flux" data-ng-click="onNoFlux()">Nothing here</button>
-          <button type="button" class="btn btn-primary continue" data-ng-click="onContinue()" disabled>Continue</button>
+          <button type="button" class="btn btn-primary continue" data-ng-click="onContinue()" ng-disabled=getIsDisabled()>Continue</button>
         </div>
         <div ng-switch-when="2">
           <button type="button" class="btn btn-primary next-radio" data-ng-click="onNextRadio()">Select Another Radio Complex</button>

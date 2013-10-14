@@ -27,6 +27,8 @@ class ClassifierModel
     @step = 1
     @showSED = false
     @example = 'single-compact-source'
+    @isDisabled = true
+    
     @hasTutorial = false
     
     # Boolean to check if on initial subject
@@ -92,11 +94,11 @@ class ClassifierModel
   
   # Testing AWS CloudFront
   getCloudFront: (location) ->
-    return location
-    # return location.replace("radio.galaxyzoo.org.s3.amazonaws.com", "d3hpovx9a6vlyh.cloudfront.net")
+    return location.replace("radio.galaxyzoo.org.s3.amazonaws.com", "d3hpovx9a6vlyh.cloudfront.net")
   
   startTutorial: =>
     @hasTutorial = true
+    return
     
     @tutorial = new Tutorial
       id: 'tutorial'
@@ -357,6 +359,8 @@ class ClassifierModel
           el.attr("class", "contour-group selected")
           @addContourGroup(contourGroupId)
       )
+    
+    @isDisabled = false
     
     # TODO: Find better place for this
     # NOTE: Tutorial animation lags due to SVG drawing. Placing tutorial start here

@@ -24,6 +24,8 @@ Classifier = ($scope, model) ->
     return model.nextRadioSource
   $scope.getExample = ->
     return model.example
+  $scope.getIsDisabled = ->
+    return model.isDisabled
   
   #
   # Recover last state
@@ -49,10 +51,6 @@ Classifier = ($scope, model) ->
   #       This needs to be done because the controller is stateless
   #       so it cannot recover without the model.
   
-  $scope.onNoFlux = ->
-    model.showContours = true
-    model.step = 3
-  
   $scope.onContinue = ->
     model.step = 2
   
@@ -68,6 +66,7 @@ Classifier = ($scope, model) ->
   $scope.onDone = ->
     model.getMatch()
     model.showContours = true
+    model.ready = false
     model.step = 3
   
   $scope.onNext = ->

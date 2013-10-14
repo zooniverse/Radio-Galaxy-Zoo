@@ -22,7 +22,6 @@ TeamCtrl  = require './controllers/team'
 
 # Import directives
 ImageOpacityDirective = require './directives/image_opacity'
-ContinueBtnDirective  = require './directives/continue_button'
 MarkingDirective      = require './directives/marking'
 ToggleContoursDirective  = require './directives/toggle_contours'
 ExampleDirective      = require './directives/example'
@@ -60,7 +59,6 @@ RadioGalaxyZoo.controller('TeamCtrl', ["$scope", TeamCtrl])
 # Directives
 RadioGalaxyZoo.directive('imageOpacity', ImageOpacityDirective)
 RadioGalaxyZoo.directive('marking', MarkingDirective)
-RadioGalaxyZoo.directive('continue', ContinueBtnDirective)
 RadioGalaxyZoo.directive('toggleContours', ToggleContoursDirective)
 RadioGalaxyZoo.directive('example', ExampleDirective)
 
