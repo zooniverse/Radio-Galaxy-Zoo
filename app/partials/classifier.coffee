@@ -45,8 +45,8 @@ template = """
       <div class="row example-selection">
         <p class="col-xs-2">Examples:</p>
         <span class="col-xs-4 example" ng-class="{'active': getExample()=='single-compact-source'}" data-type="single-compact-source">Single Compact Srcs</span>
-        <span class="col-xs-3 example" ng-class="{'active': getExample()=='multiple-sources'}" data-type="multiple-sources">Multiple Srcs</span>
         <span class="col-xs-3 example" ng-class="{'active': getExample()=='extended-source'}" data-type="extended-source">Extended Srcs</span>          
+        <span class="col-xs-3 example" ng-class="{'active': getExample()=='multiple-sources'}" data-type="multiple-sources">Multiple Srcs</span>
       </div>
       
       <div class="row content" ng-show=getExample()=="single-compact-source">

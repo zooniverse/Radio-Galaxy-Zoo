@@ -43,10 +43,9 @@ module.exports = ->
       elem = document.querySelector("input.image-opacity")
       
       onDragStart = ->
-        img.addClass("no-transition")
-        
         return unless scope.model.step is 2
-        # return if scope.model.nCircles is 1
+        
+        img.addClass("no-transition")
         dx = d3.event.sourceEvent.layerX
         dy = d3.event.sourceEvent.layerY
       
