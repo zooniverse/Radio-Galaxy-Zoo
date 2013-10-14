@@ -98,7 +98,6 @@ class ClassifierModel
   
   startTutorial: =>
     @hasTutorial = true
-    return
     
     @tutorial = new Tutorial
       id: 'tutorial'
@@ -351,6 +350,7 @@ class ClassifierModel
         el = d3.select(d3.event.target.parentNode)
         classes = el.attr("class")
         contourGroupId = el.attr("id")
+        console.log "contourGroupId", contourGroupId
         
         if classes.indexOf("selected") > -1
           el.attr("class", "contour-group")
@@ -366,6 +366,7 @@ class ClassifierModel
     # NOTE: Tutorial animation lags due to SVG drawing. Placing tutorial start here
     #       allows drawing to complete before rendering tutorial. Also needed because
     #       tutorial depends on contours already having been drawn.
+    # TODO: setImmediate?
     setTimeout ( =>
       @tutorial.start() if @hasTutorial
     ), 0
