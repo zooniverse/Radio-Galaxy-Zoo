@@ -26,6 +26,8 @@ Classifier = ($scope, model) ->
     return model.example
   $scope.getIsDisabled = ->
     return model.isDisabled
+  $scope.getAnnotationCount = ->
+    return if model.annotations.length > 0 then true else false
   
   #
   # Recover last state

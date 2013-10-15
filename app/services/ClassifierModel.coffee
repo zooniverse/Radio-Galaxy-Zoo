@@ -405,11 +405,11 @@ class ClassifierModel
     
     for annotation in d3.selectAll("circle.annotation")[0]
       circle = d3.select(annotation)
-      parent = d3.select(circle.node().parentNode)
+      group = d3.select(circle.node().parentNode)
       
       # TODO: Generalize function for getting transform coordinates
       #       it's now been written in three separate places in code
-      transform = parent.attr("transform")
+      transform = group.attr("transform")
       match = transform.match(translateRegEx)
       
       obj =
@@ -418,6 +418,7 @@ class ClassifierModel
         y: match[2]
       
       @annotations.push obj
+    @$rootScope.$apply()
   
   getClassification: ->
     @classification.annotate(@matches)

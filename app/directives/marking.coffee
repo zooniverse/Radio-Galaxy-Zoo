@@ -18,6 +18,7 @@ module.exports = ->
       onAnnotationDragStart = ->
         d3.event.sourceEvent.stopPropagation()
         return unless scope.model.step is 2
+        
         groupdx = d3.event.sourceEvent.clientX
         groupdy = d3.event.sourceEvent.clientY
       
@@ -83,7 +84,7 @@ module.exports = ->
         if dx is 0 and dy is 0
           group = infraredGroup.append("g")
             .attr("transform", "translate(#{x}, #{y})")
-            .attr("class", "")
+            .attr("class", "")  # Need to specify empty class for above interaction
           circle = group.append("circle")
                     .attr("class", "annotation")
                     .attr("cx", 0)
@@ -104,6 +105,7 @@ module.exports = ->
                     .attr("x", -13.4)
                     .attr("y", -6.5)
           group.call(move)
+          scope.model.updateAnnotation()
       
       create = d3.behavior.drag()
         .on("dragstart", onDragStart)
