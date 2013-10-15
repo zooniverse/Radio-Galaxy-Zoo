@@ -14,9 +14,12 @@ module.exports = ->
         .attr("class", "infrared")
       
       # Define drag callback to move the annotation
+      groupdx = groupdy = null
       onAnnotationDragStart = ->
         d3.event.sourceEvent.stopPropagation()
         return unless scope.model.step is 2
+        groupdx = d3.event.sourceEvent.clientX
+        groupdy = d3.event.sourceEvent.clientY
       
       onAnnotationDrag = ->
         d3.event.sourceEvent.stopPropagation()
@@ -33,9 +36,24 @@ module.exports = ->
         y += d3.event.dy
         group.attr("transform", "translate(#{x}, #{y})")
       
+      onAnnotationDragEnd = ->
+        d3.event.sourceEvent.stopPropagation()
+        return unless scope.model.step is 2
+        
+        group = d3.select(this)
+        groupdx -= d3.event.sourceEvent.clientX
+        groupdy -= d3.event.sourceEvent.clientY
+        
+        if groupdx is 0 and groupdy is 0
+          classList = group.attr("class")
+          
+          state = if classList.indexOf("active") > -1 then false else true
+          group.classed("active", state)
+      
       move = d3.behavior.drag()
         .on("dragstart", onAnnotationDragStart)
         .on("drag", onAnnotationDrag)
+        .on("dragend", onAnnotationDragEnd)
       
       dx = dy = null
       img = document.querySelector("img.infrared")
@@ -65,6 +83,7 @@ module.exports = ->
         if dx is 0 and dy is 0
           group = infraredGroup.append("g")
             .attr("transform", "translate(#{x}, #{y})")
+            .attr("class", "")
           circle = group.append("circle")
                     .attr("class", "annotation")
                     .attr("cx", 0)
