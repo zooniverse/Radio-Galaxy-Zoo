@@ -49,7 +49,6 @@ class ClassifierModel
     # Storage for contours to be used for current and next subject
     @subjectContours = []
     
-    @nCircles = 0
     @selectedContours = []
     @matches = []
     
@@ -171,8 +170,6 @@ class ClassifierModel
   onFITS: (f, opts) =>
     image = f.getDataUnit(0)
     image.getFrame(0, (arr) =>
-      
-      # TESTING: Workers versus main thread computation
       @getContoursAsync(image.width, image.height, arr, opts)
     )
   
@@ -202,7 +199,6 @@ class ClassifierModel
     # Define function to be executed on worker thread
     onmessage = (e) ->
       
-      # TODO: Update URL for beta site
       # importScripts("http://0.0.0.0:9296/workers/conrec.js")
       importScripts("http://radio.galaxyzoo.org/beta2/workers/conrec.js")
       
@@ -350,7 +346,6 @@ class ClassifierModel
         el = d3.select(d3.event.target.parentNode)
         classes = el.attr("class")
         contourGroupId = el.attr("id")
-        console.log "contourGroupId", contourGroupId
         
         if classes.indexOf("selected") > -1
           el.attr("class", "contour-group")
@@ -390,7 +385,6 @@ class ClassifierModel
     d3.select("g.infrared g:not(.matched)")
       .attr("class", "matched")
     
-    @nCircles = 0
     obj =
       radio: radio
       infrared: @annotations.shift()

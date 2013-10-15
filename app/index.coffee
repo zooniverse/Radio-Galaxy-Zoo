@@ -74,7 +74,7 @@ if window.location.hostname in ["0.0.0.0", "radio.galaxyzoo.org"]
     path: '/proxy'
 else
   # new Analytics
-  #   account: "UA-XXXXXXX-XX"
+  #   account: "UA-1224199-49"
   
   api = new zooniverse.Api
     project: 'radio'

@@ -62,19 +62,19 @@ module.exports =
       ), 3000
     onExit: (tutorial) ->
       enableButtons()
-    next: (e, tutorial, step) ->
-      console.log "HERE", e, tutorial, step
-      
-      buttonEl = angular.element( document.querySelector("button.continue") )
-      contours = tutorial.contours[0]
-      
-      $("#svg-contours").on("click", ->
-        ids = d3.selectAll("g.contour-group.selected")[0].map( (el) -> return d3.select(el).attr("id") )
-        if contours[0] in ids and contours[1] in ids and contours[2] in ids and ids.length is 3
-          return "radio2"
-        else
-          return false
-      )
+    next:
+      "click #svg-contours" : (e, tutorial, step) ->
+        
+        buttonEl = angular.element( document.querySelector("button.continue") )
+        contours = tutorial.contours[0]
+        
+        $("#svg-contours").on("click", ->
+          ids = d3.selectAll("g.contour-group.selected")[0].map( (el) -> return d3.select(el).attr("id") )
+          if contours[0] in ids and contours[1] in ids and contours[2] in ids and ids.length is 3
+            return "radio2"
+          else
+            return false
+        )
   
   radio2: new Step
     number: 3
