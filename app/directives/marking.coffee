@@ -62,19 +62,22 @@ module.exports = ->
       elem = document.querySelector("input.image-opacity")
       
       onDragStart = ->
+        img.addClass("no-transition")
         return unless scope.model.step is 2
         
-        img.addClass("no-transition")
         dx = d3.event.sourceEvent.layerX
         dy = d3.event.sourceEvent.layerY
       
       onDrag = ->
+        
+        # Update image opacity
         value = parseFloat( elem.value ) + d3.event.dx / 200
         elem.value = value
         img.css("opacity", value)
       
       onDragEnd = ->
         img.removeClass("no-transition")
+        return unless scope.model.step is 2
         
         x = d3.event.sourceEvent.layerX
         y = d3.event.sourceEvent.layerY

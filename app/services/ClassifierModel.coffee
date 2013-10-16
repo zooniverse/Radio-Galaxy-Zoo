@@ -96,7 +96,8 @@ class ClassifierModel
   
   # Testing AWS CloudFront
   getCloudFront: (location) ->
-    return location.replace("radio.galaxyzoo.org.s3.amazonaws.com", "d3hpovx9a6vlyh.cloudfront.net")
+    return location
+    # return location.replace("radio.galaxyzoo.org.s3.amazonaws.com", "d3hpovx9a6vlyh.cloudfront.net")
   
   startTutorial: =>
     return  # Disable tutorial for now

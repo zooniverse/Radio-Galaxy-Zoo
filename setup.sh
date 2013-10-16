@@ -12,11 +12,11 @@ curl -k "https://raw.github.com/fryn/html5slider/09d19a1067ada41eb3e74cb011f9fd2
 curl -k "https://raw.github.com/mbostock/d3/v3.2.8/d3.js" -o "app/lib/d3.js"
 
 curl -k "https://raw.github.com/twbs/bootstrap/v3.0.0/dist/css/bootstrap.css" -o "css/bootstrap.css"
-curl -k "https://github.com/zooniverse/Zooniverse/blob/ff2764c443cf1f751ca166ba11e5326257f760c1/css/dialog.css" -o "css/zooniverse/dialog.css"
-curl -k "https://raw.github.com/zooniverse/Zooniverse/ff2764c443cf1f751ca166ba11e5326257f760c1/css/footer.css" -o "css/zooniverse/footer.css"
-curl -k "https://raw.github.com/zooniverse/Zooniverse/ff2764c443cf1f751ca166ba11e5326257f760c1/css/profile.css" -o "css/zooniverse/profile.css"
-curl -k "https://raw.github.com/zooniverse/Zooniverse/ff2764c443cf1f751ca166ba11e5326257f760c1/css/top-bar.css" -o "css/zooniverse/top-bar.css"
-curl -k "https://raw.github.com/zooniverse/Zooniverse/ff2764c443cf1f751ca166ba11e5326257f760c1/css/zooniverse.css" -o "css/zooniverse/zooniverse.css"
+curl -k "https://github.com/zooniverse/Zooniverse/blob/959f413dd2493a9a3cdb6bcdc4e9e184aad123a2/css/dialog.css" -o "css/zooniverse/dialog.css"
+curl -k "https://raw.github.com/zooniverse/Zooniverse/959f413dd2493a9a3cdb6bcdc4e9e184aad123a2/css/footer.css" -o "css/zooniverse/footer.css"
+curl -k "https://raw.github.com/zooniverse/Zooniverse/959f413dd2493a9a3cdb6bcdc4e9e184aad123a2/css/profile.css" -o "css/zooniverse/profile.css"
+curl -k "https://raw.github.com/zooniverse/Zooniverse/959f413dd2493a9a3cdb6bcdc4e9e184aad123a2/css/top-bar.css" -o "css/zooniverse/top-bar.css"
+curl -k "https://raw.github.com/zooniverse/Zooniverse/959f413dd2493a9a3cdb6bcdc4e9e184aad123a2/css/zooniverse.css" -o "css/zooniverse/zooniverse.css"
 
 curl -k "https://raw.github.com/brian-c/zootorial/c07c536a20145c10ec2801712276f84c6fea17f3/zootorial.js" -o "app/lib/zootorial.js"
 curl -k "https://raw.github.com/brian-c/zootorial/c07c536a20145c10ec2801712276f84c6fea17f3/zootorial.css" -o "css/zooniverse/zootorial.css"
