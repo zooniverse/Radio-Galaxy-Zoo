@@ -123,6 +123,7 @@ window.base64 = {
 
   enUs = {
     topBar: {
+      heading: 'A Zooniverse project',
       username: 'Username',
       password: 'Password',
       email: 'Email address',
@@ -137,12 +138,15 @@ window.base64 = {
       noAccount: 'Don\'t have an account?',
       privacyPolicy: 'I agree to the <a href="https://www.zooniverse.org/privacy" target="_blank">privacy policy</a>.'
     },
+    groupsMenu: {
+      stop: 'Stop classifying as part of a group'
+    },
     user: {
       badLogin: 'Incorrect username or password',
       signInFailed: 'Sign in failed.'
     },
     footer: {
-      title: 'The Zooniverse is a collection of web-based citizen science projects that use the efforts of volunteers\nto help researchers deal with the flood of data that confronts them.'
+      heading: 'The Zooniverse is a collection of web-based citizen science projects that use the efforts of volunteers\nto help researchers deal with the flood of data that confronts them.'
     }
   };
 
@@ -555,6 +559,85 @@ window.base64 = {
 }).call(this);
 
 (function() {
+  var toggleClass, _base, _ref, _ref1,
+    __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+
+  toggleClass = function(element, className, condition) {
+    var classList, contained;
+    classList = element.className.split(/\s+/);
+    contained = __indexOf.call(classList, className) >= 0;
+    if (condition == null) {
+      condition = !contained;
+    }
+    condition = !!condition;
+    if (!contained && condition === true) {
+      classList.push(className);
+    }
+    if (contained && condition === false) {
+      classList.splice(classList.indexOf(className), 1);
+    }
+    element.className = classList.join(' ');
+    return null;
+  };
+
+  if ((_ref = window.zooniverse) == null) {
+    window.zooniverse = {};
+  }
+
+  if ((_ref1 = (_base = window.zooniverse).util) == null) {
+    _base.util = {};
+  }
+
+  window.zooniverse.util.toggleClass = toggleClass;
+
+  if (typeof module !== "undefined" && module !== null) {
+    module.exports = toggleClass;
+  }
+
+}).call(this);
+
+(function() {
+  var offset, _base, _ref, _ref1;
+
+  offset = function(el, from) {
+    var currentElement, left, top;
+    left = 0;
+    top = 0;
+    currentElement = el;
+    while (currentElement != null) {
+      if (!isNaN(currentElement.offsetLeft)) {
+        left += currentElement.offsetLeft;
+      }
+      if (!isNaN(currentElement.offsetTop)) {
+        top += currentElement.offsetTop;
+      }
+      currentElement = currentElement.offsetParent;
+    }
+    left += parseFloat(getComputedStyle(document.body.parentNode).marginLeft);
+    top += parseFloat(getComputedStyle(document.body.parentNode).marginTop);
+    return {
+      left: left,
+      top: top
+    };
+  };
+
+  if ((_ref = window.zooniverse) == null) {
+    window.zooniverse = {};
+  }
+
+  if ((_ref1 = (_base = window.zooniverse).util) == null) {
+    _base.util = {};
+  }
+
+  window.zooniverse.util.offset = offset;
+
+  if (typeof module !== "undefined" && module !== null) {
+    module.exports = offset;
+  }
+
+}).call(this);
+
+(function() {
   var BaseModel, EventEmitter, _base, _ref, _ref1,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -819,6 +902,23 @@ window.base64 = {
       }
     }
 
+    User.prototype.setGroup = function(groupId, callback) {
+      var get, path, _ref2,
+        _this = this;
+      if (User.current == null) {
+        return;
+      }
+      path = groupId != null ? "/user_groups/" + groupId + "/participate" : "/user_groups/TODO_HOW_DO_I_LEAVE_A_GROUP/participate";
+      get = (_ref2 = Api.current) != null ? _ref2.getJSON(path, function(group) {
+        _this.trigger('change-group', group);
+        if (typeof callback === "function") {
+          callback.apply(null, arguments);
+        }
+        return typeof console !== "undefined" && console !== null ? console.log('Changed group', group) : void 0;
+      }) : void 0;
+      return get;
+    };
+
     User.prototype.setPreference = function(key, value, global, callback) {
       var _base1, _base2, _name, _ref2, _ref3, _ref4;
       if (global == null) {
@@ -1056,6 +1156,8 @@ window.base64 = {
 
     Subject.prototype.tutorial = null;
 
+    Subject.prototype.preload = true;
+
     function Subject() {
       var _ref2, _ref3, _ref4, _ref5;
       Subject.__super__.constructor.apply(this, arguments);
@@ -1071,11 +1173,14 @@ window.base64 = {
       if ((_ref5 = this.workflow_ids) == null) {
         this.workflow_ids = [];
       }
-      this.preloadImages();
     }
 
     Subject.prototype.preloadImages = function() {
       var imageSources, src, type, _ref2, _results;
+      if (!this.preload) {
+        return;
+      }
+      console.log('preloadImages');
       _ref2 = this.location;
       _results = [];
       for (type in _ref2) {
@@ -1648,6 +1753,204 @@ template = function(__obj) {
   }
   (function() {
     (function() {
+      var className;
+    
+      className = this.className || 'zooniverse-logo';
+    
+      __out.push('\n\n<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="');
+    
+      __out.push(__sanitize(className));
+    
+      __out.push('" width="1em" height="1em">\n  <g class="');
+    
+      __out.push(__sanitize(className));
+    
+      __out.push('" fill="currentColor" stroke="transparent" stroke-width="0" transform="translate(50, 50)">\n    <path d="M 0 -45 A 45 45 0 0 1 0 45 A 45 45 0 0 1 0 -45 Z M 0 -30 A 30 30 0 0 0 0 30 A 30 30 0 0 0 0 -30 Z" />\n    <path d="M 0 -12.5 A 12.5 12.5 0 0 1 0 12.5 A 12.5 12.5 0 0 1 0 -12.5 Z" />\n    <path d="M 0 -75 L 5 0 L 0 75 L -5 0 Z" transform="rotate(50)" />\n  </g>\n</svg>\n');
+    
+    }).call(this);
+    
+  }).call(__obj);
+  __obj.safe = __objSafe, __obj.escape = __escape;
+  return __out.join('');
+};
+window.zooniverse.views['zooniverseLogoSvg'] = template;
+if (typeof module !== 'undefined') module.exports = template;
+
+window.zooniverse = window.zooniverse || {};
+window.zooniverse.views = window.zooniverse.views || {};
+template = function(__obj) {
+  if (!__obj) __obj = {};
+  var __out = [], __capture = function(callback) {
+    var out = __out, result;
+    __out = [];
+    callback.call(this);
+    result = __out.join('');
+    __out = out;
+    return __safe(result);
+  }, __sanitize = function(value) {
+    if (value && value.ecoSafe) {
+      return value;
+    } else if (typeof value !== 'undefined' && value != null) {
+      return __escape(value);
+    } else {
+      return '';
+    }
+  }, __safe, __objSafe = __obj.safe, __escape = __obj.escape;
+  __safe = __obj.safe = function(value) {
+    if (value && value.ecoSafe) {
+      return value;
+    } else {
+      if (!(typeof value !== 'undefined' && value != null)) value = '';
+      var result = new String(value);
+      result.ecoSafe = true;
+      return result;
+    }
+  };
+  if (!__escape) {
+    __escape = __obj.escape = function(value) {
+      return ('' + value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    };
+  }
+  (function() {
+    (function() {
+      var className;
+    
+      className = this.className || 'zooniverse-group-icon';
+    
+      __out.push('\n\n<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 100" class="');
+    
+      __out.push(__sanitize(className));
+    
+      __out.push('" width="2em" height="1em">\n  ');
+    
+      if (document.getElementById('zooniverse-groups-icon-person') == null) {
+        __out.push('\n    <defs>\n      <path id="zooniverse-groups-icon-person" d="M 0 -50 A 25 35 0 0 1 20 10 A 67 67 0 0 1 50 45 L 0 50 L -50 45 A 67 67 0 0 1 -20 10 A 25 35 0 0 1 0 -50 Z" />\n    </defs>\n  ');
+      }
+    
+      __out.push('\n\n  <g class="');
+    
+      __out.push(__sanitize(className));
+    
+      __out.push('" fill="currentColor" stroke="transparent" stroke-width="0" transform="translate(100, 50)">\n    <use xlink:href="#zooniverse-groups-icon-person" transform="scale(0.67) translate(-80, 0)" opacity="0.75" />\n    <use xlink:href="#zooniverse-groups-icon-person" transform="scale(0.67) translate(80, 0)" opacity="0.75" />\n    <use xlink:href="#zooniverse-groups-icon-person" />\n  </g>\n</svg>\n');
+    
+    }).call(this);
+    
+  }).call(__obj);
+  __obj.safe = __objSafe, __obj.escape = __escape;
+  return __out.join('');
+};
+window.zooniverse.views['groupIconSvg'] = template;
+if (typeof module !== 'undefined') module.exports = template;
+
+window.zooniverse = window.zooniverse || {};
+window.zooniverse.views = window.zooniverse.views || {};
+template = function(__obj) {
+  if (!__obj) __obj = {};
+  var __out = [], __capture = function(callback) {
+    var out = __out, result;
+    __out = [];
+    callback.call(this);
+    result = __out.join('');
+    __out = out;
+    return __safe(result);
+  }, __sanitize = function(value) {
+    if (value && value.ecoSafe) {
+      return value;
+    } else if (typeof value !== 'undefined' && value != null) {
+      return __escape(value);
+    } else {
+      return '';
+    }
+  }, __safe, __objSafe = __obj.safe, __escape = __obj.escape;
+  __safe = __obj.safe = function(value) {
+    if (value && value.ecoSafe) {
+      return value;
+    } else {
+      if (!(typeof value !== 'undefined' && value != null)) value = '';
+      var result = new String(value);
+      result.ecoSafe = true;
+      return result;
+    }
+  };
+  if (!__escape) {
+    __escape = __obj.escape = function(value) {
+      return ('' + value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    };
+  }
+  (function() {
+    (function() {
+      var className;
+    
+      className = this.className || 'zooniverse-mail-icon';
+    
+      __out.push('\n\n<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 100" class="');
+    
+      __out.push(__sanitize(className));
+    
+      __out.push('" width="1.5em" height="1em">\n  <g class="');
+    
+      __out.push(__sanitize(className));
+    
+      __out.push('" fill="currentColor" stroke="transparent" stroke-width="0">\n    <path d="M 0 0 L 75 65 L 150 0 Z" />\n    <path d="M 0 0 L 75 75 L 150 0 L 150 100 L 0 100 Z" opacity="0.85" />\n  </g>\n</svg>\n');
+    
+    }).call(this);
+    
+  }).call(__obj);
+  __obj.safe = __objSafe, __obj.escape = __escape;
+  return __out.join('');
+};
+window.zooniverse.views['mailIconSvg'] = template;
+if (typeof module !== 'undefined') module.exports = template;
+
+window.zooniverse = window.zooniverse || {};
+window.zooniverse.views = window.zooniverse.views || {};
+template = function(__obj) {
+  if (!__obj) __obj = {};
+  var __out = [], __capture = function(callback) {
+    var out = __out, result;
+    __out = [];
+    callback.call(this);
+    result = __out.join('');
+    __out = out;
+    return __safe(result);
+  }, __sanitize = function(value) {
+    if (value && value.ecoSafe) {
+      return value;
+    } else if (typeof value !== 'undefined' && value != null) {
+      return __escape(value);
+    } else {
+      return '';
+    }
+  }, __safe, __objSafe = __obj.safe, __escape = __obj.escape;
+  __safe = __obj.safe = function(value) {
+    if (value && value.ecoSafe) {
+      return value;
+    } else {
+      if (!(typeof value !== 'undefined' && value != null)) value = '';
+      var result = new String(value);
+      result.ecoSafe = true;
+      return result;
+    }
+  };
+  if (!__escape) {
+    __escape = __obj.escape = function(value) {
+      return ('' + value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    };
+  }
+  (function() {
+    (function() {
     
       __out.push('<div class="underlay">\n  <div class="container">\n    <div class="dialog"></div>\n  </div>\n</div>\n');
     
@@ -1701,31 +2004,55 @@ template = function(__obj) {
   }
   (function() {
     (function() {
-      var enUs, _ref;
+      var enUs, groupIconSvg, mailIconSvg, zooniverseLogoSvg, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6;
     
       enUs = ((_ref = window.zooniverse) != null ? _ref.enUs : void 0) || require('../lib/en-us');
     
-      __out.push('\n\n<div class="no-user">\n  <div class="zooniverse">\n    <span class="zooniverse-logo"></span>\n    ');
+      __out.push('\n');
     
-      __out.push(__sanitize(this.title));
+      zooniverseLogoSvg = ((_ref1 = window.zooniverse) != null ? (_ref2 = _ref1.views) != null ? _ref2.zooniverseLogoSvg : void 0 : void 0) || require('./zooniverse-logo-svg');
     
-      __out.push('\n  </div>\n\n  <div class="sign-in">\n    <button name="sign-up">');
+      __out.push('\n');
+    
+      groupIconSvg = ((_ref3 = window.zooniverse) != null ? (_ref4 = _ref3.views) != null ? _ref4.groupIconSvg : void 0 : void 0) || require('./group-icon-svg');
+    
+      __out.push('\n');
+    
+      mailIconSvg = ((_ref5 = window.zooniverse) != null ? (_ref6 = _ref5.views) != null ? _ref6.mailIconSvg : void 0 : void 0) || require('./mail-icon-svg');
+    
+      __out.push('\n\n<div class="corner">\n  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">\n    <path d="M 0 0 L 100 0 L 100 100 Z" />\n  </svg>\n</div>\n\n<div class="no-user">\n  <div class="zooniverse-info piece">\n    ');
+    
+      __out.push(zooniverseLogoSvg());
+    
+      __out.push('\n    ');
+    
+      __out.push(__sanitize(this.heading));
+    
+      __out.push('\n  </div>\n\n  <div class="sign-in piece">\n    <button name="sign-up">');
     
       __out.push(__sanitize(enUs.topBar.signUp));
     
-      __out.push('</button>\n    |\n    <button name="sign-in">');
+      __out.push('</button>\n    <span class="separator">|</span>\n    <button name="sign-in">');
     
       __out.push(__sanitize(enUs.topBar.signIn));
     
-      __out.push('</button>\n  </div>\n</div>\n\n<div class="current-user">\n  <div class="group"></div>\n\n  <div class="messages">\n    <a href="http://talk.');
-    
-      __out.push(__sanitize(location.hostname.replace(/^www\./, '')));
-    
-      __out.push('/#/profile" class="message-link">\n      <span class="message-count">&mdash;</span>\n    </a>\n  </div>\n\n  <div class="info">\n    <span class="current-user-name">&mdash;</span>\n\n    <div class="sign-out">\n      <button name="sign-out">');
+      __out.push('</button>\n  </div>\n</div>\n\n<div class="current-user">\n  <div class="user-info piece">\n    <div class="current-user-name">&mdash;</div>\n\n    <div class="sign-out">\n      <button name="sign-out">');
     
       __out.push(__sanitize(enUs.topBar.signOut));
     
-      __out.push('</button>\n    </div>\n  </div>\n\n  <div class="avatar">\n    <img src="" />\n  </div>\n</div>\n');
+      __out.push('</button>\n    </div>\n  </div>\n\n  <div class="groups piece">\n    <div class="groups-menu-toggle">\n      <button name="groups">');
+    
+      __out.push(groupIconSvg());
+    
+      __out.push('</button>\n    </div>\n  </div>\n\n  <div class="messages piece">\n    <a href="http://talk.');
+    
+      __out.push(__sanitize(location.hostname.replace(/^www\./, '')));
+    
+      __out.push('/#/profile" class="message-link">\n      ');
+    
+      __out.push(mailIconSvg());
+    
+      __out.push('\n      <span class="message-count">&mdash;</span>\n    </a>\n  </div>\n\n  <div class="avatar piece">\n    <a href="https://www.zooniverse.org/projects/current"><img src="" /></a>\n  </div>\n</div>\n');
     
     }).call(this);
     
@@ -1849,11 +2176,19 @@ template = function(__obj) {
   }
   (function() {
     (function() {
-      var enUs;
+      var enUs, zooniverseLogoSvg, _ref;
     
       enUs = (typeof zooniverse !== "undefined" && zooniverse !== null ? zooniverse.enUs : void 0) || require('../lib/en-us');
     
-      __out.push('\n\n<div class="loader"></div>\n\n<button type="button" name="close-dialog">&times;</button>\n\n<header>\n  <span class="zooniverse-logo"></span>\n  ');
+      __out.push('\n');
+    
+      zooniverseLogoSvg = (typeof zooniverse !== "undefined" && zooniverse !== null ? (_ref = zooniverse.views) != null ? _ref.zooniverseLogoSvg : void 0 : void 0) || require('./zooniverse-logo-svg');
+    
+      __out.push('\n\n<div class="loader"></div>\n\n<button type="button" name="close-dialog">&times;</button>\n\n<header>\n  ');
+    
+      __out.push(zooniverseLogoSvg());
+    
+      __out.push('\n  ');
     
       __out.push(enUs.topBar.signInTitle);
     
@@ -1925,11 +2260,19 @@ template = function(__obj) {
   }
   (function() {
     (function() {
-      var enUs;
+      var enUs, zooniverseLogoSvg, _ref;
     
       enUs = (typeof zooniverse !== "undefined" && zooniverse !== null ? zooniverse.enUs : void 0) || require('../lib/en-us');
     
-      __out.push('\n\n<div class="loader"></div>\n\n<button type="button" name="close-dialog">&times;</button>\n\n<header>\n  <span class="zooniverse-logo"></span>\n  ');
+      __out.push('\n');
+    
+      zooniverseLogoSvg = (typeof zooniverse !== "undefined" && zooniverse !== null ? (_ref = zooniverse.views) != null ? _ref.zooniverseLogoSvg : void 0 : void 0) || require('./zooniverse-logo-svg');
+    
+      __out.push('\n\n<div class="loader"></div>\n\n<button type="button" name="close-dialog">&times;</button>\n\n<header>\n  ');
+    
+      __out.push(zooniverseLogoSvg());
+    
+      __out.push('\n  ');
     
       __out.push(enUs.topBar.signUpTitle);
     
@@ -2211,38 +2554,46 @@ template = function(__obj) {
   }
   (function() {
     (function() {
-      var category, enUs, project, projects, _i, _j, _len, _len1, _ref, _ref1;
+      var category, enUs, project, projects, zooniverseLogoSvg, _i, _j, _len, _len1, _ref, _ref1, _ref2, _ref3;
     
       enUs = (typeof zooniverse !== "undefined" && zooniverse !== null ? zooniverse.enUs : void 0) || require('../lib/en-us');
     
-      __out.push('\n\n<div class="title">');
+      __out.push('\n');
     
-      __out.push(__sanitize(enUs.footer.title));
+      zooniverseLogoSvg = ((_ref = window.zooniverse) != null ? (_ref1 = _ref.views) != null ? _ref1.zooniverseLogoSvg : void 0 : void 0) || require('./zooniverse-logo-svg');
     
-      __out.push('</div>\n\n');
+      __out.push('\n\n<a href="https://www.zooniverse.org/" class="logo">\n  ');
+    
+      __out.push(zooniverseLogoSvg());
+    
+      __out.push('\n</a>\n\n<div class="content">\n  <div class="heading">');
+    
+      __out.push(__sanitize(enUs.footer.heading));
+    
+      __out.push('</div>\n\n  ');
     
       if (this.categories != null) {
-        __out.push('\n  <div class="projects">\n    ');
-        _ref = this.categories;
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-          _ref1 = _ref[_i], category = _ref1.category, projects = _ref1.projects;
-          __out.push('\n      <div class="category">\n        <div class="category-title">');
+        __out.push('\n    <div class="projects">\n      ');
+        _ref2 = this.categories;
+        for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
+          _ref3 = _ref2[_i], category = _ref3.category, projects = _ref3.projects;
+          __out.push('\n        <div class="category">\n          <div class="category-title">');
           __out.push(__sanitize(category));
-          __out.push('</div>\n        ');
+          __out.push('</div>\n          ');
           for (_j = 0, _len1 = projects.length; _j < _len1; _j++) {
             project = projects[_j];
-            __out.push('\n          <div class="project">\n            <a href="');
+            __out.push('\n            <div class="project">\n              <a href="');
             __out.push(__sanitize(project.url));
             __out.push('">');
             __out.push(__sanitize(project.name));
-            __out.push('</a>\n          </div>\n        ');
+            __out.push('</a>\n            </div>\n          ');
           }
-          __out.push('\n        <div class="project"></div>\n      </div>\n    ');
+          __out.push('\n          <div class="project"></div>\n        </div>\n      ');
         }
-        __out.push('\n  </div>\n');
+        __out.push('\n    </div>\n  ');
       }
     
-      __out.push('\n');
+      __out.push('\n\n  <div class="general">\n    <!--div class="category"><a href="#">Zooniverse Daily</a></div-->\n    <div class="category"><a href="https://www.zooniverse.org/privacy">Privacy policy</a></div>\n  </div>\n</div>\n');
     
     }).call(this);
     
@@ -2251,6 +2602,82 @@ template = function(__obj) {
   return __out.join('');
 };
 window.zooniverse.views['footer'] = template;
+if (typeof module !== 'undefined') module.exports = template;
+
+window.zooniverse = window.zooniverse || {};
+window.zooniverse.views = window.zooniverse.views || {};
+template = function(__obj) {
+  if (!__obj) __obj = {};
+  var __out = [], __capture = function(callback) {
+    var out = __out, result;
+    __out = [];
+    callback.call(this);
+    result = __out.join('');
+    __out = out;
+    return __safe(result);
+  }, __sanitize = function(value) {
+    if (value && value.ecoSafe) {
+      return value;
+    } else if (typeof value !== 'undefined' && value != null) {
+      return __escape(value);
+    } else {
+      return '';
+    }
+  }, __safe, __objSafe = __obj.safe, __escape = __obj.escape;
+  __safe = __obj.safe = function(value) {
+    if (value && value.ecoSafe) {
+      return value;
+    } else {
+      if (!(typeof value !== 'undefined' && value != null)) value = '';
+      var result = new String(value);
+      result.ecoSafe = true;
+      return result;
+    }
+  };
+  if (!__escape) {
+    __escape = __obj.escape = function(value) {
+      return ('' + value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    };
+  }
+  (function() {
+    (function() {
+      var enUs, id, name, _i, _len, _ref, _ref1, _ref2;
+    
+      enUs = ((_ref = window.zooniverse) != null ? _ref.enUs : void 0) || require('../lib/en-us');
+    
+      __out.push('\n\n<div class="user-groups">\n  ');
+    
+      _ref1 = this.user_groups || [];
+      for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
+        _ref2 = _ref1[_i], id = _ref2.id, name = _ref2.name;
+        __out.push('\n    <div class="user-group">\n      <button name="user-group" value="');
+        __out.push(__sanitize(id));
+        __out.push('" ');
+        if (id === this.user_group_id) {
+          __out.push('class="active"');
+        }
+        __out.push('>');
+        __out.push(__sanitize(name));
+        __out.push('</button>\n    </div>\n  ');
+      }
+    
+      __out.push('\n\n  <!--div class="no-group user-group">\n      <button name="user-group" value="" class="stop">');
+    
+      __out.push(enUs.groupsMenu.stop);
+    
+      __out.push('</button>\n  </div-->\n</div>\n');
+    
+    }).call(this);
+    
+  }).call(__obj);
+  __obj.safe = __objSafe, __obj.escape = __escape;
+  return __out.join('');
+};
+window.zooniverse.views['groupsMenu'] = template;
 if (typeof module !== 'undefined') module.exports = template;
 
 (function() {
@@ -2818,7 +3245,274 @@ if (typeof module !== 'undefined') module.exports = template;
 }).call(this);
 
 (function() {
-  var Api, BaseController, TopBar, User, loginDialog, signupDialog, template, _base, _base1, _ref, _ref1, _ref2,
+  var Dropdown, offset, toggleClass, _base, _ref, _ref1, _ref2, _ref3,
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+    __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+
+  toggleClass = ((_ref = zooniverse.util) != null ? _ref.toggleClass : void 0) || require('../util/toggle-class');
+
+  offset = ((_ref1 = zooniverse.util) != null ? _ref1.offset : void 0) || require('../util/offset');
+
+  Dropdown = (function() {
+    var _this = this;
+
+    Dropdown.buttonClass = 'zooniverse-dropdown-button';
+
+    Dropdown.menuClass = 'zooniverse-dropdown-menu';
+
+    Dropdown.instances = [];
+
+    Dropdown.elements = [];
+
+    Dropdown.closeAll = function() {
+      var instance, _i, _len, _ref2, _results;
+      _ref2 = this.instances;
+      _results = [];
+      for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
+        instance = _ref2[_i];
+        _results.push(instance.close());
+      }
+      return _results;
+    };
+
+    addEventListener('click', function(e) {
+      var node, shouldClose;
+      shouldClose = true;
+      node = e.target.correspondingUseElement || e.target;
+      while (node != null) {
+        if (__indexOf.call(Dropdown.elements, node) >= 0) {
+          shouldClose = false;
+          break;
+        }
+        node = node.parentNode;
+      }
+      if (shouldClose) {
+        return Dropdown.closeAll();
+      }
+    });
+
+    Dropdown.prototype.button = null;
+
+    Dropdown.prototype.buttonClass = '';
+
+    Dropdown.prototype.buttonTag = 'button';
+
+    Dropdown.prototype.menu = null;
+
+    Dropdown.prototype.menuClass = '';
+
+    Dropdown.prototype.menuTag = 'div';
+
+    Dropdown.prototype.buttonPinning = [0.5, 1];
+
+    Dropdown.prototype.menuPinning = [0.5, 0];
+
+    Dropdown.prototype._open = null;
+
+    Dropdown.prototype.openClass = 'open';
+
+    Dropdown.prototype.animationDelay = 250;
+
+    function Dropdown(params) {
+      var property, value, _ref2, _ref3;
+      if (params == null) {
+        params = {};
+      }
+      this.onResize = __bind(this.onResize, this);
+
+      this.onButtonClick = __bind(this.onButtonClick, this);
+
+      window.dropdown = this;
+      for (property in params) {
+        value = params[property];
+        this[property] = value;
+      }
+      if ((_ref2 = this.button) == null) {
+        this.button = document.createElement(this.buttonTag);
+      }
+      toggleClass(this.button, this.constructor.buttonClass, true);
+      if (this.className) {
+        toggleClass(this.button, this.className, true);
+      }
+      this.button.addEventListener('click', this.onButtonClick, false);
+      if ((_ref3 = this.menu) == null) {
+        this.menu = document.createElement(this.menuTag);
+      }
+      toggleClass(this.menu, this.constructor.menuClass, true);
+      if (this.menuClass) {
+        toggleClass(this.menu, this.menuClass, true);
+      }
+      this.menu.style.position = 'absolute';
+      this.menu.style.display = 'none';
+      document.body.appendChild(this.menu);
+      this.close();
+      this.constructor.instances.push(this);
+      this.constructor.elements.push(this.button);
+      this.constructor.elements.push(this.menu);
+    }
+
+    Dropdown.prototype.onButtonClick = function(e) {
+      return this.toggle();
+    };
+
+    Dropdown.prototype.toggle = function() {
+      if (this._open) {
+        return this.close();
+      } else {
+        return this.open();
+      }
+    };
+
+    Dropdown.prototype.open = function() {
+      var _this = this;
+      toggleClass(this.button, this.openClass, true);
+      this.menu.style.display = '';
+      this.positionMenu();
+      setTimeout(function() {
+        toggleClass(_this.menu, _this.openClass, true);
+        return _this._open = true;
+      });
+      return addEventListener('resize', this.onResize, false);
+    };
+
+    Dropdown.prototype.positionMenu = function() {
+      var buttonOffset;
+      buttonOffset = offset(this.button);
+      this.menu.style.left = (buttonOffset.left + (this.button.clientWidth * this.buttonPinning[0])) - (this.menu.clientWidth * this.menuPinning[0]) + 'px';
+      return this.menu.style.top = (buttonOffset.top + (this.button.clientHeight * this.buttonPinning[1])) - (this.menu.clientHeight * this.menuPinning[1]) + 'px';
+    };
+
+    Dropdown.prototype.onResize = function() {
+      return this.positionMenu();
+    };
+
+    Dropdown.prototype.close = function() {
+      var _this = this;
+      toggleClass(this.button, this.openClass, false);
+      toggleClass(this.menu, this.openClass, false);
+      setTimeout((function() {
+        _this.menu.style.display = 'none';
+        return _this._open = false;
+      }), this.animationDelay);
+      return removeEventListener('resize', this.onResize, false);
+    };
+
+    Dropdown.prototype.destroy = function() {
+      var _ref2, _ref3;
+      this.constructor.instances.splice(this.constructor.instances.indexOf(this), 1);
+      this.constructor.elements.splice(this.constructor.instances.indexOf(this.button), 1);
+      this.constructor.elements.splice(this.constructor.instances.indexOf(this.menu), 1);
+      this.button.removeEventListener('click', this.onButtonClick, false);
+      if ((_ref2 = this.button.parentNode) != null) {
+        _ref2.removeChild(this.button);
+      }
+      return (_ref3 = this.menu.parentNode) != null ? _ref3.removeChild(this.menu) : void 0;
+    };
+
+    return Dropdown;
+
+  }).call(this);
+
+  if ((_ref2 = window.zooniverse) == null) {
+    window.zooniverse = {};
+  }
+
+  if ((_ref3 = (_base = window.zooniverse).controllers) == null) {
+    _base.controllers = {};
+  }
+
+  window.zooniverse.controllers.Dropdown = Dropdown;
+
+  if (typeof module !== "undefined" && module !== null) {
+    module.exports = Dropdown;
+  }
+
+}).call(this);
+
+(function() {
+  var $, Controller, Dropdown, GroupsMenu, User, template, _base, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9,
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+  Controller = ((_ref = window.zooniverse) != null ? (_ref1 = _ref.controllers) != null ? _ref1.BaseController : void 0 : void 0) || require('./base-controller');
+
+  User = ((_ref2 = window.zooniverse) != null ? (_ref3 = _ref2.models) != null ? _ref3.User : void 0 : void 0) || require('../models/user');
+
+  template = ((_ref4 = window.zooniverse) != null ? (_ref5 = _ref4.views) != null ? _ref5.groupsMenu : void 0 : void 0) || require('../views/groups-menu');
+
+  $ = window.jQuery;
+
+  Dropdown = ((_ref6 = window.zooniverse) != null ? (_ref7 = _ref6.controllers) != null ? _ref7.Dropdown : void 0 : void 0) || require('./dropdown');
+
+  GroupsMenu = (function(_super) {
+
+    __extends(GroupsMenu, _super);
+
+    GroupsMenu.prototype.className = 'zooniverse-groups-menu';
+
+    GroupsMenu.prototype.events = {
+      'click button[name="user-group"]': 'onClickGroupButton'
+    };
+
+    function GroupsMenu() {
+      this.onUserChangeGroup = __bind(this.onUserChangeGroup, this);
+
+      this.onUserChange = __bind(this.onUserChange, this);
+      GroupsMenu.__super__.constructor.apply(this, arguments);
+      User.on('change', this.onUserChange);
+      User.on('change-group', this.onUserChangeGroup);
+    }
+
+    GroupsMenu.prototype.onUserChange = function(e, user) {
+      if (user != null) {
+        this.el.html(template(user));
+        if (user.user_group_id) {
+          return this.el.find("button[name='" + user.user_group_id + "']").click();
+        }
+      }
+    };
+
+    GroupsMenu.prototype.onUserChangeGroup = function(e, user, group) {
+      var buttons;
+      buttons = this.el.find('button[name="user-group"]');
+      buttons.removeClass('active');
+      if (group != null) {
+        return buttons.filter("[value='" + group.id + "']").addClass('active');
+      }
+    };
+
+    GroupsMenu.prototype.onClickGroupButton = function(e) {
+      var target, _ref8;
+      target = $(e.currentTarget);
+      if ((_ref8 = User.current) != null) {
+        _ref8.setGroup(target.val() || 'TODO_HOW_DO_I_STOP_CLASSIFYING_AS_PART_OF_A_GROUP');
+      }
+      return Dropdown.closeAll();
+    };
+
+    return GroupsMenu;
+
+  })(Controller);
+
+  if ((_ref8 = window.zooniverse) == null) {
+    window.zooniverse = {};
+  }
+
+  if ((_ref9 = (_base = window.zooniverse).controllers) == null) {
+    _base.controllers = {};
+  }
+
+  window.zooniverse.controllers.GroupsMenu = GroupsMenu;
+
+  if (typeof module !== "undefined" && module !== null) {
+    module.exports = GroupsMenu;
+  }
+
+}).call(this);
+
+(function() {
+  var Api, BaseController, Dropdown, GroupsMenu, TopBar, User, enUs, loginDialog, signupDialog, template, _base, _base1, _base2, _ref, _ref1, _ref2, _ref3,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -2835,13 +3529,23 @@ if (typeof module !== 'undefined') module.exports = template;
     _base1.views = {};
   }
 
+  if ((_ref3 = (_base2 = window.zooniverse).models) == null) {
+    _base2.models = {};
+  }
+
   BaseController = zooniverse.controllers.BaseController || require('./base-controller');
+
+  enUs = zooniverse.enUs || require('../lib/en-us');
 
   loginDialog = zooniverse.controllers.loginDialog || require('./login-dialog');
 
   signupDialog = zooniverse.controllers.signupDialog || require('./signup-dialog');
 
   template = zooniverse.views.topBar || require('../views/top-bar');
+
+  Dropdown = zooniverse.controllers.Dropdown || require('./dropdown');
+
+  GroupsMenu = zooniverse.controllers.GroupsMenu || require('./groups-menu');
 
   Api = zooniverse.Api || require('../lib/api');
 
@@ -2855,6 +3559,8 @@ if (typeof module !== 'undefined') module.exports = template;
 
     TopBar.prototype.template = template;
 
+    TopBar.prototype.heading = enUs.topBar.heading;
+
     TopBar.prototype.messageCheckTimeout = 2 * 60 * 1000;
 
     TopBar.prototype.events = {
@@ -2865,21 +3571,29 @@ if (typeof module !== 'undefined') module.exports = template;
 
     TopBar.prototype.elements = {
       '.current-user-name': 'currentUserName',
+      'button[name="groups"]': 'groupsMenuButton',
       '.message-count': 'messageCount',
       '.avatar img': 'avatarImage',
       '.group': 'currentGroup'
     };
 
-    function TopBar(title) {
-      this.title = title != null ? title : 'A Zooniverse project';
-      this.processGroup = __bind(this.processGroup, this);
+    function TopBar() {
+      this.onUserChangeGroup = __bind(this.onUserChangeGroup, this);
 
       this.getMessages = __bind(this.getMessages, this);
 
       this.onUserChange = __bind(this.onUserChange, this);
-
       TopBar.__super__.constructor.apply(this, arguments);
+      this.groupsMenu = new GroupsMenu;
+      this.groupsDropdown = new Dropdown({
+        button: this.groupsMenuButton.get(0),
+        buttonPinning: [1, 1],
+        menu: this.groupsMenu.el.get(0),
+        menuClass: 'from-top-bar',
+        menuPinning: [1, 0]
+      });
       User.on('change', this.onUserChange);
+      User.on('change-group', this.onUserChangeGroup);
     }
 
     TopBar.prototype.onClickSignIn = function() {
@@ -2895,9 +3609,11 @@ if (typeof module !== 'undefined') module.exports = template;
     };
 
     TopBar.prototype.onUserChange = function(e, user) {
+      var _ref4;
       this.el.toggleClass('signed-in', user != null);
+      this.el.toggleClass('has-groups', (user != null ? (_ref4 = user.user_groups) != null ? _ref4.length : void 0 : void 0) > 0);
+      this.onUserChangeGroup(e, user != null, user != null ? user.user_group_id : void 0);
       this.getMessages();
-      this.processGroup();
       this.currentUserName.html((user != null ? user.name : void 0) || '');
       return this.avatarImage.attr({
         src: user != null ? user.avatar : void 0
@@ -2918,25 +3634,8 @@ if (typeof module !== 'undefined') module.exports = template;
       }
     };
 
-    TopBar.prototype.processGroup = function() {
-      var currentGroup, group, _i, _len, _ref3, _results;
-      if ((User.current != null) && User.current.hasOwnProperty('user_group_id')) {
-        this.el.addClass('has-group');
-        _ref3 = User.current.user_groups;
-        _results = [];
-        for (_i = 0, _len = _ref3.length; _i < _len; _i++) {
-          group = _ref3[_i];
-          currentGroup = group;
-          if (group.id === !User.current.user_group_id) {
-            continue;
-          } else {
-            _results.push(void 0);
-          }
-        }
-        return _results;
-      } else {
-        return this.el.removeClass('has-group');
-      }
+    TopBar.prototype.onUserChangeGroup = function(e, user, group) {
+      return this.el.toggleClass('group-participant', group != null);
     };
 
     return TopBar;

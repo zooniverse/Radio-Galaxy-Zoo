@@ -9,6 +9,9 @@ Tutorial        =  zootorial.Tutorial
 
 TutorialSteps   = require '../content/tutorial_steps'
 
+# Disable Subject preloading
+Subject.preload = false
+
 
 class ClassifierModel
   COMPLETE: true
@@ -96,6 +99,8 @@ class ClassifierModel
     return location.replace("radio.galaxyzoo.org.s3.amazonaws.com", "d3hpovx9a6vlyh.cloudfront.net")
   
   startTutorial: =>
+    return  # Disable tutorial for now
+    
     @hasTutorial = true
     
     @tutorial = new Tutorial
