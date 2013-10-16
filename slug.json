@@ -4,6 +4,7 @@
     "./app/lib/jquery.js",
     "./app/lib/underscore.js",
     "./app/lib/angular.js",
+    "./app/lib/angular-route.js",
     "./app/lib/zooniverse.js",
     "./app/lib/zootorial.js",
     "./app/lib/fits.js",

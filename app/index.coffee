@@ -37,7 +37,7 @@ scienceTemplate     = require './partials/science'
 teamTemplate        = require './partials/team'
 
 # Set up application module
-RadioGalaxyZoo = angular.module("radio-galaxy-zoo", [])
+RadioGalaxyZoo = angular.module("radio-galaxy-zoo", ['ngRoute'])
 
 # Wacky browser dependent value
 agent = testAgent(navigator.userAgent)
