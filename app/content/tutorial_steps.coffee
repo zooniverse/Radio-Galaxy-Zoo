@@ -152,7 +152,7 @@ module.exports =
   markir1: new Step
     number: 9
     header: "Marking: Infrared (IR) Image"
-    details: "Usually we're interested in the brighter galaxies that align with the radio emission.  There may be lots of faint one that could coincidentally be lined up with the radio emission so focus on the bright ones as much as possible."
+    details: "Usually we're interested in the brighter galaxies that align with the radio emission.  There may be lots of faint ones that could coincidentally be lined up with the radio emission so focus on the bright ones as much as possible."
     attachment: "center top .viewport center -0.24"
     onEnter: ->
       addBlock()
