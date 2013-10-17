@@ -100,7 +100,7 @@ class ClassifierModel
     # return location.replace("radio.galaxyzoo.org.s3.amazonaws.com", "d3hpovx9a6vlyh.cloudfront.net")
   
   startTutorial: =>
-    return  # Disable tutorial for now
+    # return  # Disable tutorial for now
     
     @hasTutorial = true
     
@@ -284,6 +284,12 @@ class ClassifierModel
         group = []
         
         [ [xmin, xmax], [ymin, ymax] ] = getBBox(k0contour)
+        
+        # Apply threshold to lowest level contours
+        xd = xmax - xmin
+        yd = ymax - ymin
+        d = Math.sqrt(xd * xd + yd * yd)
+        continue if d < 8 # Tunable parameter (TODO: move to index.coffee as constant)
         
         for subcontour, index in subcontours
           
