@@ -418,15 +418,17 @@ class ClassifierModel
   # This function is called from the marking directive whenever an annotation
   # changes (e.g. create, move, scale, remove).
   updateAnnotation: ->
+    console.log "updateAnnotation"
+    
     translateRegEx = /translate\((-?\d+), (-?\d+)\)/
     @annotations.length = 0
     
-    for annotation in d3.selectAll("circle.annotation")[0]
-      circle = d3.select(annotation)
-      group = d3.select(circle.node().parentNode)
+    for group in d3.selectAll("g.infrared g")
+      group = group[0]
+      circle = group.children[0]
+      circle = d3.select(circle)
       
-      # TODO: Generalize function for getting transform coordinates
-      #       it's now been written in three separate places in code
+      group = d3.select(group)
       transform = group.attr("transform")
       match = transform.match(translateRegEx)
       
@@ -436,6 +438,22 @@ class ClassifierModel
         y: match[2]
       
       @annotations.push obj
+      
+    # for annotation in d3.selectAll("circle.annotation")[0]
+    #   circle = d3.select(annotation)
+    #   group = d3.select(circle.node().parentNode)
+    #   
+    #   # TODO: Generalize function for getting transform coordinates
+    #   #       it's now been written in three separate places in code
+    #   transform = group.attr("transform")
+    #   match = transform.match(translateRegEx)
+    #   
+    #   obj =
+    #     r: circle.attr("r")
+    #     x: match[1]
+    #     y: match[2]
+    #   
+    #   @annotations.push obj
     @$rootScope.$apply()
   
   getClassification: ->

@@ -127,6 +127,7 @@ module.exports =
         group.classed("pulsate", false)
         removeBlock()
       ), 2500
+      
     onExit: ->
       removeBlock()
       enableButtons()

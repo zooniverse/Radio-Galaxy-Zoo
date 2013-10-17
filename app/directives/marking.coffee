@@ -101,7 +101,9 @@ module.exports = ->
                     .on("mousedown", -> d3.event.stopPropagation() )
                     .on("mouseup", ->
                       d3.select(this.parentNode).remove()
-                      scope.model.updateAnnotation()
+                      setTimeout (->
+                        scope.model.updateAnnotation()
+                      ), 200
                     )
           text = group.append("text")
                     .text("×")
