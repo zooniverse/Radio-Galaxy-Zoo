@@ -106,7 +106,7 @@ class ClassifierModel
     
     @tutorial = new Tutorial
       id: 'tutorial'
-      firstStep: 'markradio1'
+      firstStep: 'welcome'
       steps: TutorialSteps
       parent: document.querySelector(".classifier")
     

@@ -24,6 +24,8 @@ enableButtons = ->
   els = angular.element( document.querySelectorAll(".workflow .buttons button") )
   els.removeAttr("disabled")
 
+# Higher scope variables to communicate between onEnter and next functions
+groupid = null
 
 module.exports =
   length: 2
@@ -113,71 +115,131 @@ module.exports =
       
       # Determine the center contour group
       groups = d3.selectAll("g.contour-group")[0]
-      group = null
       for group in groups
         bbox = group.getBBox()
         y = bbox.y + 0.5 * bbox.height
         break if y < 196 and y > 192
       
       group = d3.select(group)
+      groupid = group.attr("id")
       group.classed("pulsate", true)
       setTimeout (->
         group.classed("pulsate", false)
         removeBlock()
       ), 2500
       
-      # Mouseup to avoid overriding existing click handler
-      group.on("mouseup", ->
-        el = d3.select(this)
-        if el.attr("class").indexOf("selected") > -1
-          disableButtons()
-        else
-          enableButtons()
-      )
+      # # Mouseup to avoid overriding existing click handler
+      # group.on("mouseup", ->
+      #   el = d3.select(this)
+      #   if el.attr("class").indexOf("selected") > -1
+      #     disableButtons()
+      #   else
+      #     enableButtons()
+      # )
     onExit: ->
       removeBlock()
       enableButtons()
     next:
-      "click button.continue": "markradio2"
+      "click #svg-contours": (e) ->
+        if e.target.parentNode?.id is groupid
+          return "markradio2"
+        return false
   
   markradio2: new Step
     number: 7
     header: "Marking: Radio Image"
-    details: "Sometimes you'll see isolated faint blue features with one or two contour lines around them. These are mostly background noise and you can ignore them."
-    attachment: "center center .viewport center center"
-    next: "viewir"
-  
-  viewir: new Step
-    number: 8
-    details: "Click Continue to identify the host galaxy in the infrared."
-    attachment: "center center .viewport center center"
-    next: "markir1"
+    details: "Sometimes you'll see isolated faint blue features with one or two contour lines around them. These are mostly background noise and you can ignore them.<br><br>Click <b>Continue</b> to identify the host galaxy in the infrared."
+    attachment: "center top .viewport center -0.24"
+    onEnter: ->
+      addBlock()
+    onExit: ->
+      removeBlock()
+    next:
+      "click button.continue": "markir1"
   
   markir1: new Step
     number: 9
     header: "Marking: Infrared (IR) Image"
     details: "Usually we're interested in the brighter galaxies that align with the radio emission.  There may be lots of faint one that could coincidentally be lined up with the radio emission so focus on the bright ones as much as possible."
-    attachment: "center center .viewport center center"
+    attachment: "center top .viewport center -0.24"
+    onEnter: ->
+      addBlock()
+      disableButtons()
+    onExit: ->
+      removeBlock()
+      enableButtons()
     next: "markir2"
   
   markir2: new Step
     number: 10
     header: "Marking: Infrared (IR) Image"
     details: "Select the source galaxy that you previously observed by clicking on it."
-    attachment: "center center .viewport center center"
-    next: "goodjob1"
+    attachment: "center top .viewport center -0.24"
+    onEnter: ->
+      addBlock()
+      disableButtons()
+      
+      svg = d3.select(".svg-contours")
+      circle = svg.append("circle")
+        .attr("class", "tutorial pulsate-and-hide")
+        .attr("r", 10)
+        .attr("cx", 213)
+        .attr("cy", 211)
+      
+      setTimeout ( ->
+        circle.remove()
+        removeBlock()
+      ), 2000
+      
+    onExit: ->
+      removeBlock()
+      enableButtons()
+    next:
+      "click #svg-contours": (e) ->
+        
+        # Select the annotation
+        circle = d3.select("g.infrared circle")
+        circleGroup = d3.select( circle.node().parentNode )
+        
+        transform = circleGroup.attr("transform")
+        translateRegEx = /translate\((-?\d+), (-?\d+)\)/
+        match = transform.match(translateRegEx)
+        
+        cx = parseInt match[1]
+        cy = parseInt match[2]
+        if cx < 223 and cx > 203 and cy < 221 and cy > 201
+          return "goodjob1"
+        return false
   
   goodjob1: new Step
     number: 11
     header: "Great job!"
-    details: "You've selected radio jet emission and associated it with it's infrared galactic source ... possibly identifying a black hole!"
-    attachment: "center center .viewport center center"
+    details: "You've selected a radio jet emission and associated it with it's infrared galactic source ... possibly identifying a black hole!"
+    attachment: "center top .viewport center -0.24"
+    onEnter: ->
+      addBlock()
+      disableButtons()
+    onExit: ->
+      removeBlock()
+      enableButtons()
     next: "goodjob2"
     
   goodjob2: new Step
     number: 12
     header: "Great job!"
-    details: "Sources won't all look like the case you just classified. Depending on whether you are viewing the a galaxy edge-on, face-on, or at some in-between angle, you may see a symmetric extended radio source (like the one you just classified), a compact source (where the radio and infrared emission sit on top of each other), or an extended asymmetric radio source. Sometimes you may even see an image with multiple sources! Check out examples of these different types of sources here. We'll also show you additional examples of these types in a bit."
+    details: "Sources won't all look like the case you just classified. Depending on whether you are viewing the a galaxy edge-on, face-on, or at some in-between angle, you may see a symmetric extended radio source (like the one you just classified), a compact source (where the radio and infrared emission sit on top of each other), or an extended asymmetric radio source. Sometimes you may even see an image with multiple sources! Check out examples of these different types of sources here. We'll also show you additional examples of these types in a bit.<br><br>Click <b>Done</b> to begin!"
     attachment: "center center .viewport center center"
-    next: true
+    onEnter: ->
+      addBlock()
+      disableButtons()
+      
+      # Enable Done button
+      el = angular.element( document.querySelector("button.done") )
+      el.removeAttr("disabled")
+      
+    onExit: ->
+      removeBlock()
+      enableButtons()
+    next:
+      "click button.done": true
   
