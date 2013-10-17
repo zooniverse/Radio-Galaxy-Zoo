@@ -33,6 +33,12 @@ module.exports =
     header: "Welcome to Radio Galaxy Zoo!"
     details: "You're on the hunt for supermassive black holes at the center of galaxies! These black holes emit enormous jets of plasma -- We need your help identifying these jets and also locating the host galaxy (of the black hole) where the jets are coming from.  The tricky part is that the jets are seen at radio wavelengths, whereas the galaxy shines brightly in the infrared, so you'll have to look at both radio and infrared images to do the job."
     attachment: "center center .viewport center center"
+    onEnter: ->
+      addBlock()
+      disableButtons()
+    onExit: ->
+      removeBlock()
+      enableButtons()
     next: "dubstep"
   
   dubstep: new Step
@@ -40,35 +46,99 @@ module.exports =
     header: "Welcome to Radio Galaxy Zoo!"
     details: "Each classification you make will take place in two parts -- <b>Observing</b> the radio and infrared images and then <b>Marking</b> the systems you think represent jets and their host galaxies.  Let's try one out."
     attachment: "center center .viewport center center"
+    onEnter: ->
+      addBlock()
+      disableButtons()
+    onExit: ->
+      removeBlock()
+      enableButtons()
     next: "observeradio"
   
   observeradio: new Step
     number: 3
     header: "Observing: Radio Image"
     details: "This is a radio image. The number of contour lines represent the brightness of the radio source, notice the two bright areas of radio emission. We're interested in relatively bright radio features like this one because they're possibly from a jet."
-    attachment: "center center .viewport center center"
+    attachment: "center top .viewport center -0.24"
+    className: "arrow-bottom"
+    onEnter: ->
+      addBlock()
+      disableButtons()
+    onExit: ->
+      removeBlock()
+      enableButtons()
     next: "observeslider"
   
   observeslider: new Step
     number: 4
     header: "Observing: Slider"
     details: "By panning back and forth between the radio and infrared images with the <b>slider</b>, you'll check whether there is an infrared host galaxy that the jet appears to be originating from. It's good to keep in mind that while jets can be large and extended, the infrared sources will appear relatively small. Switch back and forth and see if you can see the host galaxy."
-    attachment: "center center .viewport center center"
+    attachment: "right center div.image-slider left center"
+    className: "arrow-right"
+    onEnter: ->
+      addBlock()
+      disableButtons()
+    onExit: ->
+      removeBlock()
+      enableButtons()
     next: "observeir"
   
   observeir: new Step
     number: 5
     header: "Observing: Infrared Image (IR)"
     details: "This is an infrared image. The bright points are mostly galaxies. It looks like there's a bright galaxy in the center of the radio contours. So the radio emission viewed together with this bright infrared source looks consistent  with a jet coming out from the top and bottom half of an edge-on galaxy.<br><br>Now that we've looked at both images, it's time record our observations by marking the radio emission and the IR source galaxy.  Use the slider to switch back to the radio image."
-    attachment: "center center .viewport center center"
+    attachment: "center top .viewport center -0.24"
+    onEnter: ->
+      addBlock()
+      disableButtons()
+      
+      document.querySelector("p[data-band='infrared']").click()
+      document.querySelector("span.toggle-contours").click()
+    onExit: ->
+      removeBlock()
+      enableButtons()
+      
+      document.querySelector("p[data-band='radio']").click()
+      document.querySelector("span.toggle-contours").click()
     next: "markradio1"
   
   markradio1: new Step
     number: 6
     header: "Marking: Radio Image"
     details: "Click on the radio contours to select the two strong areas of radio emission."
-    attachment: "center center .viewport center center"
-    next: "markradio2"
+    attachment: "center top .viewport center -0.24"
+    className: "arrow-bottom"
+    onEnter: ->
+      addBlock()
+      disableButtons()
+      
+      # Determine the center contour group
+      groups = d3.selectAll("g.contour-group")[0]
+      group = null
+      for group in groups
+        bbox = group.getBBox()
+        y = bbox.y + 0.5 * bbox.height
+        break if y < 196 and y > 192
+      
+      group = d3.select(group)
+      group.classed("pulsate", true)
+      setTimeout (->
+        group.classed("pulsate", false)
+        removeBlock()
+      ), 2500
+      
+      # Mouseup to avoid overriding existing click handler
+      group.on("mouseup", ->
+        el = d3.select(this)
+        if el.attr("class").indexOf("selected") > -1
+          disableButtons()
+        else
+          enableButtons()
+      )
+    onExit: ->
+      removeBlock()
+      enableButtons()
+    next:
+      "click button.continue": "markradio2"
   
   markradio2: new Step
     number: 7
