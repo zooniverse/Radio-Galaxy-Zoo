@@ -87,7 +87,7 @@ module.exports =
   observeir: new Step
     number: 5
     header: "Observing: Infrared Image (IR)"
-    details: "This is an infrared image. The bright points are mostly galaxies. It looks like there's a bright galaxy in the center of the radio contours. So the radio emission viewed together with this bright infrared source looks consistent  with a jet coming out from the top and bottom half of an edge-on galaxy.<br><br>Now that we've looked at both images, it's time record our observations by marking the radio emission and the IR source galaxy.  Use the slider to switch back to the radio image."
+    details: "This is an infrared image. The bright points are mostly galaxies. It looks like there's a bright galaxy in the center of the radio contours. So the radio emission viewed together with this bright infrared source looks consistent with a jet coming out from the top and bottom.<br><br>Now that we've looked at both images, it's time record our observations by marking the radio emission and the IR source galaxy.  Use the slider to switch back to the radio image."
     attachment: "center top .viewport center -0.24"
     onEnter: ->
       addBlock()
@@ -106,7 +106,7 @@ module.exports =
   markradio1: new Step
     number: 6
     header: "Marking: Radio Image"
-    details: "Click on the radio contours to select the two strong areas of radio emission."
+    details: "Click on the radio contours to select areas of radio emission."
     attachment: "center top .viewport center -0.24"
     className: "arrow-bottom"
     onEnter: ->
@@ -127,15 +127,6 @@ module.exports =
         group.classed("pulsate", false)
         removeBlock()
       ), 2500
-      
-      # # Mouseup to avoid overriding existing click handler
-      # group.on("mouseup", ->
-      #   el = d3.select(this)
-      #   if el.attr("class").indexOf("selected") > -1
-      #     disableButtons()
-      #   else
-      #     enableButtons()
-      # )
     onExit: ->
       removeBlock()
       enableButtons()
