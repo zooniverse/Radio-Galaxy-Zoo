@@ -388,12 +388,18 @@ class ClassifierModel
       group.attr("class", "contour-group matched")
     
     # Add matched class to infrared annotation
-    d3.select("g.infrared g:not(.matched)")
+    d3.selectAll("g.infrared g:not(.matched)")
       .attr("class", "matched")
+    
+    infrared = []
+    while @annotations.length
+      annotation = @annotations.shift()
+      infrared.push annotation
     
     obj =
       radio: radio
-      infrared: @annotations.shift()
+      infrared: infrared
+    
     @matches.push obj
   
   addContourGroup: (value) ->
