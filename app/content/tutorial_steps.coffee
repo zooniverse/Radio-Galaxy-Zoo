@@ -94,13 +94,11 @@ module.exports =
       disableButtons()
       
       document.querySelector("p[data-band='infrared']").click()
-      document.querySelector("span.toggle-contours").click()
     onExit: ->
       removeBlock()
       enableButtons()
       
       document.querySelector("p[data-band='radio']").click()
-      document.querySelector("span.toggle-contours").click()
     next: "markradio1"
   
   markradio1: new Step
