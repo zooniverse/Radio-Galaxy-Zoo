@@ -237,7 +237,7 @@ module.exports =
   stage2:
     length: 7
     
-    goodjob1: new Step
+    goodjob: new Step
       number: 1
       details: "Good job! Now let's take a look at another source type."
       attachment: "center center .viewport center center"
@@ -251,20 +251,8 @@ module.exports =
     
     observeradio: new Step
       number: 2
-      details: "Sometimes you’ll see radio sources that look like this. This is an example of a single compact source. Notice how this is a relatively faint radio source - it’s not very bright and there are only a few contour lines."
-      attachment: "center center .viewport center center"
-      onEnter: ->
-        addBlock()
-        disableButtons()
-      onExit: ->
-        removeBlock()
-        enableButtons()
-      next: "observeslider"
-    
-    observeslider: new Step
-      number: 3
-      header: "Observing: Slider"
-      details: "We’ve visually confirmed a potential radio emission, time to observe the infrared image. Use the slider to pan to the IR image."
+      header: "Observing: Radio Image"
+      details: "Sometimes you'll see radio sources that look like this. This is an example of a <b>single compact source</b>. We've visually confirmed a potential radio emission, time to observe the infrared image. Use the slider to pan to the IR image."
       attachment: "center center .viewport center center"
       onEnter: ->
         addBlock()
@@ -275,9 +263,9 @@ module.exports =
       next: "observeir"
     
     observeir: new Step
-      number: 4
+      number: 3
       header: "Observing: Infrared (IR) Image"
-      details: "And it looks like there is infrared source (a galaxy) at the center  of the radio emission. Both the infrared and radio emission are likely to come from the same object! The tiny specks towards the upper left corner are noise and probably do not reflect true emission."
+      details: "It looks like there is an infrared source (a galaxy) at the center of the radio emission. Both the infrared and radio emission are likely to come from the same object!"
       attachment: "center center .viewport center center"
       onEnter: ->
         addBlock()
@@ -288,7 +276,7 @@ module.exports =
       next: "markradio"
     
     markradio: new Step
-      number: 5
+      number: 4
       header: "Marking Radio"
       details: "Move the slider back to the radio source and click on it to mark it."
       attachment: "center center .viewport center center"
@@ -301,7 +289,7 @@ module.exports =
       next: "markir"
     
     markir: new Step
-      number: 6
+      number: 5
       header: "Marking Infrared (IR)"
       details: "Move the slider to the infrared image and click on the bright source galaxy that you already spotted."
       attachment: "center center .viewport center center"
@@ -314,7 +302,7 @@ module.exports =
       next: "done"
       
     done: new Step
-      number: 7
+      number: 6
       details: "Great, now try another one on your own."
       attachment: "center center .viewport center center"
       onEnter: ->
@@ -324,4 +312,110 @@ module.exports =
         removeBlock()
         enableButtons()
       next: true
-
+  
+  stage3:
+    length: 8
+    
+    multiplesources: new Step
+      number: 1
+      header: "Multiple Sources"
+      details: "You're doing great! Occasionally you might run into tricky images like this. There are two radio signals you might think come from twin jets like our first classification, but just to be sure we better pan to the IR."
+      attachment: "center center .viewport center center"
+      onEnter: ->
+        addBlock()
+        disableButtons()
+      onExit: ->
+        removeBlock()
+        enableButtons()
+      next: "observemultiples"
+    
+    observemultiples: new Step
+      number: 2
+      header: "Observing Multiple Sources"
+      details: "In the IR it appears that both of those radio signals has an infrared galaxy counterpart near the peak the radio contours. So in this case instead of seeing twin jet emission you are really just seeing two compact sources."
+      attachment: "center center .viewport center center"
+      onEnter: ->
+        addBlock()
+        disableButtons()
+      onExit: ->
+        removeBlock()
+        enableButtons()
+      next: "firstsource1"
+    
+    firstsource1: new Step
+      number: 3
+      header: "Marking the First Source"
+      details: "If you see multiple sources always mark the first in radio and IR and then go back and do the other. Select one of the radio sources."
+      attachment: "center center .viewport center center"
+      onEnter: ->
+        addBlock()
+        disableButtons()
+      onExit: ->
+        removeBlock()
+        enableButtons()
+      next: "firstsource2"
+    
+    firstsource2: new Step
+      number: 4
+      header: "Marking the First Source"
+      details: "Now slide to the IR image and select the host galaxy of this radio emission."
+      attachment: "center center .viewport center center"
+      onEnter: ->
+        addBlock()
+        disableButtons()
+      onExit: ->
+        removeBlock()
+        enableButtons()
+      next: "secondsource1"
+    
+    secondsource1: new Step
+      number: 5
+      header: "Marking the Second Source"
+      details: "Click on Select Another Radio Complex button to indicate that there is a separate and distinct source."
+      attachment: "center center .viewport center center"
+      onEnter: ->
+        addBlock()
+        disableButtons()
+      onExit: ->
+        removeBlock()
+        enableButtons()
+      next: "secondsource2"
+    
+    secondsource2: new Step
+      number: 6
+      header: "Marking the Second Source"
+      details: "Mark the second radio source."
+      attachment: "center center .viewport center center"
+      onEnter: ->
+        addBlock()
+        disableButtons()
+      onExit: ->
+        removeBlock()
+        enableButtons()
+      next: "secondsource3"
+    
+    secondsource3: new Step
+      number: 7
+      header: "Marking the Second Source"
+      details: "And now mark the host galaxy in the infrared image."
+      attachment: "center center .viewport center center"
+      onEnter: ->
+        addBlock()
+        disableButtons()
+      onExit: ->
+        removeBlock()
+        enableButtons()
+      next: "done"
+    
+    done: new Step
+      number: 8
+      header: "Congratulations!"
+      details: "You're fully trained to search for black holes!  Remember you can check out example images on the right and find even more in Talk!"
+      attachment: "center center .viewport center center"
+      onEnter: ->
+        addBlock()
+        disableButtons()
+      onExit: ->
+        removeBlock()
+        enableButtons()
+      next: true

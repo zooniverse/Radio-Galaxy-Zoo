@@ -94,7 +94,7 @@ class ClassifierModel
     stage3 = new Subject(subjects.stage3)
     
     @classification = new Classification {stage1}
-    @startTutorial()
+    @startFirstTutorial()
   
   # Testing AWS CloudFront
   # TODO: Make cloudfront address constant and inject
@@ -102,19 +102,36 @@ class ClassifierModel
     return location
     # return location.replace("radio.galaxyzoo.org.s3.amazonaws.com", "d3hpovx9a6vlyh.cloudfront.net")
   
-  startTutorial: =>
+  startFirstTutorial: =>
     @hasTutorial = true
-    
     Subject.fetch()
     
     @tutorial = new Tutorial
-      id: 'tutorial'
+      id: 'first-tutorial'
       firstStep: 'welcome'
       steps: TutorialSteps.stage1
       parent: document.querySelector(".classifier")
+    @tutorial.el.bind("end-tutorial", @onTutorialEnd)
+  
+  startSecondTutorial: =>
+    @hasTutorial = true
     
-    @tutorial.contours = @tutorialContours
-    @tutorial.el.bind('end-tutorial', @onTutorialEnd)
+    @tutorial = new Tutorial
+      id: "second-tutorial"
+      firstStep: 'goodjob'
+      steps: TutorialSteps.stage2
+      parent: document.querySelector(".classifier")
+    @tutorial.el.bind("end-tutorial", @onTutorialEnd)
+  
+  startThirdTutorial: =>
+    @hasTutorial = true
+    
+    @tutorial = new Tutorial
+      id: "third-tutorial"
+      firstStep: 'multiplesources'
+      steps: TutorialSteps.stage3
+      parent: document.querySelector(".classifier")
+    @tutorial.el.bind("end-tutorial", @onTutorialEnd)
   
   onTutorialEnd: =>
     @hasTutorial = false
@@ -164,6 +181,12 @@ class ClassifierModel
     @subject = @nextSubject
     @infraredSource = @getCloudFront( @subject.location.standard )
     @radioSource = @getCloudFront( @subject.location.radio )
+    
+    # Trigger staged tutorials
+    if @subject.id is "520be919e4bb21ddd30000d5"
+      @startSecondTutorial()
+    if @subject.id is "520be919e4bb21ddd30000b3"
+      @startThirdTutorial()
     
     # Clear the user action arrays
     @matches.length = 0
