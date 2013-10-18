@@ -20,19 +20,19 @@ module.exports =
     tutorial: true
   
   stage2:
-    id: "520be919e4bb21ddd30000d5"
+    id: "520be919e4bb21ddd3000016"
     project_id: "520be12ce4bb21ddcd000001"
     workflow_ids: ["520be12ce4bb21ddcd000002"]
     location:
-      standard: "http://radio.galaxyzoo.org/beta/subjects/standard/S325.jpg"
-      radio: "http://radio.galaxyzoo.org/beta/subjects/radio/S325.jpg"
-      raw: "//radio.galaxyzoo.org/beta/subjects/raw/S325.fits.gz"
-    coords: [8.7192, -44.1239638889]
+      standard: "http://radio.galaxyzoo.org/beta/subjects/standard/S109.jpg"
+      radio: "http://radio.galaxyzoo.org/beta/subjects/radio/S109.jpg"
+      raw: "//radio.galaxyzoo.org/beta/subjects/raw/S109.fits.gz"
+    coords: [9.34715416667, -44.379125]
     metadata:
-      src: "S325"
-      cid: "C0325"
-      swire: "J003452.40-440725.9"
-    zooniverse_id: "ARG000005y"
+      src: "S109"
+      cid: "C0109"
+      swire: "J003723.33-442244.7"
+    zooniverse_id: "ARG000000n"
     tutorial: true
     
   stage3:

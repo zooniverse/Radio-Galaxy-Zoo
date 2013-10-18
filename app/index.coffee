@@ -1,20 +1,4 @@
 
-# Have to check browser because Chrome, FF, and Safari differ in the order in which contours are computed!
-testAgent = (agent) ->
-  browserOrder = ['opera', 'chrome', 'safari', 'firefox', 'msie']
-  
-  matches =
-    chrome: parseFloat agent.match(/Chrom\w+\W+([\w|\.]+)/i)?[1]
-    firefox: parseFloat agent.match(/Firefox\W+([\w|\.]+)/i)?[1]
-    msie: parseFloat agent.match(/MSIE\W+([\w|\.]+)/i)?[1]
-    opera: parseFloat agent.match(/Opera.+Version\W+([\w|\.]+)/)?[1]
-    safari: parseFloat agent.match(/Version\W+([\w|\.]+).+Safari/i)?[1]
-  
-  browser = (browser for browser in browserOrder when matches[browser])[0]
-  version = matches[browser]
-  
-  return {browser, version}
-
 # Import controllers
 ClassifierCtrl  = require './controllers/classifier'
 ScienceCtrl  = require './controllers/science'
@@ -39,16 +23,7 @@ teamTemplate        = require './partials/team'
 # Set up application module
 RadioGalaxyZoo = angular.module("radio-galaxy-zoo", ['ngRoute'])
 
-# Wacky browser dependent value
-agent = testAgent(navigator.userAgent)
-if agent.browser is "chrome"
-  tutorialContours = [ ["3", "6", "7"], "13", "1"]
-else
-  tutorialContours = [ ["2", "5", "6"], "5", "0"]
-
-RadioGalaxyZoo.constant("tutorialContours", tutorialContours)
 RadioGalaxyZoo.constant("imageDimension", 424)
-
 RadioGalaxyZoo.run(["classifierModel", (classifierModel) ->])
 
 # Controllers
@@ -63,7 +38,7 @@ RadioGalaxyZoo.directive('toggleContours', ToggleContoursDirective)
 RadioGalaxyZoo.directive('example', ExampleDirective)
 
 # Services
-RadioGalaxyZoo.service('classifierModel', ["$rootScope", "$q", "imageDimension", "tutorialContours", ClassifierModel])
+RadioGalaxyZoo.service('classifierModel', ["$rootScope", "$q", "imageDimension", ClassifierModel])
 
 # Configure Zooniverse API
 host = if window.location.port is "9296" then "http://0.0.0.0:3000" else "https://dev.zooniverse.org"

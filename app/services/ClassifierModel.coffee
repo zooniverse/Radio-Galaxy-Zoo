@@ -17,13 +17,12 @@ class ClassifierModel
   COMPLETE: true
   
   
-  constructor: ($rootScope, $q, imageDimension, tutorialContours) ->
+  constructor: ($rootScope, $q, imageDimension) ->
     
     # Store injected services on object
     @$rootScope = $rootScope
     @$q = $q
     @imageDimension = imageDimension
-    @tutorialContours = tutorialContours
     
     # Set state variables
     @showContours = true
@@ -183,7 +182,7 @@ class ClassifierModel
     @radioSource = @getCloudFront( @subject.location.radio )
     
     # Trigger staged tutorials
-    if @subject.id is "520be919e4bb21ddd30000d5"
+    if @subject.id is "520be919e4bb21ddd3000016"
       @startSecondTutorial()
     if @subject.id is "520be919e4bb21ddd30000b3"
       @startThirdTutorial()

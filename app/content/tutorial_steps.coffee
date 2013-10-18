@@ -26,6 +26,7 @@ enableButtons = ->
 
 # Higher scope variables to communicate between onEnter and next functions
 groupid = null
+checkState = null
 
 module.exports =
   stage1:
@@ -253,65 +254,109 @@ module.exports =
       number: 2
       header: "Observing: Radio Image"
       details: "Sometimes you'll see radio sources that look like this. This is an example of a <b>single compact source</b>. We've visually confirmed a potential radio emission, time to observe the infrared image. Use the slider to pan to the IR image."
-      attachment: "center center .viewport center center"
+      attachment: "center top .viewport center -0.24"
       onEnter: ->
         addBlock()
         disableButtons()
       onExit: ->
         removeBlock()
         enableButtons()
-      next: "observeir"
+      next:
+        "change input.image-opacity": (e, el) ->
+          if parseFloat(el.value) > 0.85
+            return "observeir"
+          return false
     
     observeir: new Step
       number: 3
       header: "Observing: Infrared (IR) Image"
-      details: "It looks like there is an infrared source (a galaxy) at the center of the radio emission. Both the infrared and radio emission are likely to come from the same object!"
-      attachment: "center center .viewport center center"
+      details: "It looks like there is an infrared source (a galaxy) at the center of the radio emission. Both the infrared and radio emission are likely to come from the same object!<br><br>Move the slider back to the radio source and click on it to mark it.<br><br>Click <b>Continue</b> to find the infrared source."
+      attachment: "center top .viewport center -0.24"
       onEnter: ->
-        addBlock()
         disableButtons()
+        
+        # Determine the center contour group
+        groups = d3.selectAll("g.contour-group")[0]
+        for group in groups
+          bbox = group.getBBox()
+          x = bbox.x + 0.5 * bbox.width
+          break if x < 218 and x > 213
+          
+        group = d3.select(group)
+        groupid = group.attr("id")
+        
+        imgOpacityEl = $("input.image-opacity")
+        el = $("#svg-contours")
+        buttonEl = document.querySelector("button.continue")
+        buttonEl = angular.element(buttonEl)
+        
+        checkState = ->
+          console.log 'checkState'
+          if group.attr("class").indexOf("selected") > -1 and parseFloat( imgOpacityEl.val() ) < 0.25
+            buttonEl.removeAttr("disabled")
+          else
+            disableButtons()
+        
+        el.on("click", checkState)
+        imgOpacityEl.on("change", checkState)
+        
       onExit: ->
-        removeBlock()
         enableButtons()
-      next: "markradio"
-    
-    markradio: new Step
-      number: 4
-      header: "Marking Radio"
-      details: "Move the slider back to the radio source and click on it to mark it."
-      attachment: "center center .viewport center center"
-      onEnter: ->
-        addBlock()
-        disableButtons()
-      onExit: ->
-        removeBlock()
-        enableButtons()
-      next: "markir"
+        
+        $("#svg-contours").off("click", checkState)
+        $("input.image-opacity").off("change", checkState)
+      next:
+        "click button.continue": "markir"
     
     markir: new Step
       number: 5
       header: "Marking Infrared (IR)"
-      details: "Move the slider to the infrared image and click on the bright source galaxy that you already spotted."
-      attachment: "center center .viewport center center"
+      details: "Click on the bright source galaxy that you already spotted."
+      attachment: "center top .viewport center -0.24"
       onEnter: ->
         addBlock()
         disableButtons()
+        
+        svg = d3.select(".svg-contours")
+        circle = svg.append("circle")
+          .attr("class", "tutorial pulsate-and-hide")
+          .attr("r", 10)
+          .attr("cx", 212)
+          .attr("cy", 210)
+        
+        setTimeout ( ->
+          circle.remove()
+          removeBlock()
+        ), 2000
       onExit: ->
-        removeBlock()
         enableButtons()
-      next: "done"
+      next:
+        "click #svg-contours": (e) ->
+          
+          # Select the annotation
+          circle = d3.select("g.infrared circle")
+          circleGroup = d3.select( circle.node().parentNode )
+          
+          transform = circleGroup.attr("transform")
+          translateRegEx = /translate\((-?\d+), (-?\d+)\)/
+          match = transform.match(translateRegEx)
+          
+          cx = parseInt match[1]
+          cy = parseInt match[2]
+          if cx < 222 and cx > 202 and cy < 220 and cy > 200
+            return "done"
+          return false
       
     done: new Step
       number: 6
-      details: "Great, now try another one on your own."
-      attachment: "center center .viewport center center"
+      details: "Great, now click Done to try another one."
+      attachment: "center top .viewport center -0.24"
       onEnter: ->
         addBlock()
-        disableButtons()
       onExit: ->
         removeBlock()
-        enableButtons()
-      next: true
+      next:
+        "click button.done": true
   
   stage3:
     length: 8
