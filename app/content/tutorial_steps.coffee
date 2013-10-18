@@ -270,7 +270,7 @@ module.exports =
     observeir: new Step
       number: 3
       header: "Observing: Infrared (IR) Image"
-      details: "It looks like there is an infrared source (a galaxy) at the center of the radio emission. Both the infrared and radio emission are likely to come from the same object!<br><br>Move the slider back to the radio source and click on it to mark it.<br><br>Click <b>Continue</b> to find the infrared source."
+      details: "It looks like there is an infrared source (a galaxy) at the center of the radio emission. Both the infrared and radio emission are likely to come from the same object!<br><br><b>Move</b> the slider back to the radio source and <b>click</b> on it to mark it.<br><br>Click <b>Continue</b> to find the infrared source."
       attachment: "center top .viewport center -0.24"
       onEnter: ->
         disableButtons()
@@ -349,7 +349,7 @@ module.exports =
       
     done: new Step
       number: 6
-      details: "Great, now click Done to try another one."
+      details: "Great, now <b>click</b> Done to try another one."
       attachment: "center top .viewport center -0.24"
       onEnter: ->
         addBlock()
