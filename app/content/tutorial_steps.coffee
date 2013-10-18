@@ -33,7 +33,7 @@ module.exports =
   welcome: new Step
     number: 1
     header: "Welcome to Radio Galaxy Zoo!"
-    details: "You're on the hunt for supermassive black holes at the center of galaxies! These black holes emit enormous jets of plasma -- We need your help identifying these jets and also locating the host galaxy (of the black hole) where the jets are coming from.  The tricky part is that the jets are seen at radio wavelengths, whereas the galaxy shines brightly in the infrared, so you'll have to look at both radio and infrared images to do the job."
+    details: "You're on the hunt for supermassive black holes at the center of galaxies! These black holes emit enormous jets of plasma -- We need your help identifying these jets and also locating the host galaxy (of the black hole) where the jets are coming from. The tricky part is that the jets are seen at radio wavelengths, whereas the galaxy shines brightly in the infrared, so you'll have to look at both radio and infrared images to do the job."
     attachment: "center center .viewport center center"
     onEnter: ->
       addBlock()
@@ -46,7 +46,7 @@ module.exports =
   dubstep: new Step
     number: 2
     header: "Welcome to Radio Galaxy Zoo!"
-    details: "Each classification you make will take place in two parts -- <b>Observing</b> the radio and infrared images and then <b>Marking</b> the systems you think represent jets and their host galaxies.  Let's try one out."
+    details: "Each classification you make will take place in two parts - <b>Observing</b> the radio and infrared images and then <b>Marking</b> any system you think represents jets and their host galaxy. Let's try one out."
     attachment: "center center .viewport center center"
     onEnter: ->
       addBlock()
@@ -59,7 +59,7 @@ module.exports =
   observeradio: new Step
     number: 3
     header: "Observing: Radio Image"
-    details: "This is a radio image. The number of contour lines represent the brightness of the radio source, notice the two bright areas of radio emission. We're interested in relatively bright radio features like this one because they're possibly from a jet."
+    details: "This is a radio image. The number of contour lines represent the brightness of the radio source, notice the two bright areas of radio emission. We're interested in relatively bright radio features like this one because they're possibly from jets."
     attachment: "center top .viewport center -0.24"
     className: "arrow-bottom"
     onEnter: ->
@@ -73,7 +73,7 @@ module.exports =
   observeslider: new Step
     number: 4
     header: "Observing: Slider"
-    details: "By panning back and forth between the radio and infrared images with the <b>slider</b>, you'll check whether there is an infrared host galaxy that the jet appears to be originating from. It's good to keep in mind that while jets can be large and extended, the infrared sources will appear relatively small. Switch back and forth and see if you can see the host galaxy."
+    details: "By panning back and forth between the radio and infrared images with the <b>slider</b>, you'll check whether there is an infrared host galaxy where the jets appear to originate. Keep in mind that while jets can be large and extended, the infrared sources will appear relatively small."
     attachment: "right center div.image-slider left center"
     className: "arrow-right"
     onEnter: ->
@@ -87,7 +87,7 @@ module.exports =
   observeir: new Step
     number: 5
     header: "Observing: Infrared Image (IR)"
-    details: "This is an infrared image. The bright points are mostly galaxies. It looks like there's a bright galaxy in the center of the radio contours. So the radio emission viewed together with this bright infrared source looks consistent with a jet coming out from the top and bottom.<br><br>Now that we've looked at both images, it's time record our observations by marking the radio emission and the IR source galaxy.  Use the slider to switch back to the radio image."
+    details: "This is an infrared image. The bright points are mostly galaxies. The host galaxy you're looking for is usually off to one side. In this case between the 2 radio components. The radio emission you just viewed combined with the bright infrared source in the middle looks consistent with a picture of twin jets skyrocketing out of a central galaxy.<br><br>Now that we've looked at both images, it's time to record our observations by marking the radio emission and the IR source galaxy. Use the slider to switch back to the radio image."
     attachment: "center top .viewport center -0.24"
     onEnter: ->
       addBlock()
@@ -104,7 +104,7 @@ module.exports =
   markradio1: new Step
     number: 6
     header: "Marking: Radio Image"
-    details: "Click on the radio contours to select areas of radio emission."
+    details: "You should mark all the radio emission originating from a single galaxy before marking the corresponding IR galaxy. Click on the radio contours to select the two strong areas of radio emission."
     attachment: "center top .viewport center -0.24"
     className: "arrow-bottom"
     onEnter: ->
@@ -150,7 +150,7 @@ module.exports =
   markir1: new Step
     number: 9
     header: "Marking: Infrared (IR) Image"
-    details: "Usually we're interested in the brighter galaxies that align with the radio emission.  There may be lots of faint ones that could coincidentally be lined up with the radio emission so focus on the bright ones as much as possible."
+    details: "Usually we're interested in the brighter galaxies that align with the radio emission. There may be lots of faint ones that could coincidentally be lined up with the radio emission so focus on the bright ones as much as possible."
     attachment: "center top .viewport center -0.24"
     onEnter: ->
       addBlock()
@@ -204,7 +204,7 @@ module.exports =
   goodjob1: new Step
     number: 11
     header: "Great job!"
-    details: "You've selected a radio jet emission and associated it with it's infrared galactic source ... possibly identifying a black hole!"
+    details: "You identified the galaxy whose supermassive black hole is responsible for these radio jets!"
     attachment: "center top .viewport center -0.24"
     onEnter: ->
       addBlock()
@@ -212,12 +212,12 @@ module.exports =
     onExit: ->
       removeBlock()
       enableButtons()
-    next: "goodjob2"
+    next: "moreexamples"
     
-  goodjob2: new Step
+  moreexamples: new Step
     number: 12
-    header: "Great job!"
-    details: "Sources won't all look like the case you just classified. Depending on whether you are viewing the a galaxy edge-on, face-on, or at some in-between angle, you may see a symmetric extended radio source (like the one you just classified), a compact source (where the radio and infrared emission sit on top of each other), or an extended asymmetric radio source. Sometimes you may even see an image with multiple sources! Check out examples of these different types of sources here. We'll also show you additional examples of these types in a bit.<br><br>Click <b>Done</b> to begin!"
+    header: "More Examples"
+    details: "Sources won't all look like the case you have just classified. You may see disconnected radio jet components, single compact radio or massive extended / lop-sided radio jets.<br><br>With disconnected radio jet components, remember to click on all the radio components that match up to a single galaxy before marking the IR galaxy.<br><br>Sometimes you may even see an image with multiple galaxies emitting radio jets! Check out examples of these different types of sources in the tabs on the right.<br><br>We'll show you a couple of detailed examples, but first try one classification on your own.<br><br>Click <b>Done</b> to start!"
     attachment: "center center .viewport center center"
     onEnter: ->
       addBlock()
