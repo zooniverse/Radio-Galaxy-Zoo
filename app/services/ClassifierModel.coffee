@@ -69,7 +69,6 @@ class ClassifierModel
     User.on "change", @onUserChange
   
   onUserChange: =>
-    console.log 'onUserChange'
     
     # # SPOOF tutorial flag for testing
     # User.current?.project.tutorial_done = false
@@ -87,27 +86,31 @@ class ClassifierModel
     # Clear subjects before fetch
     Subject.instances?.length = 0
     
-    # Create tutorial subject and fetch
-    subject = require "../content/tutorial_subject"
-    @classification = new Classification {subject}
-    Subject.fetch()
+    # Create tutorial subjects and fetch
+    subjects = require "../content/tutorial_subject"
     
+    stage1 = new Subject(subjects.stage1)
+    stage2 = new Subject(subjects.stage2)
+    stage3 = new Subject(subjects.stage3)
+    
+    @classification = new Classification {stage1}
     @startTutorial()
   
   # Testing AWS CloudFront
+  # TODO: Make cloudfront address constant and inject
   getCloudFront: (location) ->
     return location
     # return location.replace("radio.galaxyzoo.org.s3.amazonaws.com", "d3hpovx9a6vlyh.cloudfront.net")
   
   startTutorial: =>
-    # return  # Disable tutorial for now
-    
     @hasTutorial = true
+    
+    Subject.fetch()
     
     @tutorial = new Tutorial
       id: 'tutorial'
       firstStep: 'welcome'
-      steps: TutorialSteps
+      steps: TutorialSteps.stage1
       parent: document.querySelector(".classifier")
     
     @tutorial.contours = @tutorialContours
@@ -117,6 +120,10 @@ class ClassifierModel
     @hasTutorial = false
   
   onInitialFetch: =>
+    
+    if @hasTutorial
+      Subject.instances.splice(1, 0, Subject.instances.pop())
+      Subject.instances.splice(3, 0, Subject.instances.pop())
     
     @subject = Subject.instances.shift()
     @nextSubject = Subject.instances.shift()
@@ -373,7 +380,6 @@ class ClassifierModel
     # NOTE: Tutorial animation lags due to SVG drawing. Placing tutorial start here
     #       allows drawing to complete before rendering tutorial. Also needed because
     #       tutorial depends on contours already having been drawn.
-    # TODO: setImmediate?
     setTimeout ( =>
       @tutorial.start() if @hasTutorial
     ), 0
@@ -418,7 +424,6 @@ class ClassifierModel
   # This function is called from the marking directive whenever an annotation
   # changes (e.g. create, move, scale, remove).
   updateAnnotation: ->
-    console.log "updateAnnotation"
     
     translateRegEx = /translate\((-?\d+), (-?\d+)\)/
     @annotations.length = 0
@@ -438,22 +443,6 @@ class ClassifierModel
         y: match[2]
       
       @annotations.push obj
-      
-    # for annotation in d3.selectAll("circle.annotation")[0]
-    #   circle = d3.select(annotation)
-    #   group = d3.select(circle.node().parentNode)
-    #   
-    #   # TODO: Generalize function for getting transform coordinates
-    #   #       it's now been written in three separate places in code
-    #   transform = group.attr("transform")
-    #   match = transform.match(translateRegEx)
-    #   
-    #   obj =
-    #     r: circle.attr("r")
-    #     x: match[1]
-    #     y: match[2]
-    #   
-    #   @annotations.push obj
     @$rootScope.$apply()
   
   getClassification: ->
