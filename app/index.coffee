@@ -24,6 +24,8 @@ teamTemplate        = require './partials/team'
 RadioGalaxyZoo = angular.module("radio-galaxy-zoo", ['ngRoute'])
 
 RadioGalaxyZoo.constant("imageDimension", 424)
+RadioGalaxyZoo.constant("contourThreshold", 8)
+RadioGalaxyZoo.constant("fitsImageDimension", 301)
 RadioGalaxyZoo.run(["classifierModel", (classifierModel) ->])
 
 # Controllers
@@ -38,7 +40,7 @@ RadioGalaxyZoo.directive('toggleContours', ToggleContoursDirective)
 RadioGalaxyZoo.directive('example', ExampleDirective)
 
 # Services
-RadioGalaxyZoo.service('classifierModel', ["$rootScope", "$q", "imageDimension", ClassifierModel])
+RadioGalaxyZoo.service('classifierModel', ["$rootScope", "$q", "imageDimension", "fitsImageDimension", "contourThreshold", ClassifierModel])
 
 # Configure Zooniverse API
 host = if window.location.port is "9296" then "http://0.0.0.0:3000" else "https://dev.zooniverse.org"
@@ -48,8 +50,8 @@ if window.location.hostname in ["0.0.0.0", "radio.galaxyzoo.org"]
     host: host
     path: '/proxy'
 else
-  # new Analytics
-  #   account: "UA-1224199-49"
+  new Analytics
+    account: "UA-1224199-49"
   
   api = new zooniverse.Api
     project: 'radio'

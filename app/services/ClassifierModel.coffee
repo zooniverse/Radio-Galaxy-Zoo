@@ -17,12 +17,14 @@ class ClassifierModel
   COMPLETE: true
   
   
-  constructor: ($rootScope, $q, imageDimension) ->
+  constructor: ($rootScope, $q, imageDimension, fitsImageDimension, contourThreshold) ->
     
     # Store injected services on object
     @$rootScope = $rootScope
     @$q = $q
     @imageDimension = imageDimension
+    @fitsImageDimension = fitsImageDimension
+    @contourThreshold = contourThreshold
     
     # Set state variables
     @showContours = true
@@ -241,6 +243,7 @@ class ClassifierModel
       width = e.data.width
       height = e.data.height
       arr = new Float32Array(e.data.buffer)
+      threshold = e.data.threshold
       
       levels = [
         3.0, 5.196152422706632, 8.999999999999998, 15.588457268119893, 26.999999999999993,
@@ -318,7 +321,7 @@ class ClassifierModel
         xd = xmax - xmin
         yd = ymax - ymin
         d = Math.sqrt(xd * xd + yd * yd)
-        continue if d < 8 # Tunable parameter (TODO: move to index.coffee as constant)
+        continue if d < threshold
         
         for subcontour, index in subcontours
           
@@ -349,6 +352,7 @@ class ClassifierModel
       width: width
       height: height
       buffer: arr.buffer
+      threshold: @contourThreshold
     
     worker.onmessage = (e) =>
       @subjectContours.push e.data
@@ -360,7 +364,7 @@ class ClassifierModel
     svg = d3.select("svg.svg-contours")
     
     # Factor is needed because JPGs have been upscaled from FITS resolution.
-    factor = @imageDimension / 301
+    factor = @imageDimension / @fitsImageDimension
     pathFn = d3.svg.line()
                 .x( (d) -> return factor * d.y)
                 .y( (d) -> return factor * d.x)
