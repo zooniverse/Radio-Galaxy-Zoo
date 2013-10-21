@@ -89,7 +89,7 @@ module.exports =
     observeir: new Step
       number: 5
       header: "Observing: Infrared Image (IR)"
-      details: "This is an infrared image. The bright points are mostly galaxies. The host galaxy you're looking for is usually off to one side. In this case between the 2 radio components. The radio emission you just viewed combined with the bright infrared source in the middle looks consistent with a picture of twin jets skyrocketing out of a central galaxy.<br><br>Now that we've looked at both images, it's time to record our observations by marking the radio emission and the IR source galaxy. Use the slider to switch back to the radio image."
+      details: "This is an infrared image. The bright points are mostly galaxies. The host galaxy you're looking for is usually off to one side. In this case between the 2 radio components. The radio emission you just viewed combined with the bright infrared source in the middle looks consistent with a picture of twin jets skyrocketing out of a central galaxy.<br><br>Now that we've looked at both images, it's time to record our observations by marking the radio emission and the IR source galaxy. <b>Move</b> the slider to switch back to the radio image."
       attachment: "center top .viewport center -0.24"
       onEnter: ->
         addBlock()
@@ -253,7 +253,7 @@ module.exports =
     observeradio: new Step
       number: 2
       header: "Observing: Radio Image"
-      details: "Sometimes you'll see radio sources that look like this. This is an example of a <b>single compact source</b>. We've visually confirmed a potential radio emission, time to observe the infrared image. Use the slider to pan to the IR image."
+      details: "Sometimes you'll see radio sources that look like this. This is an example of a <b>single compact source</b>. We've visually confirmed a potential radio emission, time to observe the infrared image. <b>Move the slider</b> to pan to the IR image."
       attachment: "center top .viewport center -0.24"
       onEnter: ->
         addBlock()
@@ -270,7 +270,7 @@ module.exports =
     observeir: new Step
       number: 3
       header: "Observing: Infrared (IR) Image"
-      details: "It looks like there is an infrared source (a galaxy) at the center of the radio emission. Both the infrared and radio emission are likely to come from the same object!<br><br><b>Move</b> the slider back to the radio source and <b>click</b> on it to mark it.<br><br>Click <b>Continue</b> to find the infrared source."
+      details: "It looks like there is an infrared source (a galaxy) at the center of the radio emission. Both the infrared and radio emission are likely to come from the same object!<br><br><b>Move the slider</b> back to the radio source and <b>click</b> on it to mark it.<br><br>Click <b>Continue</b> to find the infrared source."
       attachment: "center top .viewport center -0.24"
       onEnter: ->
         disableButtons()
@@ -291,7 +291,6 @@ module.exports =
         buttonEl = angular.element(buttonEl)
         
         checkState = ->
-          console.log 'checkState'
           if group.attr("class").indexOf("selected") > -1 and parseFloat( imgOpacityEl.val() ) < 0.25
             buttonEl.removeAttr("disabled")
           else
@@ -364,21 +363,25 @@ module.exports =
     multiplesources: new Step
       number: 1
       header: "Multiple Sources"
-      details: "You're doing great! Occasionally you might run into tricky images like this. There are two radio signals you might think come from twin jets like our first classification, but just to be sure we better pan to the IR."
-      attachment: "center center .viewport center center"
+      details: "You're doing great! Occasionally you might run into tricky images like this. There are two radio signals you might think come from twin jets like our first classification, but just to be sure we better <b>pan to the IR</b>."
+      attachment: "center top .viewport center -0.24"
       onEnter: ->
         addBlock()
         disableButtons()
       onExit: ->
         removeBlock()
         enableButtons()
-      next: "observemultiples"
+      next:
+        "change input.image-opacity": (e, el) ->
+          if parseFloat(el.value) > 0.85
+            return "observemultiples"
+          return false
     
     observemultiples: new Step
       number: 2
       header: "Observing Multiple Sources"
-      details: "In the IR it appears that both of those radio signals has an infrared galaxy counterpart near the peak the radio contours. So in this case instead of seeing twin jet emission you are really just seeing two compact sources."
-      attachment: "center center .viewport center center"
+      details: "In the IR it appears that both of those radio signals has an infrared galaxy counterpart near the peak of the radio contours. So in this case instead of seeing twin jet emission you are seeing two compact sources."
+      attachment: "center top .viewport center -0.24"
       onEnter: ->
         addBlock()
         disableButtons()
@@ -390,77 +393,148 @@ module.exports =
     firstsource1: new Step
       number: 3
       header: "Marking the First Source"
-      details: "If you see multiple sources always mark the first in radio and IR and then go back and do the other. Select one of the radio sources."
-      attachment: "center center .viewport center center"
+      details: "If you see multiple sources always mark the first in radio and IR and then go back and do the other. <b>Select</b> one of the radio sources, then <b>click</b> Continue."
+      attachment: "center top .viewport center -0.24"
       onEnter: ->
-        addBlock()
         disableButtons()
+        
+        el = $("#svg-contours")
+        buttonEl = $("button.continue")
+        
+        el.on("click", ->
+          groups = d3.selectAll("g.contour-group.selected")[0]
+          for group in groups
+            bbox = group.getBBox()
+            x = bbox.x + 0.5 * bbox.width
+            if x > 208 and x < 214 and groups.length is 1
+              groupid = d3.select(group).attr("id")
+              buttonEl.removeAttr("disabled")
+              return
+          buttonEl.attr("disabled", "disabled")
+        )
       onExit: ->
-        removeBlock()
+        $("#svg-contours").off("click")
         enableButtons()
-      next: "firstsource2"
+      next:
+        "click button.continue": "firstsource2"
     
     firstsource2: new Step
       number: 4
       header: "Marking the First Source"
-      details: "Now slide to the IR image and select the host galaxy of this radio emission."
-      attachment: "center center .viewport center center"
+      details: "Now slide to the IR image and select the host galaxy of this radio emission.<br><br><b>Click</b> Select Another Radio Complex to indicate that there is a separate and distinct source."
+      attachment: "center top .viewport center -0.24"
       onEnter: ->
-        addBlock()
         disableButtons()
+        
+        buttonEl = $("button.next-radio")
+        
+        $("#svg-contours").on("click", ->
+          
+          # Get bounding box of the selected contour group
+          bbox = d3.select("g.contour-group[id='#{groupid}']").node().getBBox()
+          x = bbox.x + 0.5 * bbox.width
+          y = bbox.y + 0.5 * bbox.height
+          
+          # Get location of the IR annotation
+          circle = d3.select("g.infrared circle")
+          circleGroup = d3.select( circle.node().parentNode )
+          
+          transform = circleGroup.attr("transform")
+          translateRegEx = /translate\((-?\d+), (-?\d+)\)/
+          match = transform.match(translateRegEx)
+          
+          cx = parseInt match[1]
+          cy = parseInt match[2]
+          
+          if cx < (x + 10) and cx > (x - 10) and cy < (y + 10) and cy > (y - 10)
+            buttonEl.removeAttr("disabled")
+            return
+          buttonEl.attr("disabled", "disabled")
+        )
+        
       onExit: ->
-        removeBlock()
         enableButtons()
-      next: "secondsource1"
+        $("#svg-contours").off("click")
+      next:
+        "click button.next-radio": "secondsource1"
     
     secondsource1: new Step
-      number: 5
-      header: "Marking the Second Source"
-      details: "Click on Select Another Radio Complex button to indicate that there is a separate and distinct source."
-      attachment: "center center .viewport center center"
-      onEnter: ->
-        addBlock()
-        disableButtons()
-      onExit: ->
-        removeBlock()
-        enableButtons()
-      next: "secondsource2"
-    
-    secondsource2: new Step
       number: 6
       header: "Marking the Second Source"
-      details: "Mark the second radio source."
-      attachment: "center center .viewport center center"
+      details: "<b>Mark</b> the second radio source and <b>click</b> Continue."
+      attachment: "center top .viewport center -0.24"
       onEnter: ->
-        addBlock()
         disableButtons()
+        
+        buttonEl = $("button.continue")
+        $("#svg-contours").on("click", ->
+          
+          groups = d3.selectAll("g.contour-group.selected")[0]
+          for group in groups
+            bbox = group.getBBox()
+            x = bbox.x + 0.5 * bbox.width
+            
+            if x > 208 and x < 214 and groups.length is 1
+              groupid = d3.select(group).attr("id")
+              buttonEl.removeAttr("disabled")
+              return
+          buttonEl.attr("disabled", "disabled")
+        )
+        
       onExit: ->
-        removeBlock()
         enableButtons()
-      next: "secondsource3"
+        $("#svg-contours").off("click")
+      next:
+        "click button.continue": "secondsource2"
     
-    secondsource3: new Step
+    secondsource2: new Step
       number: 7
       header: "Marking the Second Source"
-      details: "And now mark the host galaxy in the infrared image."
-      attachment: "center center .viewport center center"
+      details: "And now <b>mark</b> the host galaxy in the infrared image."
+      attachment: "center top .viewport center -0.24"
       onEnter: ->
-        addBlock()
         disableButtons()
+        
+        buttonEl = $("button.done")
+        $("#svg-contours").on("click", ->
+          
+          # Get bounding box of the selected contour group
+          bbox = d3.select("g.contour-group[id='#{groupid}']").node().getBBox()
+          x = bbox.x + 0.5 * bbox.width
+          y = bbox.y + 0.5 * bbox.height
+          
+          # Get location of the IR annotation
+          circle = d3.selectAll("g.infrared circle.annotation")[0][1]
+          circleGroup = d3.select( circle.parentNode )
+          
+          transform = circleGroup.attr("transform")
+          translateRegEx = /translate\((-?\d+), (-?\d+)\)/
+          match = transform.match(translateRegEx)
+          
+          cx = parseInt match[1]
+          cy = parseInt match[2]
+          console.log x, y
+          console.log cx, cy
+          
+          if cx < (x + 10) and cx > (x - 10) and cy < (y + 10) and cy > (y - 10)
+            buttonEl.removeAttr("disabled")
+            return
+          buttonEl.attr("disabled", "disabled")
+        )
       onExit: ->
-        removeBlock()
         enableButtons()
-      next: "done"
+        $("#svg-contours").off("click")
+      next:
+        "click button.done": "done"
     
     done: new Step
       number: 8
       header: "Congratulations!"
-      details: "You're fully trained to search for black holes!  Remember you can check out example images on the right and find even more in Talk!"
-      attachment: "center center .viewport center center"
+      details: "You're fully trained to search for black holes!  Remember you can check out example images on the right and find even more in Talk!<br><br><b>Click</b> Next to get going!"
+      attachment: "center top .viewport center -0.24"
       onEnter: ->
         addBlock()
-        disableButtons()
       onExit: ->
         removeBlock()
-        enableButtons()
-      next: true
+      next:
+        "click button.next": true

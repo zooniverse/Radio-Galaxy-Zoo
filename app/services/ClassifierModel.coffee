@@ -184,8 +184,8 @@ class ClassifierModel
     # Trigger staged tutorials
     if @subject.id is "520be919e4bb21ddd3000016"
       @startSecondTutorial()
-    # if @subject.id is "520be919e4bb21ddd30000b3"
-    #   @startThirdTutorial()
+    if @subject.id is "520be919e4bb21ddd30000b3"
+      @startThirdTutorial()
     
     # Clear the user action arrays
     @matches.length = 0
