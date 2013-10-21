@@ -89,8 +89,9 @@ module.exports =
     observeir: new Step
       number: 5
       header: "Observing: Infrared Image (IR)"
-      details: "This is an infrared image. The bright points are mostly galaxies. The host galaxy you're looking for is usually off to one side. In this case between the 2 radio components. The radio emission you just viewed combined with the bright infrared source in the middle looks consistent with a picture of twin jets skyrocketing out of a central galaxy.<br><br>Now that we've looked at both images, it's time to record our observations by marking the radio emission and the IR source galaxy. <b>Move</b> the slider to switch back to the radio image."
-      attachment: "center top .viewport center -0.24"
+      details: "This is an infrared image. The bright points are galaxies. The host galaxy you're looking for is usually off to one side. In this case between the 2 radio components. The radio emission you just viewed combined with the bright infrared source in the middle looks consistent with a picture of twin jets skyrocketing out of a central galaxy.<br><br>Now that we've looked at both images, it's time to record our observations by marking the radio emission and the IR source galaxy. <b>Move</b> the slider to switch back to the radio image."
+      attachment: "left center .viewport right center"
+      className: "arrow-left"
       onEnter: ->
         addBlock()
         disableButtons()
@@ -140,12 +141,15 @@ module.exports =
     markradio2: new Step
       number: 7
       header: "Marking: Radio Image"
-      details: "Sometimes you'll see isolated faint blue features with one or two contour lines around them. These are mostly background noise and you can ignore them.<br><br>Click <b>Continue</b> to identify the host galaxy in the infrared."
+      details: "Sometimes you'll see some small faint blue features with one contour line. These are mostly background noise and you can ignore them.<br><br>Click <b>Continue</b> to identify the host galaxy in the infrared."
       attachment: "center top .viewport center -0.24"
       onEnter: ->
         addBlock()
+        
+        $("button.continue").toggleClass("pulsate")
       onExit: ->
         removeBlock()
+        $("button.continue").toggleClass("pulsate")
       next:
         "click button.continue": "markir1"
         
@@ -226,12 +230,15 @@ module.exports =
         disableButtons()
         
         # Enable Done button
-        el = angular.element( document.querySelector("button.done") )
+        el = $("button.done")
         el.removeAttr("disabled")
+        el.toggleClass("pulsate")
         
       onExit: ->
         removeBlock()
         enableButtons()
+        
+        $("button.done").toggleClass("pulsate")
       next:
         "click button.done": true
   
