@@ -110,7 +110,7 @@ class ClassifierModel
     
     @tutorial = new Tutorial
       id: 'first-tutorial'
-      firstStep: 'observeir'
+      firstStep: 'welcome'
       steps: TutorialSteps.stage1
       parent: document.querySelector(".classifier")
     @tutorial.el.bind("end-tutorial", @onTutorialEnd)
