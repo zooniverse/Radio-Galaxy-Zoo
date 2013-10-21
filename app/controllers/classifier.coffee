@@ -56,6 +56,9 @@ Classifier = ($scope, model) ->
   $scope.onContinue = ->
     model.step = 2
   
+  $scope.onBack = ->
+    model.step = 1
+  
   $scope.onNoCorrespondingFlux = ->
     model.getMatch()
     model.showContours = true
