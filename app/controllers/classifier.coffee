@@ -9,6 +9,7 @@ Classifier = ($scope, model) ->
   $scope.step = model.step
   $scope.showSED = model.showSED
   $scope.example = model.example
+  $scope.subExample = model.subExample
   
   $scope.getInfraredSource = ->
     return model.infraredSource
@@ -24,6 +25,8 @@ Classifier = ($scope, model) ->
     return model.nextRadioSource
   $scope.getExample = ->
     return model.example
+  $scope.getSubExample = ->
+    return model.subExample
   $scope.getIsDisabled = ->
     return model.isDisabled
   $scope.getAnnotationCount = ->
