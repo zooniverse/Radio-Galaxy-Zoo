@@ -33,20 +33,7 @@ The FITS images sent to the client are roughly 1 MB in size. To reduce the data 
 
     s3cmd put some-binary-file.gz s3://some-s3-bucket/ --mime-type "application/json" --add-header "Content-Encoding: gzip" --acl-public
 
-## TODO
-  
-  * Bolder contours on example images
-  * Add "Tutorial" button to trigger tutorial whenever
-  * Back button?
-  * Position tutorial box in less obtrusive place
-  
-## BUGS
-  
-  * Home page formatting hides image if screen width is too small
-  * Classification page needs better formatting for smaller devices
-  
-  
-# Data Preparation
+## Data Preparation
 
     python make_png.py ../data-import/rgz_fits/
 
