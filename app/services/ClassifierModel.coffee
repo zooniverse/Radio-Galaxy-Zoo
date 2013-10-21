@@ -31,6 +31,7 @@ class ClassifierModel
     @step = 1
     @showSED = false
     @example = 'single-compact-source'
+    @subExample = 1
     @isDisabled = true
     
     @hasTutorial = false
