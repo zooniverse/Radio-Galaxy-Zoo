@@ -1,6 +1,6 @@
 $subject-width = 424
 $subject-height = 424
-$workflow-background = rgb(35, 35, 35)
+$workflow-background = rgb(0, 0, 0)
 $workflow-text-color = rgb(240, 240, 240)
 
 .block
@@ -111,14 +111,16 @@ $workflow-text-color = rgb(240, 240, 240)
         margin 0
 
       span
+        background lighten($workflow-background, 10%)
         cursor pointer
         height 30px
         
         &:hover
-          background lighten($workflow-background, 10%)
+          background lighten($workflow-background, 30%)
           color white
         
         &.active
+          background lighten($workflow-background, 20%)
           text-decoration underline
       
       .example-selection
@@ -132,6 +134,34 @@ $workflow-text-color = rgb(240, 240, 240)
       
       img
         max-width 100%
+
+      .example-list
+        clearfix()
+        margin 6px 0
+
+        ul
+          list-style none
+          margin 0
+          padding 0
+
+          li
+            float left
+            padding 3px 7px
+
+            &:hover
+              background lighten($workflow-background, 30%)
+              color white
+              cursor pointer
+            
+            &.active
+              background lighten($workflow-background, 20%)
+              text-decoration underline
+
+      .example-box
+
+        p
+          font-size 13px
+          margin 5px 0
 
     > .buttons
       padding: 10px 0

@@ -5,10 +5,11 @@ ScienceCtrl  = require './controllers/science'
 TeamCtrl  = require './controllers/team'
 
 # Import directives
-ImageOpacityDirective = require './directives/image_opacity'
-MarkingDirective      = require './directives/marking'
-ToggleContoursDirective  = require './directives/toggle_contours'
-ExampleDirective      = require './directives/example'
+ImageOpacityDirective   = require './directives/image_opacity'
+MarkingDirective        = require './directives/marking'
+ToggleContoursDirective = require './directives/toggle_contours'
+ExampleDirective        = require './directives/example'
+SubExampleDirective     = require './directives/sub_example'
 
 # Import services
 ClassifierModel = require './services/ClassifierModel'
@@ -38,6 +39,7 @@ RadioGalaxyZoo.directive('imageOpacity', ImageOpacityDirective)
 RadioGalaxyZoo.directive('marking', MarkingDirective)
 RadioGalaxyZoo.directive('toggleContours', ToggleContoursDirective)
 RadioGalaxyZoo.directive('example', ExampleDirective)
+RadioGalaxyZoo.directive('subExample', SubExampleDirective)
 
 # Services
 RadioGalaxyZoo.service('classifierModel', ["$rootScope", "$q", "imageDimension", "fitsImageDimension", "contourThreshold", ClassifierModel])
