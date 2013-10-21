@@ -6,14 +6,8 @@
   "scripts": {
     "start": "haw serve"
   },
-  "dependencies": {
-    "zooniverse": "git://github.com/zooniverse/Zooniverse.git#no-deps",
-    "zootorial": "0.3.x"
-  },
   "devDependencies": {
-    "haw": "0.1.x",
-    "express": "3.3.x",
-    "nodemon": "0.7.x"
+    "haw": "0.1.x"
   },
   "engine": "node >= 0.10.12"
 }
