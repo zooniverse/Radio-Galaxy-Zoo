@@ -27,6 +27,7 @@ RadioGalaxyZoo = angular.module("radio-galaxy-zoo", ['ngRoute'])
 RadioGalaxyZoo.constant("imageDimension", 424)
 RadioGalaxyZoo.constant("contourThreshold", 8)
 RadioGalaxyZoo.constant("fitsImageDimension", 301)
+RadioGalaxyZoo.constant("translateRegEx", /translate\((-?\d+), (-?\d+)\)/)
 RadioGalaxyZoo.run(["classifierModel", (classifierModel) ->])
 
 # Controllers
@@ -42,7 +43,7 @@ RadioGalaxyZoo.directive('example', ExampleDirective)
 RadioGalaxyZoo.directive('subExample', SubExampleDirective)
 
 # Services
-RadioGalaxyZoo.service('classifierModel', ["$rootScope", "$q", "imageDimension", "fitsImageDimension", "contourThreshold", ClassifierModel])
+RadioGalaxyZoo.service('classifierModel', ["$rootScope", "$q", "translateRegEx", "imageDimension", "fitsImageDimension", "contourThreshold", ClassifierModel])
 
 # Configure Zooniverse API
 host = if window.location.port is "9296" then "http://0.0.0.0:3000" else "https://dev.zooniverse.org"

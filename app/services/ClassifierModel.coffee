@@ -17,11 +17,12 @@ class ClassifierModel
   COMPLETE: true
   
   
-  constructor: ($rootScope, $q, imageDimension, fitsImageDimension, contourThreshold) ->
+  constructor: ($rootScope, $q, translateRegEx, imageDimension, fitsImageDimension, contourThreshold) ->
     
     # Store injected services on object
     @$rootScope = $rootScope
     @$q = $q
+    @translateRegEx = translateRegEx
     @imageDimension = imageDimension
     @fitsImageDimension = fitsImageDimension
     @contourThreshold = contourThreshold
@@ -431,23 +432,22 @@ class ClassifierModel
       
       group.attr("class", "contour-group matched")
     
-    # TODO: Inject this value from index.coffee
     infrared = []
-    translateRegEx = /translate\((-?\d+), (-?\d+)\)/
-    for group in d3.selectAll("g.infrared g:not(.matched)")
-      group = group[0]
-      circle = d3.select( group.children[0] )
+    d3.selectAll("g.infrared g:not(.matched)").each( ->
       
-      group = d3.select(group)
+      circle = d3.select( this.children[0] )
+      
+      group = d3.select(this)
       group.classed("matched", true)
       transform = group.attr("transform")
-      match = transform.match(translateRegEx)
+      match = transform.match(@translateRegEx)
       
       obj =
         r: circle.attr("r")
         x: match[1]
         y: match[2]
       infrared.push obj
+    )
     
     obj =
       radio: radio
