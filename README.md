@@ -30,7 +30,8 @@ FITS images are used to compute contours on the fly. This allows direct interact
 #### FITS Compression
 
 The FITS images sent to the client are roughly 1 MB in size. To reduce the data transfer, it's best to gzip all FITS files, and upload to S3 with the correct encoding, and a spoofed MIME type:
-
+    
+    gzip -9 some-binary-file.fits > some-binary-file.fits.gz
     s3cmd put some-binary-file.gz s3://some-s3-bucket/ --mime-type "application/json" --add-header "Content-Encoding: gzip" --acl-public
 
 ## Data Preparation

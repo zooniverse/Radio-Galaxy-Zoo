@@ -89,7 +89,7 @@ module.exports =
     observeir: new Step
       number: 5
       header: "Observing: Infrared Image (IR)"
-      details: "This is an infrared image. The bright points are galaxies. The host galaxy you're looking for is usually off to one side. In this case between the 2 radio components. The radio emission you just viewed combined with the bright infrared source in the middle looks consistent with a picture of twin jets skyrocketing out of a central galaxy.<br><br>Now that we've looked at both images, it's time to record our observations by marking the radio emission and the IR source galaxy. <b>Move</b> the slider to switch back to the radio image."
+      details: "This is an infrared image. The bright points are galaxies. The host is close to the centre of the radio emission, but may be slightly to one side. In this case between the 2 radio components. The radio emission you just viewed combined with the bright infrared source in the middle looks consistent with a picture of twin jets skyrocketing out of a central galaxy.<br><br>Now that we've looked at both images, it's time to record our observations by marking the radio emission and the IR source galaxy. <b>Move</b> the slider to switch back to the radio image."
       attachment: "left center .viewport right center"
       className: "arrow-left"
       onEnter: ->
