@@ -70,14 +70,15 @@ class ClassifierModel
     # Callback for user change
     User.on "change", @onUserChange
   
-  onUserChange: =>
-    
-    # Reset some variables
+  reset: ->
     @initialSelect = false
     @subjectContours.length = 0
     d3.select("g.contours").remove()
     d3.selectAll("g.infrared g").remove()
+  
+  onUserChange: =>
     
+    @reset()
     Subject.one("fetch", @onInitialFetch)
     
     # Close tutorial if open
@@ -102,6 +103,8 @@ class ClassifierModel
     stage3 = new Subject(subjects.stage3)
     
     @classification = new Classification {stage1}
+    
+    Subject.fetch()
     @startFirstTutorial()
   
   # Testing AWS CloudFront
@@ -112,7 +115,6 @@ class ClassifierModel
   
   startFirstTutorial: =>
     @hasTutorial = true
-    Subject.fetch()
     
     @tutorial = new Tutorial
       id: 'first-tutorial'

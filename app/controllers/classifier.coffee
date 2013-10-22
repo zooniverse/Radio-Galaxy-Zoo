@@ -39,10 +39,10 @@ Classifier = ($scope, model) ->
   if model.subjectContours.length > 0
     
     # Start tutorial if exists
-    model.startTutorial() if model.hasTutorial
+    model.startFirstTutorial() if model.hasTutorial
     
     # Draw contours if they exist
-    model.drawContours model.subjectContours[0]
+    model.drawContours(model.subjectContours[0])
     
     for contourid in model.selectedContours
       path = d3.select("path[contourid='#{contourid}']")
