@@ -242,7 +242,6 @@ class ClassifierModel
     # Define function to be executed on worker thread
     onmessage = (e) ->
       
-      # importScripts("http://0.0.0.0:9296/workers/conrec.js")
       importScripts("http://radio.galaxyzoo.org/beta2/workers/conrec.js")
       
       # Get variables sent from main thread
