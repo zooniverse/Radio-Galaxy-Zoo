@@ -66,16 +66,19 @@ class ClassifierModel
     # Callback functions when new subject is presented
     Subject.on("fetch", @onSubjectFetch)
     Subject.on("select", @onSubjectSelect)
-    Subject.one("fetch", @onInitialFetch)
     
     # Callback for user change
     User.on "change", @onUserChange
   
   onUserChange: =>
-    console.log 'onUserChange'
     
-    # # SPOOF tutorial flag for testing
-    # User.current?.project.tutorial_done = false
+    # Reset some variables
+    @initialSelect = false
+    @subjectContours.length = 0
+    d3.select("g.contours").remove()
+    d3.selectAll("g.infrared g").remove()
+    
+    Subject.one("fetch", @onInitialFetch)
     
     # Close tutorial if open
     @tutorial?.end()
@@ -170,7 +173,6 @@ class ClassifierModel
   # the async process of requesting FITS and computing contours is perceived 
   # to be faster.
   onSubjectSelect: (e, subject) =>
-    console.log 'onSubjectSelect'
     
     @nextSubject = subject
     
@@ -217,7 +219,6 @@ class ClassifierModel
     )
   
   onGetContours: (opts) =>
-    
     if @initialSelect is @COMPLETE
       @$rootScope.$apply( ->
         opts.dfd.resolve(opts.subject)
@@ -241,7 +242,6 @@ class ClassifierModel
     
     # Define function to be executed on worker thread
     onmessage = (e) ->
-      
       importScripts("http://radio.galaxyzoo.org/beta2/workers/conrec.js")
       
       # Get variables sent from main thread
