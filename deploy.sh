@@ -10,6 +10,7 @@ do
   mv $f ${f%.gz} 
 done
 
+s3cmd put --acl-public build/index.html s3://radio.galaxyzoo.org/$PHASE/
 s3cmd put --acl-public --mime-type "application/javascript" --add-header "Content-Encoding: gzip" build/application*.js s3://radio.galaxyzoo.org/$PHASE/
 s3cmd put --acl-public --mime-type "text/css" --add-header "Content-Encoding: gzip" build/application*.css s3://radio.galaxyzoo.org/$PHASE/
 s3cmd put --acl-public put build/favicon.ico s3://radio.galaxyzoo.org/$PHASE/
