@@ -71,6 +71,7 @@ class ClassifierModel
     User.on "change", @onUserChange
   
   onUserChange: =>
+    console.log 'onUserChange'
     
     # # SPOOF tutorial flag for testing
     # User.current?.project.tutorial_done = false
@@ -82,6 +83,7 @@ class ClassifierModel
       if User.current.project.tutorial_done is true
         # Clear subjects before fetch
         Subject.instances?.length = 0
+        
         Subject.fetch()
         return
     
@@ -167,6 +169,8 @@ class ClassifierModel
   # the async process of requesting FITS and computing contours is perceived 
   # to be faster.
   onSubjectSelect: (e, subject) =>
+    console.log 'onSubjectSelect'
+    
     @nextSubject = subject
     
     # Create deferred object to be resolved after contours for next subject are computed.
@@ -414,6 +418,7 @@ class ClassifierModel
   toggleFavorite: ->
     @classification.favorite = if @classification.favorite then false else true
   
+  # Store the associated radio emission with IR sources. This is called once for each association.
   getMatch: ->
     
     radio = []
@@ -426,19 +431,27 @@ class ClassifierModel
       
       group.attr("class", "contour-group matched")
     
-    # Add matched class to infrared annotation
-    d3.selectAll("g.infrared g:not(.matched)")
-      .attr("class", "matched")
-    
+    # TODO: Inject this value from index.coffee
     infrared = []
-    while @annotations.length
-      annotation = @annotations.shift()
-      infrared.push annotation
+    translateRegEx = /translate\((-?\d+), (-?\d+)\)/
+    for group in d3.selectAll("g.infrared g:not(.matched)")
+      group = group[0]
+      circle = d3.select( group.children[0] )
+      
+      group = d3.select(group)
+      group.classed("matched", true)
+      transform = group.attr("transform")
+      match = transform.match(translateRegEx)
+      
+      obj =
+        r: circle.attr("r")
+        x: match[1]
+        y: match[2]
+      infrared.push obj
     
     obj =
       radio: radio
       infrared: infrared
-    
     @matches.push obj
   
   addContourGroup: (value) ->
@@ -447,30 +460,6 @@ class ClassifierModel
   removeContourGroup: (value) ->
     index = @selectedContours.indexOf(value)
     @selectedContours.splice(index, 1)
-  
-  # This function is called from the marking directive whenever an annotation
-  # changes (e.g. create, move, scale, remove).
-  updateAnnotation: ->
-    
-    translateRegEx = /translate\((-?\d+), (-?\d+)\)/
-    @annotations.length = 0
-    
-    for group in d3.selectAll("g.infrared g")
-      group = group[0]
-      circle = group.children[0]
-      circle = d3.select(circle)
-      
-      group = d3.select(group)
-      transform = group.attr("transform")
-      match = transform.match(translateRegEx)
-      
-      obj =
-        r: circle.attr("r")
-        x: match[1]
-        y: match[2]
-      
-      @annotations.push obj
-    @$rootScope.$apply()
   
   getClassification: ->
     @classification.annotate(@matches)

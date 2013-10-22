@@ -101,16 +101,12 @@ module.exports = ->
                     .on("mousedown", -> d3.event.stopPropagation() )
                     .on("mouseup", ->
                       d3.select(this.parentNode).remove()
-                      setTimeout (->
-                        scope.model.updateAnnotation()
-                      ), 200
                     )
           text = group.append("text")
                     .text("×")
                     .attr("x", -13.4)
                     .attr("y", -6.5)
           group.call(move)
-          scope.model.updateAnnotation()
       
       create = d3.behavior.drag()
         .on("dragstart", onDragStart)
