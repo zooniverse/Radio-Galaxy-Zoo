@@ -445,8 +445,10 @@ module.exports =
           y = bbox.y + 0.5 * bbox.height
           
           # Get location of the IR annotation
-          circle = d3.select("g.infrared circle")
-          circleGroup = d3.select( circle.node().parentNode )
+          circle = d3.select("g.infrared circle").node()
+          return false unless circle?
+          
+          circleGroup = d3.select( circle.parentNode )
           
           transform = circleGroup.attr("transform")
           translateRegEx = /translate\((-?\d+), (-?\d+)\)/
@@ -514,6 +516,7 @@ module.exports =
           
           # Get location of the IR annotation
           circle = d3.selectAll("g.infrared circle.annotation")[0][1]
+          return false unless circle?
           circleGroup = d3.select( circle.parentNode )
           
           transform = circleGroup.attr("transform")
@@ -522,8 +525,6 @@ module.exports =
           
           cx = parseInt match[1]
           cy = parseInt match[2]
-          console.log x, y
-          console.log cx, cy
           
           if cx < (x + 10) and cx > (x - 10) and cy < (y + 10) and cy > (y - 10)
             buttonEl.removeAttr("disabled")
