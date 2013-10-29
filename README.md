@@ -11,7 +11,7 @@
     npm start
 
 
-## Steps Before Launching New Data
+## Steps Before Launching App with New Data
 
 #### Contour Threshold
 
@@ -29,12 +29,36 @@ FITS images are used to compute contours on the fly. This allows direct interact
 
 #### FITS Compression
 
-The FITS images sent to the client are roughly 1 MB in size. To reduce the data transfer, it's best to gzip all FITS files, and upload to S3 with the correct encoding, and a spoofed MIME type:
+The FITS images sent to the client are roughly 1 MB in size. To reduce the data transfer, it's best to gzip all FITS files, and upload to S3 with the correct encoding, and a spoofed MIME type. The `Makefile` described below gzips all FITS during processing.
     
     gzip -9 some-binary-file.fits > some-binary-file.fits.gz
     s3cmd put some-binary-file.gz s3://some-s3-bucket/ --mime-type "application/json" --add-header "Content-Encoding: gzip" --acl-public
 
 ## Data Preparation
 
-    python make_png.py ../data-import/rgz_fits/
+There is a `Makefile` in the `scripts` directory for preparing Radio Galaxy Zoo subjects. This `Makefile` provides functions that operate on `rgz.tar.gz` and `rgz_fits.tar.gz`, which are to be delivered by the Science Team.
+
+The `Makefile` runs the following operations over the data:
+  
+  * Decompresses the tarballs
+  * Process FITS infrared to PNGs without contours using `make_infrared_pngs.py`
+  * Resizes radio PNGs using Imagemagick
+  * Gzips all radio FITS that are to be served to volunteers
+  * Converts PNGs to JPGs (an Automator Workflow is used to utilized Preview's export for a better compression compared to Imagemagick)
+
+To process infrared subjects:
+
+    make infrared
+
+To process radio subjects:
+
+    make radio
+
+To process radio FITS subjects:
+
+    make raw
+
+To process the entire subject set:
+
+    make
 
