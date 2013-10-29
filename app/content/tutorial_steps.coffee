@@ -340,8 +340,10 @@ module.exports =
         "click #svg-contours": (e) ->
           
           # Select the annotation
-          circle = d3.select("g.infrared circle")
-          circleGroup = d3.select( circle.node().parentNode )
+          circle = d3.select("g.infrared circle").node()
+          return false unless circle?
+          
+          circleGroup = d3.select( circle.parentNode )
           
           transform = circleGroup.attr("transform")
           translateRegEx = /translate\((-?\d+), (-?\d+)\)/
