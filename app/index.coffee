@@ -74,8 +74,9 @@ checkBlob = window.Blob?
 checkWorker = window.Worker?
 checkURL = window.URL or window.webkitURL
 checkTypedArray = window.Uint8Array?
+checkArrayBufferSlice =  window.ArrayBuffer?.prototype.slice?
 
-check = checkDataView and checkBlob and checkWorker and checkURL and checkTypedArray
+check = checkDataView and checkBlob and checkWorker and checkURL and checkTypedArray and checkArrayBufferSlice
 unless check
   alert "Sorry, but your browser is not supported."
 
