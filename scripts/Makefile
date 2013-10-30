@@ -40,8 +40,13 @@ raw: rgz_fits
 	mkdir -vp subjects
 	mkdir -vp subjects/raw
 	
-	for f in rgz_fits/*radio.fits; do \
+	mv rgz_fits/*radio.fits subjects/raw
+	python clean_fits.py subjects/raw
+	
+	for f in subjects/raw/*radio.fits; do \
 		filename=$$(basename "$$f"); \
 		filename="$${filename%_radio.fits}"; \
 		gzip -9 -c $$f > subjects/raw/$$filename.fits.gz; \
 	done
+	
+	rm subjects/raw/*.fits
