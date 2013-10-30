@@ -7,7 +7,7 @@ curl -k "http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.js" -o "app/li
 curl -k "https://raw.github.com/jashkenas/underscore/1.5.1/underscore.js" -o "app/lib/underscore.js"
 curl -k "https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.3/angular.js" -o "app/lib/angular.js"
 curl -k "http://code.angularjs.org/1.2.0-rc.3/angular-route.js" -o "app/lib/angular-route.js"
-curl -k "https://raw.github.com/astrojs/fitsjs/8721bba7f018f8163fbd2b07364c496a8ee77bda/lib/fits.js" -o "app/lib/fits.js"
+curl -k "https://github.com/astrojs/fitsjs/blob/af64b69b5eae3b2599d39f33e984d13128b3384d/lib/fits.js" -o "app/lib/fits.js"
 curl -k "https://raw.github.com/jasondavies/conrec.js/361f86be3b1a2c46a228233d6e902926ca530213/conrec.js" -o "app/lib/conrec.js"
 curl -k "https://raw.github.com/fryn/html5slider/09d19a1067ada41eb3e74cb011f9fd237117dc74/html5slider.js" -o "app/lib/html5slider.js"
 
