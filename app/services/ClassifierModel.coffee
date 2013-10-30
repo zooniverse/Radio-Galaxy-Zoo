@@ -17,7 +17,7 @@ class ClassifierModel
   COMPLETE: true
   
   
-  constructor: ($rootScope, $q, translateRegEx, imageDimension, fitsImageDimension, contourThreshold) ->
+  constructor: ($rootScope, $q, translateRegEx, imageDimension, fitsImageDimension, levels, contourThreshold) ->
     
     # Store injected services on object
     @$rootScope = $rootScope
@@ -25,6 +25,7 @@ class ClassifierModel
     @translateRegEx = translateRegEx
     @imageDimension = imageDimension
     @fitsImageDimension = fitsImageDimension
+    @levels = levels
     @contourThreshold = contourThreshold
     
     # Set state variables
@@ -251,13 +252,7 @@ class ClassifierModel
       height = e.data.height
       arr = new Float32Array(e.data.buffer)
       threshold = e.data.threshold
-      
-      levels = [
-        3.0, 5.196152422706632, 8.999999999999998, 15.588457268119893, 26.999999999999993,
-        46.765371804359674, 80.99999999999997, 140.296115413079, 242.9999999999999,
-        420.88834623923697, 728.9999999999995, 1262.6650387177108, 2186.9999999999986,
-        3787.9951161531317, 6560.9999999999945
-      ]
+      levels = e.data.levels
       
       j = height
       data = []
@@ -359,6 +354,7 @@ class ClassifierModel
       width: width
       height: height
       buffer: arr.buffer
+      levels: @levels
       threshold: @contourThreshold
     
     worker.onmessage = (e) =>

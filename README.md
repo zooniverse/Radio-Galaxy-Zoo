@@ -13,6 +13,12 @@
 
 ## Steps Before Launching App with New Data
 
+#### Contour Levels
+
+Contours are computed against an array defining various binning levels. This array should be changed when another radio survey is ingested into the project. Consult the science team to determine the values needed for a particular radio survey. This array may be updated in `index.coffee`.
+
+    RadioGalaxyZoo.contours("levels", [3.0, ..., 6561])
+
 #### Contour Threshold
 
 A threshold is applied to filter out contours that may represent noise. This is a tunable parameter that depends on the radio survey, and should be updated when the project uses a new survey. Update this value in `index.coffee`, and it will propagate through the rest of the application.
@@ -43,7 +49,8 @@ The `Makefile` runs the following operations over the data:
   * Decompresses the tarballs
   * Process FITS infrared to PNGs without contours using `make_infrared_pngs.py`
   * Resizes radio PNGs using Imagemagick
-  * Gzips all radio FITS that are to be served to volunteers
+  * Clean all radio FITS headers by removing unnecessary HISTORY keywords
+  * GZIP all radio FITS that are to be served to volunteers
   * Converts PNGs to JPGs (an Automator Workflow is used to utilized Preview's export for a better compression compared to Imagemagick)
 
 To process infrared subjects:
