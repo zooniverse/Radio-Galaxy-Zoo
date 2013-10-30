@@ -1,8 +1,8 @@
 
 # Import controllers
 ClassifierCtrl  = require './controllers/classifier'
-ScienceCtrl  = require './controllers/science'
-TeamCtrl  = require './controllers/team'
+ScienceCtrl     = require './controllers/science'
+TeamCtrl        = require './controllers/team'
 
 # Import directives
 ImageOpacityDirective   = require './directives/image_opacity'
@@ -43,7 +43,9 @@ RadioGalaxyZoo.directive('example', ExampleDirective)
 RadioGalaxyZoo.directive('subExample', SubExampleDirective)
 
 # Services
-RadioGalaxyZoo.service('classifierModel', ["$rootScope", "$q", "translateRegEx", "imageDimension", "fitsImageDimension", "contourThreshold", ClassifierModel])
+RadioGalaxyZoo.service('classifierModel',
+  ["$rootScope", "$q", "translateRegEx", "imageDimension", "fitsImageDimension", "contourThreshold", ClassifierModel]
+)
 
 # Configure Zooniverse API
 host = if window.location.port is "9296" then "http://0.0.0.0:3000" else "https://dev.zooniverse.org"
@@ -68,7 +70,7 @@ topBar.el.appendTo 'body'
 footer = new zooniverse.controllers.Footer
 footer.el.appendTo '#footer'
 
-# Check for necessary APIs
+# Check for necessary APIs and functions
 checkDataView = window.DataView?
 checkBlob = window.Blob?
 checkWorker = window.Worker?
@@ -77,6 +79,8 @@ checkTypedArray = window.Uint8Array?
 checkArrayBufferSlice =  window.ArrayBuffer?.prototype.slice?
 
 check = checkDataView and checkBlob and checkWorker and checkURL and checkTypedArray and checkArrayBufferSlice
+
+# TODO: Disable classification interface on non-supported browsers
 unless check
   alert "Sorry, but your browser is not supported."
 

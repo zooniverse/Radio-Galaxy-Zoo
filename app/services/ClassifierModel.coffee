@@ -5,7 +5,7 @@
 User            = zooniverse.models.User
 Subject         = zooniverse.models.Subject
 Classification  = zooniverse.models.Classification
-Tutorial        =  zootorial.Tutorial
+Tutorial        = zootorial.Tutorial
 
 TutorialSteps   = require '../content/tutorial_steps'
 
@@ -434,6 +434,7 @@ class ClassifierModel
       group.attr("class", "contour-group matched")
     
     infrared = []
+    translateRegEx = @translateRegEx
     d3.selectAll("g.infrared g:not(.matched)").each( ->
       
       circle = d3.select( this.children[0] )
@@ -441,7 +442,7 @@ class ClassifierModel
       group = d3.select(this)
       group.classed("matched", true)
       transform = group.attr("transform")
-      match = transform.match(@translateRegEx)
+      match = transform.match(translateRegEx)
       
       obj =
         r: circle.attr("r")
