@@ -14,3 +14,4 @@ scripts/radio-galaxy-zoo-*
 *rgz*
 *rgz_fits*
 *subjects*
+.env

@@ -77,10 +77,8 @@ class ClassifierModel
 
   resetMarking: ->
     @selectedContours.shift()
-    console.log(@selectedContours)
     d3.select('svg .selected').attr('class', "contour-group")
     d3.select('svg .infrared g').remove()
-
   
   onUserChange: =>
     

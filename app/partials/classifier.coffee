@@ -242,7 +242,7 @@ template = """
         <p class="band" data-band="infrared">IR</p>
       </div>
       <span class="toggle-contours col-xs-3">{{getShowContours() ? 'hide' : 'show'}} contours</span>
-      <span class="message col-xs-3">{{getStep()==3 ? 'Complete!' : "Step " + parseInt(getStep()) + 1 + " of 2"}}</span>
+      <span class="tutorial col-xs-3" data-ng-click="onTutorial()">tutorial</span>
     </div>
 
     <div class="viewport col-centered">
@@ -287,6 +287,8 @@ template = """
           <button type="button" class="btn btn-primary col-xs-offset-7 next" data-ng-click="onNext()">Next</button>
         </div>
       </div>
+    </div>
+    <div class="row">
     </div>
   </div>
 </div>

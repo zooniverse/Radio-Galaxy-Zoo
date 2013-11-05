@@ -16,7 +16,6 @@ Classifier = ($scope, model) ->
   $scope.getRadioSource = ->
     return model.radioSource
   $scope.getStep = ->
-    console.log(model.step)
     return model.step
   $scope.getShowContours = ->
     return model.showContours
@@ -57,6 +56,10 @@ Classifier = ($scope, model) ->
   # TODO: Set state on model for every user action.
   #       This needs to be done because the controller is stateless
   #       so it cannot recover without the model.
+  $scope.onTutorial = ->
+    model.resetMarking()
+    model.step = 0
+    model.onUserChange()
   
   $scope.onCancel = ->
     model.resetMarking()
@@ -72,7 +75,6 @@ Classifier = ($scope, model) ->
     model.step = 0
   
   $scope.onDone = ->
-    console.log('here')
     model.getMatch()
     model.showContours = true
     model.ready = false
