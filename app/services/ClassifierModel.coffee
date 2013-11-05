@@ -32,7 +32,7 @@ class ClassifierModel
     @showContours = true
     @step = 1
     @showSED = false
-    @example = 'single-compact-source'
+    @example = false 
     @subExample = 1
     @isDisabled = true
     

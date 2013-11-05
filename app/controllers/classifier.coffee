@@ -24,6 +24,7 @@ Classifier = ($scope, model) ->
   $scope.getNextRadioSource = ->
     return model.nextRadioSource
   $scope.getExample = ->
+    model.example = false if model.example is "false"
     return model.example
   $scope.getSubExample = ->
     return model.subExample
