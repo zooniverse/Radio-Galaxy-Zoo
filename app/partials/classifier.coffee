@@ -242,7 +242,7 @@ template = """
         <p class="band" data-band="infrared">IR</p>
       </div>
       <span class="toggle-contours col-xs-3">{{getShowContours() ? 'hide' : 'show'}} contours</span>
-      <span class="message col-xs-3">{{getStep()==3 ? 'Complete!' : "Step " + getStep() + " of 2"}}</span>
+      <span class="message col-xs-3">{{getStep()==3 ? 'Complete!' : "Step " + parseInt(getStep()) + 1 + " of 2"}}</span>
     </div>
 
     <div class="viewport col-centered">
@@ -256,11 +256,11 @@ template = """
  
     <div class='row instruction'>
       <div ng-switch on="getStep()">
-        <div col-xs-12 ng-switch-when="1">
+        <div ng-switch-when="0">
           <p>Select the contour(s) representing the radio emission.</p>
         </div>
         
-        <div ng-switch-when="2">
+        <div ng-switch-when="1">
           <p>Identify the infrared source.</p>
         </div>
 
@@ -273,13 +273,13 @@ template = """
     <div class='buttons row step-{{getStep()}}'>
       <div ng-switch on="getStep()">
         <div ng-switch-when="1" class="col-xs-12">
-          <button type="button" class="btn btn-primary continue" data-ng-click="onContinue()" ng-disabled=getIsDisabled()>Continue</button>
+          <button type="button" class="btn btn-primary back" data-ng-click="onCancel()">Cancel</button>
+          <button type="button" class="btn btn-default col-xs-offset-3 no-infrared" data-ng-click="onNoCorrespondingFlux()" ng-disabled=getAnnotationCount()>No Infrared</button>
         </div>
         <div ng-switch-when="2">
-          <button type="button" class="btn btn-primary back" data-ng-click="onBack()">Back</button>
-          <button type="button" class="btn btn-primary next-radio" data-ng-click="onNextRadio()">Select Another Radio Complex</button>
-          <button type="button" class="btn btn-default col-xs-offset-3 no-infrared" data-ng-click="onNoCorrespondingFlux()" ng-disabled=getAnnotationCount()>No Infrared</button>
-          <button type="button" class="btn btn-primary col-xs-offset-5 done" data-ng-click="onDone()">Done</button>
+          <button type="button" class="btn btn-primary back" data-ng-click="onCancel()">Cancel</button>
+          <button type="button" class="btn btn-primary next-radio" data-ng-click="onNextRadio()">Mark Another Source</button>
+          <button type="button" class="btn btn-primary col-xs-offset-5 done" data-ng-click="onDone()">Finish</button>
         </div>
         <div ng-switch-when="3">
           <button type="button" class="btn btn-default" data-ng-click="onFavorite($event)">Favorite</button>

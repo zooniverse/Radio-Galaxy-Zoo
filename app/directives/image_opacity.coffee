@@ -31,9 +31,9 @@ module.exports = ->
       
       # Watch scope.step to update image opacity accordingly
       scope.$watch('model.step', (step) ->
-        if step is 1
+        if step is 0
           radioEl.onclick()
-        else if step in [2, 3]
+        else if step in [1, 2, 3]
           infraredEl.onclick()
       )
   }

@@ -16,6 +16,7 @@ Classifier = ($scope, model) ->
   $scope.getRadioSource = ->
     return model.radioSource
   $scope.getStep = ->
+    console.log(model.step)
     return model.step
   $scope.getShowContours = ->
     return model.showContours
@@ -57,11 +58,9 @@ Classifier = ($scope, model) ->
   #       This needs to be done because the controller is stateless
   #       so it cannot recover without the model.
   
-  $scope.onContinue = ->
-    model.step = 2
-  
-  $scope.onBack = ->
-    model.step = 1
+  $scope.onCancel = ->
+    model.resetMarking()
+    model.step = 0
   
   $scope.onNoCorrespondingFlux = ->
     model.getMatch()
@@ -70,9 +69,10 @@ Classifier = ($scope, model) ->
   
   $scope.onNextRadio = ->
     model.getMatch()
-    model.step = 1
+    model.step = 0
   
   $scope.onDone = ->
+    console.log('here')
     model.getMatch()
     model.showContours = true
     model.ready = false
@@ -89,7 +89,7 @@ Classifier = ($scope, model) ->
     d3.selectAll("g.infrared g").remove()
     
     # Update state to first step
-    model.step = 1
+    model.step = 0
     model.showSED = false
     
   # TODO: Post Favorite

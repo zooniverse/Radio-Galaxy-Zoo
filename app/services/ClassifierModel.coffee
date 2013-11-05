@@ -10,9 +10,7 @@ Tutorial        = zootorial.Tutorial
 TutorialSteps   = require '../content/tutorial_steps'
 
 # Disable Subject preloading
-Subject.preload = false
-
-
+Subject.preload = false 
 class ClassifierModel
   COMPLETE: true
   
@@ -30,7 +28,7 @@ class ClassifierModel
     
     # Set state variables
     @showContours = true
-    @step = 1
+    @step = 0
     @showSED = false
     @example = false 
     @subExample = 1
@@ -76,6 +74,13 @@ class ClassifierModel
     @subjectContours.length = 0
     d3.select("g.contours").remove()
     d3.selectAll("g.infrared g").remove()
+
+  resetMarking: ->
+    @selectedContours.shift()
+    console.log(@selectedContours)
+    d3.select('svg .selected').attr('class', "contour-group")
+    d3.select('svg .infrared g').remove()
+
   
   onUserChange: =>
     
@@ -391,16 +396,15 @@ class ClassifierModel
       
       # Behavior for clicking on contours
       g.on("click", =>
+        return unless @step is 0
         el = d3.select(d3.event.target.parentNode)
         classes = el.attr("class")
         contourGroupId = el.attr("id")
-        
-        if classes.indexOf("selected") > -1
-          el.attr("class", "contour-group")
-          @removeContourGroup(contourGroupId)
-        else
-          el.attr("class", "contour-group selected")
-          @addContourGroup(contourGroupId)
+        el.attr("class", "contour-group selected")
+        @$rootScope.$apply( =>
+          @step = 1 
+        )
+        @addContourGroup(contourGroupId)
       )
     
     @isDisabled = false
