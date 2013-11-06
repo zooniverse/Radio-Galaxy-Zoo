@@ -1,5 +1,5 @@
 module.exports = """
-<div class="classifier row" data-ng-controller="ClassifierCtrl">
+<div class="example-container" data-ng-controller="ClassifierCtrl">
   <div data-ng-click="activateGuide()" class="row example-selection" ng-class="{'active': getGuide()}">
     Spotter's Guide
   </div>
@@ -162,7 +162,9 @@ module.exports = """
       </div>
     </div>
   </div>
+</div>
 
+<div class="classifier row" data-ng-controller="ClassifierCtrl">
 
   <div class="workflow col-xs-6 col-centered">
     <div class="viewport col-centered">

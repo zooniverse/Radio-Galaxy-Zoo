@@ -9,25 +9,7 @@ $workflow-background = rgb(0, 0, 0) $workflow-text-color = rgb(240, 240, 240)
   position relative
   margin-top 2%
  
-  .example-selection
-    z-index: 10
-    font-size 12px
-    font-weight 800
-    line-height 30px
-    position: absolute
-    transform: rotate(90deg)
-    padding-left: 20px
-    padding-right: 20px
-    cursor: pointer
-    left: -83px
-    top: 35px
-    display: inline-block
-    background: lighten($workflow-background, 30%)
-    transition: left 0.5s ease-in-out
 
-    &.active
-      left: 245px
- 
   .viewport
     padding-bottom: 10px
     user-select none
@@ -133,73 +115,3 @@ $workflow-background = rgb(0, 0, 0) $workflow-text-color = rgb(240, 240, 240)
         
         &.pulsate
           animation-name pulsate-75
-
-  .examples
-    background-color darken($workflow-background, 15%)
-    overflow: hidden
-    height: 650px
-    transition: transform 0.5s ease-in-out
-    margin-bottom: 20px
-    position: fixed
-    transform: translateX(-360px)
-    width: 330px
-    top: 222px 
-    z-index: 10
-    
-    text-shadow 0 1px 0 rgb(15, 15, 15)
-    font-size 14px
-
-    &.active
-      transform: translateX(-30px)
-
-    > .row
-      padding 0
-
-    p
-      margin 0
-      width: inherit
-      padding: 10px
-      box-sizing: border-box
-
-    span
-      background lighten($workflow-background, 10%)
-      cursor pointer
-      text-align: center
-      height 30px
-      padding: 5px
-      
-      &:hover
-        background lighten($workflow-background, 30%)
-      
-      &.active
-        background lighten($workflow-background, 20%)
-
-    .content
-      margin-top 12px
-      min-height 226px
-    
-    img
-      max-width 100%
-      text
-
-    .example-box 
-      overflow-y: auto
-      height: 620px
-      width: inherit
-      margin-left: 0
-      
-      > div .row
-        margin: 0 auto
-        width: 300px   
-        border-bottom 1px solid rgb(130, 130, 130)
-        padding-top: 30px
-        text-align: center
-
-        &:last-child
-          border: none
-
-        &:first-child
-          padding-top: 15px
-
-        p
-          text-align: left
