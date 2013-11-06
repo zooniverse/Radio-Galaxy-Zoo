@@ -77,8 +77,8 @@ class ClassifierModel
 
   resetMarking: ->
     @selectedContours.shift()
-    d3.select('svg .selected').attr('class', "contour-group")
-    d3.select('svg .infrared g').remove()
+    d3.selectAll('svg .selected').attr('class', "contour-group")
+    d3.selectAll('svg .infrared g:not(.matched)').remove()
   
   onUserChange: =>
     
@@ -124,26 +124,6 @@ class ClassifierModel
       id: 'first-tutorial'
       firstStep: 'welcome'
       steps: TutorialSteps.stage1
-      parent: document.querySelector(".classifier")
-    @tutorial.el.bind("end-tutorial", @onTutorialEnd)
-  
-  startSecondTutorial: =>
-    @hasTutorial = true
-    
-    @tutorial = new Tutorial
-      id: "second-tutorial"
-      firstStep: 'goodjob'
-      steps: TutorialSteps.stage2
-      parent: document.querySelector(".classifier")
-    @tutorial.el.bind("end-tutorial", @onTutorialEnd)
-  
-  startThirdTutorial: =>
-    @hasTutorial = true
-    
-    @tutorial = new Tutorial
-      id: "third-tutorial"
-      firstStep: 'multiplesources'
-      steps: TutorialSteps.stage3
       parent: document.querySelector(".classifier")
     @tutorial.el.bind("end-tutorial", @onTutorialEnd)
   
@@ -196,12 +176,6 @@ class ClassifierModel
     @subject = @nextSubject
     @infraredSource = @getCloudFront( @subject.location.standard )
     @radioSource = @getCloudFront( @subject.location.radio )
-    
-    # Trigger staged tutorials
-    if @subject.id is "520be919e4bb21ddd3000016"
-      @startSecondTutorial()
-    if @subject.id is "520be919e4bb21ddd30000b3"
-      @startThirdTutorial()
     
     # Clear the user action arrays
     @matches.length = 0
@@ -464,6 +438,5 @@ class ClassifierModel
   getClassification: ->
     @classification.annotate(@matches)
     @classification.send()
-
 
 module.exports = ClassifierModel

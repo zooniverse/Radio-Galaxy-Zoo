@@ -24,12 +24,11 @@ Classifier = ($scope, model) ->
   $scope.getNextRadioSource = ->
     model.nextRadioSource
   $scope.getExample = ->
-    console.log(model.example)
     model.example
   $scope.getIsDisabled = ->
     model.isDisabled
-  $scope.getAnnotationCount = ->
-    if model.annotations.length > 0 then true else false
+  $scope.getContourCount = ->
+    (model.matches.length is 0)
   $scope.getGuide = ->
     model.activeGuide
   
@@ -62,8 +61,11 @@ Classifier = ($scope, model) ->
     model.onUserChange()
   
   $scope.onCancel = ->
-    model.resetMarking()
-    model.step = 0
+    model.resetMarking() if model.selectedContours.length isnt 0
+    if model.matches.length is 0
+      model.step = 0
+    else
+      model.step = 2
   
   $scope.onNoCorrespondingFlux = ->
     model.getMatch()
@@ -73,8 +75,11 @@ Classifier = ($scope, model) ->
   $scope.onNextRadio = ->
     model.getMatch()
     model.step = 0
-  
+
   $scope.onDone = ->
+    model.step = 2
+  
+  $scope.onFinish = ->
     model.getMatch()
     model.showContours = true
     model.ready = false

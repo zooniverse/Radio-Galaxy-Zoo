@@ -50,7 +50,6 @@ module.exports = ->
                     .attr("cx", 0)
                     .attr("cy", 0)
                     .attr("r", 10)
-          scope.$apply( => scope.model.step = 2)
 
       create = d3.behavior.drag()
         .on("dragstart", onDragStart)

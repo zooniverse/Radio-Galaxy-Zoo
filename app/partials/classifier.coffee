@@ -163,62 +163,66 @@ module.exports = """
     </div>
   </div>
 
+
   <div class="workflow col-xs-6 col-centered">
+    <div class="viewport col-centered">
+      <img data-ng-src="{{ getRadioSource() }}" />
+      <img class="infrared" data-ng-src="{{ getInfraredSource() }}" />
+
+      <div id="svg-contours" class='contours marking step-{{getStep()}}' ng-class="{'fade-contour': !getShowContours()}">
+        <svg xmlns="http://www.w3.org/2000/svg" class="svg-contours"></svg>
+      </div>
+    </div>
+
     <div class="row controls">
       <div class="image-slider col-xs-6">
         <p class="band" data-band="radio">Radio</p>
-        <input class='image-opacity' type="range" min="0" max="1" step="0.01" value="0">
-          <p class="band" data-band="infrared">IR</p>
-        </div>
-        <span class="toggle-contours col-xs-3">{{getShowContours() ? 'hide' : 'show'}} contours</span>
-        <span class="tutorial col-xs-3" data-ng-click="onTutorial()">tutorial</span>
+        <input class='image-opacity' type="range" min="0" max="1" step="0.01" value="0" />
+        <p class="band" data-band="infrared">IR</p>
       </div>
+      <span class="toggle-contours col-xs-3">{{getShowContours() ? 'hide' : 'show'}} contours</span>
+      <span class="tutorial col-xs-3" data-ng-click="onTutorial()">tutorial</span>
+    </div>
 
-      <div class="viewport col-centered">
-        <img data-ng-src="{{ getRadioSource() }}">
-          <img class="infrared" data-ng-src="{{ getInfraredSource() }}">
 
-            <div id="svg-contours" class='contours marking step-{{getStep()}}' ng-class="{'fade-contour': !getShowContours()}">
-              <svg xmlns="http://www.w3.org/2000/svg" class="svg-contours"></svg>
-            </div>
-          </div>
+    <div class='row instruction'>
+      <div ng-switch on="getStep()">
+        <div ng-switch-when="0">
+          <p>Select the contour(s) representing the radio emission.</p>
+        </div>
 
-          <div class='row instruction'>
-            <div ng-switch on="getStep()">
-              <div ng-switch-when="0">
-                <p>Select the contour(s) representing the radio emission.</p>
-              </div>
+        <div ng-switch-when="1">
+          <p>Identify the infrared source.</p>
+        </div>
 
-              <div ng-switch-when="1">
-                <p>Identify the infrared source.</p>
-              </div>
-
-              <div ng-switch-when="3">
-                <p>Great work, you helped science!</p>
-              </div>
-            </div>
-          </div>
-
-          <div class='buttons row step-{{getStep()}}'>
-            <div ng-switch on="getStep()">
-              <div ng-switch-when="1" class="col-xs-12">
-                <button type="button" class="btn btn-primary back" data-ng-click="onCancel()">Cancel</button>
-                <button type="button" class="btn btn-default col-xs-offset-3 no-infrared" data-ng-click="onNoCorrespondingFlux()" ng-disabled=getAnnotationCount()>No Infrared</button>
-              </div>
-              <div ng-switch-when="2">
-                <button type="button" class="btn btn-primary back" data-ng-click="onCancel()">Cancel</button>
-                <button type="button" class="btn btn-primary next-radio" data-ng-click="onNextRadio()">Mark Another Source</button>
-                <button type="button" class="btn btn-primary col-xs-offset-5 done" data-ng-click="onDone()">Finish</button>
-              </div>
-              <div ng-switch-when="3">
-                <button type="button" class="btn btn-default" data-ng-click="onFavorite($event)">Favorite</button>
-                <button type="button" class="btn btn-default" data-ng-click="onDiscuss()">Discuss</button>
-                <button type="button" class="btn btn-primary col-xs-offset-7 next" data-ng-click="onNext()">Next</button>
-              </div>
-            </div>
-          </div>
+        <div ng-switch-when="3">
+          <p>Great work, you helped science!</p>
         </div>
       </div>
+    </div>
+
+    <div class='buttons row step-{{getStep()}}'>
+      <div ng-switch on="getStep()">
+        <div ng-switch-when="0" class="col-xs-12">
+          <button type="button" class="btn btn-primary back" data-ng-click="onCancel()" ng-disabled="getContourCount()">Cancel</button>
+        </div>
+        <div ng-switch-when="1" class="col-xs-12">
+          <button type="button" class="btn btn-primary back" data-ng-click="onCancel()">Cancel</button>
+          <button type="button" class="btn btn-default col-xs-offset-3 no-infrared" data-ng-click="onNoCorrespondingFlux()">No Infrared</button>
+          <button type="button" class="btn btn-primary col-xs-offset-5 done" data-ng-click="onDone()">Done</button>
+        </div>
+        <div ng-switch-when="2">
+          <button type="button" class="btn btn-primary back" data-ng-click="onCancel()">Cancel</button>
+          <button type="button" class="btn btn-primary next-radio" data-ng-click="onNextRadio()">Mark Another Source</button>
+          <button type="button" class="btn btn-primary col-xs-offset-5 done" data-ng-click="onFinish()">Finish</button>
+        </div>
+        <div ng-switch-when="3">
+          <button type="button" class="btn btn-default" data-ng-click="onFavorite($event)">Favorite</button>
+          <button type="button" class="btn btn-default" data-ng-click="onDiscuss()">Discuss</button>
+          <button type="button" class="btn btn-primary col-xs-offset-7 next" data-ng-click="onNext()">Next</button>
+        </div>
+      </div>
+     </div>
     </div>
   </div>
 </div>

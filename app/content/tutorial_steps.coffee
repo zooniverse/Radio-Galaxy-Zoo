@@ -20,10 +20,6 @@ disableButtons = ->
   els = angular.element( document.querySelectorAll(".workflow .buttons button") )
   els.attr("disabled", "disabled")
 
-enableButtons = ->
-  els = angular.element( document.querySelectorAll(".workflow .buttons button") )
-  els.removeAttr("disabled")
-
 # Higher scope variables to communicate between onEnter and next functions
 groupid = null
 checkState = null
@@ -42,7 +38,6 @@ module.exports =
         disableButtons()
       onExit: ->
         removeBlock()
-        enableButtons()
       next: "dubstep"
       
     dubstep: new Step
@@ -55,7 +50,6 @@ module.exports =
         disableButtons()
       onExit: ->
         removeBlock()
-        enableButtons()
       next: "observeradio"
       
     observeradio: new Step
@@ -69,7 +63,6 @@ module.exports =
         disableButtons()
       onExit: ->
         removeBlock()
-        enableButtons()
       next: "observeslider"
       
     observeslider: new Step
@@ -83,7 +76,6 @@ module.exports =
         disableButtons()
       onExit: ->
         removeBlock()
-        enableButtons()
       next: "observeir"
       
     observeir: new Step
@@ -99,7 +91,6 @@ module.exports =
         document.querySelector("p[data-band='infrared']").click()
       onExit: ->
         removeBlock()
-        enableButtons()
         
         document.querySelector("p[data-band='radio']").click()
       next: "markradio1"
@@ -131,7 +122,6 @@ module.exports =
       
       onExit: ->
         removeBlock()
-        enableButtons()
       next:
         "click #svg-contours": (e) ->
           if e.target.parentNode?.id is groupid
@@ -163,7 +153,6 @@ module.exports =
         disableButtons()
       onExit: ->
         removeBlock()
-        enableButtons()
       next: "markir2"
       
     markir2: new Step
@@ -189,7 +178,6 @@ module.exports =
       
       onExit: ->
         removeBlock()
-        enableButtons()
       next:
         "click #svg-contours": (e) ->
           
@@ -217,7 +205,6 @@ module.exports =
         disableButtons()
       onExit: ->
         removeBlock()
-        enableButtons()
       next: "moreexamples"
     
     moreexamples: new Step
@@ -236,7 +223,6 @@ module.exports =
         
       onExit: ->
         removeBlock()
-        enableButtons()
         
         $("button.done").toggleClass("pulsate")
       next:
@@ -254,7 +240,6 @@ module.exports =
         disableButtons()
       onExit: ->
         removeBlock()
-        enableButtons()
       next: "observeradio"
     
     observeradio: new Step
@@ -267,7 +252,6 @@ module.exports =
         disableButtons()
       onExit: ->
         removeBlock()
-        enableButtons()
       next:
         "change input.image-opacity": (e, el) ->
           if parseFloat(el.value) > 0.85
@@ -307,7 +291,6 @@ module.exports =
         imgOpacityEl.on("change", checkState)
         
       onExit: ->
-        enableButtons()
         
         $("#svg-contours").off("click", checkState)
         $("input.image-opacity").off("change", checkState)
@@ -335,7 +318,6 @@ module.exports =
           removeBlock()
         ), 2000
       onExit: ->
-        enableButtons()
       next:
         "click #svg-contours": (e) ->
           
@@ -379,24 +361,6 @@ module.exports =
         disableButtons()
       onExit: ->
         removeBlock()
-        enableButtons()
-      next:
-        "change input.image-opacity": (e, el) ->
-          if parseFloat(el.value) > 0.85
-            return "observemultiples"
-          return false
-    
-    observemultiples: new Step
-      number: 2
-      header: "Observing Multiple Sources"
-      details: "In the IR it appears that both of those radio signals has an infrared galaxy counterpart near the peak of the radio contours. So in this case instead of seeing twin jet emission you are seeing two compact sources."
-      attachment: "center top .viewport center -0.24"
-      onEnter: ->
-        addBlock()
-        disableButtons()
-      onExit: ->
-        removeBlock()
-        enableButtons()
       next: "firstsource1"
     
     firstsource1: new Step
@@ -423,7 +387,6 @@ module.exports =
         )
       onExit: ->
         $("#svg-contours").off("click")
-        enableButtons()
       next:
         "click button.continue": "firstsource2"
     
@@ -464,7 +427,6 @@ module.exports =
         )
         
       onExit: ->
-        enableButtons()
         $("#svg-contours").off("click")
       next:
         "click button.next-radio": "secondsource1"
@@ -493,7 +455,6 @@ module.exports =
         )
         
       onExit: ->
-        enableButtons()
         $("#svg-contours").off("click")
       next:
         "click button.continue": "secondsource2"
@@ -532,7 +493,6 @@ module.exports =
           buttonEl.attr("disabled", "disabled")
         )
       onExit: ->
-        enableButtons()
         $("#svg-contours").off("click")
       next:
         "click button.done": "done"
