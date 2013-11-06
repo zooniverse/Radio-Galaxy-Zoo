@@ -30,8 +30,8 @@ class ClassifierModel
     @showContours = true
     @step = 0
     @showSED = false
-    @example = false 
-    @subExample = 1
+    @example = "compact" 
+    @activeGuide = false
     @isDisabled = true
     
     @hasTutorial = false

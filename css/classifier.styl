@@ -8,7 +8,26 @@ $workflow-background = rgb(0, 0, 0) $workflow-text-color = rgb(240, 240, 240)
 .classifier
   position relative
   margin-top 2%
-  
+ 
+  .example-selection
+    z-index: 10
+    font-size 12px
+    font-weight 800
+    line-height 30px
+    position: absolute
+    transform: rotate(90deg)
+    padding-left: 20px
+    padding-right: 20px
+    cursor: pointer
+    left: -83px
+    top: 35px
+    display: inline-block
+    background: lighten($workflow-background, 30%)
+    transition: left 0.5s ease-in-out
+
+    &.active
+      left: 245px
+ 
   .viewport
     padding-bottom: 10px
     user-select none
@@ -117,34 +136,37 @@ $workflow-background = rgb(0, 0, 0) $workflow-text-color = rgb(240, 240, 240)
 
   .examples
     background-color darken($workflow-background, 15%)
-    padding-bottom 10px
     overflow: hidden
-    height: 35px
-    transition: height 0.5s ease-in-out
+    height: 650px
+    transition: transform 0.5s ease-in-out
     margin-bottom: 20px
+    position: fixed
+    transform: translateX(-360px)
+    width: 330px
+    top: 222px 
+    z-index: 10
     
     text-shadow 0 1px 0 rgb(15, 15, 15)
     font-size 14px
 
     &.active
-      height: 450px
-
-      span.exit
-        opacity: 1
+      transform: translateX(-30px)
 
     > .row
       padding 0
 
     p
       margin 0
+      width: inherit
+      padding: 10px
+      box-sizing: border-box
 
     span
       background lighten($workflow-background, 10%)
       cursor pointer
       text-align: center
       height 30px
-      padding-left: 5px
-      padding-right: 5px
+      padding: 5px
       
       &:hover
         background lighten($workflow-background, 30%)
@@ -152,51 +174,32 @@ $workflow-background = rgb(0, 0, 0) $workflow-text-color = rgb(240, 240, 240)
       &.active
         background lighten($workflow-background, 20%)
 
-      &.exit
-        opacity: 0
-        transition: opacity 0.5s ease-in-out
-        background: black
-    
-    .example-selection
-      font-size 12px
-      font-weight 800
-      line-height 30px
-
-      p
-        text-align: right
-
     .content
       margin-top 12px
       min-height 226px
     
     img
       max-width 100%
+      text
 
-    .example-list
-      clearfix()
-      margin 6px 0
+    .example-box 
+      overflow-y: auto
+      height: 620px
+      width: inherit
+      margin-left: 0
+      
+      > div .row
+        margin: 0 auto
+        width: 300px   
+        border-bottom 1px solid rgb(130, 130, 130)
+        padding-top: 30px
+        text-align: center
 
-      ul
-        list-style none
-        margin 0
-        padding 0
+        &:last-child
+          border: none
 
-        li
-          float left
-          padding 3px 7px
+        &:first-child
+          padding-top: 15px
 
-          &:hover
-            background lighten($workflow-background, 30%)
-            color white
-            cursor pointer
-          
-          &.active
-            background lighten($workflow-background, 20%)
-
-    .example-box
-
-      p
-        font-size 13px
-        margin 5px 0
-
-
+        p
+          text-align: left

@@ -12,26 +12,26 @@ Classifier = ($scope, model) ->
   $scope.subExample = model.subExample
   
   $scope.getInfraredSource = ->
-    return model.infraredSource
+    model.infraredSource
   $scope.getRadioSource = ->
-    return model.radioSource
+    model.radioSource
   $scope.getStep = ->
-    return model.step
+    model.step
   $scope.getShowContours = ->
-    return model.showContours
+    model.showContours
   $scope.getNextInfraredSource = ->
-    return model.nextInfraredSource
+    model.nextInfraredSource
   $scope.getNextRadioSource = ->
-    return model.nextRadioSource
+    model.nextRadioSource
   $scope.getExample = ->
-    model.example = false if model.example is "false"
-    return model.example
-  $scope.getSubExample = ->
-    return model.subExample
+    console.log(model.example)
+    model.example
   $scope.getIsDisabled = ->
-    return model.isDisabled
+    model.isDisabled
   $scope.getAnnotationCount = ->
-    return if model.annotations.length > 0 then true else false
+    if model.annotations.length > 0 then true else false
+  $scope.getGuide = ->
+    model.activeGuide
   
   #
   # Recover last state
@@ -103,5 +103,7 @@ Classifier = ($scope, model) ->
   $scope.onDiscuss = ->
     alert "Sorry, Talk doesn't work yet"
 
+  $scope.activateGuide = ->
+    model.activeGuide = !model.activeGuide
 
 module.exports = Classifier
