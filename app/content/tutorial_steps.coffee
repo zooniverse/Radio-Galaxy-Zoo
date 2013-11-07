@@ -18,7 +18,7 @@ removeBlock = ->
 
 disableButtons = ->
   els = angular.element( document.querySelectorAll(".workflow .buttons button") )
-  els.attr("disabled", "disabled")
+  #  els.attr("disabled", "disabled")
 
 # Higher scope variables to communicate between onEnter and next functions
 groupid = null

@@ -207,6 +207,7 @@ module.exports = """
       <div ng-switch on="getStep()">
         <div ng-switch-when="0" class="col-xs-12">
           <button type="button" class="btn btn-primary back" data-ng-click="onCancel()" ng-disabled="getContourCount()">Cancel</button>
+          <button type="button" class="btn btn-primary no-contours" data-ng-click="onFinish()" ng-disabled="!getContourCount()">No Contours</button>
         </div>
         <div ng-switch-when="1" class="col-xs-12">
           <button type="button" class="btn btn-primary back" data-ng-click="onCancel()">Cancel</button>
