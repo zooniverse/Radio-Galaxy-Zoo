@@ -103,8 +103,6 @@ class ClassifierModel
     subjects = require "../content/tutorial_subject"
     
     stage1 = new Subject(subjects.stage1)
-    stage2 = new Subject(subjects.stage2)
-    stage3 = new Subject(subjects.stage3)
     
     @classification = new Classification {stage1}
     
@@ -131,7 +129,6 @@ class ClassifierModel
     @hasTutorial = false
   
   onInitialFetch: =>
-    
     if @hasTutorial
       Subject.instances.splice(1, 0, Subject.instances.pop())
       Subject.instances.splice(3, 0, Subject.instances.pop())
