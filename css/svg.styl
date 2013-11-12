@@ -1,4 +1,5 @@
 $green = #00FF00
+$blue = #0079AE 
 
 @keyframes pulsate {
   0% { opacity: 1 }
@@ -98,7 +99,7 @@ div.contours
         
         circle
           fill #000
-          stroke #FFF
+          stroke $blue 
           stroke-width 2px
           
           &.handle
@@ -115,6 +116,7 @@ div.contours
             
         text
           font-size 8px
+          display: none
           stroke #FFF
           pointer-events none
           
@@ -123,7 +125,7 @@ div.contours
         &.active
           circle
             &.annotation
-              stroke $green
+              stroke $blue 
           text
             display block
 
@@ -148,6 +150,9 @@ div.contours
       g.infrared
         circle.remove
           display: block
+
+        text
+          display: block
   
   &.step-0, &.step-1
     svg
@@ -170,7 +175,7 @@ div.contours
       g.infrared
         g.matched
           circle.annotation
-            stroke #FFF
+            stroke $blue 
             stroke-dasharray 5,5
           circle.handle
             display none
