@@ -1,4 +1,3 @@
-
 $green = #00FF00
 
 @keyframes pulsate {
@@ -24,7 +23,6 @@ $green = #00FF00
   50% { opacity: 0}
   100% { opacity: 1}
 }
-
 
 div.contours
   
@@ -102,7 +100,6 @@ div.contours
           fill #000
           stroke #FFF
           stroke-width 2px
-          cursor move
           
           &.handle
             fill $green
@@ -111,15 +108,14 @@ div.contours
             
           &.remove
             display none
-            fill #FFF
+            fill #000
             fill-opacity 1
             stroke none
             cursor pointer
             
         text
-          display none
-          font-size 11px
-          stroke #FF0000
+          font-size 8px
+          stroke #FFF
           pointer-events none
           
         &.hide
@@ -128,9 +124,6 @@ div.contours
           circle
             &.annotation
               stroke $green
-            &.remove
-              stroke #FFFFFF
-              display block
           text
             display block
 
@@ -149,6 +142,12 @@ div.contours
               display block
               fill-opacity 0
               stroke-dasharray 5,5
+
+  &.step-1
+    svg
+      g.infrared
+        circle.remove
+          display: block
   
   &.step-0, &.step-1
     svg

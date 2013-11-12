@@ -1,4 +1,3 @@
-
 module.exports = ->
   return {
     restrict: 'C'
@@ -35,6 +34,7 @@ module.exports = ->
       onDragEnd = ->
         img.removeClass("no-transition")
         return unless scope.model.step is 1
+        return if d3.event.sourceEvent.target.tagName is "circle"
         
         x = d3.event.sourceEvent.layerX
         y = d3.event.sourceEvent.layerY
@@ -45,11 +45,21 @@ module.exports = ->
           group = infraredGroup.append("g")
             .attr("transform", "translate(#{x}, #{y})")
             .attr("class", "")  # Need to specify empty class for above interaction
-          circle = group.append("circle")
-                    .attr("class", "annotation")
-                    .attr("cx", 0)
-                    .attr("cy", 0)
-                    .attr("r", 10)
+          group.append("circle")
+            .attr("class", "annotation")
+            .attr("cx", 0)
+            .attr("cy", 0)
+            .attr("r", 10)
+          group.append("circle")
+            .attr('class', 'remove')
+            .attr('cx', 7)
+            .attr('cy', -7)
+            .attr('r', 5)
+            .on('click', -> group.remove()) 
+          group.append('text')
+            .text('x')
+            .attr('x', 5)
+            .attr('y', -5)
 
       create = d3.behavior.drag()
         .on("dragstart", onDragStart)
