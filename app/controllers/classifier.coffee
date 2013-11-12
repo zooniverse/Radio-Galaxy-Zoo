@@ -77,10 +77,10 @@ Classifier = ($scope, model) ->
     model.step = 0
 
   $scope.onDone = ->
+    model.getMatch()
     model.step = 2
   
   $scope.onFinish = ->
-    model.getMatch()
     model.showContours = true
     model.ready = false
     model.step = 3
