@@ -166,7 +166,7 @@ module.exports = """
 
 <div class="classifier row" data-ng-controller="ClassifierCtrl">
 
-  <div class="workflow col-xs-8 col-centered">
+  <div class="workflow col-xs-6 col-centered">
     <div class="viewport col-centered">
       <img data-ng-src="{{ getRadioSource() }}" />
       <img class="infrared" data-ng-src="{{ getInfraredSource() }}" />
