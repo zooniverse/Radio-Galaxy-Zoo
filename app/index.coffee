@@ -56,7 +56,7 @@ RadioGalaxyZoo.service('classifierModel',
 
 # Configure Zooniverse API
 host = if window.location.port is "9296" then "http://0.0.0.0:3000" else "https://dev.zooniverse.org"
-if window.location.hostname in ["localhost", "0.0.0.0", "radio.galaxyzoo.org"]
+if window.location.hostname in ["localhost", "0.0.0.0", "radio.galaxyzoo.org", "192.168.50.1"]
   api = new zooniverse.Api
     project: 'radio'
     host: host
