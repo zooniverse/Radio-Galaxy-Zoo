@@ -177,13 +177,13 @@ module.exports = """
     </div>
 
     <div class="row controls">
-      <div class="image-slider col-xs-6">
+      <div class="image-slider col-xs-7">
         <p class="band" data-band="radio">Radio</p>
         <input class='image-opacity' type="range" min="0" max="1" step="0.01" value="0" />
         <p class="band" data-band="infrared">IR</p>
       </div>
       <span class="toggle-contours col-xs-3">{{getShowContours() ? 'hide' : 'show'}} contours</span>
-      <span class="tutorial col-xs-3" data-ng-click="onTutorial()">tutorial</span>
+      <span class="tutorial col-xs-2" data-ng-click="onTutorial()">tutorial</span>
     </div>
 
 
@@ -197,8 +197,12 @@ module.exports = """
           <p>Identify the infrared source.</p>
         </div>
 
+        <div ng-switch-when="2">
+          <p>Are there any more sources?</p>
+        </div>
+
         <div ng-switch-when="3">
-          <p>Great work, you helped science!</p>
+          <p>Great work: you helped science!</p>
         </div>
       </div>
     </div>
