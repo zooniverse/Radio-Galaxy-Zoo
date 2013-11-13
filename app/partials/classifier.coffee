@@ -174,6 +174,8 @@ module.exports = """
       <div id="svg-contours" class='contours marking step-{{getStep()}}' ng-class="{'fade-contour': !getShowContours()}">
         <svg xmlns="http://www.w3.org/2000/svg" class="svg-contours"></svg>
       </div>
+      <span class="toggle-contours btn-primary">{{getShowContours() ? 'hide' : 'show'}} contours</span>
+      <span class="tutorial btn-primary" data-ng-click="onTutorial()">tutorial</span>
     </div>
 
     <div class="row controls">
@@ -182,19 +184,17 @@ module.exports = """
         <input class='image-opacity' type="range" min="0" max="1" step="0.01" value="0" />
         <p class="band" data-band="infrared">IR</p>
       </div>
-      <span class="toggle-contours col-xs-3">{{getShowContours() ? 'hide' : 'show'}} contours</span>
-      <span class="tutorial col-xs-2" data-ng-click="onTutorial()">tutorial</span>
     </div>
 
 
     <div class='row instruction'>
       <div ng-switch on="getStep()">
         <div ng-switch-when="0">
-          <p>Select the contour(s) representing the radio emission.</p>
+          <p>Click on any radio contour or pair of jets</p>
         </div>
 
         <div ng-switch-when="1">
-          <p>Identify the infrared source.</p>
+          <p>Click the associated infrared source(s)</p>
         </div>
 
         <div ng-switch-when="2">
@@ -220,7 +220,7 @@ module.exports = """
         </div>
         <div ng-switch-when="2">
           <button type="button" class="btn btn-primary back" data-ng-click="onCancel()">Cancel</button>
-          <button type="button" class="btn btn-primary next-radio" data-ng-click="onNextRadio()">Mark Another Source</button>
+          <button type="button" class="btn btn-primary next-radio" data-ng-click="onNextRadio()">Mark Another</button>
           <button type="button" class="btn btn-primary col-xs-offset-5 done" data-ng-click="onFinish()">Finish</button>
         </div>
         <div ng-switch-when="3">

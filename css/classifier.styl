@@ -24,6 +24,7 @@ $workflow-background = rgb(0, 0, 0) $workflow-text-color = rgb(240, 240, 240)
     cursor crosshair
     
     div.contours
+      border 1px solid $dark-blue
       position absolute
       width $subject-width
       height $subject-height
@@ -42,14 +43,40 @@ $workflow-background = rgb(0, 0, 0) $workflow-text-color = rgb(240, 240, 240)
     border-radius 4px
     padding 0
 
+    .toggle-contours, .tutorial
+      cursor pointer
+      text-align center
+      vertical-align middle
+      font-size 12px
+      line-height 12px
+      position absolute
+      width 50
+      height 50
+      right -65
+      top 0
+      border-radius(25)
+      
+      &:hover
+        color white
+
+    .tutorial
+      top 65
+
+    .row
+      margin 0 auto
+      width $subject-width
+
     .controls
-      border-top 1px solid rgb(130, 130, 130)
-      border-bottom 1px solid rgb(130, 130, 130)
+      // border-top 1px solid rgb(130, 130, 130)
+      // border-bottom 1px solid rgb(130, 130, 130)
       padding 6px 0 0 0
       
       .image-slider
         font-weight 700
         font-size 12px
+        width $subject-width
+        padding-left 0
+        padding-right 0
         
         p.band
           display inline-block
@@ -62,7 +89,7 @@ $workflow-background = rgb(0, 0, 0) $workflow-text-color = rgb(240, 240, 240)
         vertical-align 1px
         -webkit-appearance none
         background-color rgb(212, 212, 212)
-        width 65%
+        width 350px
         height 6px
         border-radius 3px
         margin 0 6px
@@ -74,14 +101,6 @@ $workflow-background = rgb(0, 0, 0) $workflow-text-color = rgb(240, 240, 240)
         width 12px
         height 12px
         border-radius 6px
-      
-      .toggle-contours, .tutorial
-        cursor pointer
-        text-align right
-        font-size 12px
-        
-        &:hover
-          color white
         
       .message
         text-align right
@@ -89,7 +108,10 @@ $workflow-background = rgb(0, 0, 0) $workflow-text-color = rgb(240, 240, 240)
     
     .instruction
       border-top 1px solid rgb(130, 130, 130)
+      border-bottom 1px solid rgb(130, 130, 130)
       padding 15px 0
+      width $subject-width
+      margin 0 auto
 
       p
         margin 0
@@ -99,7 +121,13 @@ $workflow-background = rgb(0, 0, 0) $workflow-text-color = rgb(240, 240, 240)
     
     > .buttons
       padding: 10px 0
+      width $subject-width
+      margin 0 auto
       text-align right
+
+      div
+        padding-right 0
+        padding-left 0
       
       button
         animation-duration 2s
