@@ -127,6 +127,7 @@ class ClassifierModel
   
   onTutorialEnd: =>
     @hasTutorial = false
+    @tutorial.end()
   
   onInitialFetch: =>
     if @hasTutorial
