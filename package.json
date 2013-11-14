@@ -7,7 +7,8 @@
     "start": "haw serve"
   },
   "devDependencies": {
-    "haw": "0.1.x"
+    "haw": "0.1.x",
+    "coffee-script": "*"
   },
   "engine": "node >= 0.10.12"
 }
