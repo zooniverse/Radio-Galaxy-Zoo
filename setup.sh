@@ -18,5 +18,5 @@ curl --fail -k "https://raw.github.com/zooniverse/Zooniverse/959f413dd2493a9a3cd
 curl --fail -k "https://raw.github.com/zooniverse/Zooniverse/959f413dd2493a9a3cdb6bcdc4e9e184aad123a2/css/top-bar.css" -o "css/zooniverse/top-bar.css"
 curl --fail -k "https://raw.github.com/zooniverse/Zooniverse/959f413dd2493a9a3cdb6bcdc4e9e184aad123a2/css/zooniverse.css" -o "css/zooniverse/zooniverse.css"
 
-curl --fail -k "https://raw.github.com/brian-c/zootorial/c07c536a20145c10ec2801712276f84c6fea17f3/zootorial.js" -o "app/lib/zootorial.js"
-curl --fail -k "https://raw.github.com/brian-c/zootorial/c07c536a20145c10ec2801712276f84c6fea17f3/zootorial.css" -o "css/zooniverse/zootorial.css"
+curl --fail -k "https://raw.github.com/brian-c/zootorial/ce1120bc3d83247f3462abddbaf3430848f29ba4/zootorial.js" -o "app/lib/zootorial.js"
+curl --fail -k "https://raw.github.com/brian-c/zootorial/ce1120bc3d83247f3462abddbaf3430848f29ba4/zootorial.css" -o "css/zooniverse/zootorial.css"

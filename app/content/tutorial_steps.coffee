@@ -31,7 +31,7 @@ module.exports =
     welcome: new Step
       number: 1
       header: "Welcome to Radio Galaxy Zoo!"
-      details: "We’re going to show you two images of the same part of the sky, one from a radio telescope and one from an infrared telescope. Most contain galaxies that will show in the infrared (IR), but only some galaxies appear in the radio." 
+      details: "We’re going to show you two images of the same part of the sky, one from a radio telescope and one from an infrared telescope. \n \n Most contain galaxies that will show in the infrared (IR), but only some galaxies appear in the radio." 
       attachment: "center center .viewport center center"
       next: "wavelengths"
 
@@ -111,13 +111,13 @@ module.exports =
       number: 11
       header: "What's Going on?"
       details: "The fainter radio object shows emission from newly-formed stars in the galaxy. The bright radio object shows us two jets emitted by a supermassive black hole at center of that galaxy -- but we can only see the central galaxy in the infrared. \n \n This is why we need your help to match these objects."
-      attachment: "center center .viewport center center"
+      attachment: "right center .viewport left center"
       next: 'guide'
 
     guide: new Step
       number: 12
       header: "More Objects"
-      details: "This single contour is an object you don’t need to identify as it’s too faint. \n \n You can see many more examples in the ‘Guide’, showing how the science team marked more complex objects."
+      details: "You can see many more examples in the ‘Guide’, showing how the science team marked more complex objects."
       attachment: "0.35 0.20 .example-selection right center"
       className: "arrow-left"
       next: 'next'
