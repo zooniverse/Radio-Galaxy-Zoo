@@ -44,6 +44,10 @@ $workflow-background = rgb(0, 0, 0) $workflow-text-color = rgb(240, 240, 240)
     padding 0
 
     .toggle-contours, .tutorial
+      background-image url('../images/hide-contours.png')
+      background-repeat no-repeat
+      background-position 0 0
+      background-size: 100% 100%
       cursor pointer
       text-align center
       vertical-align middle
@@ -59,8 +63,12 @@ $workflow-background = rgb(0, 0, 0) $workflow-text-color = rgb(240, 240, 240)
       &:hover
         color white
 
+    .nocontours 
+      background-image url('../images/show-contours.png')
+
     .tutorial
       top 65
+      background-image url('../images/tutorial.png')
 
     .row
       margin 0 auto

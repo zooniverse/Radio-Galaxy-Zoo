@@ -174,8 +174,8 @@ module.exports = """
       <div id="svg-contours" class='contours marking step-{{getStep()}}' ng-class="{'fade-contour': !getShowContours()}">
         <svg xmlns="http://www.w3.org/2000/svg" class="svg-contours"></svg>
       </div>
-      <span class="toggle-contours btn-primary">{{getShowContours() ? 'hide' : 'show'}} contours</span>
-      <span class="tutorial btn-primary" data-ng-click="onTutorial()">tutorial</span>
+      <span class="toggle-contours btn-primary {{getShowContours() ? '' : 'nocontours'}}" title="{{getShowContours() ? 'Hide' : 'Show'}} Contours"></span>
+      <span class="tutorial btn-primary" data-ng-click="onTutorial()" title="Tutorial"></span>
     </div>
 
     <div class="row controls">
