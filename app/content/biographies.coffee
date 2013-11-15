@@ -187,6 +187,18 @@ module.exports = [
     institution: "Oxford University"
     twitter: "orbitingfrog"
     bio: "Rob is a researcher and web developer as well as Communicatios Lead for the Zooniverse. His background is in submillimetre astronomy so he's quite used to seeing the kind of 'fried eggs' that Radio Gaalxy Zoo has to offer. Rob is also interested in the Zooniverse itself and the motivations of the hundreds of thousands of amazing people who come and classify on sites like Radio Galaxy Zoo. You can follow Rob online at orbitingfrog.com."
+  },
+  {
+    name: "Ed Paget"
+    institution: "Adler Planetarium"
+    twitter: "edpaget"
+    bio: ""
+  },
+  {
+    name: "Brooke Simmons"
+    institution: "Oxford University"
+    twitter: "vrooje"
+    bio: ""
   }
 ]
   
