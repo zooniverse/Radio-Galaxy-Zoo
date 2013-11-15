@@ -3,17 +3,25 @@ template = """
     
     <div class="content-block row">
       <div class="col-xs-6">
-        <h2>Radio Images</h2>
-        <p class="description"> The radio data you are viewing comes from the Australia Telescope Large Area Survey (ATLAS), which is a deep radio survey of about six square degrees of the sky (about 30 times the size of the full Moon). In total, this field contains about 6000 sources. The data were taken with the Australia Telescope Compact Array (ATCA), which observes the Southern Hemisphere from its location in rural New South Wales. The images were taken from 2006-2011, and are now being analysed. With only 6000 sources, we can simultaneously have experts examine the sources by eye AND compare these to results from Radio Galaxy Zoo volunteers. We'll combine these early data sets to develop and refine our techniques for the upcoming EMU survey.</p>
-        <p class="description">The Evolutionary Map of the Universe (EMU) is a survey that will be performed with the newly constructed Australian SKA Pathfinder (ASKAP) telescope in Western Australia. EMU will discover about 70 million radio sources, increasing our knowledge of the radio sky by almost a factor of 30. Even more importantly, EMU will probe far more deeply than other telescopes, giving us millions of examples of types of galaxies of which only a few hundred are currently known. For example, only a few tens of thousands of star-forming galaxies have so far been detected at radio wavelengths, but EMU will detect about 30 million of them, enabling us to study the properties of different types of star forming galaxies.</p>
+        <span class="content-image">
+          <a href="http://www.atnf.csiro.au/people/Emil.Lenc/Gallery/"><span class="image-credit">Image Credit: Emil Lenc</span></a>
+          <img src="/images/science/atlas.jpg" class="science-image"/>
+          <h2>Radio Images</h2>
+        </span>
+        <p class="description"> The radio data you are viewing comes from the Australia Telescope Large Area Survey (ATLAS), a deep radio survey of six square degrees of the sky (about 30 times the size of the full Moon). This field contains about 6000 sources. The data were taken with the Australia Telescope Compact Array (ATCA) in rural New South Wales. The images were taken between 2006 and 2011. With only 6000 sources, we can simultaneously have experts examine the sources by eye AND compare these to results from Radio Galaxy Zoo volunteers. We'll combine these to develop and refine our techniques for the upcoming, larger EMU (Evolutionary Map of the Universe) survey.</p>
+        <p class="description">EMU will be performed with the newly constructed Australian SKA Pathfinder (ASKAP) telescope in Western Australia. EMU will discover about 70 million radio sources, increasing our knowledge of the radio sky by almost a factor of 30! Even more importantly, EMU will probe far more deeply than other telescopes, giving us millions of examples of types of galaxies of which only a few hundred are currently known.</p>
       </div>
       <div class="col-xs-6">
-        <h2>Infrared Images</h2>
+        <span class="content-image">
+          <a href="http://commons.wikimedia.org/wiki/File:Spitzer_space_telescope.jpg"><span class="image-credit">Image Credit: NASA/JPL-Caltech</span></a>
+          <img src="/images/science/spitzer.jpg" class="science-image"/>
+          <h2>Infrared Images</h2>
+        </span>
         <p class="description">The Spitzer Space Telescope is a space-based infrared observatory launched by NASA in 2003. It studies objects ranging from our own Solar System to the distant reaches of the Universe. In the early days of the Spitzer mission, the telescope was cryogenically cooled so that its three instruments (two cameras and a spectrograph) could observe the Universe at wavelengths from 3 to 180 micrometers. Since Spitzer's helium supply was exhausted in 2009, the telescope currently operates one of its cameras in Warm Mode, continuing to image the universe at infrared wavelengths of 3.4 and 4.6 micrometers.</p>
         <p class="description">The infrared images you see in Radio Galaxy Zoo were taken as part of a program called the Spitzer Wide-Area Infrared Extragalactic Survey, or SWIRE. These images were taken with the IRAC camera at a wavelength 3.6 micrometers. The emission from the galaxies comes from a combination of stars and from dust in the galaxy which has been heated, either by the stars themselves or by emission from a central black hole.</p>
       </div>
     </div>
-    
+
     <div class="content-block row">
       <div class="col-xs-6">
         <h2>Why can’t computers do this task?</h2>
