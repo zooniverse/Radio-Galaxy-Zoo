@@ -7,6 +7,179 @@ from astropy.io import fits
 
 EPSILON = 1e-10
 
+LEVELS = [ 3.0, 5.196152422706632, 8.999999999999998,
+    15.588457268119893, 26.999999999999993, 46.765371804359674,
+    80.99999999999997, 140.296115413079, 242.9999999999999,
+    420.88834623923697, 728.9999999999995, 1262.6650387177108,
+    2186.9999999999986, 3787.9951161531317, 6560.9999999999945]
+
+THRESHOLD = 8
+
+class Point:
+  def __init__(self, x, y):
+    self.x = x
+    self.y = y
+
+  def __str__(self):
+    return str(self.to_pair())
+
+  def __eq__(self, b):
+    x = self.x - b.x
+    y = self.y - b.y
+    return (x*x)+(y*y) < EPSILON
+
+  def to_pair(self):
+    return (self.x, self.y)
+
+class Node:
+  def __init__(self, parent, car, cdr=None, prev=None):
+    self.parent = parent
+    self.car = car
+    self.cdr = cdr 
+    self.prev = prev
+
+  def swap(self):
+    n = self.cdr
+    self.cdr = self.prev
+    self.prev = n
+    return n
+
+  def remove(self):
+    if self.parent.head is self:
+      self.parent.head = self.cdr
+    if self.parent.tail is self:
+      self.parent.tail = self.prev
+    if not self.prev is None:
+      self.prev.cdr = self.cdr
+    if not self.cdr is None:
+      self.cdr.prev = self.prev
+    self.prev = None
+    self.cdr = None
+
+class List:
+  def __init__(self):
+    self.head = None
+    self.tail = None
+    self.closed = False
+
+  def __str__(self):
+    s = self.head
+    sr = "("
+    while not s.cdr is None:
+      sr = sr + str(s.car) + ", "
+      s = s.cdr
+    return sr + str(s.car) + ")"
+
+  def prepend(self, value):
+    node = Node(self, value, cdr=self.head)
+    if not self.head is None:
+      self.head.prev = node
+    self.head = node
+    if self.tail is None:
+      self.tail = self.head
+    return self
+
+  def close(self, value):
+    node = Node(self, value, prev=self.tail, cdr=self.head)
+    self.head = node
+    self.tail = node
+    self.closed = True
+    return self
+
+  def append(self, value):
+    node = Node(self, value, prev=self.tail)
+    if not self.head is None:
+      self.tail.cdr = node
+    self.tail = node
+    if self.head is None:
+      self.head = self.tail
+    return self
+
+  def reverse(self):
+    node = self.head
+    while not node.cdr is None:
+      node = node.swap()
+    node = self.head
+    self.head = self.tail
+    self.tail = node
+    return self
+
+  def merge(self, mergee):
+    self.tail.cdr = mergee.head
+    mergee.head.prev = self.tail
+    self.tail = mergee.tail
+    return self
+
+  def first(self):
+    return self.head.car
+
+  def last(self):
+    return self.tail.car
+
+class ContourBuilder:
+  def __init__(self, lvl):
+    self.lvl = lvl
+    self.s = List()
+    self.count = 0
+
+  def add_segment(self, a, b):
+    ss = self.s.head
+    ma = None
+    mb = None
+    prepend_a = False
+    prepend_b = False
+
+    while (not ss is None):
+      if ma is None:
+        if a == ss.car.first():
+          ma = ss
+          prepend_a = True
+        elif a == ss.car.last():
+          ma = ss
+      if mb is None:
+        if b == ss.car.first():
+          mb = ss
+          prepend_b = True
+        elif b == ss.car.last():
+          mb = ss
+      if (not mb is None) and (not ma is None):
+        break
+      else:
+        ss = ss.cdr
+
+    if ma is None and mb is None:
+      ma = List().append(a).append(b)
+      self.s.prepend(ma)
+      self.count = self.count + 1
+    elif mb is None:
+      if prepend_a:
+        ma.car.prepend(b)
+      else:
+        ma.car.append(b)
+    elif ma is None:
+      if prepend_b:
+        mb.car.prepend(a)
+      else:
+        mb.car.append(a)
+    else:
+      self.count = self.count - 1
+      if (ma.car is mb.car):
+        ma.car.close(a)
+      elif (not prepend_a) and (not prepend_b):
+        ma.car.reverse()
+        mb.car.merge(ma.car)
+        ma.remove()
+      elif prepend_a and (not prepend_b):
+        mb.car.merge(ma.car)
+        ma.remove()
+      elif prepend_b and prepend_a:
+        ma.car.reverse()
+        ma.car.merge(mb.car)
+        mb.remove()
+      elif prepend_b and (not prepend_a):
+        ma.car.merge(mb.car)
+        mb.remove()
+
 # contour is countring subrouter for rectangularily spaced data
 #
 # d - matrix of data to contour
@@ -16,30 +189,27 @@ EPSILON = 1e-10
 # nc - number of contour levels
 # z - contour levels in increasing order
 
-def conrec(d, ilb, iub, jlb, jub, x, y, nc, z)  
-  h = np.empty(5)
-  sh = np.empty(5)
-  xh = np.empty(5)
-  yh = np.empty(5)
-  contours = {} 
+def sect(h, xh, p1, p2): 
+  return (h[p2]*xh[p1]-h[p1]*xh[p2])/(h[p2]-h[p1])
 
-  xsect = lambda p1, p2:
-    return (h[p2]*xh[p1]-h[p1]*xh[p2])/(h[p2]-h[p1])
-
-  ysect = lambda p1, p2:
-    return (h[p2]*yh[p1]-h[p1]*yh[p2])/(h[p2]-h[p1])
+def conrec(d, ilb, iub, jlb, jub, x, y, nc, z):
+  h = [0] * 5
+  sh = [0] * 5
+  xh = [0] * 5
+  yh = [0] * 5
+  contours = [None] * nc
 
   x1 = 0.0
   x2 = 0.0
   y1 = 0.0
-  y2 = 0.0
+  y2 = 0.0 
 
   im = [0, 1, 1, 0]
   jm = [0, 0, 1, 1]
 
   castab = [
       [
-        [0, 0, 8], [0, 2, 5], [7, 6, 8]
+        [0, 0, 8], [0, 2, 5], [7, 6, 9]
       ],
       [
         [0, 3, 4], [1, 3, 1], [4, 3, 0]
@@ -49,15 +219,16 @@ def conrec(d, ilb, iub, jlb, jub, x, y, nc, z)
       ]
     ]
 
-  for j in range(jlb, jub-1):
+  for j in range(jub-1, jlb, -1):
     for i in range(ilb, iub):
       dmin = min(min(d[i][j], d[i][j+1]), min(d[i+1][j], d[i+1][j+1]))
-      dmax = max(max(d[i][j], d[i][j+1]), min(d[i+1][j], d[i+1][j+1]))
+      dmax = max(max(d[i][j], d[i][j+1]), max(d[i+1][j], d[i+1][j+1]))
+
 
       if dmax >= z[0] and dmin <= z[nc-1]:
         for k in range(0, nc):
           if z[k] >= dmin and z[k] <= dmax:
-            for m in range(4, 0):
+            for m in [4, 3, 2, 1, 0]:
               if m > 0:
                 h[m] = d[i+im[m-1]][j+jm[m-1]]-z[k]
                 xh[m] = x[i+im[m-1]]
@@ -65,14 +236,14 @@ def conrec(d, ilb, iub, jlb, jub, x, y, nc, z)
               else:
                 h[0] = 0.25*(h[1]+h[2]+h[3]+h[4])
                 xh[0] = 0.25*(x[i]+x[i+1])
-                yh[0] = 0.25*(y[j]+y[i+1])
+                yh[0] = 0.25*(y[j]+y[j+1])
               if h[m] > EPSILON:
                 sh[m] = 1
               elif h[m] < -EPSILON:
                 sh[m] = -1
               else:
                 sh[m] = 0
-            for m in range(1, 4):
+            for m in [1, 2, 3, 4]:
               m1 = m
               m2 = 0
               if m != 4:
@@ -80,7 +251,7 @@ def conrec(d, ilb, iub, jlb, jub, x, y, nc, z)
               else:
                 m3 = 1
 
-              case_value = castab[sh[m1]+1][sh[m2]+2][sh[m3]+1]
+              case_value = castab[sh[m1]+1][sh[m2]+1][sh[m3]+1]
               if case_value != 0:
                 if case_value == 1:
                   x1=xh[m1]
@@ -91,48 +262,78 @@ def conrec(d, ilb, iub, jlb, jub, x, y, nc, z)
                   x1=xh[m2]
                   y1=yh[m2]
                   x2=xh[m3]
-                  y2=xh[m3]
+                  y2=yh[m3]
                 elif case_value == 3:
                   x1=xh[m3]
-                  y1=xh[m3]
+                  y1=yh[m3]
                   x2=xh[m1]
-                  y2=xh[m1]
+                  y2=yh[m1]
                 elif case_value == 4:
                   x1=xh[m1]
                   y1=yh[m1]
-                  x2=xsect(m2,m3)
-                  y2=ysect(m2,m3)
+                  x2=xsect(h, xh, m2,m3)
+                  y2=ysect(h, yh, m2,m3)
                 elif case_value == 5:
                   x1=xh[m2]
-                  y1=yh[m3]
-                  x2=xsect(m3,m1)
-                  y2=ysect(m3,m1)
+                  y1=yh[m2]
+                  x2=sect(h, xh, m3,m1)
+                  y2=sect(h, yh, m3,m1)
                 elif case_value == 6:
                   x1=xh[m3]
                   y1=yh[m3]
-                  x2=xsect(m1,m2)
-                  y2=ysect(m1,m2)
+                  x2=sect(h, xh, m1,m2)
+                  y2=sect(h, yh, m1,m2)
                 elif case_value == 7:
-                  x1=xsect(m1,m2)
-                  y2=ysect(m1,m2)
-                  x2=xsect(m2,m3)
-                  y3=ysect(m2,m3)
+                  x1=sect(h, xh, m1,m2)
+                  y1=sect(h, yh, m1,m2)
+                  x2=sect(h, xh, m2,m3)
+                  y2=sect(h, yh, m2,m3)
                 elif case_value == 8:
-                  x1=xsect(m2,m3)
-                  y1=ysect(m2,m3)
-                  x2=xsect(m2,m3)
-                  y3=ysect(m2,m3)
+                  x1=sect(h, xh, m2,m3)
+                  y1=sect(h, yh, m2,m3)
+                  x2=sect(h, xh, m3,m1)
+                  y2=sect(h, yh, m3,m1)
                 elif case_value == 9:
-                  x1=xsect(m3,m1)
-                  y1=ysect(m3,m1)
-                  x2=xsect(m1,m2)
-                  y3=xsect(m1,m2)
-                  
+                  x1=sect(h, xh, m3,m1)
+                  y1=sect(h, yh, m3,m1)
+                  x2=sect(h, xh, m1,m2)
+                  y2=sect(h, yh, m1,m2)
+                if contours[k] is None:
+                  contours[k] = ContourBuilder(z[k])
+                contours[k].add_segment(Point(x1, y1), Point(x2, y2))
+  return contours
 
+def contour_list(contours):
+  contours = filter(lambda c: not c is None, contours)
+  l = []
+  for k, c in enumerate(contours):
+    s = c.s.head
+    lvl = c.lvl
+    while (not s is None):
+      h = s.car.head
+      l2 = {'arr': [], 'k': k, 'level': lvl} 
+      while (not h is None):
+        l2['arr'].append(h.car.to_pair())
+        h = h.cdr
+      l.append(l2)
+      s = s.cdr
+  return sorted(l, key=lambda n: n['k'])
 
+def contour(f):
+  data = fits.getdata(f)
+  height = len(data)
+  width = len(data[0])
+  idx = range(1, height+1)
+  jdx = range(1, width+1) 
+  return contour_list(conrec(data, 0, height - 1, 0, width - 1, idx, jdx, len(LEVELS), LEVELS))
 
-                
-                
-
-
-
+if __name__ == '__main__':
+  if len(sys.argv) < 2:
+    print "Usage: python make_contours.py [directory]"
+    sys.exit()
+  directory = sys.argv[1]
+  cs = contour(directory)
+  print len(cs)
+  print max(map(lambda c: len(c['arr']), cs))
+  print reduce(lambda m, c: m+len(c['arr']), cs, 0) / len(cs)
+  #print map(lambda c: c['arr'], cs)
