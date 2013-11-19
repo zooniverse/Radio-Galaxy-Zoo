@@ -108,7 +108,7 @@ Classifier = ($scope, model) ->
   $scope.onDiscuss = ->
     alert "Sorry, Talk doesn't work yet"
 
-  $scope.activateGuide = ->
+  $scope.activateGuide = (e) ->
     model.activeGuide = !model.activeGuide
 
 module.exports = Classifier

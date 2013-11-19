@@ -16,13 +16,14 @@
     left: -40px
     top: 55px 
     display: inline-block
-    background: lighten($workflow-background, 30%)
+    background: #428bca
     transition: transform 0.5s ease-in-out
     width: 140px
     text-align: center
 
     &.active
       transform: translateX(330px) rotate(90deg)
+      background-color #fb3a3a
 
   .examples
     background-color darken($workflow-background, 15%)
@@ -93,3 +94,6 @@
 
         p
           text-align: left
+
+    .example
+      background-color #428bca

@@ -173,16 +173,16 @@ module.exports = """
     <div class='buttons row step-{{getStep()}}'>
       <div ng-switch on="getStep()">
         <div ng-switch-when="0" class="col-xs-12">
-          <button type="button" class="btn btn-primary back" data-ng-click="onCancel()" ng-disabled="getContourCount()">Cancel</button>
+          <button type="button" class="btn btn-primary back cancel" data-ng-click="onCancel()" ng-disabled="getContourCount()">Cancel</button>
           <button type="button" class="btn btn-primary no-contours" data-ng-click="onFinish()" ng-disabled="!getContourCount()">No Contours</button>
         </div>
         <div ng-switch-when="1" class="col-xs-12">
-          <button type="button" class="btn btn-primary back" data-ng-click="onCancel()">Cancel</button>
+          <button type="button" class="btn btn-primary back cancel" data-ng-click="onCancel()">Cancel</button>
           <button type="button" class="btn btn-default col-xs-offset-3 no-infrared" data-ng-click="onNoCorrespondingFlux()">No Infrared</button>
           <button type="button" class="btn btn-primary col-xs-offset-5 done" data-ng-click="onDone()">Done</button>
         </div>
         <div ng-switch-when="2">
-          <button type="button" class="btn btn-primary back" data-ng-click="onCancel()">Cancel</button>
+          <button type="button" class="btn btn-primary back cancel" data-ng-click="onCancel()">Cancel</button>
           <button type="button" class="btn btn-primary next-radio" data-ng-click="onNextRadio()">Mark Another</button>
           <button type="button" class="btn btn-primary col-xs-offset-5 done" data-ng-click="onFinish()">Finish</button>
         </div>
