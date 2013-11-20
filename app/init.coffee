@@ -2,7 +2,6 @@ Router = require('lib/router')
 
 module.exports = ->
   host = if window.location.port is "9296" then "http://0.0.0.0:3000" else "https://dev.zooniverse.org"
-  console.log(Analytics?)
   if Analytics?
     new Analytics
       account: "UA-1224199-49"

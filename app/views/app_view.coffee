@@ -1,6 +1,6 @@
 Index = require('./index')
 Classify = require('./classify')
-Science = require('./profile')
+Science = require('./science')
 Team = require('./team')
 
 class AppView extends Backbone.View
