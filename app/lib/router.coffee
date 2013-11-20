@@ -1,3 +1,5 @@
+AppView = require('views/app_view')
+
 class Router extends Backbone.Router
   routes: {
     "" : "index"
@@ -7,5 +9,20 @@ class Router extends Backbone.Router
     "team(/)" : "team"
     "profile(/)" : "profile"
   }
+
+  initialize: ->
+    @appView = new AppView()
+
+  classify: ->
+    @appView.setActive('classify')
+
+  science: ->
+    @appView.setActive('science')
+
+  team: ->
+    @appView.setActive('team')
+
+  profile: ->
+    @appView.setActive('profile')
 
 module.exports = Router

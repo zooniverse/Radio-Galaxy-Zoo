@@ -1,3 +1,5 @@
+Router = require('lib/router')
+
 module.exports = ->
   host = if window.location.port is "9296" then "http://0.0.0.0:3000" else "https://dev.zooniverse.org"
   console.log(Analytics?)
@@ -21,3 +23,6 @@ module.exports = ->
 
   footer = new zooniverse.controllers.Footer
   footer.el.appendTo '#footer'
+
+  router = new Router()
+  Backbone.history.start()
