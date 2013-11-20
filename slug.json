@@ -8,8 +8,6 @@
     "./app/lib/zooniverse.js",
     "./app/lib/zootorial.js",
     "./app/lib/fits.js",
-    "./app/lib/d3.js",
-    "./app/lib/conrec.js",
-    "./app/lib/html5slider.js"
+    "./app/lib/d3.js"
   ]
 }

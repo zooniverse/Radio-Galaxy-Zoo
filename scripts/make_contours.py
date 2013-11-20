@@ -1,9 +1,12 @@
 import os
 import sys
 import glob
+import json
 import numpy as np
 import matplotlib.pyplot as plt
 from astropy.io import fits
+from collections import namedtuple
+import cmath
 
 EPSILON = 1e-10
 
@@ -30,6 +33,9 @@ class Point:
 
   def to_pair(self):
     return (self.x, self.y)
+
+  def to_dict(self):
+    return {"x": self.x, "y": self.y}
 
 class Node:
   def __init__(self, parent, car, cdr=None, prev=None):
@@ -97,7 +103,7 @@ class List:
 
   def reverse(self):
     node = self.head
-    while not node.cdr is None:
+    while not node is None:
       node = node.swap()
     node = self.head
     self.head = self.tail
@@ -313,27 +319,62 @@ def contour_list(contours):
       h = s.car.head
       l2 = {'arr': [], 'k': k, 'level': lvl} 
       while (not h is None):
-        l2['arr'].append(h.car.to_pair())
+        l2['arr'].append(h.car)
         h = h.cdr
       l.append(l2)
       s = s.cdr
   return sorted(l, key=lambda n: n['k'])
 
 def contour(f):
+  def filter_small(c):
+    box = c['bbox']
+    x = box.max_x - box.min_x
+    y = box.max_y - box.min_y
+    return cmath.sqrt(x*x + y*y).real > THRESHOLD
+
+  def group_contours(c):
+    group = []
+    group.append(c)
+    bbox = c['bbox']
+    for sc in subcontours:
+      p = sc['arr'][0]
+      if bbox.max_x > p.x and bbox.min_x < p.x and bbox.max_y > p.y and bbox.min_y < p.y:
+        group.append(sc)
+    return group
+ 
+  def bounding_box(c):
+    BBox = namedtuple('BBox', 'max_x max_y min_x min_y')
+    xs = map(lambda p: p.x, c['arr'])
+    ys = map(lambda p: p.y, c['arr'])
+    max_x = max(xs)
+    min_x = min(xs)
+    max_y = max(ys)
+    min_y = min(ys)
+    c['bbox'] = BBox(max_x, max_y, min_x, min_y)
+    return c
+
   data = fits.getdata(f)
   height = len(data)
   width = len(data[0])
   idx = range(1, height+1)
   jdx = range(1, width+1) 
-  return contour_list(conrec(data, 0, height - 1, 0, width - 1, idx, jdx, len(LEVELS), LEVELS))
+  cs = contour_list(conrec(data, 0, height - 1, 0, width - 1, idx, jdx, len(LEVELS), LEVELS))
+
+  k0contours = map(bounding_box, filter(lambda c: c['k'] == 0, cs))
+  subcontours = filter(lambda c: c['k'] != 0, cs)
+  
+  return map(group_contours, filter(filter_small, k0contours))
+
+def points_to_dict(g):
+  for i,c in enumerate(g): 
+    c['arr'] = map(lambda p: p.to_dict(), c['arr'])
+    g[i] = c
+  return g
 
 if __name__ == '__main__':
   if len(sys.argv) < 2:
-    print "Usage: python make_contours.py [directory]"
+    print "Usage: python make_contours.py [file]"
     sys.exit()
-  directory = sys.argv[1]
-  cs = contour(directory)
-  print len(cs)
-  print max(map(lambda c: len(c['arr']), cs))
-  print reduce(lambda m, c: m+len(c['arr']), cs, 0) / len(cs)
-  #print map(lambda c: c['arr'], cs)
+  f = sys.argv[1]
+  cs = map(points_to_dict, contour(f))
+  print json.dumps(cs)

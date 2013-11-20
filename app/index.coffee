@@ -1,4 +1,4 @@
-
+console.log('here')
 # Import controllers
 ClassifierCtrl  = require './controllers/classifier'
 ScienceCtrl     = require './controllers/science'
