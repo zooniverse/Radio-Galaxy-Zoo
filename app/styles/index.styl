@@ -8,26 +8,30 @@ body
   color: #EFEFEF
   margin: 0 auto
   font-family: "Open Sans", "Helvetica"
+  font-size: 14px
 
 nav  
   width 1000px
-  margin 0 auto
-  margin-top 5px
+  margin 5px auto 70px auto
   height 80px
   padding 45px 0 0 0
   
   ul
+    width: inherit
     padding 0
     margin 0
     
     li
-      width 100px
       line-height 76px
       vertical-align middle
       display inline-block
       text-align center
-      margin-right 20px
+      margin-right 80px
       position relative
+
+      &:last-child
+        margin-right: 0
+        text-align: right
       
       a
         font-size 12px
@@ -44,9 +48,6 @@ nav
         background-position center 50% 50%
         height 76px
         
-        img
-          border 0
-  
 .container
   margin 0 auto
   margin-top 80px

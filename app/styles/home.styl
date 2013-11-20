@@ -1,14 +1,6 @@
+@import 'colors'
 
-$gutter-size = 20px
-$column-size = 65px
-$one-half = ($column-size * 6) + ($gutter-size * 5)
-
-$green = #C1EA00
-$dark-gray = #01050F
-$dark-blue = #003C57
-
-.home
-  
+#index
   > .headline
     font-family "Open Sans", "Helvetica"
     font-weight 700
@@ -31,13 +23,13 @@ $dark-blue = #003C57
     display block
     border-top 1px solid $dark-blue
     border-bottom 1px solid $dark-blue
-    padding $gutter-size 0px
+    padding: 20px 0
     
     .slide-element
       min-height 290px
       
       &.radio-galaxy-zoo
-        background url("images/rgz_slider.jpg") #000 no-repeat
+        background url("../images/rgz_slider.jpg") #000 no-repeat
       
       .credit
         position relative
@@ -47,7 +39,6 @@ $dark-blue = #003C57
       
       .right
         display inline-block
-        width $one-half
         text-align right
         
         p
@@ -57,7 +48,6 @@ $dark-blue = #003C57
       .left
         position relative
         display inline-block
-        width $one-half
         padding 0 25px 0 0
         
         .header-blue
@@ -99,3 +89,4 @@ $dark-blue = #003C57
           padding 4px 10px
           -webkit-border-radius 3px
           border-radius 3px
+
