@@ -1,5 +1,6 @@
 !app/lib/zooniverse*.js
 
+public/
 .DS_Store
 docs/
 node_modules/
