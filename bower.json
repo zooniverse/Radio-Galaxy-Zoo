@@ -1,0 +1,38 @@
+{
+  "name": "Radio-Galaxy-Zoo",
+  "version": "0.2.0",
+  "homepage": "https://github.com/zooniverse/Radio-Galaxy-Zoo",
+  "authors": [
+    "Edward Paget <ed.paget@gmail.com>"
+  ],
+  "description": "Radio Contour to IR source pairing",
+  "main": "app/index",
+  "license": "APL",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "backbone": "~1.1.0",
+    "d3": "~3.3.10",
+    "jquery": "~2.0.3",
+    "underscore": "~1.5.2",
+    "normalize-css": "~2.1.3"
+  },
+  "overrides": {
+    "backbone": {
+      "dependencies": {
+        "underscore": "*",
+        "jquery": "*"
+      },
+      "main": "backbone.js"
+    },
+    "underscore": {
+      "main": "underscore.js"
+    }
+  }
+}

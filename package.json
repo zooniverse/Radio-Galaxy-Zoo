@@ -4,11 +4,21 @@
   "author": "Zooniverse <support@zooniverse.org>",
   "version": "0.0.1",
   "scripts": {
-    "start": "haw serve"
+    "start": "brunch watch --server"
   },
-  "devDependencies": {
-    "haw": "0.1.x",
-    "coffee-script": "*"
+  "dependencies": {
+    "javascript-brunch": ">= 1.0 < 1.8",
+    "css-brunch": ">= 1.0 < 1.8",
+    "eco-brunch": ">= 1.0 < 1.8",
+    "aws-sdk": "~1.5.0",
+    "node-static": "~0.7.0",
+    "clean-css": "~1.0.12",
+    "uglify-js": "~2.4.0",
+    "cheerio": "~0.12.1",
+    "stylus-brunch": "~1.7.0",
+    "uglify-js-brunch": ">= 1.0 < 1.8",
+    "clean-css-brunch": ">= 1.0 < 1.8",
+    "coffee-script-brunch": "~1.7.2"
   },
   "engine": "node >= 0.10.12"
 }

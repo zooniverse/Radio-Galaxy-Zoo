@@ -1,0 +1,53 @@
+.zootorial-dialog {
+  background: #fff;
+  border: 1px solid #000;
+  color: #000;
+  display: none;
+  max-width: 33%;
+  -webkit-transition: left 0.25s ease-in, top 0.25s ease-out;
+  -moz-transition: left 0.25s ease-in, top 0.25s ease-out;
+  -o-transition: left 0.25s ease-in, top 0.25s ease-out;
+  -ms-transition: left 0.25s ease-in, top 0.25s ease-out;
+  transition: left 0.25s ease-in, top 0.25s ease-out;
+  z-index: 2;
+}
+.zootorial-dialog.open {
+  display: block;
+}
+.zootorial-blocker {
+  background: #808080;
+  cursor: not-allowed;
+  opacity: 0.25;
+  filter: alpha(opacity=25);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=25)";
+  position: absolute;
+  -webkit-transition: opacity 0.25s ease-in-out;
+  -moz-transition: opacity 0.25s ease-in-out;
+  -o-transition: opacity 0.25s ease-in-out;
+  -ms-transition: opacity 0.25s ease-in-out;
+  transition: opacity 0.25s ease-in-out;
+  z-index: 1;
+}
+.zootorial-blocker.hidden {
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+}
+.zootorial-focuser {
+  background: #808080;
+  opacity: 0.75;
+  filter: alpha(opacity=75);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
+  position: absolute;
+  -webkit-transition: opacity 0.25s ease-in-out;
+  -moz-transition: opacity 0.25s ease-in-out;
+  -o-transition: opacity 0.25s ease-in-out;
+  -ms-transition: opacity 0.25s ease-in-out;
+  transition: opacity 0.25s ease-in-out;
+  z-index: 1;
+}
+.zootorial-focuser.hidden {
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+}

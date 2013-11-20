@@ -1,0 +1,238 @@
+.zooniverse-dialog {
+  display: block;
+  font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+}
+.zooniverse-dialog .underlay {
+  background: rgba(0,0,0,0);
+  display: table;
+  width: 100%;
+  -webkit-transition: background-color 0.5s ease-in-out;
+  -moz-transition: background-color 0.5s ease-in-out;
+  -o-transition: background-color 0.5s ease-in-out;
+  -ms-transition: background-color 0.5s ease-in-out;
+  transition: background-color 0.5s ease-in-out;
+  height: 100%;
+}
+.zooniverse-dialog .underlay .container {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-perspective: 1000px;
+  -moz-perspective: 1000px;
+  -ms-perspective: 1000px;
+  perspective: 1000px;
+}
+.zooniverse-dialog .underlay .container .dialog {
+  background: #f4f4f4;
+  border-top: 5px solid #050505;
+  -webkit-box-shadow: 0 3px 5px rgba(0,0,0,0.5);
+  box-shadow: 0 3px 5px rgba(0,0,0,0.5);
+  color: #000;
+  display: inline-block;
+  max-width: 33%;
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  padding: 30px;
+  position: relative;
+  text-align: left;
+  text-shadow: none;
+  -webkit-transform: translateY(-25%) rotateX(30deg) scale(0.75);
+  -moz-transform: translateY(-25%) rotateX(30deg) scale(0.75);
+  -o-transform: translateY(-25%) rotateX(30deg) scale(0.75);
+  -ms-transform: translateY(-25%) rotateX(30deg) scale(0.75);
+  transform: translateY(-25%) rotateX(30deg) scale(0.75);
+  -webkit-transition: opacity 0.25s ease-in-out, -webkit-transform 0.33s ease-in-out;
+  -moz-transition: opacity 0.25s ease-in-out, -moz-transform 0.33s ease-in-out;
+  -o-transition: opacity 0.25s ease-in-out, -o-transform 0.33s ease-in-out;
+  -ms-transition: opacity 0.25s ease-in-out, -ms-transform 0.33s ease-in-out;
+  transition: opacity 0.25s ease-in-out, transform 0.33s ease-in-out;
+}
+.zooniverse-dialog .underlay .container .dialog > form > button[name="close-dialog"] {
+  font-size: 16px;
+  height: 1em;
+  position: absolute;
+  right: 4px;
+  top: 0;
+  width: 1em;
+}
+.zooniverse-dialog.warning .underlay .container .dialog {
+  border: 5px solid #f90;
+}
+.zooniverse-dialog.error .underlay .container .dialog {
+  border: 5px solid #c30;
+}
+.zooniverse-dialog.showing .underlay {
+  background: rgba(0,0,0,0.5);
+}
+.zooniverse-dialog.showing .underlay .container .dialog {
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
+  -webkit-transform: translateY(0) rotateX(0) scale(1);
+  -moz-transform: translateY(0) rotateX(0) scale(1);
+  -o-transform: translateY(0) rotateX(0) scale(1);
+  -ms-transform: translateY(0) rotateX(0) scale(1);
+  transform: translateY(0) rotateX(0) scale(1);
+}
+.zooniverse-dialog button {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  margin: 0;
+  padding: 0;
+}
+.zooniverse-dialog a {
+  border: 0;
+  color: inherit;
+  text-decoration: underline;
+}
+.zooniverse-dialog a:hover {
+  color: inherit;
+}
+.zooniverse-dialog header {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+.zooniverse-dialog header .zooniverse-logo {
+  display: inline-block;
+  height: 25px;
+  margin-right: 5px;
+  position: relative;
+  top: -2px;
+  vertical-align: middle;
+  width: 25px;
+}
+.zooniverse-dialog .loader {
+  -webkit-animation: 1s zooniverse-progress linear infinite;
+  -moz-animation: 1s zooniverse-progress linear infinite;
+  -o-animation: 1s zooniverse-progress linear infinite;
+  -ms-animation: 1s zooniverse-progress linear infinite;
+  animation: 1s zooniverse-progress linear infinite;
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(0.25, transparent), color-stop(0.25, #000), color-stop(0.5, #000), color-stop(0.5, transparent), color-stop(0.75, transparent), color-stop(0.75, #000));
+  background: -webkit-linear-gradient(left top, transparent 25%, #000 25%, #000 50%, transparent 50%, transparent 75%, #000 75%);
+  background: -moz-linear-gradient(left top, transparent 25%, #000 25%, #000 50%, transparent 50%, transparent 75%, #000 75%);
+  background: -o-linear-gradient(left top, transparent 25%, #000 25%, #000 50%, transparent 50%, transparent 75%, #000 75%);
+  background: -ms-linear-gradient(left top, transparent 25%, #000 25%, #000 50%, transparent 50%, transparent 75%, #000 75%);
+  background: linear-gradient(left top, transparent 25%, #000 25%, #000 50%, transparent 50%, transparent 75%, #000 75%);
+  -webkit-background-size: 25px 25px;
+  -moz-background-size: 25px 25px;
+  background-size: 25px 25px;
+  bottom: 0;
+  display: none;
+  left: 0;
+  opacity: 0.05;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=5)";
+  filter: alpha(opacity=5);
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+.zooniverse-dialog .loading .loader {
+  display: block;
+}
+.zooniverse-dialog label {
+  display: block;
+  margin: 10px 0;
+}
+.zooniverse-dialog input {
+  background: #f0f0f0;
+  border: 1px solid #ccc;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-box-shadow: 0 1px 0 #fff;
+  box-shadow: 0 1px 0 #fff;
+  font-size: 12px;
+  padding: 10px;
+}
+.zooniverse-dialog input:first-child {
+  width: 100%;
+}
+.zooniverse-dialog .explanation {
+  font-size: 10px;
+  margin: 5px 13px;
+  opacity: 0.75;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
+  filter: alpha(opacity=75);
+}
+.zooniverse-dialog .error-message {
+  color: #800000;
+  font-weight: bold;
+  text-align: center;
+}
+.zooniverse-dialog .action {
+  margin: 1em 0;
+  text-align: center;
+}
+.zooniverse-dialog .action button {
+  background: #fff;
+  border: 1px solid #bbb;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 1px 0 #fff inset, 0 1px 3px rgba(0,0,0,0.25);
+  box-shadow: 0 1px 0 #fff inset, 0 1px 3px rgba(0,0,0,0.25);
+  font-size: 12px;
+  font-weight: bold;
+  margin: 0 5px;
+  padding: 3px 10px;
+}
+.zooniverse-dialog .action button:active {
+  border-color: rgba(0,0,0,0.25);
+  -webkit-box-shadow: 0 100px rgba(0,0,0,0.125) inset;
+  box-shadow: 0 100px rgba(0,0,0,0.125) inset;
+}
+@-moz-keyframes zooniverse-progress {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 50px 0;
+  }
+}
+@-webkit-keyframes zooniverse-progress {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 50px 0;
+  }
+}
+@-o-keyframes zooniverse-progress {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 50px 0;
+  }
+}
+@-ms-keyframes zooniverse-progress {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 50px 0;
+  }
+}
+@keyframes zooniverse-progress {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 50px 0;
+  }
+}
