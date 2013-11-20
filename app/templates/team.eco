@@ -1,0 +1,5 @@
+<div class="row">
+  <h5><%- @name %> <% if @twitter: %><a href="http://twitter.com/<%- @twitter %>"><%- @twitter %></a></h5>
+  <p><%- institution %></p>
+  <p><%- bio %></p>
+</div>
