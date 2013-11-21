@@ -10,11 +10,7 @@ import cmath
 
 EPSILON = 1e-10
 
-LEVELS = [ 3.0, 5.196152422706632, 8.999999999999998,
-    15.588457268119893, 26.999999999999993, 46.765371804359674,
-    80.99999999999997, 140.296115413079, 242.9999999999999,
-    420.88834623923697, 728.9999999999995, 1262.6650387177108,
-    2186.9999999999986, 3787.9951161531317, 6560.9999999999945]
+LEVELS = [3.0, 5.196152422706632, 8.999999999999998, 15.588457268119893, 26.999999999999993, 46.765371804359674, 80.99999999999997, 140.296115413079, 242.9999999999999, 420.88834623923697, 728.9999999999995, 1262.6650387177108, 2186.9999999999986, 3787.9951161531317, 6560.9999999999945]
 
 THRESHOLD = 8
 
@@ -191,18 +187,18 @@ class ContourBuilder:
 # d - matrix of data to contour
 # ilb, iub, jlb, jub - index bounds of data matric
 # x - data matrix column coordinates
-# y - data matric row coordinates
+# y - data matrix row coordinates
 # nc - number of contour levels
 # z - contour levels in increasing order
 
 def sect(h, xh, p1, p2): 
-  return (h[p2]*xh[p1]-h[p1]*xh[p2])/(h[p2]-h[p1])
+  return ((h[p2]*xh[p1])-(h[p1]*xh[p2]))/(h[p2]-h[p1])
 
 def conrec(d, ilb, iub, jlb, jub, x, y, nc, z):
-  h = [0] * 5
-  sh = [0] * 5
-  xh = [0] * 5
-  yh = [0] * 5
+  h = [None] * 5
+  sh = [None] * 5
+  xh = [None] * 5
+  yh = [None] * 5
   contours = [None] * nc
 
   x1 = 0.0
@@ -225,7 +221,7 @@ def conrec(d, ilb, iub, jlb, jub, x, y, nc, z):
       ]
     ]
 
-  for j in range(jub-1, jlb, -1):
+  for j in range(jub-1, jlb-1, -1):
     for i in range(ilb, iub):
       dmin = min(min(d[i][j], d[i][j+1]), min(d[i+1][j], d[i+1][j+1]))
       dmax = max(max(d[i][j], d[i][j+1]), max(d[i+1][j], d[i+1][j+1]))
@@ -241,8 +237,8 @@ def conrec(d, ilb, iub, jlb, jub, x, y, nc, z):
                 yh[m] = y[j+jm[m-1]]
               else:
                 h[0] = 0.25*(h[1]+h[2]+h[3]+h[4])
-                xh[0] = 0.25*(x[i]+x[i+1])
-                yh[0] = 0.25*(y[j]+y[j+1])
+                xh[0] = 0.5*(x[i]+x[i+1])
+                yh[0] = 0.5*(y[j]+y[j+1])
               if h[m] > EPSILON:
                 sh[m] = 1
               elif h[m] < -EPSILON:
@@ -306,7 +302,7 @@ def conrec(d, ilb, iub, jlb, jub, x, y, nc, z):
                   y2=sect(h, yh, m1,m2)
                 if contours[k] is None:
                   contours[k] = ContourBuilder(z[k])
-                contours[k].add_segment(Point(x1, y1), Point(x2, y2))
+                contours[k].add_segment(Point(y1, x1), Point(y2, x2))
   return contours
 
 def contour_list(contours):
@@ -326,6 +322,7 @@ def contour_list(contours):
   return sorted(l, key=lambda n: n['k'])
 
 def contour(f):
+  BBox = namedtuple('BBox', 'max_x max_y min_x min_y')
   def filter_small(c):
     box = c['bbox']
     x = box.max_x - box.min_x
@@ -343,7 +340,6 @@ def contour(f):
     return group
  
   def bounding_box(c):
-    BBox = namedtuple('BBox', 'max_x max_y min_x min_y')
     xs = map(lambda p: p.x, c['arr'])
     ys = map(lambda p: p.y, c['arr'])
     max_x = max(xs)
@@ -353,7 +349,7 @@ def contour(f):
     c['bbox'] = BBox(max_x, max_y, min_x, min_y)
     return c
 
-  data = fits.getdata(f)
+  data = fits.getdata(f)[::-1]
   height = len(data)
   width = len(data[0])
   idx = range(1, height+1)
@@ -362,7 +358,7 @@ def contour(f):
 
   k0contours = map(bounding_box, filter(lambda c: c['k'] == 0, cs))
   subcontours = filter(lambda c: c['k'] != 0, cs)
-  
+
   return map(group_contours, filter(filter_small, k0contours))
 
 def points_to_dict(g):
@@ -376,5 +372,6 @@ if __name__ == '__main__':
     print "Usage: python make_contours.py [file]"
     sys.exit()
   f = sys.argv[1]
-  cs = map(points_to_dict, contour(f))
+  cs = contour(f)
+  cs = map(points_to_dict, cs)
   print json.dumps(cs)
