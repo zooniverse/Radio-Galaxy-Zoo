@@ -17,7 +17,6 @@ class Classify extends Section
     Subject.on('select', @loadSubject)
 
   loadSubject: =>
-    console.log('here')
     @model = new Model({subject: Subject.current})
     
     if @steps? and @classifier?

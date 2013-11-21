@@ -6,7 +6,7 @@ class Steps extends Backbone.View
     @revealStep(@model)
 
   revealStep: (m, step) ->
-    step = step || m.get('step')
+    step or= m.get('step')
     console.log(step)
     @$(".instruction > div[data-step=#{step}]").show()
     @$(".instruction > div[data-step!=#{step}]").hide()
