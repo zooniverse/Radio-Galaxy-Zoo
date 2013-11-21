@@ -14,4 +14,7 @@ class Steps extends Backbone.View
     @$(".buttons > div[data-step=#{step}]").show()
     @$(".buttons > div[data-step!=#{step}]").hide()
 
+    @$("div.contours").removeClass("step-#{m.previous("step")}")
+    @$("div.contours").addClass("step-#{step}")
+
 module.exports = Steps
