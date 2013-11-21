@@ -16,6 +16,7 @@ class Classify extends Section
     'input input.image-opacity' : 'updateOpacity'
     'change input.image-opacity' : 'updateOpacity'
     'click .band' : 'setBand'
+    'click .toggle-contours' : 'toggleContours'
   }
 
   initialize: ->
@@ -67,5 +68,9 @@ class Classify extends Section
 
   setSlider: (m, opacity) ->
     @slider.val(opacity)
+
+  toggleContours: ->
+    @$('div.contours').toggleClass('fade-contour')
+    @$('.toggle-contours').toggleClass('nocontours')
 
 module.exports = Classify
