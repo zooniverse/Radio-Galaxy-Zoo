@@ -43,8 +43,9 @@ class Classify extends Section
     if User.current
       Subject.next()
     else
-      Subject.current = new Subject(tutorialSubject)
-      @loadSubject()
+      unless Subject.current?.tutorial
+        Subject.current = new Subject(tutorialSubject)
+        @loadSubject()
       @startTutorial() if @isVisible() and not @tut?
 
   startTutorial: ->

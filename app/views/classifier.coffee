@@ -5,9 +5,10 @@ class Classifier extends Backbone.View
 
   initialize: ->
     @loadImages()
-    @model.contours.then(@drawContours)
 
     @listenTo(@model, "change:ir_opacity", @setOpacity)
+    @listenTo(@model, "change:selected_contours", @drawContours)
+    @listenTo(@model, "change:contours", @drawContours)
     @setOpacity(@model)
 
   loadImages: ->
@@ -23,7 +24,8 @@ class Classifier extends Backbone.View
     @$el.prepend(ir)
     @$el.prepend(radio)
   
-  drawContours: (contourGroups) =>
+  drawContours: (m) =>
+    contourGroups = m.get("contours")
     svg = d3.select("svg.svg-contours g.contours")
     factor = @imageDimension / @fitsImageDimension
     path = d3.svg.line()
@@ -35,9 +37,14 @@ class Classifier extends Backbone.View
       .data(contourGroups)
 
     cGroups.enter().append('g')
-      .attr('class', 'contour-group')
       .attr("id", (d, i) -> i)
+      .on('click', @selectContour)
 
+    cGroups.attr('class', (d, i) => 
+      if i in @model.get('selected_contours') 
+        'contour-group selected'
+      else
+        'contour-group')
     paths = cGroups.selectAll('path').data((d) -> d)
 
     paths.enter().append('path')
@@ -47,5 +54,9 @@ class Classifier extends Backbone.View
   setOpacity: (m, opacity) ->
     opacity or= m.get('ir_opacity')
     @$('img.infrared').css('opacity', opacity)
+
+  selectContour: (d, i) =>
+    return if @model.get('step') isnt 0
+    @model.selectContour(i)
 
 module.exports = Classifier

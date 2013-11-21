@@ -4,13 +4,13 @@ User = zooniverse.models.User
 
 class Classification extends Backbone.Model
   defaults: {
-    selected_id: 0
+    selected_contours: []
     step: 0
     ir_opacity: 0
   }
 
   initialize: ->
-    @contours = @loadContours()
+    @loadContours()
 
   irImage: ->
     @get('subject').location.standard
@@ -19,6 +19,14 @@ class Classification extends Backbone.Model
     @get('subject').location.radio
 
   loadContours: ->
-    $.get(@get('subject').location.contours)
+    $.get(@get('subject').location.contours).then((response) =>
+      @set('contours', response))
+
+  selectContour: (id) ->
+    selected = @get('selected_contours')
+    if id in selected
+      @set('selected_contours', _.without(selected, id))
+    else
+      @set('selected_contours', selected.concat(id))
 
 module.exports = Classification
