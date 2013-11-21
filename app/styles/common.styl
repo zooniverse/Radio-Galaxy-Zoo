@@ -64,3 +64,23 @@ section > .row
 p.description
   font-weight: 400
   line-height: 20px
+
+.btn
+  color: #fff
+  border: 1px solid $btn-border
+  box-sizing: border-box
+  background: $btn
+  height: 30px
+  border-radius: 3px
+
+  &:hover
+    border-color: darken($btn-border, 20%)
+    background: darken($btn, 20%)
+
+  &.cancel
+    background: $cancel
+    border-color: $cancel-border
+
+    &:hover
+      border-color: darken($cancel-border, 20%)
+      background: darken($cancel, 20%)
