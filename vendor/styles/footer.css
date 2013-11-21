@@ -1,0 +1,62 @@
+.zooniverse-footer {
+  overflow: hidden;
+  text-align: left;
+}
+.zooniverse-footer a {
+  color: inherit;
+  opacity: 0.75;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
+  filter: alpha(opacity=75);
+  text-decoration: none;
+}
+.zooniverse-footer a:hover {
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
+}
+.zooniverse-footer .logo {
+  float: left;
+  opacity: 0.5;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+  width: 25%;
+}
+.zooniverse-footer .logo:hover {
+  opacity: 0.67;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=67)";
+  filter: alpha(opacity=67);
+}
+.zooniverse-footer .logo .zooniverse-logo {
+  height: 100%;
+  max-height: 200px;
+  width: 85%;
+}
+.zooniverse-footer .content {
+  float: left;
+  width: 75%;
+}
+.zooniverse-footer .heading {
+  font-size: 18px;
+  margin-bottom: 1em;
+}
+.zooniverse-footer .projects {
+  font-size: 14px;
+  overflow: hidden;
+}
+.zooniverse-footer .general {
+  font-size: 12px;
+  letter-spacing: 1px;
+  margin-top: 1em;
+  overflow: hidden;
+  text-transform: uppercase;
+}
+.zooniverse-footer .category {
+  float: left;
+  width: 25%;
+}
+.zooniverse-footer .category-title {
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}

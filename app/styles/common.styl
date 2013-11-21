@@ -1,0 +1,86 @@
+@import "nib"
+@import "colors"
+
+h1, h2, h3
+  border-bottom 1px solid $dark-blue
+  color #efefef
+  font-family "Open Sans Condensed"
+  line-height 30px
+  margin-bottom 10px
+  font-weight: 500
+
+h1
+  font-size: 30px
+
+h2
+  font-size: 25px
+
+h3
+  font-size: 20px
+
+section
+  padding: 0 35px
+  width: 1000px
+  box-sizing: border-box
+  margin: 0 auto
+  display: none
+
+  &.active
+    display: block
+
+
+section > .row
+    box-sizing: border-box
+    width: 100%
+    margin: 20px auto
+
+    .column
+      box-sizing: border-box
+      display: inline-block
+
+      &.full
+        width: 100%
+        margin: 0 auto
+
+      &.half
+        width: 49%
+        padding-right: 20px
+        overflow: hidden
+
+        &:last-child
+          padding-left: 20px
+          padding-right: 0
+          float: right
+
+      &.centered
+        text-align: center
+
+.recents a, .description a
+  text-transform: uppercase
+  color: $dark-blue
+  text-decoration: none
+  font-weight: 700
+
+p.description
+  font-weight: 400
+  line-height: 20px
+
+.btn
+  color: #fff
+  border: 1px solid $btn-border
+  box-sizing: border-box
+  background: $btn
+  height: 30px
+  border-radius: 3px
+
+  &:hover
+    border-color: darken($btn-border, 20%)
+    background: darken($btn, 20%)
+
+  &.cancel
+    background: $cancel
+    border-color: $cancel-border
+
+    &:hover
+      border-color: darken($cancel-border, 20%)
+      background: darken($cancel, 20%)

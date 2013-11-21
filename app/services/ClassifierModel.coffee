@@ -16,7 +16,6 @@ class ClassifierModel
   
   
   constructor: ($rootScope, $q, translateRegEx, imageDimension, fitsImageDimension, levels, contourThreshold) ->
-    
     # Store injected services on object
     @$rootScope = $rootScope
     @$q = $q
@@ -25,7 +24,6 @@ class ClassifierModel
     @fitsImageDimension = fitsImageDimension
     @levels = levels
     @contourThreshold = contourThreshold
-    
     # Set state variables
     @showContours = true
     @step = 0
@@ -33,9 +31,8 @@ class ClassifierModel
     @example = "compact" 
     @activeGuide = false
     @isDisabled = true
-    
+
     @hasTutorial = false
-    
     # Boolean to check if on initial subject
     # TODO: Would be nice to use `one` event binding instead
     @initialSelect = false
@@ -109,12 +106,6 @@ class ClassifierModel
     Subject.fetch()
     @startFirstTutorial()
   
-  # Testing AWS CloudFront
-  # TODO: Make cloudfront address constant and inject
-  getCloudFront: (location) ->
-    return location
-    # return location.replace("radio.galaxyzoo.org.s3.amazonaws.com", "d3hpovx9a6vlyh.cloudfront.net")
-  
   startFirstTutorial: =>
     @hasTutorial = true
     
@@ -140,11 +131,9 @@ class ClassifierModel
     @classification = new Classification {@subject}
     
     # Request FITS for first subject
-    new astro.FITS( @getCloudFront( @subject.location.raw ), @onFITS)
-    
     @$rootScope.$apply( =>
-      @infraredSource = @getCloudFront( @subject.location.standard )
-      @radioSource = @getCloudFront( @subject.location.radio )
+      @infraredSource = @subject.location.standard
+      @radioSource = @subject.location.radio
     )
   
   # Ensure unique subjects are served
@@ -163,17 +152,16 @@ class ClassifierModel
     # Create deferred object to be resolved after contours for next subject are computed.
     dfd = @$q.defer()
     @contourPromise = dfd.promise
-    new astro.FITS( @getCloudFront( subject.location.raw ), @onFITS, {dfd: dfd, subject: subject})
     
     # Set variable to prefetch images for next subject
-    @nextInfraredSource = @getCloudFront( @nextSubject.location.standard )
-    @nextRadioSource = @getCloudFront( @nextSubject.location.radio )
+    @nextInfraredSource = @nextSubject.location.standard
+    @nextRadioSource = @nextSubject.location.radio 
   
   getSubject: ->
     
     @subject = @nextSubject
-    @infraredSource = @getCloudFront( @subject.location.standard )
-    @radioSource = @getCloudFront( @subject.location.radio )
+    @infraredSource = @subject.location.standard
+    @radioSource = @subject.location.radio
     
     # Clear the user action arrays
     @matches.length = 0
@@ -189,14 +177,8 @@ class ClassifierModel
       Subject.next()
     )
   
-  # Callback for when a FITS file has been received
-  onFITS: (f, opts) =>
-    image = f.getDataUnit(0)
-    image.getFrame(0, (arr) =>
-      @getContoursAsync(image.width, image.height, arr, opts)
-    )
-  
-  onGetContours: (opts) =>
+  onGetContours: (contours, opts) =>
+    @subjectContours = contours
     if @initialSelect is @COMPLETE
       @$rootScope.$apply( ->
         opts.dfd.resolve(opts.subject)
@@ -206,15 +188,6 @@ class ClassifierModel
       @drawContours( @subjectContours[0] )
       
       # Request FITS and precompute contours for next subject
-      dfd = @$q.defer()
-      @contourPromise = dfd.promise
-      new astro.FITS( @getCloudFront( @nextSubject.location.raw ), @onFITS, {dfd: dfd, subject: @nextSubject})
-      
-      # Set variable to prefetch images for next subject
-      @$rootScope.$apply( =>
-        @nextInfraredSource = @getCloudFront( @nextSubject.location.standard )
-        @nextRadioSource = @getCloudFront( @nextSubject.location.radio )
-      )
   
   getContoursAsync: (width, height, arr, opts) ->
     
@@ -292,7 +265,8 @@ class ClassifierModel
       for k0contour in k0contours
         group = []
         
-        [ [xmin, xmax], [ymin, ymax] ] = getBBox(k0contour)
+        group.bbox = getBBox(k0contour)
+        [ [xmin, xmax], [ymin, ymax] ] = group.bbox
         
         # Apply threshold to lowest level contours
         xd = xmax - xmin
@@ -331,8 +305,11 @@ class ClassifierModel
       buffer: arr.buffer
       levels: @levels
       threshold: @contourThreshold
-    
+   
     worker.onmessage = (e) =>
+      console.log(_.map(_.pluck(e.data, 'bbox'), ([[xmin, xmax], [ymin, ymax]]) -> 
+        {xmax: xmax, ymax: ymax, xmin: xmin, ymin: ymin}
+      ))
       @subjectContours.push e.data
       @onGetContours(opts)
     

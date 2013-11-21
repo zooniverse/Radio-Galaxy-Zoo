@@ -1,10 +1,11 @@
 !app/lib/zooniverse*.js
 
+public/
 .DS_Store
 docs/
 node_modules/
+bower_components/
 build/
-app/lib/
 data-import/
 *.map
 css/bootstrap.css
