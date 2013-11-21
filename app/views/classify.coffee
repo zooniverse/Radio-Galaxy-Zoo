@@ -17,6 +17,8 @@ class Classify extends Section
     'change input.image-opacity' : 'updateOpacity'
     'click .band' : 'setBand'
     'click .toggle-contours' : 'toggleContours'
+    'click .done' : 'nextStep'
+    'click .cancel' : 'prevStep'
   }
 
   initialize: ->
@@ -72,5 +74,12 @@ class Classify extends Section
   toggleContours: ->
     @$('div.contours').toggleClass('fade-contour')
     @$('.toggle-contours').toggleClass('nocontours')
+
+  nextStep: ->
+    @model.next()
+
+  prevStep: ->
+    @model.prev()
+
 
 module.exports = Classify

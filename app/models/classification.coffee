@@ -11,6 +11,7 @@ class Classification extends Backbone.Model
 
   initialize: ->
     @loadContours()
+    @listenTo(@, 'change:step', @stateDispatch)
 
   irImage: ->
     @get('subject').location.standard
@@ -28,5 +29,30 @@ class Classification extends Backbone.Model
       @set('selected_contours', _.without(selected, id))
     else
       @set('selected_contours', selected.concat(id))
+
+  next: ->
+    step = @get('step') + 1
+    console.log(step)
+    @set('step', step)
+
+  prev: ->
+    step = @get('step') - 1
+    @set('step', step)
+
+  stateDispatch: (m, step) ->
+    @["step#{step}"]()
+
+  step0: ->
+    console.log('here')
+
+  step1: ->
+    console.log('here')
+
+  step2: ->
+    console.log('here')
+
+  step3: ->
+    console.log('here')
+
 
 module.exports = Classification
