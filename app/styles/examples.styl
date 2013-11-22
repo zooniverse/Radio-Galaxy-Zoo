@@ -16,7 +16,7 @@
     padding-left: 20px
     padding-right: 20px
     cursor: pointer
-    left: -40px
+    left: -75px
     top: 55px 
     display: inline-block
     background: #428bca
@@ -40,7 +40,7 @@
     width: 330px
     z-index: 10
     transform: translateX(0)
-    
+    top: -20px
     text-shadow 0 1px 0 rgb(15, 15, 15)
     font-size 14px
 
@@ -56,12 +56,17 @@
       padding: 10px
       box-sizing: border-box
 
-    span
-      background lighten($workflow-background, 10%)
+    span.example
       cursor pointer
       text-align: center
       height 30px
+      background-color #428bca
+      text-shadow: none
+      width: 110px
+      box-sizing: border-box
       padding: 5px
+      display: inline-block
+      float: left
       
       &:hover
         background lighten($workflow-background, 30%)
@@ -72,6 +77,10 @@
     .content
       margin-top 12px
       min-height 226px
+      display: none
+
+      &.active
+        display: block
     
     img
       max-width 100%
@@ -98,5 +107,3 @@
         p
           text-align: left
 
-    .example
-      background-color #428bca

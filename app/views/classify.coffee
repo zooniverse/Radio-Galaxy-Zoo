@@ -4,6 +4,7 @@ User = zooniverse.models.User
 Section = require('./section_view')
 Steps = require('./steps')
 Classifier = require('./classifier')
+Guide = require('./guide')
 
 Model = require('models/classification')
 
@@ -26,6 +27,7 @@ class Classify extends Section
     Subject.on('select', @loadSubject)
     @slider = @$('input.image-opacity')
     @slider.val(0)
+    @guide = new Guide()
 
   loadSubject: =>
     @stopListening(@model)
