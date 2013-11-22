@@ -16,3 +16,6 @@ scripts/radio-galaxy-zoo-*
 *rgz_fits*
 *subjects*
 .env
+*.fits
+*.fits.gz
+scripts/converted

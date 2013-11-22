@@ -5,7 +5,7 @@ module.exports =
   location:
     standard: "http://radio.galaxyzoo.org/beta/subjects/standard/S311.jpg"
     radio: "http://radio.galaxyzoo.org/beta/subjects/radio/S311.jpg"
-    contours: "/S311.json"
+    contours: "http://radio.galaxyzoo.org/beta/contours/S311.json"
   coords: [9.33480833333, -44.1265305556]
   metadata:
     src: "S311"

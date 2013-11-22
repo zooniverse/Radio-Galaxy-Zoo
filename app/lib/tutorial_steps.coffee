@@ -88,7 +88,7 @@ module.exports =
       number: 11
       header: "What's Going on?"
       details: "The fainter radio object shows emission from newly-formed stars in the galaxy. The bright radio object shows us two jets emitted by a supermassive black hole at center of that galaxy -- but we can only see the central galaxy in the infrared. \n \n This is why we need your help to match these objects."
-      attachment: "top center .viewport bottom center"
+      attachment: "center top .viewport center bottom"
       next: 'guide'
 
     guide: new Step
