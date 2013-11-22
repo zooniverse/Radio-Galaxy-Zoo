@@ -24,7 +24,8 @@ class Classification extends Backbone.Model
     @get('subject').location.radio
 
   loadContours: ->
-    $.get(@get('subject').location.contours).then((response) =>
+    console.log(@get('subject'))
+    $.get(@get('subject').location.contour).then((response) =>
       @set('contours', response))
 
   selectContour: (id) ->
