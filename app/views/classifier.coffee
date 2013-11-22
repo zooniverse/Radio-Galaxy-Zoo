@@ -8,9 +8,11 @@ class Classifier extends Backbone.View
 
     @listenTo(@model, "change:ir_opacity", @setOpacity)
     @listenTo(@model, "change:selected_contours", @drawContours)
+    @listenTo(@model, "change:matched_contours", @drawContours)
     @listenTo(@model, "change:contours", @drawContours)
     @listenTo(@model, "change:step", @startMarking)
     @listenTo(@model, "change:ir_markings", @drawInfrared)
+    @listenTo(@model, "change:ir_matched", @drawInfrared)
     @setOpacity(@model)
 
   loadImages: ->
@@ -45,6 +47,8 @@ class Classifier extends Backbone.View
     cGroups.attr('class', (d, i) => 
       if i in @model.get('selected_contours') 
         'contour-group selected'
+      else if i in @model.get('matched_contours')
+        'contour-group matched'
       else
         'contour-group')
     paths = cGroups.selectAll('path').data((d) -> d)
@@ -55,7 +59,8 @@ class Classifier extends Backbone.View
 
     cGroups.exit().remove()
 
-  drawInfrared: (m, markings) ->
+  drawInfrared: (m) ->
+    markings = m.get('ir_markings').concat(m.get('ir_matched'))
     marking = (g) =>
       g.append('circle')
         .attr('class', 'annotation')
@@ -76,12 +81,18 @@ class Classifier extends Backbone.View
         .attr('y', -5)
 
     svg = d3.select("svg.svg-contours g.infrared")
-    gMarkings = svg.selectAll('g.marking').data(markings)
+    gMarkings = svg.selectAll('g.marking')
+      .data(markings, (d) -> return d.x + "-" + d.y)
 
     gMarkings.enter().append('g')
-      .attr('class', 'marking')
       .attr('transform', (d) -> "translate(#{d.x}, #{d.y})")
       .call(marking)
+
+    gMarkings.attr('class', (d) -> 
+      if _.isEmpty(_.filter(m.get("ir_matched"), (m) -> m.x == d.x and m.y == d.y))
+        "marking"
+      else
+        "marking matched")
 
     gMarkings.exit().remove()
 
@@ -94,9 +105,11 @@ class Classifier extends Backbone.View
     @model.selectContour(i)
 
   startMarking: (m, step) -> 
-    return unless step is 1
     svg = d3.select('svg.svg-contours')
-    svg.on('click', @markInfrared(@model))
+    if step is 1
+      svg.on('click', @markInfrared(@model))
+    else
+      svg.on('click', null)
 
   markInfrared: (model) ->
     return ->

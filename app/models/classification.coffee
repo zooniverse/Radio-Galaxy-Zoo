@@ -5,12 +5,15 @@ User = zooniverse.models.User
 class Classification extends Backbone.Model
   defaults: {
     selected_contours: []
+    matched_contours: []
     step: 0
     ir_opacity: 0
     ir_markings: []
+    ir_matched: []
   }
 
   initialize: ->
+    @classification = new ZooClassification({subject: @get('subject')})
     @loadContours()
     @listenTo(@, 'change:step', @stateDispatch)
 
@@ -37,6 +40,24 @@ class Classification extends Backbone.Model
   removeMarking: ({x, y}) ->
     @set('ir_markings', _.filter(@get('ir_markings'), (m) -> not (m.x == x and m.y == y)))
 
+  matchContours: ->
+    contour_ids = _.clone(@get('selected_contours'))
+    sources = _.clone(@get('ir_markings'))
+    @set({
+      ir_matched: sources.concat(@get("ir_matched"))
+      matched_contours: contour_ids.concat(@get('matched_contours'))
+      selected_contours: []
+      ir_markings: []
+    })
+    bboxes = _.chain(contour_ids)
+        .map((cid) => @get('contours')[cid][0].bbox)
+        .map((bb) -> _.object(['xmax', 'ymax', 'xmin', 'ymin'], bb))
+        .value()
+    @classification.annotate({
+      radio: if _.isEmpty(bboxes) then "No Contours" else bboxes
+      ir: if _.isEmpty(sources) then "No Sources" else sources
+    })
+
   next: ->
     step = @get('step') + 1
     @set('step', step)
@@ -49,16 +70,17 @@ class Classification extends Backbone.Model
     @["step#{step}"]()
 
   step0: ->
-    console.log('here')
+    @set('selected_contours', [])
+    @set('ir_opacity', 0)
 
   step1: ->
+    @set('ir_markings', [])
     @set('ir_opacity', 1)
 
   step2: ->
-    console.log('here')
+    @matchContours()
 
   step3: ->
-    console.log('here')
-
+    @classification.send()
 
 module.exports = Classification

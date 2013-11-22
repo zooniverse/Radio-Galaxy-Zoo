@@ -9,6 +9,7 @@ Guide = require('./guide')
 Model = require('models/classification')
 
 tutorialSubject = require('lib/tutorial_subject')
+tutorialSteps = require('lib/tutorial_steps')
 
 class Classify extends Section
   el: "#classify"
@@ -20,6 +21,10 @@ class Classify extends Section
     'click .toggle-contours' : 'toggleContours'
     'click .done' : 'nextStep'
     'click .cancel' : 'prevStep'
+    'click .no-contours' : 'end'
+    'click .no-infrared' : 'nextStep'
+    'click .next-radio' : 'begin'
+    'click .next' : 'nextSubject'
   }
 
   initialize: ->
@@ -54,7 +59,7 @@ class Classify extends Section
       @startTutorial() if @isVisible() and not @tut?
 
   startTutorial: ->
-    @tut = true
+    @tut = new zootorial.Tutorial
 
   show: ->
     super
@@ -83,5 +88,13 @@ class Classify extends Section
   prevStep: ->
     @model.prev()
 
+  end: -> 
+    @model.set('step', 3)
+
+  begin: ->
+    @model.set('step', 0)
+
+  nextSubject: ->
+    Subject.next()
 
 module.exports = Classify

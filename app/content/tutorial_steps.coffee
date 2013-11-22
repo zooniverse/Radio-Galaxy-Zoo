@@ -1,28 +1,4 @@
-
 Step = zootorial.Step
-
-
-addBlock = ->
-  el = angular.element( document.querySelector(".viewport") )
-  el.addClass("block")
-  
-  el = angular.element( document.querySelector("span.toggle-contours") )
-  el.addClass("block")
-  
-removeBlock = ->
-  el = angular.element( document.querySelector(".viewport") )
-  el.removeClass("block")
-  
-  el = angular.element( document.querySelector("span.toggle-contours") )
-  el.removeClass("block")
-
-disableButtons = ->
-  els = angular.element( document.querySelectorAll(".workflow .buttons button") )
-  #  els.attr("disabled", "disabled")
-
-# Higher scope variables to communicate between onEnter and next functions
-groupid = null
-checkState = null
 
 module.exports =
   stage1:
