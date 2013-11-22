@@ -72,6 +72,17 @@ p.description
   background: $btn
   height: 30px
   border-radius: 3px
+  transition: all 0.2s ease-in-out
+
+  &[DISABLED]
+    background: darken($btn, 50%)
+    border-color: darken($btn-border, 50%)
+    color: darken(#fff, 50%)
+
+    &:hover
+      background: darken($btn, 50%)
+      border-color: darken($btn-border, 50%)
+      color: darken(#fff, 50%)
 
   &:hover
     border-color: darken($btn-border, 20%)
@@ -84,3 +95,13 @@ p.description
     &:hover
       border-color: darken($cancel-border, 20%)
       background: darken($cancel, 20%)
+
+    &[DISABLED]
+      background: darken($cancel, 50%)
+      border-color: darken($cancel-border, 50%)
+      color: darken(#fff, 50%)
+
+      &:hover
+        border-color: darken($cancel-border, 50%)
+        background: darken($cancel, 50%)
+        color: darken(#fff, 50%)

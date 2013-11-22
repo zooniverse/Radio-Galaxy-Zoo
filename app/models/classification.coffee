@@ -58,11 +58,16 @@ class Classification extends Backbone.Model
 
   next: ->
     step = @get('step') + 1
+    if step > 3
+      throw new Error("Cannot step past 3")
     @set('step', step)
 
   prev: ->
     step = @get('step') - 1
-    @set('step', step)
+    if step == -1
+      @step0()
+    else
+      @set('step', step)
 
   stateDispatch: (m, step) ->
     @["step#{step}"]()
@@ -76,8 +81,6 @@ class Classification extends Backbone.Model
     xsIR = _.pluck(@get('ir_markings'), 'x')
     ysIR = _.pluck(@get('ir_markings'), 'y')
     @set("matched_contours", _.difference(@get("matched_contours"), @get("selected_contours")))
-    console.log(xsIR, ysIR)
-    console.log(_.filter(@get("ir_matched"), (m) -> not (m in xsIR and m in ysIR)))
     @set("ir_matched", _.filter(@get("ir_matched"), (m) -> not (m.x in xsIR and m.y in ysIR)))
     @set('ir_markings', [])
     @set('ir_opacity', 1)
