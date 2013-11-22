@@ -19,3 +19,4 @@ scripts/radio-galaxy-zoo-*
 *.fits
 *.fits.gz
 scripts/converted
+.aws-cred.json
