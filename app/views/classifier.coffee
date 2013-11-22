@@ -49,10 +49,10 @@ class Classifier extends Backbone.View
       .on('click', @selectContour)
 
     cGroups.attr('class', (d, i) => 
-      if i in @model.get('selected_contours') 
-        'contour-group selected'
-      else if i in @model.get('matched_contours')
+      if i in @model.get('matched_contours')
         'contour-group matched'
+      else if i in @model.get('selected_contours') 
+        'contour-group selected'
       else
         'contour-group')
     paths = cGroups.selectAll('path').data((d) -> d)

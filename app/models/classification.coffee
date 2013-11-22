@@ -46,8 +46,6 @@ class Classification extends Backbone.Model
     @set({
       ir_matched: sources.concat(@get("ir_matched"))
       matched_contours: contour_ids.concat(@get('matched_contours'))
-      selected_contours: []
-      ir_markings: []
     })
     bboxes = _.chain(contour_ids)
         .map((cid) => @get('contours')[cid][0].bbox)
@@ -71,9 +69,16 @@ class Classification extends Backbone.Model
 
   step0: ->
     @set('selected_contours', [])
+    @set('ir_markings', [])
     @set('ir_opacity', 0)
 
   step1: ->
+    xsIR = _.pluck(@get('ir_markings'), 'x')
+    ysIR = _.pluck(@get('ir_markings'), 'y')
+    @set("matched_contours", _.difference(@get("matched_contours"), @get("selected_contours")))
+    console.log(xsIR, ysIR)
+    console.log(_.filter(@get("ir_matched"), (m) -> not (m in xsIR and m in ysIR)))
+    @set("ir_matched", _.filter(@get("ir_matched"), (m) -> not (m.x in xsIR and m.y in ysIR)))
     @set('ir_markings', [])
     @set('ir_opacity', 1)
 
@@ -81,6 +86,8 @@ class Classification extends Backbone.Model
     @matchContours()
 
   step3: ->
+    @set('selected_contours', [])
+    @set('ir_markings', [])
     @classification.send()
 
 module.exports = Classification
