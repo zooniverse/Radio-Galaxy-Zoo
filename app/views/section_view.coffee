@@ -1,4 +1,8 @@
 class SectionView extends Backbone.View
+  constructor: ->
+    super
+    @_visible = false
+
   hide: ->
     @$el.removeClass('active')
     @_visible = false
