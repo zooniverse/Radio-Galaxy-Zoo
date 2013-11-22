@@ -16,4 +16,8 @@ class Steps extends Backbone.View
     @$("div.contours").removeClass("step-#{m.previous("step")}")
     @$("div.contours").addClass("step-#{step}")
 
+  reset: ->
+    @$("div.contours").removeClass("step-#{@model.get("step")}")
+
+
 module.exports = Steps

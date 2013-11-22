@@ -15,6 +15,10 @@ class Classifier extends Backbone.View
     @listenTo(@model, "change:ir_matched", @drawInfrared)
     @setOpacity(@model)
 
+  emptySVG: ->
+    d3.selectAll('svg.svg-contours g.contours g').remove()
+    d3.selectAll('svg.svg-contours g.infrared g').remove()
+
   loadImages: ->
     @$('img').remove()
     radio = document.createElement('img')

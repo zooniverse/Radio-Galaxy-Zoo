@@ -42,7 +42,9 @@ class Classify extends Section
     
     if @steps? and @classifier?
       @steps.undelegateEvents()
+      @steps.reset()
       @classifier.undelegateEvents() 
+      @classifier.emptySVG()
 
       delete @steps
       delete @classifier
