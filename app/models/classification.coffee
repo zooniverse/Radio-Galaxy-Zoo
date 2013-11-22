@@ -7,6 +7,7 @@ class Classification extends Backbone.Model
     selected_contours: []
     step: 0
     ir_opacity: 0
+    ir_markings: []
   }
 
   initialize: ->
@@ -30,9 +31,14 @@ class Classification extends Backbone.Model
     else
       @set('selected_contours', selected.concat(id))
 
+  addMarking: ([x, y]) -> 
+    @set('ir_markings', @get('ir_markings').concat({x: x, y: y}))
+
+  removeMarking: ({x, y}) ->
+    @set('ir_markings', _.filter(@get('ir_markings'), (m) -> not (m.x == x and m.y == y)))
+
   next: ->
     step = @get('step') + 1
-    console.log(step)
     @set('step', step)
 
   prev: ->
@@ -46,7 +52,7 @@ class Classification extends Backbone.Model
     console.log('here')
 
   step1: ->
-    console.log('here')
+    @set('ir_opacity', 1)
 
   step2: ->
     console.log('here')
