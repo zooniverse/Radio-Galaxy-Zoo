@@ -1,9 +1,10 @@
 Step = zootorial.Step
 
 module.exports =
-  stage1:
-    length: 13
-    
+  id: "rgz-tut"
+  firstStep: "welcome"
+  length: 13
+  steps:    
     welcome: new Step
       number: 1
       header: "Welcome to Radio Galaxy Zoo!"
@@ -22,16 +23,16 @@ module.exports =
     classify1: new Step
       number: 3
       header: "Paring the Data"
-      details: "Let’s do the easy galaxy first: pick the smaller object by clicking on its contours."
-      attachment: "-0.15 0.35 #2.contour-group right center"
+      details: "Let’s do the easy galaxy first: pick the smaller object by clicking on its contours then click 'Done'."
+      attachment: "-0.15 0.35 #0.contour-group right center"
       className: "arrow-left"
-      next: {'click #2.contour-group' : 'classify2'}
+      next: {'click .done' : 'classify2'}
 
     classify2: new Step
       number: 4
       header: "Pairing the Data"
       details: "Now select it in the infrared too. Use the slider to compare the two. In this case the galaxy is at exactly the same position in both wavelengths."
-      attachment: "-0.15 0.35 #2.contour-group right center"
+      attachment: "-0.15 0.35 #0.contour-group right center"
       next: {'click svg' : "classify3"}
       className: "arrow-left"
 
@@ -54,10 +55,10 @@ module.exports =
     classify5: new Step
       number: 7
       header: "Pairing the Data"
-      details: "Now let’s click the contours of the brighter galaxy" 
+      details: "Now let’s click the contours of the brighter galaxy. Then click 'Done'." 
       attachment: "-0.4 -0.5 #1.contour-group right center"
       className: "arrow-left"
-      next: {'click #1.contour-group' : "classify6"}
+      next: {'click .done' : "classify6"}
 
     classify6: new Step
       number: 8
@@ -87,7 +88,7 @@ module.exports =
       number: 11
       header: "What's Going on?"
       details: "The fainter radio object shows emission from newly-formed stars in the galaxy. The bright radio object shows us two jets emitted by a supermassive black hole at center of that galaxy -- but we can only see the central galaxy in the infrared. \n \n This is why we need your help to match these objects."
-      attachment: "right center .viewport left center"
+      attachment: "top center .viewport bottom center"
       next: 'guide'
 
     guide: new Step

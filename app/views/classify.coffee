@@ -25,6 +25,7 @@ class Classify extends Section
     'click .no-infrared' : 'nextStep'
     'click .next-radio' : 'begin'
     'click .next' : 'nextSubject'
+    'click .tutorial' : 'startTutorial'
   }
 
   initialize: ->
@@ -53,13 +54,20 @@ class Classify extends Section
     if User.current
       Subject.next()
     else
-      unless Subject.current?.tutorial
-        Subject.current = new Subject(tutorialSubject)
-        @loadSubject()
       @startTutorial() if @isVisible() and not @tut?
 
   startTutorial: ->
-    @tut = new zootorial.Tutorial
+    unless Subject.current?.tutorial
+      Subject.current = new Subject(tutorialSubject)
+      @loadSubject()
+    @tut = new zootorial.Tutorial(tutorialSteps)
+    @tut.el.bind('end-tutorial', @endTutorial)
+    @tut.start()
+
+  endTutorial: =>
+    delete @tut
+    if User.current
+      User.current.setPreference('tutorial_done', true)
 
   show: ->
     super
