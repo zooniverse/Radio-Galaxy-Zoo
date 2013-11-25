@@ -14,14 +14,25 @@ class Classification extends Backbone.Model
 
   initialize: ->
     @classification = new ZooClassification({subject: @get('subject')})
+
     @loadContours()
+    @loadImages()
+
     @listenTo(@, 'change:step', @stateDispatch)
 
   irImage: ->
-    @get('subject').location.standard
+    @irImg or= new Image()
+    @irImg.src or= @get('subject').location.standard
+    return @irImg.src
 
   radioImage: ->
-    @get('subject').location.radio
+    @rImg or= new Image()
+    @rImg.src or= @get('subject').location.radio
+    return @rImg.src
+
+  loadImages: ->
+    @irImage()
+    @radioImage()
 
   loadContours: ->
     $.get(@get('subject').location.contour).then((response) =>

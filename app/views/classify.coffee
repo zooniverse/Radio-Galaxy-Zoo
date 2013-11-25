@@ -30,14 +30,18 @@ class Classify extends Section
 
   initialize: ->
     User.on('change', @userChange)
-    Subject.on('select', @loadSubject)
+    Subject.on('select', => @loadSubject())
     @slider = @$('input.image-opacity')
     @slider.val(0)
     @guide = new Guide()
 
-  loadSubject: =>
+  loadSubject: (sub) =>
     @stopListening(@model)
-    @model = new Model({subject: Subject.current})
+    if sub
+      @model = new Model({subject: sub})
+    else
+      @model = @next or new Model({subject: Subject.current})
+    @next = new Model({subject: Subject.instances[1]})
     @listenTo(@model, 'change:ir_opacity', @setSlider)
     
     if @steps? and @classifier?
@@ -60,8 +64,7 @@ class Classify extends Section
 
   startTutorial: ->
     unless Subject.current?.tutorial
-      Subject.current = new Subject(tutorialSubject)
-      @loadSubject()
+      @loadSubject(new Subject(tutorialSubject))
     @tut = new zootorial.Tutorial(tutorialSteps)
     @tut.el.bind('end-tutorial', @endTutorial)
     @tut.start()

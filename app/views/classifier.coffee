@@ -14,8 +14,10 @@ class Classifier extends Backbone.View
     @listenTo(@model, "change:ir_markings", @drawInfrared)
     @listenTo(@model, "change:ir_matched", @drawInfrared)
     @setOpacity(@model)
+    @drawContours(@model) if @model.get('contours')?
 
   emptySVG: ->
+    @stopListening(@model)
     d3.selectAll('svg.svg-contours g.contours g').remove()
     d3.selectAll('svg.svg-contours g.infrared g').remove()
 
@@ -105,7 +107,6 @@ class Classifier extends Backbone.View
     @$('img.infrared').css('opacity', opacity)
 
   selectContour: (d, i) =>
-    console.log(@model.get('step'))
     if @model.get('step') is 2
       @model.set('step', 0)
     return if @model.get('step') isnt 0

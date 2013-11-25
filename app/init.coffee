@@ -16,12 +16,14 @@ module.exports = ->
       host: host
       path: '/proxy'
 
-  topBar = new zooniverse.controllers.TopBar
-  zooniverse.models.User.fetch()
-  topBar.el.appendTo 'body'
+  zooniverse.models.Subject.next(->
+    topBar = new zooniverse.controllers.TopBar
+    zooniverse.models.User.fetch()
+    topBar.el.appendTo 'body'
 
-  footer = new zooniverse.controllers.Footer
-  footer.el.appendTo '#footer'
+    footer = new zooniverse.controllers.Footer
+    footer.el.appendTo '#footer'
 
-  router = new Router()
-  Backbone.history.start()
+    router = new Router()
+    Backbone.history.start()
+  )
