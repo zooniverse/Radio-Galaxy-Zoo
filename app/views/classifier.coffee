@@ -105,6 +105,9 @@ class Classifier extends Backbone.View
     @$('img.infrared').css('opacity', opacity)
 
   selectContour: (d, i) =>
+    console.log(@model.get('step'))
+    if @model.get('step') is 2
+      @model.set('step', 0)
     return if @model.get('step') isnt 0
     @model.selectContour(i)
 
