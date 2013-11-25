@@ -55,6 +55,7 @@ class Classify extends Section
 
     @steps = new Steps({model: @model})
     @classifier = new Classifier({model: @model})
+    @slider.val(0)
 
   userChange: =>
     if User.current
