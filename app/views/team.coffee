@@ -10,10 +10,8 @@ class Team extends Section
       .reduce(((m, b, i) ->
         if i isnt 0 and i % 3 is 0
           m = m.concat([[b]])
-          console.log('here', m)
         else
           _.last(m).push(b)
-          console.log(_.last(m))
         m), [[]])
       .each(((b) -> @$('.bios').append(template(b))), @)
     @
@@ -25,7 +23,5 @@ class Team extends Section
   hide: ->
     super
     @$('.bios').empty()
-
-    
 
 module.exports = Team

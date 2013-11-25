@@ -121,7 +121,7 @@ class Classifier extends Backbone.View
 
   markInfrared: (model) ->
     return ->
-      return true if d3.event.originalTarget.tagName is "circle"
+      return true if d3.event.target.tagName is "circle"
       model.addMarking(d3.mouse(@))
 
   removeMarking: (d, i) =>
