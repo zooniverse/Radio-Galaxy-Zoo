@@ -13,6 +13,9 @@ class Router extends Backbone.Router
   initialize: ->
     @appView = new AppView()
 
+  index: ->
+    @appView.setActive('index')
+
   classify: ->
     @appView.setActive('classify')
 
