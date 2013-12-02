@@ -15,31 +15,41 @@ console.log("Building RGZ Version: ", version);
 
 // Upload Images
 
-fs.readdir('./public/images', function(err, imgs) {
-  if (err)
-    return console.log("Failed to read img dir");
-  imgs.forEach(function(img) {
-    fs.readFile('./public/images/' + img, function(err, file) {
-      if (err)
-        return console.log("Failed to read: ", img);
-      var fileType = img.split('.').slice(-1)[0],
-        contentType = (fileType === "svg") ? "image/svg+xml" : "image/" + fileType;
-
-      console.log(contentType);
-      s3bucket.putObject({
-        ACL: 'public-read',
-        Body: file,
-        Key: 'beta2/image/' + img,
-        ContentType: contentType 
-      }, function(err) {
-        if (err)
-          console.log("Failed to upload: ", img)
-        else
-          console.log("Uploaded: ", img)
-      });
+uploadImgs = function(dir) {
+  fs.readdir(dir, function(err, imgs) {
+    if (err)
+      return console.log("Failed to read img dir");
+    dirs = imgs.filter(function(i) {
+      stat = fs.lstatSync(dir + "/" + i);
+      return stat.isDirectory();
     });
+
+    imgs.filter(function(i) { console.log(dirs); return !(i in dirs) })
+      .forEach(function(img) {
+        fs.readFile(dir + "/" + img, function(err, file) {
+          var d = dir.slice(9)
+          if (err)
+            return console.log("Failed to read: ", d + "/" + img);
+          var fileType = img.split('.').slice(-1)[0],
+            contentType = (fileType === "svg") ? "image/svg+xml" : "image/" + fileType;
+          s3bucket.putObject({
+            ACL: 'public-read',
+            Body: file,
+            Key: 'beta2/' + d + '/' + img,
+            ContentType: contentType 
+          }, function(err) {
+            if (err)
+              console.log("Failed to upload: ", d + "/" + img)
+            else
+              console.log("Uploaded: ", d + "/" + img)
+          });
+        });
+      });
+    dirs.forEach(function(d) { uploadImgs(dir + "/" + d) });
   });
-});
+};
+
+uploadImgs('./public/images');
 
 console.log("Build CSS");
 
