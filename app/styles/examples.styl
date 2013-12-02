@@ -25,7 +25,7 @@
     text-align: center
 
     &.active
-      transform: translateX(630px) rotate(90deg)
+      transform: translateX(330px) rotate(90deg)
       background-color #fb3a3a
 
   .examples
@@ -35,9 +35,9 @@
     transition: transform 0.5s ease-in-out
     margin-bottom: 20px
     position: absolute 
-    left: -630px
+    left: -330px
     margin-left: 0
-    width: 630px
+    width: 330px
     z-index: 10
     transform: translateX(0)
     top: -20px
@@ -45,7 +45,7 @@
     font-size 14px
 
     &.active
-      transform: translateX(630px)
+      transform: translateX(330px)
 
     > .row
       padding 0
@@ -62,7 +62,7 @@
       height 30px
       background-color #428bca
       text-shadow: none
-      width: 210px
+      width: 110px
       box-sizing: border-box
       padding: 5px
       display: inline-block
@@ -74,39 +74,61 @@
       &.active
         background lighten($workflow-background, 20%)
 
-    .content
-      margin-top 12px
-      min-height 226px
-      display: none
-
-      &.active
-        display: block
-    
-    img
-      width: 270px
-      height: 270px
-      display: inline
-      margin: 5px
-
-
     .example-box 
       overflow-y: auto
       height: 620px
       width: inherit
       margin-left: 0
-      
-      > div .row
-        margin: 0 auto
-        width: 600px   
-        padding-top: 15px
-        text-align: center
 
-        &:last-child
-          border: none
+      .content
+        margin-top 12px
+        min-height 226px
+        display: none
 
-        &:first-child
+        &.active
+          display: block
+
+        .row
+          margin: 0 auto
+          width: 290px   
           padding-top: 15px
+          text-align: center
 
-        p
-          text-align: left
+          .ex-img-container   
+            position: relative
+            width: 290px
+            height: 290px
+            margin 20px auto
+
+            img
+              width: 290px
+              height: 290px
+              margin: 5px
+              position: absolute
+              top: 0
+              left: 0
+
+              &.ir-ex
+                opacity: 0
+
+          input
+            width: 230px
+            margin: 0 auto
+
+          span.pull-right
+            float: right
+            cursor: pointer
+
+          span.pull-left
+            float: left
+            cursor: pointer
+
+          &:last-child
+            border: none
+
+          &:first-child
+            padding-top: 15px
+
+          p
+            text-align: left
 
