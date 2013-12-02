@@ -1,16 +1,22 @@
 @import 'colors'
 
 #index
-  > .headline
-    font-family "Open Sans", "Helvetica"
-    font-weight 700
-    font-size 36px
-    color #EFEFEF
+  .headline
     width 100%
     text-align center
     margin 20px
     padding 0px
-    
+
+    h1
+      margin: 0
+      padding: 0
+      border: none
+      font-family "Open Sans", "Helvetica"
+      font-weight 700
+      font-size 36px
+      line-height: 40px
+      color #EFEFEF
+      
     p.call-to-action
       font-family "Open Sans", "Helvetica"
       font-weight 400
@@ -89,4 +95,14 @@
           padding 0px 10px
           -webkit-border-radius 3px
           border-radius 3px
+
+@media (max-width: 1000px)
+  #index  
+    .slider
+      .slide-element
+        .credit
+          display: none
+
+        .left
+          width: 100%
 

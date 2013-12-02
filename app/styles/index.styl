@@ -1,38 +1,37 @@
 @import "nib"
 
 html
-  background: url("../images/gz_headerimage.jpg") no-repeat scroll 50% 0 #000
   margin: 0 0 50px 0
 
 body
+  background: url("../images/gz_headerimage.jpg") no-repeat scroll 50% 0 #000
   color: #EFEFEF
   margin: 0 auto
   font-family: "Open Sans", "Helvetica"
   font-size: 14px
 
 nav  
-  width 1000px
-  margin 5px auto 70px auto
-  height 80px
-  padding 45px 0 0 0
+  margin 45px auto 40px auto
+  text-align: center
+
+  .logo
+    width: 235px
+    margin: 0 auto
   
   ul
-    width: inherit
     padding 0
     margin 0
+
+    &.pull-right
+      float: right 
+
+    &.pull-left
+      float: left
     
     li
-      line-height 76px
       vertical-align middle
-      display inline-block
       text-align center
-      margin-right 80px
-      position relative
 
-      &:last-child
-        margin-right: 0
-        text-align: right
-      
       a
         font-size 12px
         font-weight 700
@@ -42,16 +41,53 @@ nav
       
       &.disabled
         pointer-events none
-      
-      &.logo
-        min-width 235px
-        background-position center 50% 50%
-        height 76px
         
 .container
   margin 0 auto
   margin-top 80px
   width 1000px
-  
+
 #footer
   padding-top 60px
+
+@media (min-width: 1000px)
+  nav  
+    width 1000px
+
+    .logo
+      display: inline-block
+
+    ul
+
+      li
+        line-height 76px
+        display inline-block
+        text-align center
+        position relative
+        margin-right: 80px
+
+        &:last-child
+          margin-right: 0
+          text-align: right
+
+        &:first-child
+          text-align: left
+
+@media (max-width: 1000px)
+  nav
+    width: 500px
+
+    .logo
+      display: block
+
+    ul
+      list-style-type: none
+      width: 50%
+      margin-bottom: 30px
+
+      li
+        margin: 0
+        padding: 5px 0
+
+  .container
+    width: 500px

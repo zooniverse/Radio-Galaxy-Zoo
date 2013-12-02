@@ -20,14 +20,12 @@ h3
 
 section
   padding: 0 35px
-  width: 1000px
   box-sizing: border-box
   margin: 0 auto
   display: none
 
   &.active
     display: block
-
 
 section > .row
     box-sizing: border-box
@@ -37,20 +35,6 @@ section > .row
     .column
       box-sizing: border-box
       display: inline-block
-
-      &.full
-        width: 100%
-        margin: 0 auto
-
-      &.half
-        width: 49%
-        padding-right: 20px
-        overflow: hidden
-
-        &:last-child
-          padding-left: 20px
-          padding-right: 0
-          float: right
 
       &.centered
         text-align: center
@@ -105,3 +89,50 @@ p.description
         border-color: darken($cancel-border, 50%)
         background: darken($cancel, 50%)
         color: darken(#fff, 50%)
+
+@media (min-width: 1000px)
+  section
+    width: 1000px
+
+    .row
+      .column
+        &.full
+          width: 100%
+          margin: 0 auto
+
+        &.half
+          width: 49%
+          padding-right: 20px
+          overflow: hidden
+
+          &:last-child
+            padding-left: 20px
+            padding-right: 0
+            float: right
+
+@media (max-width: 1000px)
+  section
+    width: 500px
+
+    .row
+      .column
+        &.full
+          100%
+          margin 0 auto
+
+        &.half
+          width: 100%
+          margin: 0 auto
+          overflow: hidden
+
+  .zooniverse-footer
+    width: 500px
+    margin: 0 auto 20px
+
+    .projects
+      display: none
+
+    .general
+      .category
+        width: 100%
+
