@@ -64,6 +64,7 @@ class Classify extends Section
       @startTutorial() if @isVisible() and not @tut?
 
   startTutorial: ->
+    return if @tut? and !@isVisible()
     unless Subject.current?.tutorial
       @loadSubject(new Subject(tutorialSubject))
     @tut = new zootorial.Tutorial(tutorialSteps)
@@ -78,6 +79,10 @@ class Classify extends Section
   show: ->
     super
     _.defer(@userChange)
+
+  hide: ->
+    super
+    @tut.end() if @tut?
 
   updateOpacity: (ev) ->
     @$('img.infrared').addClass("no-transition")
