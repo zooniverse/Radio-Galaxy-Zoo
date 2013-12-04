@@ -29,7 +29,7 @@
     if (to == null) {
       to = window;
     }
-    to = $(to).filter(':visible').first();
+    to = $(to).filter(':visible, g').first();
     if (to.length === 0) {
       to = $(window);
     }
