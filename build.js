@@ -24,7 +24,7 @@ uploadImgs = function(dir) {
       return stat.isDirectory();
     });
 
-    imgs.filter(function(i) { console.log(dirs); return !(i in dirs) })
+    imgs.filter(function(i) { return !(i in dirs) })
       .forEach(function(img) {
         fs.readFile(dir + "/" + img, function(err, file) {
           var d = dir.slice(9)
