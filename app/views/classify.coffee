@@ -36,6 +36,7 @@ class Classify extends Section
     @guide = new Guide()
 
   loadSubject: (sub) =>
+    console.trace()
     @stopListening(@model)
     if sub
       @model = new Model({subject: sub})
@@ -58,13 +59,12 @@ class Classify extends Section
     @slider.val(0)
 
   userChange: =>
-    if User.current
+    if User.current? and User.current.project?.tutorial_done
       Subject.next()
     else
       @startTutorial() if @isVisible() and not @tut?
 
   startTutorial: ->
-    return if @tut? and !@isVisible()
     unless Subject.current?.tutorial
       @loadSubject(new Subject(tutorialSubject))
     @tut = new zootorial.Tutorial(tutorialSteps)
