@@ -1,4 +1,3 @@
-
 module.exports = [
   {
     name: "Ivy Wong"
@@ -198,7 +197,7 @@ module.exports = [
     name: "Brooke Simmons"
     institution: "Oxford University"
     twitter: "vrooje"
-    bio: ""
+    bio: "Brooke spends most of her time studying the growth of supermassive black holes and their role in galaxy evolution. She also suspects there is a parallel universe out there where she decided to become a potter and do astronomy on the side, so she tries to keep up the balance in this existence by spending rare moments of free time in the ceramics studio."
   }
 ]
   
