@@ -129,7 +129,7 @@ div.contours
           text
             display block
 
-  &.step-1, &.step-2, &.step-3
+  &.step-2, &.step-3
     svg
       g.contours
         g.contour-group
@@ -157,6 +157,16 @@ div.contours
 
         text
           display: block
+
+      g.contours
+        g.contour-group
+          &.selected
+            display: block
+            path
+              display: block
+              fill-opacity: 0
+              stroke-opacity: 0.6
+
   
   &.step-0, &.step-1
     svg
