@@ -36,7 +36,6 @@ class Classify extends Section
     @guide = new Guide()
 
   loadSubject: (sub) =>
-    console.trace()
     @stopListening(@model)
     if sub
       @model = new Model({subject: sub})
