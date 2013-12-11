@@ -16,7 +16,6 @@ class SectionView extends Backbone.View
 
       if ev.shiftKey
         key = "shift+" + key
-      console.log(events, key)
       events[key](ev, key)
 
   delegateKeyEvents: ->
