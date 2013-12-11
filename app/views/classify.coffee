@@ -28,6 +28,15 @@ class Classify extends Section
     'click .tutorial' : 'startTutorial'
   }
 
+  keyboardEvents: {
+    'enter' : 'nextStep'
+    'shift+enter' : 'prevStep'
+    'c' : 'toggleContours'
+    't' : 'startTutorial'
+    'r' : 'setBand'
+    'i' : 'setBand'
+  }
+
   initialize: ->
     User.on('change', @userChange)
     Subject.on('select', => @loadSubject())
@@ -89,8 +98,11 @@ class Classify extends Section
     if ev.type is 'change'
       @$('img.infrared').removeClass("no-transition")
 
-  setBand: (ev) ->
-    opacity = if ev.target.dataset.band is 'radio' then 0 else 1
+  setBand: (ev, key) ->
+    if key?
+      opacity = if key is 'r' then 0 else 1
+    else
+      opacity = if ev.target.dataset.band is 'radio' then 0 else 1
     @model.set('ir_opacity', opacity)
 
   setSlider: (m, opacity) ->
@@ -101,9 +113,11 @@ class Classify extends Section
     @$('.toggle-contours').toggleClass('nocontours')
 
   nextStep: ->
+    return if _.isEmpty(@model.get('selected_contours'))
     @model.next()
 
   prevStep: ->
+    return if _.isEmpty(@model.get('selected_contours'))
     @model.prev()
 
   end: -> 

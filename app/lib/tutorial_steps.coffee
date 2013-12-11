@@ -22,7 +22,7 @@ module.exports =
 
     classify1: new Step
       number: 3
-      header: "Paring the Data"
+      header: "Pairing the Data"
       details: "Let’s do the easy galaxy first: pick the smaller object by clicking on its contours then click 'Done'."
       attachment: "-0.15 0.35 #0.contour-group right center"
       className: "arrow-left"
@@ -46,7 +46,7 @@ module.exports =
 
     classify4: new Step
       number: 6
-      header: "Pairing the Data"
+      header: "Pairing a Second Source."
       details: "Now let's mark the other Galaxy. First select 'Mark Another'."
       attachment: "left 0.65 .next-radio right center"
       className: "arrow-left"
@@ -57,7 +57,7 @@ module.exports =
 
     classify5: new Step
       number: 7
-      header: "Pairing the Data"
+      header: "Pairing a Second Source."
       details: "Now let’s click the contours of the brighter galaxy. Then click 'Done'." 
       attachment: "-0.4 -0.5 #1.contour-group right center"
       className: "arrow-left"
@@ -65,7 +65,7 @@ module.exports =
 
     classify6: new Step
       number: 8
-      header: "Pairing the Data"
+      header: "Pairing Second Source."
       details: "When you check the infrared you’ll see a galaxy between the two bright radio ‘lobes’. Click that galaxy and select 'Done'."
       attachment: "-0.4 -0.5 #1.contour-group right center"
       className: "arrow-left"
@@ -73,7 +73,7 @@ module.exports =
 
     classify8: new Step
       number: 10
-      header: "Pairing the Data"
+      header: "Finish Marking."
       details: "That's all the pairs in this image. Click 'Finish' to advance."
       attachment: "right 0.55 .done left center"
       className: "arrow-right"
@@ -82,7 +82,7 @@ module.exports =
     que: new Step
       number: 11
       header: "What's Going on?"
-      details: "The fainter radio object shows emission from newly-formed stars in the galaxy. The bright radio object shows us two jets emitted by a supermassive black hole at center of that galaxy -- but we can only see the central galaxy in the infrared. \n \n This is why we need your help to match these objects."
+      details: "The fainter radio object shows emission from newly-formed stars in the galaxy. The large, bright radio object shows us two jets emitted by a supermassive black hole at center of that galaxy -- but the central galaxy can only be seen in the infrared. \n \n This is why we need your help to match these objects."
       attachment: "center top .viewport center bottom"
       next: 'guide'
 
