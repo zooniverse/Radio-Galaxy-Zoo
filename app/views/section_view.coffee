@@ -16,7 +16,9 @@ class SectionView extends Backbone.View
 
       if ev.shiftKey
         key = "shift+" + key
-      events[key](ev, key)
+
+      if events[key]?
+        events[key](ev, key)
 
   delegateKeyEvents: ->
     $(document).on("keypress", @_keydispatch(@keyboardEvents))
