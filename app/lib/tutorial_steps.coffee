@@ -63,17 +63,9 @@ module.exports =
     classify6: new Step
       number: 8
       header: "Pairing the Data"
-      details: "When you check the infrared you’ll see a galaxy between the two bright radio ‘lobes’."
+      details: "When you check the infrared you’ll see a galaxy between the two bright radio ‘lobes’. Click that galaxy and select 'Done'."
       attachment: "-0.4 -0.5 #1.contour-group right center"
       className: "arrow-left"
-      next: {'click svg' : "classify7"}
-
-    classify7: new Step
-      number: 9
-      header: "Pairing the Data"
-      details: "Click the object and select 'Done'"
-      attachment: "right 0.55 .done left center"
-      className: "arrow-right"
       next: {'click .done' : "classify8"}
 
     classify8: new Step
