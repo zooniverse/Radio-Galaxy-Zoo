@@ -115,54 +115,121 @@ window.base64 = {
 };
 
 (function() {
-  var enUs, _ref;
+  var en, _base;
 
-  if ((_ref = window.zooniverse) == null) {
+  en = {
+    topBarHeading: 'A Zooniverse project',
+    signUpHeading: 'Sign up for a new Zooniverse account',
+    signInHeading: 'Sign in to your Zooniverse account',
+    signUp: 'Sign up',
+    signIn: 'Sign in',
+    signOut: 'Sign out',
+    username: 'Username',
+    password: 'Password',
+    email: 'Email',
+    realName: 'Real name',
+    whyRealName: 'This will be used when we thank contributors, for example, in talks or on posters.<br />If you don\'t want to be mentioned publicly, leave this blank.',
+    noAccount: 'Don\'t have an account?',
+    privacyPolicy: 'I agree to the <a href="https://www.zooniverse.org/privacy" target="_blank">privacy policy</a>.',
+    forgotPassword: 'Forgot your password?',
+    badLogin: 'Incorrect username or password',
+    signInFailed: 'Sign in failed.',
+    signInForProfile: 'Sign in to see your profile.',
+    footerHeading: 'The Zooniverse is a collection of web-based citizen science projects that use the efforts of volunteers to help researchers deal with the flood of data that confronts them.',
+    privacyPolicy: 'Privacy policy',
+    recents: 'Recents',
+    favorites: 'Favorites',
+    none: 'none'
+  };
+
+  if (window.zooniverse == null) {
     window.zooniverse = {};
   }
 
-  enUs = {
-    topBar: {
-      heading: 'A Zooniverse project',
-      username: 'Username',
-      password: 'Password',
-      email: 'Email address',
-      realName: 'Real name',
-      whyRealName: 'This will be used when we thank contributors, for example, in talks or on posters.<br />If you don\'t want to be mentioned publicly, leave this blank.',
-      signIn: 'Sign in',
-      signInTitle: 'Sign in to your Zooniverse account',
-      signOut: 'Sign out',
-      signUp: 'Sign up',
-      signUpTitle: 'Sign up for a new account',
-      forgotPassword: 'Forgot your password?',
-      noAccount: 'Don\'t have an account?',
-      privacyPolicy: 'I agree to the <a href="https://www.zooniverse.org/privacy" target="_blank">privacy policy</a>.'
-    },
-    groupsMenu: {
-      stop: 'Stop classifying as part of a group'
-    },
-    user: {
-      badLogin: 'Incorrect username or password',
-      signInFailed: 'Sign in failed.'
-    },
-    footer: {
-      heading: 'The Zooniverse is a collection of web-based citizen science projects that use the efforts of volunteers\nto help researchers deal with the flood of data that confronts them.'
-    }
-  };
+  if ((_base = window.zooniverse).translations == null) {
+    _base.translations = {};
+  }
 
-  window.zooniverse.enUs = enUs;
+  window.zooniverse.translations.en = en;
 
   if (typeof module !== "undefined" && module !== null) {
-    module.exports = enUs;
+    module.exports = en;
   }
 
 }).call(this);
 
 (function() {
-  var $, EventEmitter, logTriggers, _ref,
+  var es, _base;
+
+  es = {
+    topBarHeading: 'Un proyecto de la Zooniverse'
+  };
+
+  if (window.zooniverse == null) {
+    window.zooniverse = {};
+  }
+
+  if ((_base = window.zooniverse).translations == null) {
+    _base.translations = {};
+  }
+
+  window.zooniverse.translations.es = es;
+
+  if (typeof module !== "undefined" && module !== null) {
+    module.exports = es;
+  }
+
+}).call(this);
+
+(function() {
+  var fr, _base;
+
+  fr = {
+    topBarHeading: 'Un projet Zooniverse',
+    signUpHeading: 'Créer un compte Zooniverse',
+    signInHeading: 'Connectez-vous à votre compte Zooniverse',
+    signUp: 'S\'inscrire',
+    signIn: 'Connexion',
+    signOut: 'Déconnexion',
+    username: 'Nom d\'utilisateur',
+    password: 'Mot de passe',
+    email: 'Email',
+    realName: 'Prénom Nom',
+    whyRealName: 'Votre nom pourra être utiliser lors du remerciement des contributeurs, par exemple lors de présentation orales ou sur des posters.<br />Si vous ne souhaitez pas qu\'il soit mentionner publiquement, laissez cette case vide.',
+    noAccount: 'Vous n\'avez pas encore de compte?',
+    privacyPolicy: 'J\'accepte les <a href="https://www.zooniverse.org/privacy" target="_blank">conditions d\'utilisation </a>.',
+    forgotPassword: 'Mot de passe oublié?',
+    badLogin: 'Utilisateur ou mot de passe incorrect',
+    signInFailed: 'Échec de la connexion.',
+    signInForProfile: 'Connectez-vous pour accéder à votre profil.',
+    footerHeading: 'Zooniverse est une collection de projets de science participative en ligne qui permettent aux volontaires d\'aider les scientifiques à traiter les immenses quantités de données dont ils disposent.',
+    privacyPolicy: 'Contiditons d\'utilisation',
+    recents: 'Récents',
+    favorites: 'Favoris',
+    none: 'aucun'
+  };
+
+  if (window.zooniverse == null) {
+    window.zooniverse = {};
+  }
+
+  if ((_base = window.zooniverse).translations == null) {
+    _base.translations = {};
+  }
+
+  window.zooniverse.translations.fr = fr;
+
+  if (typeof module !== "undefined" && module !== null) {
+    module.exports = fr;
+  }
+
+}).call(this);
+
+(function() {
+  var $, EventEmitter, logTriggers,
     __hasProp = {}.hasOwnProperty;
 
-  if ((_ref = window.zooniverse) == null) {
+  if (window.zooniverse == null) {
     window.zooniverse = {};
   }
 
@@ -176,31 +243,28 @@ window.base64 = {
     function EventEmitter() {}
 
     EventEmitter.on = function(eventName, handler) {
-      var _ref1;
-      if ((_ref1 = this.jQueryEventProxy) == null) {
+      if (this.jQueryEventProxy == null) {
         this.jQueryEventProxy = $({});
       }
       return this.jQueryEventProxy.on(eventName, handler);
     };
 
     EventEmitter.one = function(eventName, handler) {
-      var _ref1;
-      if ((_ref1 = this.jQueryEventProxy) == null) {
+      if (this.jQueryEventProxy == null) {
         this.jQueryEventProxy = $({});
       }
       return this.jQueryEventProxy.one(eventName, handler);
     };
 
     EventEmitter.off = function(eventName, handler) {
-      var _ref1;
-      if ((_ref1 = this.jQueryEventProxy) == null) {
+      if (this.jQueryEventProxy == null) {
         this.jQueryEventProxy = $({});
       }
       return this.jQueryEventProxy.off(eventName, handler);
     };
 
     EventEmitter.trigger = function(eventName, args) {
-      var _base, _ref1, _ref2;
+      var _base, _ref;
       if (args == null) {
         args = [];
       }
@@ -209,10 +273,10 @@ window.base64 = {
           console.info(this.name || this.toString(), eventName.toUpperCase(), args);
         }
       }
-      if ((_ref1 = this.jQueryEventProxy) == null) {
+      if (this.jQueryEventProxy == null) {
         this.jQueryEventProxy = $({});
       }
-      (_ref2 = this.jQueryEventProxy).trigger.apply(_ref2, arguments);
+      (_ref = this.jQueryEventProxy).trigger.apply(_ref, arguments);
       return typeof (_base = this.constructor).trigger === "function" ? _base.trigger(eventName, [this].concat(args)) : void 0;
     };
 
@@ -246,12 +310,12 @@ window.base64 = {
 }).call(this);
 
 (function() {
-  var $, EventEmitter, ProxyFrame, beta, demo, flaggedHost, highPort, html, messageId, _ref, _ref1,
+  var $, EventEmitter, ProxyFrame, beta, demo, flaggedHost, highPort, html, messageId, _ref,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  if ((_ref = window.zooniverse) == null) {
+  if (window.zooniverse == null) {
     window.zooniverse = {};
   }
 
@@ -263,20 +327,19 @@ window.base64 = {
 
   messageId = -1;
 
-  demo = !!~location.hostname.indexOf('zooniverse-demo');
+  demo = !!~location.hostname.indexOf('demo');
 
   beta = !!~location.pathname.indexOf('beta');
 
   highPort = +location.port >= 1024;
 
-  flaggedHost = (_ref1 = location.search.match(/api=([^&]+)/)) != null ? _ref1[1] : void 0;
+  flaggedHost = (_ref = location.search.match(/api=([^&]+)/)) != null ? _ref[1] : void 0;
 
   if ((flaggedHost != null) && !!!~flaggedHost.indexOf('//')) {
     flaggedHost = "//" + flaggedHost;
   }
 
   ProxyFrame = (function(_super) {
-
     __extends(ProxyFrame, _super);
 
     ProxyFrame.REJECTION = 'ProxyFrame not connected';
@@ -304,13 +367,12 @@ window.base64 = {
     ProxyFrame.prototype.queue = null;
 
     function ProxyFrame(params) {
-      var property, value, _ref2, _ref3,
+      var property, value,
         _this = this;
       if (params == null) {
         params = {};
       }
       this.timeout = __bind(this.timeout, this);
-
       ProxyFrame.__super__.constructor.apply(this, arguments);
       for (property in params) {
         if (!__hasProp.call(params, property)) continue;
@@ -319,10 +381,10 @@ window.base64 = {
           this[property] = value;
         }
       }
-      if ((_ref2 = this.deferreds) == null) {
+      if (this.deferreds == null) {
         this.deferreds = {};
       }
-      if ((_ref3 = this.queue) == null) {
+      if (this.queue == null) {
         this.queue = [];
       }
       $(window).on('message', function(_arg) {
@@ -336,12 +398,12 @@ window.base64 = {
     }
 
     ProxyFrame.prototype.connect = function() {
-      var testBad, _ref2,
+      var testBad, _ref1,
         _this = this;
       testBad = this.attempt < 0 ? '_BAD' : '';
       this.attempt += 1;
-      if ((_ref2 = this.el) != null) {
-        _ref2.remove();
+      if ((_ref1 = this.el) != null) {
+        _ref1.remove();
       }
       this.el = $("<iframe src='" + this.host + this.path + testBad + "' class='" + this.className + "' data-attempt='" + this.attempt + "' style='display: none;'></iframe>");
       this.el.appendTo(document.body);
@@ -358,11 +420,11 @@ window.base64 = {
       this.ready = true;
       this.failed = false;
       setTimeout((function() {
-        var payload, _i, _len, _ref2, _results;
-        _ref2 = _this.queue;
+        var payload, _i, _len, _ref1, _results;
+        _ref1 = _this.queue;
         _results = [];
-        for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
-          payload = _ref2[_i];
+        for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
+          payload = _ref1[_i];
           _results.push(_this.process(payload));
         }
         return _results;
@@ -377,15 +439,15 @@ window.base64 = {
     };
 
     ProxyFrame.prototype.onFailed = function() {
-      var payload, _i, _len, _ref2,
+      var payload, _i, _len, _ref1,
         _this = this;
       if (this.ready) {
         return;
       }
       this.failed = true;
-      _ref2 = this.queue;
-      for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
-        payload = _ref2[_i];
+      _ref1 = this.queue;
+      for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
+        payload = _ref1[_i];
         this.deferreds[payload.id].reject(this.constructor.REJECTION);
       }
       this.queue.splice(0);
@@ -456,12 +518,12 @@ window.base64 = {
 }).call(this);
 
 (function() {
-  var $, Api, EventEmitter, ProxyFrame, _ref,
+  var $, Api, EventEmitter, ProxyFrame,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     __slice = [].slice;
 
-  if ((_ref = window.zooniverse) == null) {
+  if (window.zooniverse == null) {
     window.zooniverse = {};
   }
 
@@ -472,7 +534,6 @@ window.base64 = {
   $ = window.jQuery;
 
   Api = (function(_super) {
-
     __extends(Api, _super);
 
     Api.current = null;
@@ -484,9 +545,9 @@ window.base64 = {
     Api.prototype.proxyFrame = null;
 
     function Api(_arg) {
-      var host, loadTimeout, path, _ref1,
+      var host, loadTimeout, path, _ref,
         _this = this;
-      _ref1 = _arg != null ? _arg : {}, this.project = _ref1.project, host = _ref1.host, path = _ref1.path, loadTimeout = _ref1.loadTimeout;
+      _ref = _arg != null ? _arg : {}, this.project = _ref.project, host = _ref.host, path = _ref.path, loadTimeout = _ref.loadTimeout;
       Api.__super__.constructor.apply(this, arguments);
       this.proxyFrame = new ProxyFrame({
         host: host,
@@ -503,9 +564,9 @@ window.base64 = {
     }
 
     Api.prototype.request = function(type, url, data, done, fail) {
-      var _ref1;
+      var _ref;
       if (typeof data === 'function') {
-        _ref1 = [done, data, null], fail = _ref1[0], done = _ref1[1], data = _ref1[2];
+        _ref = [done, data, null], fail = _ref[0], done = _ref[1], data = _ref[2];
         this.trigger('request', [type, url, data]);
       }
       return this.proxyFrame.send({
@@ -559,7 +620,7 @@ window.base64 = {
 }).call(this);
 
 (function() {
-  var toggleClass, _base, _ref, _ref1,
+  var toggleClass, _base,
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   toggleClass = function(element, className, condition) {
@@ -580,11 +641,11 @@ window.base64 = {
     return null;
   };
 
-  if ((_ref = window.zooniverse) == null) {
+  if (window.zooniverse == null) {
     window.zooniverse = {};
   }
 
-  if ((_ref1 = (_base = window.zooniverse).util) == null) {
+  if ((_base = window.zooniverse).util == null) {
     _base.util = {};
   }
 
@@ -597,7 +658,7 @@ window.base64 = {
 }).call(this);
 
 (function() {
-  var offset, _base, _ref, _ref1;
+  var offset, _base;
 
   offset = function(el, from) {
     var currentElement, left, top;
@@ -621,11 +682,11 @@ window.base64 = {
     };
   };
 
-  if ((_ref = window.zooniverse) == null) {
+  if (window.zooniverse == null) {
     window.zooniverse = {};
   }
 
-  if ((_ref1 = (_base = window.zooniverse).util) == null) {
+  if ((_base = window.zooniverse).util == null) {
     _base.util = {};
   }
 
@@ -638,22 +699,303 @@ window.base64 = {
 }).call(this);
 
 (function() {
-  var BaseModel, EventEmitter, _base, _ref, _ref1,
+  var $, EventEmitter, LanguageManager, _ref,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  if ((_ref = window.zooniverse) == null) {
+  EventEmitter = ((_ref = window.zooniverse) != null ? _ref.EventEmitter : void 0) || require('./event-emitter');
+
+  $ = window.jQuery;
+
+  LanguageManager = (function(_super) {
+    __extends(LanguageManager, _super);
+
+    LanguageManager.current = null;
+
+    LanguageManager.prototype.translations = null;
+
+    LanguageManager.prototype.code = 'en';
+
+    function LanguageManager(_arg) {
+      var lang, _ref1, _ref2, _ref3, _ref4, _ref5,
+        _this = this;
+      _ref1 = _arg != null ? _arg : {}, this.translations = _ref1.translations, this.code = _ref1.code;
+      if (this.translations == null) {
+        this.translations = {};
+      }
+      if (window.AVAILABLE_TRANSLATIONS != null) {
+        _ref2 = window.AVAILABLE_TRANSLATIONS;
+        for (code in _ref2) {
+          lang = _ref2[code];
+          this.translations[code] = lang;
+        }
+      }
+      if (this.code == null) {
+        this.code = (_ref3 = location.search.match(/lang=(\w+)/)) != null ? _ref3[1] : void 0;
+      }
+      if (this.code == null) {
+        this.code = localStorage.getItem('zooniverse-language-code');
+      }
+      if (this.code == null) {
+        this.code = (_ref4 = navigator.language) != null ? _ref4.split('-')[0] : void 0;
+      }
+      if (this.code == null) {
+        this.code = (_ref5 = navigator.userLanguage) != null ? _ref5.split('-')[0] : void 0;
+      }
+      if (this.code == null) {
+        this.code = this.constructor.prototype.code;
+      }
+      this.constructor.current = this;
+      setTimeout(function() {
+        return _this.setLanguage(_this.code);
+      });
+    }
+
+    LanguageManager.prototype.setLanguage = function(code, done, fail) {
+      var localStrings, request, _ref1,
+        _this = this;
+      this.code = code;
+      if (typeof ((_ref1 = this.translations[this.code]) != null ? _ref1.strings : void 0) === 'string') {
+        localStrings = JSON.parse(localStorage.getItem("zooniverse-language-strings-" + this.code));
+        if (localStrings != null) {
+          this.translations[this.code].strings = localStrings;
+          return this.setLanguage(this.code, done, fail);
+        } else {
+          request = $.getJSON(this.translations[this.code].strings);
+          request.done(function(data) {
+            localStorage.setItem("zooniverse-language-strings-" + _this.code, JSON.stringify(data));
+            _this.translations[_this.code].strings = data;
+            return _this.setLanguage(_this.code, done, fail);
+          });
+          return request.fail(function() {
+            _this.trigger('language-fetch-fail');
+            return typeof fail === "function" ? fail.apply(null, arguments) : void 0;
+          });
+        }
+      } else {
+        localStorage.setItem('zooniverse-language-code', this.code);
+        this.trigger('change-language', [this.code, this.translations[this.code].strings]);
+        return typeof done === "function" ? done(this.code, this.translations[this.code].strings) : void 0;
+      }
+    };
+
+    return LanguageManager;
+
+  })(EventEmitter);
+
+  if (window.zooniverse == null) {
     window.zooniverse = {};
   }
 
-  if ((_ref1 = (_base = window.zooniverse).models) == null) {
+  window.zooniverse.LanguageManager = LanguageManager;
+
+  if (typeof module !== "undefined" && module !== null) {
+    module.exports = LanguageManager;
+  }
+
+}).call(this);
+
+(function() {
+  var LanguageManager, translate, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6,
+    __slice = [].slice;
+
+  LanguageManager = ((_ref = window.zooniverse) != null ? _ref.LanguageManager : void 0) || require('./language-manager');
+
+  translate = function() {
+    var element, key, tag, _arg, _i;
+    _arg = 2 <= arguments.length ? __slice.call(arguments, 0, _i = arguments.length - 1) : (_i = 0, []), key = arguments[_i++];
+    tag = _arg[0];
+    if (tag == null) {
+      tag = 'span';
+    }
+    element = document.createElement(tag);
+    element.setAttribute(translate.attr, key);
+    translate.refresh(element);
+    return element.outerHTML;
+  };
+
+  translate.attr = 'data-zooniverse-translate';
+
+  translate.strings = {
+    en: ((_ref1 = window.zooniverse) != null ? (_ref2 = _ref1.translations) != null ? _ref2.en : void 0 : void 0) || require('../translations/en'),
+    es: ((_ref3 = window.zooniverse) != null ? (_ref4 = _ref3.translations) != null ? _ref4.es : void 0 : void 0) || require('../translations/es'),
+    fr: ((_ref5 = window.zooniverse) != null ? (_ref6 = _ref5.translations) != null ? _ref6.fr : void 0 : void 0) || require('../translations/fr')
+  };
+
+  translate.refresh = function(element, key) {
+    var name, property, string, value, _i, _len, _ref10, _ref11, _ref7, _ref8, _ref9, _results;
+    _ref7 = element.attributes;
+    _results = [];
+    for (_i = 0, _len = _ref7.length; _i < _len; _i++) {
+      _ref8 = _ref7[_i], name = _ref8.name, value = _ref8.value;
+      if (name.slice(0, translate.attr.length) !== translate.attr) {
+        continue;
+      }
+      if (!value) {
+        continue;
+      }
+      property = name.slice(translate.attr.length + 1) || 'innerHTML';
+      string = (_ref9 = translate.strings[(_ref10 = LanguageManager.current) != null ? _ref10.code : void 0]) != null ? _ref9[value] : void 0;
+      string || (string = (_ref11 = translate.strings[LanguageManager.prototype.code]) != null ? _ref11[value] : void 0);
+      string || (string = value);
+      _results.push(element[property] = string);
+    }
+    return _results;
+  };
+
+  LanguageManager.on('change-language', function() {
+    var element, _i, _len, _ref7, _results;
+    _ref7 = document.querySelectorAll("[" + translate.attr + "]");
+    _results = [];
+    for (_i = 0, _len = _ref7.length; _i < _len; _i++) {
+      element = _ref7[_i];
+      _results.push(translate.refresh(element));
+    }
+    return _results;
+  });
+
+  if (window.zooniverse == null) {
+    window.zooniverse = {};
+  }
+
+  window.zooniverse.translate = translate;
+
+  if (typeof module !== "undefined" && module !== null) {
+    module.exports = translate;
+  }
+
+}).call(this);
+
+(function() {
+  var $, EventEmitter, GA_SCOPES, GoogleAnalytics, gaSrc, _ref,
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+    __slice = [].slice;
+
+  if (window.zooniverse == null) {
+    window.zooniverse = {};
+  }
+
+  EventEmitter = window.zooniverse.EventEmitter || require('./event-emitter');
+
+  $ = window.jQuery;
+
+  GA_SCOPES = {
+    visitor: 1,
+    session: 2,
+    page: 3
+  };
+
+  gaSrc = 'http://www.google-analytics.com/ga.js';
+
+  if (window.location.protocol === 'https:') {
+    gaSrc = gaSrc.replace('http://www', 'https://ssl');
+  }
+
+  GoogleAnalytics = (function(_super) {
+    __extends(GoogleAnalytics, _super);
+
+    GoogleAnalytics.current = null;
+
+    GoogleAnalytics.prototype.account = '';
+
+    GoogleAnalytics.prototype.domain = '';
+
+    GoogleAnalytics.prototype.trackHashes = true;
+
+    function GoogleAnalytics(params) {
+      var property, value,
+        _this = this;
+      if (params == null) {
+        params = {};
+      }
+      for (property in params) {
+        value = params[property];
+        this[property] = value;
+      }
+      this.select();
+      if (!window._gaq) {
+        $.getScript(gaSrc);
+      }
+      if (window._gaq == null) {
+        window._gaq = [];
+      }
+      window._gaq.push(['_setAccount', this.account]);
+      if (this.domain) {
+        window._gaq.push(['_setDomainName', this.domain]);
+      }
+      window._gaq.push(['_trackPageview']);
+      if (this.trackHashes) {
+        $(window).on('hashchange', (function() {
+          return _this.track();
+        }));
+      }
+    }
+
+    GoogleAnalytics.prototype.select = function() {
+      this.constructor.current = this;
+      return this.trigger('select');
+    };
+
+    GoogleAnalytics.prototype.track = function(pathname) {
+      if (typeof pathname !== 'string') {
+        pathname = "/" + location.hash;
+      }
+      window._gaq.push(['_trackPageview', pathname]);
+      return this.trigger('track', [pathname]);
+    };
+
+    GoogleAnalytics.prototype.event = function(category, action, label, value, ignoreForBounceRate) {
+      window._gaq.push(['_trackEvent'].concat(__slice.call(arguments)));
+      return this.trigger('event', __slice.call(arguments));
+    };
+
+    GoogleAnalytics.prototype.custom = function(index, key, value, scope) {
+      var command;
+      if (typeof index === 'string') {
+        index = this.constructor.indices[index];
+      }
+      if (typeof scope === 'string') {
+        scope = GA_SCOPES[scope];
+      }
+      command = ['_setCustomVar', index, key, value];
+      if (scope != null) {
+        command.push(scope);
+      }
+      window._gaq.push(command);
+      return this.trigger('custom', __slice.call(arguments));
+    };
+
+    return GoogleAnalytics;
+
+  })(EventEmitter);
+
+  if ((_ref = window.zooniverse) != null) {
+    _ref.GoogleAnalytics = GoogleAnalytics;
+  }
+
+  if (typeof module !== "undefined" && module !== null) {
+    module.exports = GoogleAnalytics;
+  }
+
+}).call(this);
+
+(function() {
+  var BaseModel, EventEmitter, _base,
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+  if (window.zooniverse == null) {
+    window.zooniverse = {};
+  }
+
+  if ((_base = window.zooniverse).models == null) {
     _base.models = {};
   }
 
   EventEmitter = window.zooniverse.EventEmitter || require('../lib/event-emitter');
 
   BaseModel = (function(_super) {
-
     __extends(BaseModel, _super);
 
     BaseModel.idCounter = -1;
@@ -661,29 +1003,27 @@ window.base64 = {
     BaseModel.instances = null;
 
     BaseModel.count = function() {
-      var _ref2;
-      if ((_ref2 = this.instances) == null) {
+      if (this.instances == null) {
         this.instances = [];
       }
       return this.instances.length;
     };
 
     BaseModel.first = function() {
-      var _ref2;
-      if ((_ref2 = this.instances) == null) {
+      if (this.instances == null) {
         this.instances = [];
       }
       return this.instances[0];
     };
 
     BaseModel.find = function(id) {
-      var instance, _i, _len, _ref2, _ref3;
-      if ((_ref2 = this.instances) == null) {
+      var instance, _i, _len, _ref;
+      if (this.instances == null) {
         this.instances = [];
       }
-      _ref3 = this.instances;
-      for (_i = 0, _len = _ref3.length; _i < _len; _i++) {
-        instance = _ref3[_i];
+      _ref = this.instances;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        instance = _ref[_i];
         if (instance.id === id) {
           return instance;
         }
@@ -691,14 +1031,14 @@ window.base64 = {
     };
 
     BaseModel.search = function(query) {
-      var instance, miss, property, value, _i, _len, _ref2, _ref3, _results;
-      if ((_ref2 = this.instances) == null) {
+      var instance, miss, property, value, _i, _len, _ref, _results;
+      if (this.instances == null) {
         this.instances = [];
       }
-      _ref3 = this.instances;
+      _ref = this.instances;
       _results = [];
-      for (_i = 0, _len = _ref3.length; _i < _len; _i++) {
-        instance = _ref3[_i];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        instance = _ref[_i];
         miss = false;
         for (property in query) {
           if (!__hasProp.call(query, property)) continue;
@@ -728,7 +1068,7 @@ window.base64 = {
     BaseModel.prototype.id = null;
 
     function BaseModel(params) {
-      var property, value, _base1, _ref2;
+      var property, value, _base1;
       if (params == null) {
         params = {};
       }
@@ -744,24 +1084,24 @@ window.base64 = {
       if (this.id == null) {
         this.id = "C_" + this.constructor.idCounter;
       }
-      if ((_ref2 = (_base1 = this.constructor).instances) == null) {
+      if ((_base1 = this.constructor).instances == null) {
         _base1.instances = [];
       }
       this.constructor.instances.push(this);
     }
 
     BaseModel.prototype.destroy = function() {
-      var i, instance, _i, _len, _ref2, _ref3, _results;
+      var i, instance, _i, _len, _ref, _ref1, _results;
       BaseModel.__super__.destroy.apply(this, arguments);
-      _ref2 = this.constructor.instances;
+      _ref = this.constructor.instances;
       _results = [];
-      for (i = _i = 0, _len = _ref2.length; _i < _len; i = ++_i) {
-        instance = _ref2[i];
+      for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
+        instance = _ref[i];
         if (!(instance === this)) {
           continue;
         }
-        if ((_ref3 = this.constructor.instances) != null) {
-          _ref3.splice(i, 1);
+        if ((_ref1 = this.constructor.instances) != null) {
+          _ref1.splice(i, 1);
         }
         break;
       }
@@ -781,16 +1121,16 @@ window.base64 = {
 }).call(this);
 
 (function() {
-  var Api, EventEmitter, User, base64, _base, _ref, _ref1,
+  var Api, EventEmitter, User, base64, _base,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     __slice = [].slice;
 
-  if ((_ref = window.zooniverse) == null) {
+  if (window.zooniverse == null) {
     window.zooniverse = {};
   }
 
-  if ((_ref1 = (_base = window.zooniverse).models) == null) {
+  if ((_base = window.zooniverse).models == null) {
     _base.models = {};
   }
 
@@ -801,7 +1141,6 @@ window.base64 = {
   base64 = window.base64 || (require('../vendor/base64'), window.base64);
 
   User = (function(_super) {
-
     __extends(User, _super);
 
     User.current = false;
@@ -815,36 +1154,36 @@ window.base64 = {
     };
 
     User.fetch = function() {
-      var fetcher, _ref2;
+      var fetcher, _ref;
       User.trigger('fetching', arguments);
-      fetcher = (_ref2 = Api.current).getJSON.apply(_ref2, ["" + (User.path()) + "/current_user"].concat(__slice.call(arguments)));
+      fetcher = (_ref = Api.current).getJSON.apply(_ref, ["" + (User.path()) + "/current_user"].concat(__slice.call(arguments)));
       fetcher.always(User.onFetch);
       return fetcher;
     };
 
     User.login = function(_arg) {
-      var login, password, username, _ref2;
+      var login, password, username, _ref;
       username = _arg.username, password = _arg.password;
       this.trigger('logging-in', arguments);
-      login = (_ref2 = Api.current).getJSON.apply(_ref2, ["" + (this.path()) + "/login"].concat(__slice.call(arguments)));
+      login = (_ref = Api.current).getJSON.apply(_ref, ["" + (this.path()) + "/login"].concat(__slice.call(arguments)));
       login.done(this.onFetch);
       login.fail(this.onFail);
       return login;
     };
 
     User.logout = function() {
-      var logout, _ref2;
+      var logout, _ref;
       this.trigger('logging-out', arguments);
-      logout = (_ref2 = Api.current).getJSON.apply(_ref2, ["" + (this.path()) + "/logout"].concat(__slice.call(arguments)));
+      logout = (_ref = Api.current).getJSON.apply(_ref, ["" + (this.path()) + "/logout"].concat(__slice.call(arguments)));
       logout.always(this.onFetch);
       return logout;
     };
 
     User.signup = function(_arg) {
-      var email, password, signup, username, _ref2;
+      var email, password, signup, username, _ref;
       username = _arg.username, password = _arg.password, email = _arg.email;
       this.trigger('signing-up');
-      signup = (_ref2 = Api.current).getJSON.apply(_ref2, ["" + (this.path()) + "/signup"].concat(__slice.call(arguments)));
+      signup = (_ref = Api.current).getJSON.apply(_ref, ["" + (this.path()) + "/signup"].concat(__slice.call(arguments)));
       signup.always(this.onFetch);
       return signup;
     };
@@ -903,24 +1242,21 @@ window.base64 = {
     }
 
     User.prototype.setGroup = function(groupId, callback) {
-      var get, path, _ref2,
+      var get, path, _ref,
         _this = this;
       if (User.current == null) {
         return;
       }
       path = groupId != null ? "/user_groups/" + groupId + "/participate" : "/user_groups/TODO_HOW_DO_I_LEAVE_A_GROUP/participate";
-      get = (_ref2 = Api.current) != null ? _ref2.getJSON(path, function(group) {
+      get = (_ref = Api.current) != null ? _ref.getJSON(path, function(group) {
         _this.trigger('change-group', group);
-        if (typeof callback === "function") {
-          callback.apply(null, arguments);
-        }
-        return typeof console !== "undefined" && console !== null ? console.log('Changed group', group) : void 0;
+        return typeof callback === "function" ? callback.apply(null, arguments) : void 0;
       }) : void 0;
       return get;
     };
 
     User.prototype.setPreference = function(key, value, global, callback) {
-      var _base1, _base2, _name, _ref2, _ref3, _ref4;
+      var _base1, _base2, _name, _ref;
       if (global == null) {
         global = false;
       }
@@ -928,15 +1264,15 @@ window.base64 = {
         return;
       }
       if (typeof global === 'function') {
-        _ref2 = [false, global], global = _ref2[0], callback = _ref2[1];
+        _ref = [false, global], global = _ref[0], callback = _ref[1];
       }
-      if ((_ref3 = (_base1 = User.current).preferences) == null) {
+      if ((_base1 = User.current).preferences == null) {
         _base1.preferences = {};
       }
       if (global) {
         User.current.preferences[key] = value;
       } else {
-        if ((_ref4 = (_base2 = User.current.preferences)[_name = Api.current.project]) == null) {
+        if ((_base2 = User.current.preferences)[_name = Api.current.project] == null) {
           _base2[_name] = {};
         }
         User.current.preferences[Api.current.project][key] = value;
@@ -951,7 +1287,7 @@ window.base64 = {
     };
 
     User.prototype.deletePreference = function(key, global, callback) {
-      var _base1, _base2, _name, _ref2, _ref3, _ref4;
+      var _base1, _base2, _name, _ref;
       if (global == null) {
         global = false;
       }
@@ -959,15 +1295,15 @@ window.base64 = {
         return;
       }
       if (typeof global === 'function') {
-        _ref2 = [false, global], global = _ref2[0], callback = _ref2[1];
+        _ref = [false, global], global = _ref[0], callback = _ref[1];
       }
-      if ((_ref3 = (_base1 = User.current).preferences) == null) {
+      if ((_base1 = User.current).preferences == null) {
         _base1.preferences = {};
       }
       if (global) {
         delete User.current.preferences[key];
       } else {
-        if ((_ref4 = (_base2 = User.current.preferences)[_name = Api.current.project]) == null) {
+        if ((_base2 = User.current.preferences)[_name = Api.current.project] == null) {
           _base2[_name] = {};
         }
         delete User.current.preferences[Api.current.project][key];
@@ -993,15 +1329,15 @@ window.base64 = {
 }).call(this);
 
 (function() {
-  var $, Api, BaseModel, Subject, _base, _ref, _ref1,
+  var $, Api, BaseModel, Subject, _base,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  if ((_ref = window.zooniverse) == null) {
+  if (window.zooniverse == null) {
     window.zooniverse = {};
   }
 
-  if ((_ref1 = (_base = window.zooniverse).models) == null) {
+  if ((_base = window.zooniverse).models == null) {
     _base.models = {};
   }
 
@@ -1012,7 +1348,6 @@ window.base64 = {
   $ = window.jQuery;
 
   Subject = (function(_super) {
-
     __extends(Subject, _super);
 
     Subject.current = null;
@@ -1030,11 +1365,11 @@ window.base64 = {
     };
 
     Subject.next = function(done, fail) {
-      var fetcher, nexter, _ref2,
+      var fetcher, nexter, _ref,
         _this = this;
       this.trigger('get-next');
-      if ((_ref2 = this.current) != null) {
-        _ref2.destroy();
+      if ((_ref = this.current) != null) {
+        _ref.destroy();
       }
       this.current = null;
       nexter = new $.Deferred;
@@ -1042,9 +1377,9 @@ window.base64 = {
       if (this.count() === 0) {
         fetcher = this.fetch();
         fetcher.done(function(newSubjects) {
-          var _ref3;
-          if ((_ref3 = _this.first()) != null) {
-            _ref3.select();
+          var _ref1;
+          if ((_ref1 = _this.first()) != null) {
+            _ref1.select();
           }
           if (_this.current) {
             return nexter.resolve(_this.current);
@@ -1067,10 +1402,10 @@ window.base64 = {
     };
 
     Subject.fetch = function(params, done, fail) {
-      var fetcher, limit, request, _ref2,
+      var fetcher, limit, request, _ref,
         _this = this;
       if (typeof params === 'function') {
-        _ref2 = [params, done, {}], done = _ref2[0], fail = _ref2[1], params = _ref2[2];
+        _ref = [params, done, {}], done = _ref[0], fail = _ref[1], params = _ref[2];
       }
       limit = (params || {}).limit;
       if (limit == null) {
@@ -1159,32 +1494,30 @@ window.base64 = {
     Subject.prototype.preload = true;
 
     function Subject() {
-      var _ref2, _ref3, _ref4, _ref5;
       Subject.__super__.constructor.apply(this, arguments);
-      if ((_ref2 = this.location) == null) {
+      if (this.location == null) {
         this.location = {};
       }
-      if ((_ref3 = this.coords) == null) {
+      if (this.coords == null) {
         this.coords = [];
       }
-      if ((_ref4 = this.metadata) == null) {
+      if (this.metadata == null) {
         this.metadata = {};
       }
-      if ((_ref5 = this.workflow_ids) == null) {
+      if (this.workflow_ids == null) {
         this.workflow_ids = [];
       }
     }
 
     Subject.prototype.preloadImages = function() {
-      var imageSources, src, type, _ref2, _results;
+      var imageSources, src, type, _ref, _results;
       if (!this.preload) {
         return;
       }
-      console.log('preloadImages');
-      _ref2 = this.location;
+      _ref = this.location;
       _results = [];
-      for (type in _ref2) {
-        imageSources = _ref2[type];
+      for (type in _ref) {
+        imageSources = _ref[type];
         if (!(imageSources instanceof Array)) {
           imageSources = [imageSources];
         }
@@ -1217,10 +1550,10 @@ window.base64 = {
     };
 
     Subject.prototype.isImage = function(subjectLocation) {
-      var src, _i, _len, _ref2;
+      var src, _i, _len, _ref;
       for (_i = 0, _len = subjectLocation.length; _i < _len; _i++) {
         src = subjectLocation[_i];
-        if (!((_ref2 = src.split('.').pop()) === 'gif' || _ref2 === 'jpg' || _ref2 === 'png')) {
+        if (!((_ref = src.split('.').pop()) === 'gif' || _ref === 'jpg' || _ref === 'png')) {
           return false;
         }
       }
@@ -1274,15 +1607,15 @@ window.base64 = {
 }).call(this);
 
 (function() {
-  var $, Api, BaseModel, Recent, Subject, SubjectForRecent, User, _base, _ref, _ref1,
+  var $, Api, BaseModel, Recent, Subject, SubjectForRecent, User, _base, _ref,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  if ((_ref = window.zooniverse) == null) {
+  if (window.zooniverse == null) {
     window.zooniverse = {};
   }
 
-  if ((_ref1 = (_base = window.zooniverse).models) == null) {
+  if ((_base = window.zooniverse).models == null) {
     _base.models = {};
   }
 
@@ -1297,11 +1630,11 @@ window.base64 = {
   $ = window.jQuery;
 
   SubjectForRecent = (function(_super) {
-
     __extends(SubjectForRecent, _super);
 
     function SubjectForRecent() {
-      return SubjectForRecent.__super__.constructor.apply(this, arguments);
+      _ref = SubjectForRecent.__super__.constructor.apply(this, arguments);
+      return _ref;
     }
 
     return SubjectForRecent;
@@ -1309,22 +1642,21 @@ window.base64 = {
   })(Subject);
 
   Recent = (function(_super) {
-
     __extends(Recent, _super);
 
     Recent.type = 'recent';
 
     Recent.path = function() {
-      var _ref2;
-      return "/projects/" + Api.current.project + "/users/" + ((_ref2 = User.current) != null ? _ref2.id : void 0) + "/" + this.type + "s";
+      var _ref1;
+      return "/projects/" + Api.current.project + "/users/" + ((_ref1 = User.current) != null ? _ref1.id : void 0) + "/" + this.type + "s";
     };
 
     Recent.fetch = function(params, done, fail) {
-      var fetcher, request, _ref2,
+      var fetcher, request, _ref1,
         _this = this;
       this.trigger('fetching');
       if (typeof params === 'function') {
-        _ref2 = [params, done, {}], done = _ref2[0], fail = _ref2[1], params = _ref2[2];
+        _ref1 = [params, done, {}], done = _ref1[0], fail = _ref1[1], params = _ref1[2];
       }
       params = $.extend({
         page: 1,
@@ -1336,11 +1668,11 @@ window.base64 = {
       request.done(function(rawRecents) {
         var newRecents, rawRecent;
         newRecents = (function() {
-          var _i, _len, _ref3, _results;
-          _ref3 = rawRecents.reverse();
+          var _i, _len, _ref2, _results;
+          _ref2 = rawRecents.reverse();
           _results = [];
-          for (_i = 0, _len = _ref3.length; _i < _len; _i++) {
-            rawRecent = _ref3[_i];
+          for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
+            rawRecent = _ref2[_i];
             _results.push(new this(rawRecent));
           }
           return _results;
@@ -1379,17 +1711,17 @@ window.base64 = {
     Recent.prototype.created_at = '';
 
     function Recent() {
-      var i, subject, _i, _len, _ref2, _ref3, _ref4, _ref5, _ref6;
+      var i, subject, _i, _len, _ref1, _ref2, _ref3, _ref4;
       Recent.__super__.constructor.apply(this, arguments);
-      if ((_ref2 = this.subjects) == null) {
+      if (this.subjects == null) {
         this.subjects = [];
       }
-      this.project_id || (this.project_id = (_ref3 = this.subjects[0]) != null ? _ref3.project_id : void 0);
-      this.workflow_id || (this.workflow_id = (_ref4 = this.subjects[0]) != null ? (_ref5 = _ref4.workflow_ids) != null ? _ref5[0] : void 0 : void 0);
+      this.project_id || (this.project_id = (_ref1 = this.subjects[0]) != null ? _ref1.project_id : void 0);
+      this.workflow_id || (this.workflow_id = (_ref2 = this.subjects[0]) != null ? (_ref3 = _ref2.workflow_ids) != null ? _ref3[0] : void 0 : void 0);
       this.created_at || (this.created_at = (new Date).toUTCString());
-      _ref6 = this.subjects;
-      for (i = _i = 0, _len = _ref6.length; _i < _len; i = ++_i) {
-        subject = _ref6[i];
+      _ref4 = this.subjects;
+      for (i = _i = 0, _len = _ref4.length; _i < _len; i = ++_i) {
+        subject = _ref4[i];
         this.subjects[i] = new SubjectForRecent(subject);
       }
     }
@@ -1407,16 +1739,16 @@ window.base64 = {
 }).call(this);
 
 (function() {
-  var $, Api, Favorite, Recent, User, _base, _ref, _ref1,
+  var $, Api, Favorite, Recent, User, _base, _ref,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  if ((_ref = window.zooniverse) == null) {
+  if (window.zooniverse == null) {
     window.zooniverse = {};
   }
 
-  if ((_ref1 = (_base = window.zooniverse).models) == null) {
+  if ((_base = window.zooniverse).models == null) {
     _base.models = {};
   }
 
@@ -1429,12 +1761,12 @@ window.base64 = {
   $ = window.jQuery;
 
   Favorite = (function(_super) {
-
     __extends(Favorite, _super);
 
     function Favorite() {
       this.toJSON = __bind(this.toJSON, this);
-      return Favorite.__super__.constructor.apply(this, arguments);
+      _ref = Favorite.__super__.constructor.apply(this, arguments);
+      return _ref;
     }
 
     Favorite.type = 'favorite';
@@ -1446,11 +1778,11 @@ window.base64 = {
       return {
         favorite: {
           subject_ids: (function() {
-            var _i, _len, _ref2, _results;
-            _ref2 = this.subjects;
+            var _i, _len, _ref1, _results;
+            _ref1 = this.subjects;
             _results = [];
-            for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
-              subject = _ref2[_i];
+            for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
+              subject = _ref1[_i];
               _results.push(subject.id);
             }
             return _results;
@@ -1490,33 +1822,27 @@ window.base64 = {
 }).call(this);
 
 (function() {
-  var $, Api, BaseModel, Classification, Favorite, RESOLVED_STATE, Recent, _base, _ref, _ref1,
+  var $, Api, BaseModel, Classification, Favorite, LanguageManager, RESOLVED_STATE, Recent, _base, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+    __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; },
     __slice = [].slice;
 
-  if ((_ref = window.zooniverse) == null) {
-    window.zooniverse = {};
-  }
+  BaseModel = ((_ref = window.zooniverse) != null ? (_ref1 = _ref.models) != null ? _ref1.BaseModel : void 0 : void 0) || require('./base-model');
 
-  if ((_ref1 = (_base = window.zooniverse).models) == null) {
-    _base.models = {};
-  }
+  Api = ((_ref2 = window.zooniverse) != null ? _ref2.Api : void 0) || require('../lib/api');
 
-  BaseModel = window.zooniverse.models.BaseModel || require('./base-model');
+  Recent = ((_ref3 = window.zooniverse) != null ? (_ref4 = _ref3.models) != null ? _ref4.Recent : void 0 : void 0) || require('../models/recent');
 
-  Api = window.zooniverse.Api || require('../lib/api');
+  Favorite = ((_ref5 = window.zooniverse) != null ? (_ref6 = _ref5.models) != null ? _ref6.Favorite : void 0 : void 0) || require('../models/favorite');
 
-  Recent = window.zooniverse.models.Recent || require('../models/recent');
-
-  Favorite = window.zooniverse.models.Favorite || require('../models/favorite');
+  LanguageManager = ((_ref7 = window.zooniverse) != null ? _ref7.LanguageManager : void 0) || require('../lib/language-manager');
 
   $ = window.jQuery;
 
   RESOLVED_STATE = (new $.Deferred).resolve().state();
 
   Classification = (function(_super) {
-
     __extends(Classification, _super);
 
     Classification.pending = JSON.parse(localStorage.getItem('pending-classifications')) || [];
@@ -1524,17 +1850,17 @@ window.base64 = {
     Classification.sentThisSession = 0;
 
     Classification.sendPending = function() {
-      var classification, pendingPosts, _i, _len, _ref2, _results,
+      var classification, pendingPosts, _i, _len, _ref8, _results,
         _this = this;
       if (this.pending.length === 0) {
         return;
       }
       this.trigger('sending-pending', [classification]);
       pendingPosts = [];
-      _ref2 = this.pending;
+      _ref8 = this.pending;
       _results = [];
-      for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
-        classification = _ref2[_i];
+      for (_i = 0, _len = _ref8.length; _i < _len; _i++) {
+        classification = _ref8[_i];
         _results.push((function(classification) {
           var latePost;
           latePost = Api.current.post(classification.url, classification);
@@ -1545,11 +1871,11 @@ window.base64 = {
             if (classification.favorite) {
               favorite = new Favorite({
                 subjects: (function() {
-                  var _j, _len1, _ref3, _results1;
-                  _ref3 = classification.subject_ids;
+                  var _j, _len1, _ref9, _results1;
+                  _ref9 = classification.subject_ids;
                   _results1 = [];
-                  for (_j = 0, _len1 = _ref3.length; _j < _len1; _j++) {
-                    id = _ref3[_j];
+                  for (_j = 0, _len1 = _ref9.length; _j < _len1; _j++) {
+                    id = _ref9[_j];
                     _results1.push({
                       id: id
                     });
@@ -1564,8 +1890,8 @@ window.base64 = {
             return _this.trigger('send-pending-fail', [classification]);
           });
           return $.when.apply($, pendingPosts).always(function() {
-            var i, _j, _ref3;
-            for (i = _j = _ref3 = pendingPosts.length - 1; _ref3 <= 0 ? _j <= 0 : _j >= 0; i = _ref3 <= 0 ? ++_j : --_j) {
+            var i, _j, _ref9;
+            for (i = _j = _ref9 = pendingPosts.length - 1; _ref9 <= 0 ? _j <= 0 : _j >= 0; i = _ref9 <= 0 ? ++_j : --_j) {
               if (pendingPosts[i].state() === RESOLVED_STATE) {
                 _this.pending.splice(i, 1);
               }
@@ -1576,6 +1902,8 @@ window.base64 = {
       }
       return _results;
     };
+
+    Classification.prototype.subjects = [];
 
     Classification.prototype.subject = null;
 
@@ -1592,9 +1920,8 @@ window.base64 = {
     Classification.prototype.user_agent = null;
 
     function Classification() {
-      var _ref2;
       Classification.__super__.constructor.apply(this, arguments);
-      if ((_ref2 = this.annotations) == null) {
+      if (this.annotations == null) {
         this.annotations = [];
       }
       this.generic = {};
@@ -1602,20 +1929,43 @@ window.base64 = {
       this.user_agent = window.navigator.userAgent;
     }
 
+    Classification.prototype.normalizeSubjects = function() {
+      if (this.subjects.length > 0) {
+        return this.subject || (this.subject = this.subjects[0]);
+      } else {
+        return this.subjects = [this.subject];
+      }
+    };
+
     Classification.prototype.annotate = function(annotation) {
       this.annotations.push(annotation);
       return annotation;
     };
 
     Classification.prototype.removeAnnotation = function(annotation) {
-      var a, i, _i, _len, _ref2;
-      _ref2 = this.annotations;
-      for (i = _i = 0, _len = _ref2.length; _i < _len; i = ++_i) {
-        a = _ref2[i];
+      var a, i, _i, _len, _ref8;
+      _ref8 = this.annotations;
+      for (i = _i = 0, _len = _ref8.length; _i < _len; i = ++_i) {
+        a = _ref8[i];
         if (a === annotation) {
           return this.annotations.splice(i, 1);
         }
       }
+    };
+
+    Classification.prototype.isTutorial = function() {
+      var subject;
+      this.normalizeSubjects();
+      return __indexOf.call((function() {
+        var _i, _len, _ref8, _ref9, _results;
+        _ref8 = this.subjects;
+        _results = [];
+        for (_i = 0, _len = _ref8.length; _i < _len; _i++) {
+          subject = _ref8[_i];
+          _results.push((_ref9 = subject.metadata) != null ? _ref9.tutorial : void 0);
+        }
+        return _results;
+      }).call(this), true) >= 0;
     };
 
     Classification.prototype.set = function(key, value) {
@@ -1628,23 +1978,37 @@ window.base64 = {
     };
 
     Classification.prototype.toJSON = function() {
-      var annotation, key, output, value, _ref2;
+      var annotation, key, lang, output, subject, subject_ids, value, _ref8, _ref9;
+      lang = (_ref8 = LanguageManager.current) != null ? _ref8.code : void 0;
+      this.normalizeSubjects();
+      subject_ids = (function() {
+        var _i, _len, _ref9, _results;
+        _ref9 = this.subjects;
+        _results = [];
+        for (_i = 0, _len = _ref9.length; _i < _len; _i++) {
+          subject = _ref9[_i];
+          _results.push(subject.id);
+        }
+        return _results;
+      }).call(this);
       output = {
         classification: {
-          subject_ids: [this.subject.id],
+          subject_ids: subject_ids,
           annotations: this.annotations.concat([
             {
               started_at: this.started_at,
               finished_at: this.finished_at
             }, {
               user_agent: this.user_agent
+            }, {
+              lang: lang
             }
           ])
         }
       };
-      _ref2 = this.generic;
-      for (key in _ref2) {
-        value = _ref2[key];
+      _ref9 = this.generic;
+      for (key in _ref9) {
+        value = _ref9[key];
         annotation = {};
         annotation[key] = value;
         output.classification.annotations.push(annotation);
@@ -1656,17 +2020,18 @@ window.base64 = {
     };
 
     Classification.prototype.url = function() {
-      return "/projects/" + Api.current.project + "/workflows/" + this.subject.workflow_ids[0] + "/classifications";
+      this.normalizeSubjects();
+      return "/projects/" + Api.current.project + "/workflows/" + this.subjects[0].workflow_ids[0] + "/classifications";
     };
 
     Classification.prototype.send = function(done, fail) {
-      var post, _ref2,
+      var post, _ref8,
         _this = this;
-      if (!this.subject.metadata.tutorial) {
+      if (!this.isTutorial()) {
         this.constructor.sentThisSession += 1;
       }
       this.finished_at = (new Date).toUTCString();
-      post = (_ref2 = Api.current).post.apply(_ref2, [this.url(), this.toJSON()].concat(__slice.call(arguments)));
+      post = (_ref8 = Api.current).post.apply(_ref8, [this.url(), this.toJSON()].concat(__slice.call(arguments)));
       post.done(function() {
         _this.makeRecent();
         return _this.constructor.sendPending();
@@ -1687,22 +2052,39 @@ window.base64 = {
     };
 
     Classification.prototype.makeRecent = function() {
-      var favorite, recent;
-      recent = new Recent({
-        subjects: [this.subject]
-      });
-      recent.trigger('from-classification');
-      if (this.favorite) {
-        favorite = new Favorite({
-          subjects: [this.subject]
+      var favorite, recent, subject, _i, _len, _ref8, _results;
+      this.normalizeSubjects();
+      _ref8 = this.subjects;
+      _results = [];
+      for (_i = 0, _len = _ref8.length; _i < _len; _i++) {
+        subject = _ref8[_i];
+        recent = new Recent({
+          subjects: [subject]
         });
-        return favorite.trigger('from-classification');
+        recent.trigger('from-classification');
+        if (this.favorite) {
+          favorite = new Favorite({
+            subjects: [subject]
+          });
+          _results.push(favorite.trigger('from-classification'));
+        } else {
+          _results.push(void 0);
+        }
       }
+      return _results;
     };
 
     return Classification;
 
   })(BaseModel);
+
+  if (window.zooniverse == null) {
+    window.zooniverse = {};
+  }
+
+  if ((_base = window.zooniverse).models == null) {
+    _base.models = {};
+  }
 
   window.zooniverse.models.Classification = Classification;
 
@@ -1951,7 +2333,6 @@ template = function(__obj) {
   }
   (function() {
     (function() {
-    
       __out.push('<div class="underlay">\n  <div class="container">\n    <div class="dialog"></div>\n  </div>\n</div>\n');
     
     }).call(this);
@@ -2004,9 +2385,9 @@ template = function(__obj) {
   }
   (function() {
     (function() {
-      var enUs, groupIconSvg, mailIconSvg, zooniverseLogoSvg, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6;
+      var groupIconSvg, languageIconSvg, mailIconSvg, translate, zooniverseLogoSvg, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8;
     
-      enUs = ((_ref = window.zooniverse) != null ? _ref.enUs : void 0) || require('../lib/en-us');
+      translate = ((_ref = window.zooniverse) != null ? _ref.translate : void 0) || require('../lib/translate');
     
       __out.push('\n');
     
@@ -2018,7 +2399,11 @@ template = function(__obj) {
     
       __out.push('\n');
     
-      mailIconSvg = ((_ref5 = window.zooniverse) != null ? (_ref6 = _ref5.views) != null ? _ref6.mailIconSvg : void 0 : void 0) || require('./mail-icon-svg');
+      languageIconSvg = ((_ref5 = window.zooniverse) != null ? (_ref6 = _ref5.views) != null ? _ref6.languageIconSvg : void 0 : void 0) || require('./language-icon-svg');
+    
+      __out.push('\n');
+    
+      mailIconSvg = ((_ref7 = window.zooniverse) != null ? (_ref8 = _ref7.views) != null ? _ref8.mailIconSvg : void 0 : void 0) || require('./mail-icon-svg');
     
       __out.push('\n\n<div class="corner">\n  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">\n    <path d="M 0 0 L 100 0 L 100 100 Z" />\n  </svg>\n</div>\n\n<div class="no-user">\n  <div class="zooniverse-info piece">\n    ');
     
@@ -2026,19 +2411,19 @@ template = function(__obj) {
     
       __out.push('\n    ');
     
-      __out.push(__sanitize(this.heading));
+      __out.push(translate('topBarHeading'));
     
       __out.push('\n  </div>\n\n  <div class="sign-in piece">\n    <button name="sign-up">');
     
-      __out.push(__sanitize(enUs.topBar.signUp));
+      __out.push(translate('signUp'));
     
       __out.push('</button>\n    <span class="separator">|</span>\n    <button name="sign-in">');
     
-      __out.push(__sanitize(enUs.topBar.signIn));
+      __out.push(translate('signIn'));
     
       __out.push('</button>\n  </div>\n</div>\n\n<div class="current-user">\n  <div class="user-info piece">\n    <div class="current-user-name">&mdash;</div>\n\n    <div class="sign-out">\n      <button name="sign-out">');
     
-      __out.push(__sanitize(enUs.topBar.signOut));
+      __out.push(translate('signOut'));
     
       __out.push('</button>\n    </div>\n  </div>\n\n  <div class="groups piece">\n    <div class="groups-menu-toggle">\n      <button name="groups">');
     
@@ -2052,7 +2437,11 @@ template = function(__obj) {
     
       __out.push(mailIconSvg());
     
-      __out.push('\n      <span class="message-count">&mdash;</span>\n    </a>\n  </div>\n\n  <div class="avatar piece">\n    <a href="https://www.zooniverse.org/projects/current"><img src="" /></a>\n  </div>\n</div>\n');
+      __out.push('\n      <span class="message-count">&mdash;</span>\n    </a>\n  </div>\n\n  <div class="avatar piece">\n    <a href="https://www.zooniverse.org/projects/current"><img src="" /></a>\n  </div>\n</div>\n\n<div class="languages piece">\n  <div class="languages-menu-toggle">\n    <button name="languages">');
+    
+      __out.push(languageIconSvg());
+    
+      __out.push('</button>\n  </div>\n</div>\n');
     
     }).call(this);
     
@@ -2104,25 +2493,17 @@ template = function(__obj) {
   }
   (function() {
     (function() {
-      var enUs;
+      var translate, _ref;
     
-      enUs = (typeof zooniverse !== "undefined" && zooniverse !== null ? zooniverse.enUs : void 0) || require('../lib/en-us');
+      translate = ((_ref = window.zooniverse) != null ? _ref.translate : void 0) || require('../lib/translate');
     
-      __out.push('\n\n<input type="text" name="username" required="required" placeholder="');
+      __out.push('\n<input type="text" name="username" required="required" data-zooniverse-translate="" data-zooniverse-translate-placeholder="username" />\n<input type="password" name="password" required="required" data-zooniverse-translate="" data-zooniverse-translate-placeholder="password" />\n<button type="submit">');
     
-      __out.push(__sanitize(enUs.topBar.username));
-    
-      __out.push('" />\n<input type="password" name="password" required="required" placeholder="');
-    
-      __out.push(__sanitize(enUs.topBar.password));
-    
-      __out.push('" />\n<button type="submit">');
-    
-      __out.push(__sanitize(enUs.topBar.signIn));
+      __out.push(translate('signIn'));
     
       __out.push('</button>\n<button name="sign-out">');
     
-      __out.push(__sanitize(enUs.topBar.signOut));
+      __out.push(translate('signOut'));
     
       __out.push('</button>\n<div class="error-message"></div>\n');
     
@@ -2176,9 +2557,9 @@ template = function(__obj) {
   }
   (function() {
     (function() {
-      var enUs, zooniverseLogoSvg, _ref;
+      var translate, zooniverseLogoSvg, _ref;
     
-      enUs = (typeof zooniverse !== "undefined" && zooniverse !== null ? zooniverse.enUs : void 0) || require('../lib/en-us');
+      translate = (typeof zooniverse !== "undefined" && zooniverse !== null ? zooniverse.translate : void 0) || require('../lib/translate');
     
       __out.push('\n');
     
@@ -2190,23 +2571,15 @@ template = function(__obj) {
     
       __out.push('\n  ');
     
-      __out.push(enUs.topBar.signInTitle);
+      __out.push(translate('signInHeading'));
     
-      __out.push('\n</header>\n\n<label>\n  <input type="text" name="username" required="required" placeholder="');
+      __out.push('\n</header>\n\n<label>\n  <input type="text" name="username" required="required" data-zooniverse-translate="" data-zooniverse-translate-placeholder="username" />\n</label>\n\n<label>\n  <input type="password" name="password" required="required" data-zooniverse-translate="" data-zooniverse-translate-placeholder="password" />\n</label>\n\n<div class="error-message"></div>\n\n<div class="action">\n  <a href="https://www.zooniverse.org/password/reset">');
     
-      __out.push(__sanitize(enUs.topBar.username));
-    
-      __out.push('" />\n</label>\n\n<label>\n  <input type="password" name="password" required="required" placeholder="');
-    
-      __out.push(__sanitize(enUs.topBar.password));
-    
-      __out.push('" />\n</label>\n\n<div class="error-message"></div>\n\n<div class="action">\n  <a href="https://www.zooniverse.org/password/reset">');
-    
-      __out.push(__sanitize(enUs.topBar.forgotPassword));
+      __out.push(translate('forgotPassword'));
     
       __out.push('</a>\n  <button type="submit">');
     
-      __out.push(__sanitize(enUs.topBar.signIn));
+      __out.push(translate('signIn'));
     
       __out.push('</button>\n</div>\n');
     
@@ -2260,9 +2633,9 @@ template = function(__obj) {
   }
   (function() {
     (function() {
-      var enUs, zooniverseLogoSvg, _ref;
+      var translate, zooniverseLogoSvg, _ref;
     
-      enUs = (typeof zooniverse !== "undefined" && zooniverse !== null ? zooniverse.enUs : void 0) || require('../lib/en-us');
+      translate = (typeof zooniverse !== "undefined" && zooniverse !== null ? zooniverse.translate : void 0) || require('../lib/translate');
     
       __out.push('\n');
     
@@ -2274,35 +2647,19 @@ template = function(__obj) {
     
       __out.push('\n  ');
     
-      __out.push(enUs.topBar.signUpTitle);
+      __out.push(translate('signUpHeading'));
     
-      __out.push('\n</header>\n\n<label>\n  <input type="text" name="username" required="required" placeholder="');
+      __out.push('\n</header>\n\n<label>\n  <input type="text" name="username" required="required" data-zooniverse-translate="" data-zooniverse-translate-placeholder="username" />\n</label>\n\n<label>\n  <input type="password" name="password" required="required" data-zooniverse-translate="" data-zooniverse-translate-placeholder="password" />\n</label>\n\n<label>\n  <input type="email" name="email" required="required" data-zooniverse-translate="" data-zooniverse-translate-placeholder="email" />\n</label>\n\n<label>\n  <input type="text" name="real-name" data-zooniverse-translate="" data-zooniverse-translate-placeholder="realName" />\n  <div class="explanation">');
     
-      __out.push(__sanitize(enUs.topBar.username));
-    
-      __out.push('" />\n</label>\n\n<label>\n  <input type="password" name="password" required="required" placeholder="');
-    
-      __out.push(__sanitize(enUs.topBar.password));
-    
-      __out.push('" />\n</label>\n\n<label>\n  <input type="email" name="email" required="required" placeholder="');
-    
-      __out.push(__sanitize(enUs.topBar.email));
-    
-      __out.push('" />\n</label>\n\n<label>\n  <input type="text" name="real-name" placeholder="');
-    
-      __out.push(__sanitize(enUs.topBar.realName));
-    
-      __out.push('" />\n  <div class="explanation">');
-    
-      __out.push(enUs.topBar.whyRealName);
+      __out.push(translate('whyRealName'));
     
       __out.push('</div>\n</label>\n\n<label>\n  <span></span>\n  <input type="checkbox" required="required" />');
     
-      __out.push(enUs.topBar.privacyPolicy);
+      __out.push(translate('privacyPolicy'));
     
       __out.push('\n</label>\n\n<div class="error-message"></div>\n\n<div class="action">\n  <button type="submit">');
     
-      __out.push(__sanitize(enUs.topBar.signUp));
+      __out.push(translate('signUp'));
     
       __out.push('</button>\n</div>\n');
     
@@ -2356,7 +2713,6 @@ template = function(__obj) {
   }
   (function() {
     (function() {
-    
       __out.push('<div class="loader"></div>\n\n<div class="items"></div>\n\n<nav class="controls">\n  <span class="numbered"></span>\n</nav>\n');
     
     }).call(this);
@@ -2409,8 +2765,51 @@ template = function(__obj) {
   }
   (function() {
     (function() {
+      var translate, _ref;
     
-      __out.push('<form class="sign-in-form">\n  <div class="loader"></div>\n\n  <header>Sign in to see your profile</header>\n  <label><input type="text" name="username" placeholder="Username" required="required" /></label>\n  <label><input type="password" name="password" placeholder="Password" required="required" /></label>\n  <div class="error-message"></div>\n  <div class="action"><button type="submit">Sign in</button></div>\n  <p class="no-account">Don\'t have a Zooniverse profile? <button name="sign-up">Create one now!</button></p>\n</form>\n\n<nav>\n  <button name="turn-page" value="recents">Recents</button>\n  <button name="turn-page" value="favorites">Favorites</button>\n</nav>\n\n<div class="recents page"></div>\n<div class="recents-empty empty-message">No recents</div>\n\n<div class="favorites page"></div>\n<div class="favorites-empty empty-message">No favorites</div>\n');
+      translate = ((_ref = window.zooniverse) != null ? _ref.translate : void 0) || require('../lib/translate');
+    
+      __out.push('\n\n<form class="sign-in-form">\n  <div class="loader"></div>\n\n  <header>');
+    
+      __out.push(translate('signInForProfile'));
+    
+      __out.push('</header>\n  <label><input type="text" name="username" required="required" data-zooniverse-translate="" data-zooniverse-translate-placeholder="username" /></label>\n  <label><input type="password" name="password" required="required" data-zooniverse-translate="" data-zooniverse-translate-placeholder="password" /></label>\n  <div class="error-message"></div>\n  <div class="action"><button type="submit">');
+    
+      __out.push(translate('signIn'));
+    
+      __out.push('</button></div>\n  <p class="no-account">');
+    
+      __out.push(translate('noAccount'));
+    
+      __out.push(' <button name="sign-up">');
+    
+      __out.push(translate('signUp'));
+    
+      __out.push('</button></p>\n</form>\n\n<nav>\n  <button name="turn-page" value="recents">');
+    
+      __out.push(translate('recents'));
+    
+      __out.push('</button>\n  <button name="turn-page" value="favorites">');
+    
+      __out.push(translate('favorites'));
+    
+      __out.push('</button>\n</nav>\n\n<div class="recents page"></div>\n<div class="recents-empty empty-message">');
+    
+      __out.push(translate('recents'));
+    
+      __out.push(' (');
+    
+      __out.push(translate('none'));
+    
+      __out.push(')</div>\n\n<div class="favorites page"></div>\n<div class="favorites-empty empty-message">');
+    
+      __out.push(translate('favorites'));
+    
+      __out.push(' (');
+    
+      __out.push(translate('none'));
+    
+      __out.push(')</div>\n');
     
     }).call(this);
     
@@ -2554,46 +2953,50 @@ template = function(__obj) {
   }
   (function() {
     (function() {
-      var category, enUs, project, projects, zooniverseLogoSvg, _i, _j, _len, _len1, _ref, _ref1, _ref2, _ref3;
+      var category, project, projects, translate, zooniverseLogoSvg, _i, _j, _len, _len1, _ref, _ref1, _ref2, _ref3;
     
-      enUs = (typeof zooniverse !== "undefined" && zooniverse !== null ? zooniverse.enUs : void 0) || require('../lib/en-us');
+      translate = (typeof zooniverse !== "undefined" && zooniverse !== null ? zooniverse.translate : void 0) || require('../lib/translate');
     
       __out.push('\n');
     
       zooniverseLogoSvg = ((_ref = window.zooniverse) != null ? (_ref1 = _ref.views) != null ? _ref1.zooniverseLogoSvg : void 0 : void 0) || require('./zooniverse-logo-svg');
     
-      __out.push('\n\n<a href="https://www.zooniverse.org/" class="logo">\n  ');
+      __out.push('\n\n<a href="https://www.zooniverse.org/" class="zooniverse-logo-container">\n  ');
     
       __out.push(zooniverseLogoSvg());
     
-      __out.push('\n</a>\n\n<div class="content">\n  <div class="heading">');
+      __out.push('\n</a>\n\n<div class="zooniverse-footer-content">\n  <div class="zooniverse-footer-heading">');
     
-      __out.push(__sanitize(enUs.footer.heading));
+      __out.push(translate('footerHeading'));
     
       __out.push('</div>\n\n  ');
     
       if (this.categories != null) {
-        __out.push('\n    <div class="projects">\n      ');
+        __out.push('\n    <div class="zooniverse-footer-projects">\n      ');
         _ref2 = this.categories;
         for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
           _ref3 = _ref2[_i], category = _ref3.category, projects = _ref3.projects;
-          __out.push('\n        <div class="category">\n          <div class="category-title">');
+          __out.push('\n        <div class="zooniverse-footer-category">\n          <div class="zooniverse-footer-category-title">');
           __out.push(__sanitize(category));
           __out.push('</div>\n          ');
           for (_j = 0, _len1 = projects.length; _j < _len1; _j++) {
             project = projects[_j];
-            __out.push('\n            <div class="project">\n              <a href="');
+            __out.push('\n            <div class="zooniverse-footer-project">\n              <a href="');
             __out.push(__sanitize(project.url));
             __out.push('">');
             __out.push(__sanitize(project.name));
             __out.push('</a>\n            </div>\n          ');
           }
-          __out.push('\n          <div class="project"></div>\n        </div>\n      ');
+          __out.push('\n          <div class="zooniverse-footer-project"></div>\n        </div>\n      ');
         }
         __out.push('\n    </div>\n  ');
       }
     
-      __out.push('\n\n  <div class="general">\n    <!--div class="category"><a href="#">Zooniverse Daily</a></div-->\n    <div class="category"><a href="https://www.zooniverse.org/privacy">Privacy policy</a></div>\n  </div>\n</div>\n');
+      __out.push('\n\n  <div class="zooniverse-footer-general">\n    <!--div class="zooniverse-footer-category"><a href="#">Zooniverse Daily</a></div-->\n    <div class="zooniverse-footer-category"><a href="https://www.zooniverse.org/privacy">');
+    
+      __out.push(translate('privacyPolicy'));
+    
+      __out.push('</a></div>\n  </div>\n</div>\n');
     
     }).call(this);
     
@@ -2645,15 +3048,13 @@ template = function(__obj) {
   }
   (function() {
     (function() {
-      var enUs, id, name, _i, _len, _ref, _ref1, _ref2;
+      var id, name, _i, _len, _ref, _ref1;
     
-      enUs = ((_ref = window.zooniverse) != null ? _ref.enUs : void 0) || require('../lib/en-us');
+      __out.push('<div class="user-groups">\n  ');
     
-      __out.push('\n\n<div class="user-groups">\n  ');
-    
-      _ref1 = this.user_groups || [];
-      for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
-        _ref2 = _ref1[_i], id = _ref2.id, name = _ref2.name;
+      _ref = this.user_groups || [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        _ref1 = _ref[_i], id = _ref1.id, name = _ref1.name;
         __out.push('\n    <div class="user-group">\n      <button name="user-group" value="');
         __out.push(__sanitize(id));
         __out.push('" ');
@@ -2665,11 +3066,7 @@ template = function(__obj) {
         __out.push('</button>\n    </div>\n  ');
       }
     
-      __out.push('\n\n  <!--div class="no-group user-group">\n      <button name="user-group" value="" class="stop">');
-    
-      __out.push(enUs.groupsMenu.stop);
-    
-      __out.push('</button>\n  </div-->\n</div>\n');
+      __out.push('\n</div>\n');
     
     }).call(this);
     
@@ -2680,17 +3077,347 @@ template = function(__obj) {
 window.zooniverse.views['groupsMenu'] = template;
 if (typeof module !== 'undefined') module.exports = template;
 
+window.zooniverse = window.zooniverse || {};
+window.zooniverse.views = window.zooniverse.views || {};
+template = function(__obj) {
+  if (!__obj) __obj = {};
+  var __out = [], __capture = function(callback) {
+    var out = __out, result;
+    __out = [];
+    callback.call(this);
+    result = __out.join('');
+    __out = out;
+    return __safe(result);
+  }, __sanitize = function(value) {
+    if (value && value.ecoSafe) {
+      return value;
+    } else if (typeof value !== 'undefined' && value != null) {
+      return __escape(value);
+    } else {
+      return '';
+    }
+  }, __safe, __objSafe = __obj.safe, __escape = __obj.escape;
+  __safe = __obj.safe = function(value) {
+    if (value && value.ecoSafe) {
+      return value;
+    } else {
+      if (!(typeof value !== 'undefined' && value != null)) value = '';
+      var result = new String(value);
+      result.ecoSafe = true;
+      return result;
+    }
+  };
+  if (!__escape) {
+    __escape = __obj.escape = function(value) {
+      return ('' + value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    };
+  }
+  (function() {
+    (function() {
+      var LanguageManager, code, label, _ref, _ref1, _ref2;
+    
+      LanguageManager = window.zooniverse.LanguageManager || require('../lib/language-manager');
+    
+      __out.push('\n\n<div class="languages">\n  ');
+    
+      _ref1 = (_ref = LanguageManager.current) != null ? _ref.translations : void 0;
+      for (code in _ref1) {
+        label = _ref1[code].label;
+        __out.push('\n    <div class="language">\n      <button name="language" value="');
+        __out.push(__sanitize(code));
+        __out.push('" ');
+        if (code === ((_ref2 = LanguageManager.current) != null ? _ref2.code : void 0)) {
+          __out.push('class="active"');
+        }
+        __out.push('>');
+        __out.push(__sanitize(label));
+        __out.push('</button>\n    </div>\n  ');
+      }
+    
+      __out.push('\n</div>\n');
+    
+    }).call(this);
+    
+  }).call(__obj);
+  __obj.safe = __objSafe, __obj.escape = __escape;
+  return __out.join('');
+};
+window.zooniverse.views['languagesMenu'] = template;
+if (typeof module !== 'undefined') module.exports = template;
+
+window.zooniverse = window.zooniverse || {};
+window.zooniverse.views = window.zooniverse.views || {};
+template = function(__obj) {
+  if (!__obj) __obj = {};
+  var __out = [], __capture = function(callback) {
+    var out = __out, result;
+    __out = [];
+    callback.call(this);
+    result = __out.join('');
+    __out = out;
+    return __safe(result);
+  }, __sanitize = function(value) {
+    if (value && value.ecoSafe) {
+      return value;
+    } else if (typeof value !== 'undefined' && value != null) {
+      return __escape(value);
+    } else {
+      return '';
+    }
+  }, __safe, __objSafe = __obj.safe, __escape = __obj.escape;
+  __safe = __obj.safe = function(value) {
+    if (value && value.ecoSafe) {
+      return value;
+    } else {
+      if (!(typeof value !== 'undefined' && value != null)) value = '';
+      var result = new String(value);
+      result.ecoSafe = true;
+      return result;
+    }
+  };
+  if (!__escape) {
+    __escape = __obj.escape = function(value) {
+      return ('' + value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    };
+  }
+  (function() {
+    (function() {
+      var className;
+    
+      className = this.className || 'zooniverse-logo';
+    
+      __out.push('\n\n<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="');
+    
+      __out.push(__sanitize(className));
+    
+      __out.push('" width="1em" height="1em">\n  <g class="');
+    
+      __out.push(__sanitize(className));
+    
+      __out.push('" fill="currentColor" stroke="transparent" stroke-width="0" transform="translate(50, 50)">\n    <path d="M 0 -45 A 45 45 0 0 1 0 45 A 45 45 0 0 1 0 -45 Z M 0 -30 A 30 30 0 0 0 0 30 A 30 30 0 0 0 0 -30 Z" />\n    <path d="M 0 -12.5 A 12.5 12.5 0 0 1 0 12.5 A 12.5 12.5 0 0 1 0 -12.5 Z" />\n    <path d="M 0 -75 L 5 0 L 0 75 L -5 0 Z" transform="rotate(50)" />\n  </g>\n</svg>\n');
+    
+    }).call(this);
+    
+  }).call(__obj);
+  __obj.safe = __objSafe, __obj.escape = __escape;
+  return __out.join('');
+};
+window.zooniverse.views['zooniverseLogoSvg'] = template;
+if (typeof module !== 'undefined') module.exports = template;
+
+window.zooniverse = window.zooniverse || {};
+window.zooniverse.views = window.zooniverse.views || {};
+template = function(__obj) {
+  if (!__obj) __obj = {};
+  var __out = [], __capture = function(callback) {
+    var out = __out, result;
+    __out = [];
+    callback.call(this);
+    result = __out.join('');
+    __out = out;
+    return __safe(result);
+  }, __sanitize = function(value) {
+    if (value && value.ecoSafe) {
+      return value;
+    } else if (typeof value !== 'undefined' && value != null) {
+      return __escape(value);
+    } else {
+      return '';
+    }
+  }, __safe, __objSafe = __obj.safe, __escape = __obj.escape;
+  __safe = __obj.safe = function(value) {
+    if (value && value.ecoSafe) {
+      return value;
+    } else {
+      if (!(typeof value !== 'undefined' && value != null)) value = '';
+      var result = new String(value);
+      result.ecoSafe = true;
+      return result;
+    }
+  };
+  if (!__escape) {
+    __escape = __obj.escape = function(value) {
+      return ('' + value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    };
+  }
+  (function() {
+    (function() {
+      var className;
+    
+      className = this.className || 'zooniverse-group-icon';
+    
+      __out.push('\n\n<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 100" class="');
+    
+      __out.push(__sanitize(className));
+    
+      __out.push('" width="2em" height="1em">\n  ');
+    
+      if (document.getElementById('zooniverse-groups-icon-person') == null) {
+        __out.push('\n    <defs>\n      <path id="zooniverse-groups-icon-person" d="M 0 -50 A 25 35 0 0 1 20 10 A 67 67 0 0 1 50 45 L 0 50 L -50 45 A 67 67 0 0 1 -20 10 A 25 35 0 0 1 0 -50 Z" />\n    </defs>\n  ');
+      }
+    
+      __out.push('\n\n  <g class="');
+    
+      __out.push(__sanitize(className));
+    
+      __out.push('" fill="currentColor" stroke="transparent" stroke-width="0" transform="translate(100, 50)">\n    <use xlink:href="#zooniverse-groups-icon-person" transform="scale(0.67) translate(-80, 0)" opacity="0.75" />\n    <use xlink:href="#zooniverse-groups-icon-person" transform="scale(0.67) translate(80, 0)" opacity="0.75" />\n    <use xlink:href="#zooniverse-groups-icon-person" />\n  </g>\n</svg>\n');
+    
+    }).call(this);
+    
+  }).call(__obj);
+  __obj.safe = __objSafe, __obj.escape = __escape;
+  return __out.join('');
+};
+window.zooniverse.views['groupIconSvg'] = template;
+if (typeof module !== 'undefined') module.exports = template;
+
+window.zooniverse = window.zooniverse || {};
+window.zooniverse.views = window.zooniverse.views || {};
+template = function(__obj) {
+  if (!__obj) __obj = {};
+  var __out = [], __capture = function(callback) {
+    var out = __out, result;
+    __out = [];
+    callback.call(this);
+    result = __out.join('');
+    __out = out;
+    return __safe(result);
+  }, __sanitize = function(value) {
+    if (value && value.ecoSafe) {
+      return value;
+    } else if (typeof value !== 'undefined' && value != null) {
+      return __escape(value);
+    } else {
+      return '';
+    }
+  }, __safe, __objSafe = __obj.safe, __escape = __obj.escape;
+  __safe = __obj.safe = function(value) {
+    if (value && value.ecoSafe) {
+      return value;
+    } else {
+      if (!(typeof value !== 'undefined' && value != null)) value = '';
+      var result = new String(value);
+      result.ecoSafe = true;
+      return result;
+    }
+  };
+  if (!__escape) {
+    __escape = __obj.escape = function(value) {
+      return ('' + value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    };
+  }
+  (function() {
+    (function() {
+      var className;
+    
+      className = this.className || 'zooniverse-mail-icon';
+    
+      __out.push('\n\n<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 100" class="');
+    
+      __out.push(__sanitize(className));
+    
+      __out.push('" width="1.5em" height="1em">\n  <g class="');
+    
+      __out.push(__sanitize(className));
+    
+      __out.push('" fill="currentColor" stroke="transparent" stroke-width="0">\n    <path d="M 0 0 L 75 65 L 150 0 Z" />\n    <path d="M 0 0 L 75 75 L 150 0 L 150 100 L 0 100 Z" opacity="0.85" />\n  </g>\n</svg>\n');
+    
+    }).call(this);
+    
+  }).call(__obj);
+  __obj.safe = __objSafe, __obj.escape = __escape;
+  return __out.join('');
+};
+window.zooniverse.views['mailIconSvg'] = template;
+if (typeof module !== 'undefined') module.exports = template;
+
+window.zooniverse = window.zooniverse || {};
+window.zooniverse.views = window.zooniverse.views || {};
+template = function(__obj) {
+  if (!__obj) __obj = {};
+  var __out = [], __capture = function(callback) {
+    var out = __out, result;
+    __out = [];
+    callback.call(this);
+    result = __out.join('');
+    __out = out;
+    return __safe(result);
+  }, __sanitize = function(value) {
+    if (value && value.ecoSafe) {
+      return value;
+    } else if (typeof value !== 'undefined' && value != null) {
+      return __escape(value);
+    } else {
+      return '';
+    }
+  }, __safe, __objSafe = __obj.safe, __escape = __obj.escape;
+  __safe = __obj.safe = function(value) {
+    if (value && value.ecoSafe) {
+      return value;
+    } else {
+      if (!(typeof value !== 'undefined' && value != null)) value = '';
+      var result = new String(value);
+      result.ecoSafe = true;
+      return result;
+    }
+  };
+  if (!__escape) {
+    __escape = __obj.escape = function(value) {
+      return ('' + value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    };
+  }
+  (function() {
+    (function() {
+      var className;
+    
+      className = this.className || 'zooniverse-language-icon';
+    
+      __out.push('\n\n<svg viewBox="0 0 100 100" class="');
+    
+      __out.push(__sanitize(className));
+    
+      __out.push('" width="1.25em" height="1.25em">\n  <!--TODO: This icon is still not so great.-->\n  <g transform="translate(50, 50)" fill="transparent" stroke="currentColor" stroke-width="8">\n    <path d="M -43 0 H 43 M 0 -43 V 43"></path>\n    <path d="M 0 -45 Q -45 0 0 45 M 0 -45 Q 45 0 0 45"></path>\n    <path d="M -40 -25 Q 0 -15 40 -25 M -40 25 Q 0 15 40 25"></path>\n    <circle r="45"></circle>\n  </g>\n</svg>\n');
+    
+    }).call(this);
+    
+  }).call(__obj);
+  __obj.safe = __objSafe, __obj.escape = __escape;
+  return __out.join('');
+};
+window.zooniverse.views['languageIconSvg'] = template;
+if (typeof module !== 'undefined') module.exports = template;
+
 (function() {
-  var $, BaseController, EventEmitter, nextId, _base, _ref, _ref1,
+  var $, BaseController, EventEmitter, nextId, _base,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     __slice = [].slice;
 
-  if ((_ref = window.zooniverse) == null) {
+  if (window.zooniverse == null) {
     window.zooniverse = {};
   }
 
-  if ((_ref1 = (_base = window.zooniverse).controllers) == null) {
+  if ((_base = window.zooniverse).controllers == null) {
     _base.controllers = {};
   }
 
@@ -2701,7 +3428,6 @@ if (typeof module !== 'undefined') module.exports = template;
   nextId = 0;
 
   BaseController = (function(_super) {
-
     __extends(BaseController, _super);
 
     BaseController.prototype.el = null;
@@ -2719,7 +3445,7 @@ if (typeof module !== 'undefined') module.exports = template;
     BaseController.prototype.elements = null;
 
     function BaseController(params) {
-      var property, value, _ref2;
+      var property, value;
       if (params == null) {
         params = {};
       }
@@ -2733,7 +3459,7 @@ if (typeof module !== 'undefined') module.exports = template;
       }
       this.id || (this.id = "controller_" + nextId);
       nextId += 1;
-      if ((_ref2 = this.el) == null) {
+      if (this.el == null) {
         this.el = document.createElement(this.tagName);
       }
       this.el = $(this.el);
@@ -2757,12 +3483,12 @@ if (typeof module !== 'undefined') module.exports = template;
     };
 
     BaseController.prototype.nameElements = function() {
-      var name, selector, _ref2, _results;
+      var name, selector, _ref, _results;
       if (this.elements != null) {
-        _ref2 = this.elements;
+        _ref = this.elements;
         _results = [];
-        for (selector in _ref2) {
-          name = _ref2[selector];
+        for (selector in _ref) {
+          name = _ref[selector];
           _results.push(this[name] = this.el.find(selector));
         }
         return _results;
@@ -2770,17 +3496,17 @@ if (typeof module !== 'undefined') module.exports = template;
     };
 
     BaseController.prototype.delegateEvents = function() {
-      var eventString, method, _ref2, _results,
+      var eventString, method, _ref, _results,
         _this = this;
       this.el.off("." + this.id);
       if (this.events != null) {
-        _ref2 = this.events;
+        _ref = this.events;
         _results = [];
-        for (eventString in _ref2) {
-          method = _ref2[eventString];
+        for (eventString in _ref) {
+          method = _ref[eventString];
           _results.push((function(eventString, method) {
-            var autoPreventDefault, eventName, selector, _ref3;
-            _ref3 = eventString.split(/\s+/), eventName = _ref3[0], selector = 2 <= _ref3.length ? __slice.call(_ref3, 1) : [];
+            var autoPreventDefault, eventName, selector, _ref1;
+            _ref1 = eventString.split(/\s+/), eventName = _ref1[0], selector = 2 <= _ref1.length ? __slice.call(_ref1, 1) : [];
             selector = selector.join(' ');
             if (eventName.slice(-1) === '*') {
               eventName = eventName.slice(0, -1);
@@ -2802,11 +3528,11 @@ if (typeof module !== 'undefined') module.exports = template;
     };
 
     BaseController.prototype.destroy = function() {
-      var propertyName, selector, _ref2;
+      var propertyName, selector, _ref;
       if (this.elements != null) {
-        _ref2 = this.elements;
-        for (selector in _ref2) {
-          propertyName = _ref2[selector];
+        _ref = this.elements;
+        for (selector in _ref) {
+          propertyName = _ref[selector];
           this[propertyName] = null;
         }
       }
@@ -2829,19 +3555,19 @@ if (typeof module !== 'undefined') module.exports = template;
 }).call(this);
 
 (function() {
-  var BaseController, Dialog, template, _base, _base1, _ref, _ref1, _ref2,
+  var BaseController, Dialog, template, _base, _base1,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  if ((_ref = window.zooniverse) == null) {
+  if (window.zooniverse == null) {
     window.zooniverse = {};
   }
 
-  if ((_ref1 = (_base = window.zooniverse).controllers) == null) {
+  if ((_base = window.zooniverse).controllers == null) {
     _base.controllers = {};
   }
 
-  if ((_ref2 = (_base1 = window.zooniverse).views) == null) {
+  if ((_base1 = window.zooniverse).views == null) {
     _base1.views = {};
   }
 
@@ -2850,7 +3576,6 @@ if (typeof module !== 'undefined') module.exports = template;
   template = zooniverse.views.dialog || require('../views/dialog');
 
   Dialog = (function(_super) {
-
     __extends(Dialog, _super);
 
     Dialog.prototype.warning = false;
@@ -2929,23 +3654,23 @@ if (typeof module !== 'undefined') module.exports = template;
 }).call(this);
 
 (function() {
-  var Api, BaseController, LoginForm, User, enUs, template, _base, _base1, _base2, _ref, _ref1, _ref2, _ref3,
+  var Api, BaseController, LoginForm, User, template, translate, _base, _base1, _base2,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  if ((_ref = window.zooniverse) == null) {
+  if (window.zooniverse == null) {
     window.zooniverse = {};
   }
 
-  if ((_ref1 = (_base = window.zooniverse).controllers) == null) {
+  if ((_base = window.zooniverse).controllers == null) {
     _base.controllers = {};
   }
 
-  if ((_ref2 = (_base1 = window.zooniverse).views) == null) {
+  if ((_base1 = window.zooniverse).views == null) {
     _base1.views = {};
   }
 
-  if ((_ref3 = (_base2 = window.zooniverse).models) == null) {
+  if ((_base2 = window.zooniverse).models == null) {
     _base2.models = {};
   }
 
@@ -2957,10 +3682,9 @@ if (typeof module !== 'undefined') module.exports = template;
 
   User = zooniverse.models.User || require('../models/user');
 
-  enUs = zooniverse.enUs || require('../lib/en-us');
+  translate = zooniverse.translate || require('../lib/translate');
 
   LoginForm = (function(_super) {
-
     __extends(LoginForm, _super);
 
     LoginForm.prototype.tagName = 'form';
@@ -3010,7 +3734,7 @@ if (typeof module !== 'undefined') module.exports = template;
         }
       });
       login.fail(function() {
-        return _this.showError(enUs.user.signInFailed);
+        return _this.showError(translate('signInFailed'));
       });
       return login.always(function() {
         _this.el.removeClass('loading');
@@ -3043,7 +3767,7 @@ if (typeof module !== 'undefined') module.exports = template;
         disabled: User.current != null
       });
       return this.signOutButton.attr({
-        disabled: !(User.current != null)
+        disabled: User.current == null
       });
     };
 
@@ -3064,13 +3788,13 @@ if (typeof module !== 'undefined') module.exports = template;
 }).call(this);
 
 (function() {
-  var Dialog, LoginForm, User, loginDialog, template, _base, _ref, _ref1;
+  var Dialog, LoginForm, User, loginDialog, template, _base;
 
-  if ((_ref = window.zooniverse) == null) {
+  if (window.zooniverse == null) {
     window.zooniverse = {};
   }
 
-  if ((_ref1 = (_base = window.zooniverse).controllers) == null) {
+  if ((_base = window.zooniverse).controllers == null) {
     _base.controllers = {};
   }
 
@@ -3103,19 +3827,19 @@ if (typeof module !== 'undefined') module.exports = template;
 }).call(this);
 
 (function() {
-  var BaseController, SignupForm, User, enUs, _base, _base1, _ref, _ref1, _ref2,
+  var BaseController, SignupForm, User, translate, _base, _base1, _ref,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  if ((_ref = window.zooniverse) == null) {
+  if (window.zooniverse == null) {
     window.zooniverse = {};
   }
 
-  if ((_ref1 = (_base = window.zooniverse).controllers) == null) {
+  if ((_base = window.zooniverse).controllers == null) {
     _base.controllers = {};
   }
 
-  if ((_ref2 = (_base1 = window.zooniverse).models) == null) {
+  if ((_base1 = window.zooniverse).models == null) {
     _base1.models = {};
   }
 
@@ -3123,14 +3847,14 @@ if (typeof module !== 'undefined') module.exports = template;
 
   User = zooniverse.models.User || require('../models/user');
 
-  enUs = zooniverse.enUs || require('../lib/en-us');
+  translate = zooniverse.translate || require('../lib/translate');
 
   SignupForm = (function(_super) {
-
     __extends(SignupForm, _super);
 
     function SignupForm() {
-      return SignupForm.__super__.constructor.apply(this, arguments);
+      _ref = SignupForm.__super__.constructor.apply(this, arguments);
+      return _ref;
     }
 
     SignupForm.prototype.tagName = 'form';
@@ -3171,7 +3895,7 @@ if (typeof module !== 'undefined') module.exports = template;
         }
       });
       signup.fail(function() {
-        return _this.showError(enUs.user.signInFailed);
+        return _this.showError(translate('signInFailed'));
       });
       return signup.always(function() {
         _this.el.removeClass('loading');
@@ -3198,21 +3922,21 @@ if (typeof module !== 'undefined') module.exports = template;
 }).call(this);
 
 (function() {
-  var Dialog, SignupForm, User, signupDialog, template, _base, _base1, _base2, _ref, _ref1, _ref2, _ref3;
+  var Dialog, SignupForm, User, signupDialog, template, _base, _base1, _base2;
 
-  if ((_ref = window.zooniverse) == null) {
+  if (window.zooniverse == null) {
     window.zooniverse = {};
   }
 
-  if ((_ref1 = (_base = window.zooniverse).controllers) == null) {
+  if ((_base = window.zooniverse).controllers == null) {
     _base.controllers = {};
   }
 
-  if ((_ref2 = (_base1 = window.zooniverse).views) == null) {
+  if ((_base1 = window.zooniverse).views == null) {
     _base1.views = {};
   }
 
-  if ((_ref3 = (_base2 = window.zooniverse).models) == null) {
+  if ((_base2 = window.zooniverse).models == null) {
     _base2.models = {};
   }
 
@@ -3245,7 +3969,7 @@ if (typeof module !== 'undefined') module.exports = template;
 }).call(this);
 
 (function() {
-  var Dropdown, offset, toggleClass, _base, _ref, _ref1, _ref2, _ref3,
+  var Dropdown, offset, toggleClass, _base, _ref, _ref1,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
@@ -3264,13 +3988,18 @@ if (typeof module !== 'undefined') module.exports = template;
 
     Dropdown.elements = [];
 
-    Dropdown.closeAll = function() {
-      var instance, _i, _len, _ref2, _results;
+    Dropdown.closeAll = function(_arg) {
+      var except, instance, _i, _len, _ref2, _results;
+      except = (_arg != null ? _arg : {}).except;
       _ref2 = this.instances;
       _results = [];
       for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
         instance = _ref2[_i];
-        _results.push(instance.close());
+        if (instance !== except) {
+          _results.push(instance.close());
+        } else {
+          _results.push(void 0);
+        }
       }
       return _results;
     };
@@ -3314,20 +4043,18 @@ if (typeof module !== 'undefined') module.exports = template;
     Dropdown.prototype.animationDelay = 250;
 
     function Dropdown(params) {
-      var property, value, _ref2, _ref3;
+      var property, value;
       if (params == null) {
         params = {};
       }
       this.onResize = __bind(this.onResize, this);
-
       this.onButtonClick = __bind(this.onButtonClick, this);
-
       window.dropdown = this;
       for (property in params) {
         value = params[property];
         this[property] = value;
       }
-      if ((_ref2 = this.button) == null) {
+      if (this.button == null) {
         this.button = document.createElement(this.buttonTag);
       }
       toggleClass(this.button, this.constructor.buttonClass, true);
@@ -3335,7 +4062,7 @@ if (typeof module !== 'undefined') module.exports = template;
         toggleClass(this.button, this.className, true);
       }
       this.button.addEventListener('click', this.onButtonClick, false);
-      if ((_ref3 = this.menu) == null) {
+      if (this.menu == null) {
         this.menu = document.createElement(this.menuTag);
       }
       toggleClass(this.menu, this.constructor.menuClass, true);
@@ -3365,6 +4092,9 @@ if (typeof module !== 'undefined') module.exports = template;
 
     Dropdown.prototype.open = function() {
       var _this = this;
+      this.constructor.closeAll({
+        except: this
+      });
       toggleClass(this.button, this.openClass, true);
       this.menu.style.display = '';
       this.positionMenu();
@@ -3413,11 +4143,11 @@ if (typeof module !== 'undefined') module.exports = template;
 
   }).call(this);
 
-  if ((_ref2 = window.zooniverse) == null) {
+  if (window.zooniverse == null) {
     window.zooniverse = {};
   }
 
-  if ((_ref3 = (_base = window.zooniverse).controllers) == null) {
+  if ((_base = window.zooniverse).controllers == null) {
     _base.controllers = {};
   }
 
@@ -3430,7 +4160,82 @@ if (typeof module !== 'undefined') module.exports = template;
 }).call(this);
 
 (function() {
-  var $, Controller, Dropdown, GroupsMenu, User, template, _base, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9,
+  var Controller, Dropdown, LanguageManager, LanguagesMenu, template, _base, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6,
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+  Controller = ((_ref = window.zooniverse) != null ? (_ref1 = _ref.controllers) != null ? _ref1.BaseController : void 0 : void 0) || require('./base-controller');
+
+  Dropdown = ((_ref2 = window.zooniverse) != null ? (_ref3 = _ref2.controllers) != null ? _ref3.Dropdown : void 0 : void 0) || require('./dropdown');
+
+  LanguageManager = ((_ref4 = window.zooniverse) != null ? _ref4.LanguageManager : void 0) || require('../lib/language-manager');
+
+  template = ((_ref5 = window.zooniverse) != null ? (_ref6 = _ref5.views) != null ? _ref6.languagesMenu : void 0 : void 0) || require('../views/languages-menu');
+
+  LanguagesMenu = (function(_super) {
+    __extends(LanguagesMenu, _super);
+
+    LanguagesMenu.prototype.className = 'zooniverse-languages-menu';
+
+    LanguagesMenu.prototype.template = template;
+
+    LanguagesMenu.prototype.events = {
+      'click button[name="language"]': 'onClickLanguageButton'
+    };
+
+    function LanguagesMenu() {
+      this.onClickLanguageButton = __bind(this.onClickLanguageButton, this);
+      var _ref7,
+        _this = this;
+      LanguagesMenu.__super__.constructor.apply(this, arguments);
+      if ((_ref7 = LanguageManager.current) != null) {
+        _ref7.on('change-language', function(e, code) {
+          return _this.setLanguageButton(code);
+        });
+      }
+    }
+
+    LanguagesMenu.prototype.onClickLanguageButton = function(e) {
+      var _ref7;
+      if ((_ref7 = LanguageManager.current) != null) {
+        _ref7.setLanguage(e.currentTarget.value);
+      }
+      return Dropdown.closeAll();
+    };
+
+    LanguagesMenu.prototype.setLanguageButton = function(code) {
+      var buttons, target;
+      target = this.el.find('button[value="' + code + '"]');
+      if (target.length !== 0) {
+        buttons = this.el.find('button[name="language"]');
+        buttons.removeClass('active');
+        return target.addClass('active');
+      }
+    };
+
+    return LanguagesMenu;
+
+  })(Controller);
+
+  if (window.zooniverse == null) {
+    window.zooniverse = {};
+  }
+
+  if ((_base = window.zooniverse).controllers == null) {
+    _base.controllers = {};
+  }
+
+  window.zooniverse.controllers.LanguagesMenu = LanguagesMenu;
+
+  if (typeof module !== "undefined" && module !== null) {
+    module.exports = LanguagesMenu;
+  }
+
+}).call(this);
+
+(function() {
+  var $, Controller, Dropdown, GroupsMenu, User, template, _base, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -3446,7 +4251,6 @@ if (typeof module !== 'undefined') module.exports = template;
   Dropdown = ((_ref6 = window.zooniverse) != null ? (_ref7 = _ref6.controllers) != null ? _ref7.Dropdown : void 0 : void 0) || require('./dropdown');
 
   GroupsMenu = (function(_super) {
-
     __extends(GroupsMenu, _super);
 
     GroupsMenu.prototype.className = 'zooniverse-groups-menu';
@@ -3457,7 +4261,6 @@ if (typeof module !== 'undefined') module.exports = template;
 
     function GroupsMenu() {
       this.onUserChangeGroup = __bind(this.onUserChangeGroup, this);
-
       this.onUserChange = __bind(this.onUserChange, this);
       GroupsMenu.__super__.constructor.apply(this, arguments);
       User.on('change', this.onUserChange);
@@ -3495,11 +4298,11 @@ if (typeof module !== 'undefined') module.exports = template;
 
   })(Controller);
 
-  if ((_ref8 = window.zooniverse) == null) {
+  if (window.zooniverse == null) {
     window.zooniverse = {};
   }
 
-  if ((_ref9 = (_base = window.zooniverse).controllers) == null) {
+  if ((_base = window.zooniverse).controllers == null) {
     _base.controllers = {};
   }
 
@@ -3512,30 +4315,32 @@ if (typeof module !== 'undefined') module.exports = template;
 }).call(this);
 
 (function() {
-  var Api, BaseController, Dropdown, GroupsMenu, TopBar, User, enUs, loginDialog, signupDialog, template, _base, _base1, _base2, _ref, _ref1, _ref2, _ref3,
+  var Api, BaseController, Dropdown, GroupsMenu, LanguageManager, LanguagesMenu, TopBar, User, loginDialog, signupDialog, template, _base, _base1, _base2, _base3,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  if ((_ref = window.zooniverse) == null) {
+  if (window.zooniverse == null) {
     window.zooniverse = {};
   }
 
-  if ((_ref1 = (_base = window.zooniverse).controllers) == null) {
+  if ((_base = window.zooniverse).controllers == null) {
     _base.controllers = {};
   }
 
-  if ((_ref2 = (_base1 = window.zooniverse).views) == null) {
+  if ((_base1 = window.zooniverse).views == null) {
     _base1.views = {};
   }
 
-  if ((_ref3 = (_base2 = window.zooniverse).models) == null) {
-    _base2.models = {};
+  if ((_base2 = window.zooniverse).lib == null) {
+    _base2.lib = {};
+  }
+
+  if ((_base3 = window.zooniverse).models == null) {
+    _base3.models = {};
   }
 
   BaseController = zooniverse.controllers.BaseController || require('./base-controller');
-
-  enUs = zooniverse.enUs || require('../lib/en-us');
 
   loginDialog = zooniverse.controllers.loginDialog || require('./login-dialog');
 
@@ -3547,19 +4352,20 @@ if (typeof module !== 'undefined') module.exports = template;
 
   GroupsMenu = zooniverse.controllers.GroupsMenu || require('./groups-menu');
 
+  LanguageManager = zooniverse.LanguageManager || require('../lib/language-manager');
+
+  LanguagesMenu = zooniverse.controllers.LanguagesMenu || require('./languages-menu');
+
   Api = zooniverse.Api || require('../lib/api');
 
   User = zooniverse.models.User || require('../models/user');
 
   TopBar = (function(_super) {
-
     __extends(TopBar, _super);
 
     TopBar.prototype.className = 'zooniverse-top-bar';
 
     TopBar.prototype.template = template;
-
-    TopBar.prototype.heading = enUs.topBar.heading;
 
     TopBar.prototype.messageCheckTimeout = 2 * 60 * 1000;
 
@@ -3572,6 +4378,7 @@ if (typeof module !== 'undefined') module.exports = template;
     TopBar.prototype.elements = {
       '.current-user-name': 'currentUserName',
       'button[name="groups"]': 'groupsMenuButton',
+      'button[name="languages"]': 'languagesMenuButton',
       '.message-count': 'messageCount',
       '.avatar img': 'avatarImage',
       '.group': 'currentGroup'
@@ -3579,9 +4386,7 @@ if (typeof module !== 'undefined') module.exports = template;
 
     function TopBar() {
       this.onUserChangeGroup = __bind(this.onUserChangeGroup, this);
-
       this.getMessages = __bind(this.getMessages, this);
-
       this.onUserChange = __bind(this.onUserChange, this);
       TopBar.__super__.constructor.apply(this, arguments);
       this.groupsMenu = new GroupsMenu;
@@ -3592,6 +4397,17 @@ if (typeof module !== 'undefined') module.exports = template;
         menuClass: 'from-top-bar',
         menuPinning: [1, 0]
       });
+      this.el.toggleClass('has-languages', LanguageManager.current != null);
+      if (LanguageManager.current != null) {
+        this.languagesMenu = new LanguagesMenu();
+        this.languagesDropdown = new Dropdown({
+          button: this.languagesMenuButton.get(0),
+          buttonPinning: [1, 1],
+          menu: this.languagesMenu.el.get(0),
+          menuClass: 'from-top-bar',
+          menuPinning: [1, 0]
+        });
+      }
       User.on('change', this.onUserChange);
       User.on('change-group', this.onUserChangeGroup);
     }
@@ -3609,9 +4425,9 @@ if (typeof module !== 'undefined') module.exports = template;
     };
 
     TopBar.prototype.onUserChange = function(e, user) {
-      var _ref4;
+      var _ref;
       this.el.toggleClass('signed-in', user != null);
-      this.el.toggleClass('has-groups', (user != null ? (_ref4 = user.user_groups) != null ? _ref4.length : void 0 : void 0) > 0);
+      this.el.toggleClass('has-groups', (user != null ? (_ref = user.user_groups) != null ? _ref.length : void 0 : void 0) > 0);
       this.onUserChangeGroup(e, user != null, user != null ? user.user_group_id : void 0);
       this.getMessages();
       this.currentUserName.html((user != null ? user.name : void 0) || '');
@@ -3651,20 +4467,20 @@ if (typeof module !== 'undefined') module.exports = template;
 }).call(this);
 
 (function() {
-  var $, BaseController, Paginator, User, template, _base, _base1, _ref, _ref1, _ref2,
+  var $, BaseController, Paginator, User, template, _base, _base1,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  if ((_ref = window.zooniverse) == null) {
+  if (window.zooniverse == null) {
     window.zooniverse = {};
   }
 
-  if ((_ref1 = (_base = window.zooniverse).controllers) == null) {
+  if ((_base = window.zooniverse).controllers == null) {
     _base.controllers = {};
   }
 
-  if ((_ref2 = (_base1 = window.zooniverse).views) == null) {
+  if ((_base1 = window.zooniverse).views == null) {
     _base1.views = {};
   }
 
@@ -3677,7 +4493,6 @@ if (typeof module !== 'undefined') module.exports = template;
   $ = window.jQuery;
 
   Paginator = (function(_super) {
-
     __extends(Paginator, _super);
 
     Paginator.prototype.type = null;
@@ -3703,13 +4518,9 @@ if (typeof module !== 'undefined') module.exports = template;
 
     function Paginator() {
       this.onItemDestroyed = __bind(this.onItemDestroyed, this);
-
       this.onItemFromClassification = __bind(this.onItemFromClassification, this);
-
       this.onFetchFail = __bind(this.onFetchFail, this);
-
       this.onFetch = __bind(this.onFetch, this);
-
       this.onUserChange = __bind(this.onUserChange, this);
       Paginator.__super__.constructor.apply(this, arguments);
       User.on('change', this.onUserChange);
@@ -3718,8 +4529,8 @@ if (typeof module !== 'undefined') module.exports = template;
     }
 
     Paginator.prototype.onUserChange = function(e, user) {
-      var _ref3;
-      this.reset((user != null ? (_ref3 = user.project) != null ? _ref3.classification_count : void 0 : void 0) || 0);
+      var _ref;
+      this.reset((user != null ? (_ref = user.project) != null ? _ref.classification_count : void 0 : void 0) || 0);
       this.onFetch([]);
       if (user != null) {
         return this.goTo(1);
@@ -3727,11 +4538,11 @@ if (typeof module !== 'undefined') module.exports = template;
     };
 
     Paginator.prototype.reset = function(itemCount) {
-      var button, i, _i, _ref3, _results;
+      var button, i, _i, _ref, _results;
       this.pages = Math.ceil(itemCount / this.perPage);
       this.numbersContainer.empty();
       _results = [];
-      for (i = _i = 0, _ref3 = this.pages; 0 <= _ref3 ? _i < _ref3 : _i > _ref3; i = 0 <= _ref3 ? ++_i : --_i) {
+      for (i = _i = 0, _ref = this.pages; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
         button = $("<button name='page' value='" + (i + 1) + "'>" + (i + 1) + "</button>");
         _results.push(this.numbersContainer.append(button));
       }
@@ -3777,10 +4588,10 @@ if (typeof module !== 'undefined') module.exports = template;
     };
 
     Paginator.prototype.getItemEl = function(item) {
-      var inner, itemEl, _ref3, _ref4;
+      var inner, itemEl, _ref, _ref1;
       itemEl = this.itemsContainer.find("[data-item-id='" + item.id + "']");
       if (itemEl.length === 0) {
-        inner = this.itemTemplate != null ? this.itemTemplate(item) : "<div class='item'><a href=\"" + (((_ref3 = item.subjects[0]) != null ? _ref3.talkHref() : void 0) || '#/SUBJECT-ERROR') + "\">" + (((_ref4 = item.subjects[0]) != null ? _ref4.zooniverse_id : void 0) || 'Error in subject') + "</a></div>";
+        inner = this.itemTemplate != null ? this.itemTemplate(item) : "<div class='item'><a href=\"" + (((_ref = item.subjects[0]) != null ? _ref.talkHref() : void 0) || '#/SUBJECT-ERROR') + "\">" + (((_ref1 = item.subjects[0]) != null ? _ref1.zooniverse_id : void 0) || 'Error in subject') + "</a></div>";
         itemEl = $($.trim(inner));
         itemEl.attr({
           'data-item-id': item.id
@@ -3824,19 +4635,19 @@ if (typeof module !== 'undefined') module.exports = template;
 }).call(this);
 
 (function() {
-  var $, BaseController, Favorite, LoginForm, Paginator, Profile, Recent, User, itemTemplate, template, _base, _base1, _ref, _ref1, _ref2,
+  var $, BaseController, Favorite, LoginForm, Paginator, Profile, Recent, User, itemTemplate, template, _base, _base1,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  if ((_ref = window.zooniverse) == null) {
+  if (window.zooniverse == null) {
     window.zooniverse = {};
   }
 
-  if ((_ref1 = (_base = window.zooniverse).controllers) == null) {
+  if ((_base = window.zooniverse).controllers == null) {
     _base.controllers = {};
   }
 
-  if ((_ref2 = (_base1 = window.zooniverse).views) == null) {
+  if ((_base1 = window.zooniverse).views == null) {
     _base1.views = {};
   }
 
@@ -3859,7 +4670,6 @@ if (typeof module !== 'undefined') module.exports = template;
   $ = window.jQuery;
 
   Profile = (function(_super) {
-
     __extends(Profile, _super);
 
     Profile.prototype.className = 'zooniverse-profile';
@@ -3948,18 +4758,18 @@ if (typeof module !== 'undefined') module.exports = template;
 }).call(this);
 
 (function() {
-  var $, $window, Footer, template, _base, _base1, _ref, _ref1, _ref2,
+  var $, $window, Footer, template, _base, _base1,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
-  if ((_ref = window.zooniverse) == null) {
+  if (window.zooniverse == null) {
     window.zooniverse = {};
   }
 
-  if ((_ref1 = (_base = window.zooniverse).controllers) == null) {
+  if ((_base = window.zooniverse).controllers == null) {
     _base.controllers = {};
   }
 
-  if ((_ref2 = (_base1 = window.zooniverse).views) == null) {
+  if ((_base1 = window.zooniverse).views == null) {
     _base1.views = {};
   }
 
@@ -3974,7 +4784,6 @@ if (typeof module !== 'undefined') module.exports = template;
   };
 
   Footer = (function() {
-
     Footer.prototype.el = null;
 
     Footer.prototype.projectScript = 'http://zooniverse-demo.s3-website-us-east-1.amazonaws.com/projects.js';
@@ -4011,13 +4820,13 @@ if (typeof module !== 'undefined') module.exports = template;
 }).call(this);
 
 (function() {
-  var $, activeHashLinks, anchors, className, init, root, updateClasses, _base, _ref, _ref1;
+  var $, activeHashLinks, anchors, className, init, root, updateClasses, _base;
 
-  if ((_ref = window.zooniverse) == null) {
+  if (window.zooniverse == null) {
     window.zooniverse = {};
   }
 
-  if ((_ref1 = (_base = window.zooniverse).util) == null) {
+  if ((_base = window.zooniverse).util == null) {
     _base.util = {};
   }
 
@@ -4036,14 +4845,14 @@ if (typeof module !== 'undefined') module.exports = template;
   };
 
   init = function(newClassName, newRoot) {
-    var _ref2;
+    var _ref;
     if (newClassName == null) {
       newClassName = className;
     }
     if (newRoot == null) {
       newRoot = root;
     }
-    _ref2 = [newClassName, newRoot], className = _ref2[0], root = _ref2[1];
+    _ref = [newClassName, newRoot], className = _ref[0], root = _ref[1];
     updateClasses();
     return $(window).on('hashchange', updateClasses);
   };
