@@ -21,6 +21,9 @@ class SectionView extends Backbone.View
   delegateKeyEvents: ->
     $(document).on("keypress", @_keydispatch(@keyboardEvents))
 
+  undelegateKeyEvents: ->
+    $(document).off("keypress")
+
   hide: ->
     @undelegateKeyEvents() if @keyboardEvents?
     @$el.removeClass('active')
