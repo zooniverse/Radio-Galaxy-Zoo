@@ -47,10 +47,13 @@ module.exports =
     classify4: new Step
       number: 6
       header: "Pairing the Data"
-      details: "Now let's mark the other Galaxy. First select 'Mark Another Source'"
+      details: "Now let's mark the other Galaxy. First select 'Mark Another'."
       attachment: "left 0.65 .next-radio right center"
       className: "arrow-left"
-      next: {'click .next-radio' : "classify5"}
+      next: {
+        'click .next-radio' : "classify5"
+        'click #1.contour-group' : "classify5"
+      }
 
     classify5: new Step
       number: 7
