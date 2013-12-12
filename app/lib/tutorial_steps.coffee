@@ -8,14 +8,14 @@ module.exports =
     welcome: new Step
       number: 1
       header: "Welcome to Radio Galaxy Zoo!"
-      details: "We’re going to show you two images of the same part of the sky, one from a radio telescope and one from an infrared telescope. \n \n Most contain galaxies that will show in the infrared (IR), but only some galaxies appear in the radio." 
+      details: "We’re going to show you two images of the same part of the sky, one from a radio telescope and one from an infrared telescope. \n \n In most images there are many infrared galaxies, but only some of these appear in the radio."
       attachment: "center center .viewport center center"
       next: "wavelengths"
 
     wavelengths: new Step
       number: 2
       header: "Different Wavelengths"
-      details: "Here are two galaxies seen at radio wavelengths - we use contours to show their radio brightness. To see how the galaxies appear in the infrared, move the slider over to the IR position. The goal is to match up the radio contours to their galaxy images in the IR."
+      details: "Here are two galaxies seen at radio wavelengths - one small one lower down and one large, double-lobed object in the centre. We use contours to show their radio brightness. \n \n To see how the galaxies appear in the infrared, move the slider over to the IR position. The goal is to match up the radio contours to their galaxy images in the IR."
       attachment: "center -0.05 .image-opacity center bottom"
       className: "arrow-top"
       next: "classify1"
@@ -82,7 +82,7 @@ module.exports =
     que: new Step
       number: 11
       header: "What's Going on?"
-      details: "The fainter radio object shows emission from newly-formed stars in the galaxy. The large, bright radio object shows us two jets emitted by a supermassive black hole at center of that galaxy -- but the central galaxy can only be seen in the infrared. \n \n This is why we need your help to match these objects."
+      details: "The large, bright radio object shows us where two jets were emitted by a supermassive black hole at center of that galaxy. The fainter radio object shows emission from newly-formed stars in the galaxy." 
       attachment: "center top .viewport center bottom"
       next: 'guide'
 
