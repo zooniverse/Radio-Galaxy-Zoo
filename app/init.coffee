@@ -1,6 +1,7 @@
 Router = require('lib/router')
 
 module.exports = ->
+  console.log('here')
   host = if window.location.port is "9296" then "http://0.0.0.0:3000" else "https://dev.zooniverse.org"
   if window.location.port is "" and (window.location.pathname isnt "/beta2/")
     new zooniverse.GoogleAnalytics

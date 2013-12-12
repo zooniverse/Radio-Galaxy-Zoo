@@ -10,7 +10,7 @@ class Guide extends Backbone.View
   }
 
   initialize: ->
-    @$('input').val(0)
+    @$('input').val(0.5)
     @activeButton = @$('.example[data-type="compact"]')
     @activeContent = @$('#compact-examples')
 
@@ -19,8 +19,8 @@ class Guide extends Backbone.View
     @$('.example-selection').toggleClass('active')
 
   toggleSelection: (e) -> 
-    @$('input').val(0)
-    @$('.ir-ex').css('opacity', 0)
+    @$('input').val(0.5)
+    @$('.ir-ex').css('opacity', 0.5)
     target = $(e.target)
     return if target.hasClass('active')
     section = target.data('type')

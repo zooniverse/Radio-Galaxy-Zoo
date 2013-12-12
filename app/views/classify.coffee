@@ -41,7 +41,7 @@ class Classify extends Section
     User.on('change', @userChange)
     Subject.on('select', => @loadSubject())
     @slider = @$('input.image-opacity')
-    @slider.val(0)
+    @slider.val(0.5)
     @guide = new Guide()
 
   loadSubject: (sub) =>
@@ -64,7 +64,7 @@ class Classify extends Section
 
     @steps = new Steps({model: @model})
     @classifier = new Classifier({model: @model})
-    @slider.val(0)
+    @slider.val(0.5)
 
   userChange: =>
     if User.current? and User.current.project?.tutorial_done

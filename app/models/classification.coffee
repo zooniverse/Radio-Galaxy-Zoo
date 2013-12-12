@@ -7,7 +7,7 @@ class Classification extends Backbone.Model
     selected_contours: []
     matched_contours: []
     step: 0
-    ir_opacity: 0
+    ir_opacity: 0.5
     ir_markings: []
     ir_matched: []
   }
