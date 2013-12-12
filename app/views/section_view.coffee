@@ -9,7 +9,7 @@ class SectionView extends Backbone.View
       .object()
       .value()
     (ev) -> 
-      return if ev.originalTarget.tagName is 'INPUT'
+      return if ev.target.tagName is 'INPUT'
       if ev.keyCode is 13
         key = "enter"
       else

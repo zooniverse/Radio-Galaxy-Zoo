@@ -6,24 +6,25 @@ module.exports = ->
     new zooniverse.GoogleAnalytics
       account: "UA-1224199-49"
     
-    api = new zooniverse.Api
+    api = new zooniverse.Api({
       project: 'radio'
       host: "https://api.zooniverse.org"
       path: '/proxy'
+    })
   else
-    api = new zooniverse.Api
+    api = new zooniverse.Api({
       project: 'radio'
       host: host
       path: '/proxy'
+    })
 
-  zooniverse.models.Subject.next(->
-    topBar = new zooniverse.controllers.TopBar
-    zooniverse.models.User.fetch()
-    topBar.el.appendTo 'body'
+  zooniverse.models.Subject.next()
+  topBar = new zooniverse.controllers.TopBar
+  zooniverse.models.User.fetch()
+  topBar.el.appendTo 'body'
 
-    footer = new zooniverse.controllers.Footer
-    footer.el.appendTo '#footer'
+  footer = new zooniverse.controllers.Footer
+  footer.el.appendTo '#footer'
 
-    router = new Router()
-    Backbone.history.start()
-  )
+  router = new Router()
+  Backbone.history.start()
