@@ -13,6 +13,7 @@ class Classification extends Backbone.Model
   }
 
   initialize: ->
+    console.log(@get('subject'))
     @classification = new ZooClassification({subject: @get('subject')})
 
     @loadContours()
@@ -86,7 +87,7 @@ class Classification extends Backbone.Model
   step0: ->
     @set('selected_contours', [])
     @set('ir_markings', [])
-    @set('ir_opacity', 0)
+    @set('ir_opacity', 0.5)
 
   step1: ->
     xsIR = _.pluck(@get('ir_markings'), 'x')

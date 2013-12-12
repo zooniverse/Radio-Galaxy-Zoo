@@ -5,10 +5,23 @@
   pointer-events none
   cursor not-allowed
 
+.keyboard-modal
+  width: 200px
+  position: absolute
+  left: 0
+  top: 350px
+  transform: translate(-200px)
+  transition: transform 0.5s ease-in-out
+
+  ul
+    font-size: 12px
+
+  &.active
+    transform: translate(20px)
+
 .classifier
   position relative
   margin-top 2%
- 
 
   .viewport
     padding-bottom: 10px
@@ -49,8 +62,7 @@
     border-radius 4px
     padding 0
 
-    .toggle-contours, .tutorial
-      background-image url('../images/hide-contours.png')
+    .toggle-contours, .tutorial, .keyboard
       background-repeat no-repeat
       background-position center center
       background-size: 80% 80%
@@ -65,6 +77,9 @@
       right: -65px
       top: 0
       border-radius: 50%
+
+    .toggle-contours
+      background-image url('../images/hide-contours.png')
       
     .nocontours 
       background-image url('../images/show-contours.png')
@@ -72,6 +87,14 @@
     .tutorial
       top: 65px
       background-image url('../images/tutorial.svg')
+
+    .keyboard
+      top: 130px
+      background-image url('../images/keyboard.svg')
+
+      &.active
+        background-color #fb3a3a
+        border-color #fb3a3a
 
     .row
       margin 0 auto

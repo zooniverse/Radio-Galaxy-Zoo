@@ -10,10 +10,11 @@ class SectionView extends Backbone.View
       .value()
     (ev) -> 
       return if ev.target.tagName is 'INPUT'
-      if ev.keyCode is 13
-        key = "enter"
-      else
-        key = String.fromCharCode(ev.charCode)
+      key = String.fromCharCode(ev.charCode)
+
+      if key is " "
+        key = "space"
+        ev.preventDefault()
 
       if ev.shiftKey
         key = "shift+" + key

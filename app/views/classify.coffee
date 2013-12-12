@@ -26,15 +26,15 @@ class Classify extends Section
     'click .next-radio' : 'begin'
     'click .next' : 'nextSubject'
     'click .tutorial' : 'startTutorial'
+    'click .keyboard' : 'toggleKeyboardGuide'
   }
 
   keyboardEvents: {
-    'enter' : 'nextStep'
-    'shift+enter' : 'prevStep'
+    'space' : 'nextStep'
+    'shift+space' : 'prevStep'
     'c' : 'toggleContours'
     't' : 'startTutorial'
     'r' : 'setBand'
-    'i' : 'setBand'
   }
 
   initialize: ->
@@ -46,11 +46,11 @@ class Classify extends Section
 
   loadSubject: (sub) =>
     @stopListening(@model)
-    if sub
+    if sub?
       @model = new Model({subject: sub})
     else
       @model = @next or new Model({subject: Subject.current})
-    @next = new Model({subject: Subject.instances[1]})
+    @next = new Model({subject: Subject.instances[1]}) if Subject.instances[1]?
     @listenTo(@model, 'change:ir_opacity', @setSlider)
     
     if @steps? and @classifier?
@@ -100,7 +100,7 @@ class Classify extends Section
 
   setBand: (ev, key) ->
     if key?
-      opacity = if key is 'r' then 0 else 1
+      opacity = if @model.get('ir_opacity') is 1 then 0 else 1
     else
       opacity = if ev.target.dataset.band is 'radio' then 0 else 1
     @model.set('ir_opacity', opacity)
@@ -128,5 +128,13 @@ class Classify extends Section
 
   nextSubject: ->
     Subject.next()
+
+  toggleKeyboardGuide: ->
+    @keyboardButton or= @$('.keyboard')
+    @keyboardButton.toggleClass('active')
+
+    @keyboardModal or= @$('.keyboard-modal')
+    @keyboardModal.toggleClass('active')
+
 
 module.exports = Classify
