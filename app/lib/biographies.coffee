@@ -196,6 +196,18 @@ module.exports = [
     institution: "Oxford University"
     twitter: "vrooje"
     bio: "Brooke spends most of her time studying the growth of supermassive black holes and their role in galaxy evolution. She also suspects there is a parallel universe out there where she decided to become a potter and do astronomy on the side, so she tries to keep up the balance in this existence by spending rare moments of free time in the ceramics studio."
+  },
+  {
+    name: "Anna Kapinska"
+    insitution: "Universeity of Western Australia"
+    bio: "nna is interested in radio galaxies and quasars at various stages of
+their life, from small young radio sources to large old radio
+galaxies. She works on radio jets in particular from these
+supermassive black holes and studies how they affect the galaxies
+which host them at various stages of the Universe evolution. Anna is
+also working on new surveys of radio sources being observed with the
+brand new radio telescopes on our path to SKA, the Murchison Widefield
+Array in Australia and the Low Frequency Array in Europe."  
   }
 ]
   
