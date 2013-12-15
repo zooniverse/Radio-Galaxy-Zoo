@@ -8,9 +8,6 @@ bower_components/
 build/
 data-import/
 *.map
-css/bootstrap.css
-css/zooniverse
-public/subjects/
 scripts/radio-galaxy-zoo-*
 *rgz*
 *rgz_fits*

@@ -1,0 +1,42 @@
+@import "colors"
+
+#profile
+  .zooniverse-profile
+    nav
+      text-align: left
+
+      button
+        color: #fff
+        border: 1px solid $btn-border
+        box-sizing: border-box
+        background: $btn
+        height: 30px
+        border-radius: 3px
+        transition: all 0.2s ease-in-out
+
+        &[DISABLED]
+          background: darken($btn, 50%)
+          border-color: darken($btn-border, 50%)
+          color: darken(#fff, 50%)
+
+          &:hover
+            background: darken($btn, 50%)
+            border-color: darken($btn-border, 50%)
+            color: darken(#fff, 50%)
+
+        &:hover, &.active
+          border-color: darken($btn-border, 20%)
+          background: darken($btn, 20%)
+
+      .numbered
+        button
+          background: none
+          border: none
+          font-size: 14px
+          font-weight: 700
+
+          &:hover
+            background: #555
+
+          &.active
+            color: #cdcdcd

@@ -128,9 +128,9 @@ window.base64 = {
     password: 'Password',
     email: 'Email',
     realName: 'Real name',
-    whyRealName: 'This will be used when we thank contributors, for example, in talks or on posters.<br />If you don\'t want to be mentioned publicly, leave this blank.',
+    whyRealName: 'This will be used when we thank contributors, for example, in talks or on posters. If you don\'t want to be mentioned publicly, leave this blank.',
     noAccount: 'Don\'t have an account?',
-    privacyPolicy: 'I agree to the <a href="https://www.zooniverse.org/privacy" target="_blank">privacy policy</a>.',
+    agreeToPrivacyPolicy: 'I agree to the <a href="https://www.zooniverse.org/privacy" target="_blank">privacy policy</a>.',
     forgotPassword: 'Forgot your password?',
     badLogin: 'Incorrect username or password',
     signInFailed: 'Sign in failed.',
@@ -221,6 +221,50 @@ window.base64 = {
 
   if (typeof module !== "undefined" && module !== null) {
     module.exports = fr;
+  }
+
+}).call(this);
+
+(function() {
+  var pl, _base;
+
+  pl = {
+    topBarHeading: 'Projekt Zooniverse',
+    signUpHeading: 'Utwórz nowe konto Zooniverse',
+    signInHeading: 'Zaloguj się na swoje konto Zooniverse',
+    signUp: 'Zarejestruj',
+    signIn: 'Zaloguj',
+    signOut: 'Wyloguj',
+    username: 'Nazwa użytkownika',
+    password: 'Hasło',
+    email: 'Adres e-mail',
+    realName: 'Prawdziwe imię',
+    whyRealName: 'Korzystamy z tych danych, kiedy dziękujemy ochotnikom za ich wkład, na przykład podczas rozmów czy na plakatach. <br/> Jeżeli nie chcesz, abyśmy wymieniali Cię publicznie z imienia i nazwiska, zostaw to pole puste.',
+    noAccount: 'Nie masz jeszcze konta?',
+    privacyPolicy: 'Zgadzam się z <a href="https://www.zooniverse.org/privacy" target="_blank">polityką prywatności</a>.',
+    forgotPassword: 'Nie pamiętasz hasła?',
+    badLogin: 'Niepoprawna nazwa użytkownika lub hasło',
+    signInFailed: 'Nie udało się zalogować',
+    signInForProfile: 'Zaloguj się, aby zobaczyć swój profil',
+    footerHeading: 'Zooniverse to zbiór projektów nauki obywatelskiej w Internecie, dzięki którym ochotnicy pomagają badaczom przedzierać się przez powódź napływających danych.',
+    privacyPolicy: 'Polityka prywatności',
+    recents: 'Najnowsze',
+    favorites: 'Ulubione',
+    none: 'nic'
+  };
+
+  if (window.zooniverse == null) {
+    window.zooniverse = {};
+  }
+
+  if ((_base = window.zooniverse).translations == null) {
+    _base.translations = {};
+  }
+
+  window.zooniverse.translations.pl = pl;
+
+  if (typeof module !== "undefined" && module !== null) {
+    module.exports = pl;
   }
 
 }).call(this);
@@ -796,7 +840,7 @@ window.base64 = {
 }).call(this);
 
 (function() {
-  var LanguageManager, translate, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6,
+  var LanguageManager, translate, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8,
     __slice = [].slice;
 
   LanguageManager = ((_ref = window.zooniverse) != null ? _ref.LanguageManager : void 0) || require('./language-manager');
@@ -819,15 +863,16 @@ window.base64 = {
   translate.strings = {
     en: ((_ref1 = window.zooniverse) != null ? (_ref2 = _ref1.translations) != null ? _ref2.en : void 0 : void 0) || require('../translations/en'),
     es: ((_ref3 = window.zooniverse) != null ? (_ref4 = _ref3.translations) != null ? _ref4.es : void 0 : void 0) || require('../translations/es'),
-    fr: ((_ref5 = window.zooniverse) != null ? (_ref6 = _ref5.translations) != null ? _ref6.fr : void 0 : void 0) || require('../translations/fr')
+    fr: ((_ref5 = window.zooniverse) != null ? (_ref6 = _ref5.translations) != null ? _ref6.fr : void 0 : void 0) || require('../translations/fr'),
+    pl: ((_ref7 = window.zooniverse) != null ? (_ref8 = _ref7.translations) != null ? _ref8.pl : void 0 : void 0) || require('../translations/pl')
   };
 
   translate.refresh = function(element, key) {
-    var name, property, string, value, _i, _len, _ref10, _ref11, _ref7, _ref8, _ref9, _results;
-    _ref7 = element.attributes;
+    var name, property, string, value, _i, _len, _ref10, _ref11, _ref12, _ref13, _ref9, _results;
+    _ref9 = element.attributes;
     _results = [];
-    for (_i = 0, _len = _ref7.length; _i < _len; _i++) {
-      _ref8 = _ref7[_i], name = _ref8.name, value = _ref8.value;
+    for (_i = 0, _len = _ref9.length; _i < _len; _i++) {
+      _ref10 = _ref9[_i], name = _ref10.name, value = _ref10.value;
       if (name.slice(0, translate.attr.length) !== translate.attr) {
         continue;
       }
@@ -835,20 +880,27 @@ window.base64 = {
         continue;
       }
       property = name.slice(translate.attr.length + 1) || 'innerHTML';
-      string = (_ref9 = translate.strings[(_ref10 = LanguageManager.current) != null ? _ref10.code : void 0]) != null ? _ref9[value] : void 0;
-      string || (string = (_ref11 = translate.strings[LanguageManager.prototype.code]) != null ? _ref11[value] : void 0);
+      string = (_ref11 = translate.strings[(_ref12 = LanguageManager.current) != null ? _ref12.code : void 0]) != null ? _ref11[value] : void 0;
+      string || (string = (_ref13 = translate.strings[LanguageManager.prototype.code]) != null ? _ref13[value] : void 0);
       string || (string = value);
-      _results.push(element[property] = string);
+      if (typeof console !== "undefined" && console !== null) {
+        console.log("Translating " + property + ", " + value);
+      }
+      if (element.hasAttribute(property)) {
+        _results.push(element.setAttribute(property, string));
+      } else {
+        _results.push(element[property] = string);
+      }
     }
     return _results;
   };
 
   LanguageManager.on('change-language', function() {
-    var element, _i, _len, _ref7, _results;
-    _ref7 = document.querySelectorAll("[" + translate.attr + "]");
+    var element, _i, _len, _ref9, _results;
+    _ref9 = document.querySelectorAll("[" + translate.attr + "]");
     _results = [];
-    for (_i = 0, _len = _ref7.length; _i < _len; _i++) {
-      element = _ref7[_i];
+    for (_i = 0, _len = _ref9.length; _i < _len; _i++) {
+      element = _ref9[_i];
       _results.push(translate.refresh(element));
     }
     return _results;
@@ -2573,7 +2625,15 @@ template = function(__obj) {
     
       __out.push(translate('signInHeading'));
     
-      __out.push('\n</header>\n\n<label>\n  <input type="text" name="username" required="required" data-zooniverse-translate="" data-zooniverse-translate-placeholder="username" />\n</label>\n\n<label>\n  <input type="password" name="password" required="required" data-zooniverse-translate="" data-zooniverse-translate-placeholder="password" />\n</label>\n\n<div class="error-message"></div>\n\n<div class="action">\n  <a href="https://www.zooniverse.org/password/reset">');
+      __out.push('\n</header>\n\n<label>\n  <span class="text-label">');
+    
+      __out.push(translate('username'));
+    
+      __out.push('</span><br />\n  <input type="text" name="username" required="required" />\n</label>\n\n<label>\n  <span class="text-label">');
+    
+      __out.push(translate('password'));
+    
+      __out.push('</span><br />\n  <input type="password" name="password" required="required" />\n</label>\n\n<div class="error-message"></div>\n\n<div class="action">\n  <a href="https://www.zooniverse.org/password/reset">');
     
       __out.push(translate('forgotPassword'));
     
@@ -2649,13 +2709,29 @@ template = function(__obj) {
     
       __out.push(translate('signUpHeading'));
     
-      __out.push('\n</header>\n\n<label>\n  <input type="text" name="username" required="required" data-zooniverse-translate="" data-zooniverse-translate-placeholder="username" />\n</label>\n\n<label>\n  <input type="password" name="password" required="required" data-zooniverse-translate="" data-zooniverse-translate-placeholder="password" />\n</label>\n\n<label>\n  <input type="email" name="email" required="required" data-zooniverse-translate="" data-zooniverse-translate-placeholder="email" />\n</label>\n\n<label>\n  <input type="text" name="real-name" data-zooniverse-translate="" data-zooniverse-translate-placeholder="realName" />\n  <div class="explanation">');
+      __out.push('\n</header>\n\n<label>\n  <span class="text-label">');
+    
+      __out.push(translate('username'));
+    
+      __out.push('</span><br />\n  <input type="text" name="username" required="required" />\n</label>\n\n<label>\n  <span class="text-label">');
+    
+      __out.push(translate('password'));
+    
+      __out.push('</span><br />\n  <input type="password" name="password" required="required" />\n</label>\n\n<label>\n  <span class="text-label">');
+    
+      __out.push(translate('email'));
+    
+      __out.push('</span><br />\n  <input type="email" name="email" required="required" />\n</label>\n\n<label>\n  <span class="text-label">');
+    
+      __out.push(translate('realName'));
+    
+      __out.push('</span><br />\n  <input type="text" name="real-name" />\n  <div class="explanation">');
     
       __out.push(translate('whyRealName'));
     
       __out.push('</div>\n</label>\n\n<label>\n  <span></span>\n  <input type="checkbox" required="required" />');
     
-      __out.push(translate('privacyPolicy'));
+      __out.push(translate('agreeToPrivacyPolicy'));
     
       __out.push('\n</label>\n\n<div class="error-message"></div>\n\n<div class="action">\n  <button type="submit">');
     
@@ -2863,7 +2939,7 @@ template = function(__obj) {
     (function() {
       var Favorite, location, thumbSrc, _ref, _ref1;
     
-      Favorite = require('zooniverse/models/favorite');
+      Favorite = zooniverse.models.Favorite || require('zooniverse/models/favorite');
     
       __out.push('\n\n<div class=\'item\'>\n  <a href="');
     
@@ -3555,7 +3631,7 @@ if (typeof module !== 'undefined') module.exports = template;
 }).call(this);
 
 (function() {
-  var BaseController, Dialog, template, _base, _base1,
+  var BaseController, Dialog, template, translate, _base, _base1,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -3574,6 +3650,8 @@ if (typeof module !== 'undefined') module.exports = template;
   BaseController = zooniverse.controllers.BaseController || require('./base-controller');
 
   template = zooniverse.views.dialog || require('../views/dialog');
+
+  translate = zooniverse.translate || require('../lib/translate');
 
   Dialog = (function(_super) {
     __extends(Dialog, _super);
@@ -3621,7 +3699,13 @@ if (typeof module !== 'undefined') module.exports = template;
     };
 
     Dialog.prototype.show = function() {
-      var _this = this;
+      var element, _i, _len, _ref,
+        _this = this;
+      _ref = this.el.get(0).querySelectorAll("[" + translate.attr + "]");
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        element = _ref[_i];
+        translate.refresh(element);
+      }
       this.el.css({
         display: ''
       });
@@ -4413,10 +4497,12 @@ if (typeof module !== 'undefined') module.exports = template;
     }
 
     TopBar.prototype.onClickSignIn = function() {
+      signupDialog.hide();
       return loginDialog.show();
     };
 
     TopBar.prototype.onClickSignUp = function() {
+      loginDialog.hide();
       return signupDialog.show();
     };
 

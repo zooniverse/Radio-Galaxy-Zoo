@@ -2,6 +2,7 @@ Index = require('./index')
 Classify = require('./classify')
 Science = require('./science')
 Team = require('./team')
+Profile = require('./profile')
 
 class AppView extends Backbone.View
 
@@ -10,6 +11,7 @@ class AppView extends Backbone.View
     'classify' : new Classify()
     'science' : new Science()
     'team' : new Team()
+    'profile': new Profile()
   }
 
   initialize: ->
