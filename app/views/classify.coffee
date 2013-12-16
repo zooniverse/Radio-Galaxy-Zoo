@@ -75,9 +75,10 @@ class Classify extends Section
   startTutorial: ->
     unless Subject.current?.tutorial
       @loadSubject(new Subject(tutorialSubject))
-    @tut = new zootorial.Tutorial(tutorialSteps)
-    @tut.el.bind('end-tutorial', @endTutorial)
-    @tut.start()
+    unless @tut?
+      @tut = new zootorial.Tutorial(tutorialSteps)
+      @tut.el.bind('end-tutorial', @endTutorial)
+      @tut.start()
 
   endTutorial: =>
     delete @tut
