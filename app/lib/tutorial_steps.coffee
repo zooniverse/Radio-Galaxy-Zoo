@@ -31,7 +31,7 @@ module.exports =
     classify2: new Step
       number: 4
       header: "Pairing the Data"
-      details: "Now select it in the infrared too. Use the slider to compare the two. In this case the galaxy is at exactly the same position in both wavelengths."
+      details: "Select it in the infrared too. Use the slider to compare the two. In this case the galaxy is at exactly the same position in both wavelengths."
       attachment: "-0.15 0.35 #0.contour-group right center"
       next: {'click svg' : "classify3"}
       className: "arrow-left"
@@ -48,7 +48,7 @@ module.exports =
       number: 6
       header: "Pairing a Second Source."
       details: "Now let's mark the other Galaxy. First select 'Mark Another'."
-      attachment: "left 0.65 .next-radio right center"
+      attachment: "left 0.55 .next-radio right center"
       className: "arrow-left"
       next: {
         'click .next-radio' : "classify5"
@@ -58,16 +58,24 @@ module.exports =
     classify5: new Step
       number: 7
       header: "Pairing a Second Source."
-      details: "Now let’s click the contours of the brighter galaxy. Then click 'Done'." 
-      attachment: "-0.4 -0.5 #1.contour-group right center"
+      details: "Then click on the first contour of the brighter Galaxy." 
+      attachment: "-0.2 0.1 #1.contour-group right center"
       className: "arrow-left"
-      next: {'click .done' : "classify6"}
+      next: {'click #1.contour-group' : "classify55"}
+
+    classify55: new Step
+      number: 8
+      header: "Pairing a Second Source."
+      details: "Next click on the second contour of the Galaxy. Then click on 'Done'."
+      attachment: "-0.2 0.1 #3.contour-group right center"
+      className: "arrow-left"
+      next: {"click .done" : "classify6"}
 
     classify6: new Step
-      number: 8
+      number: 9
       header: "Pairing Second Source."
       details: "When you check the infrared you’ll see a galaxy between the two bright radio ‘lobes’. Click that galaxy and select 'Done'."
-      attachment: "-0.4 -0.5 #1.contour-group right center"
+      attachment: "-0.15 0.5 #1.contour-group right center"
       className: "arrow-left"
       next: {'click .done' : "classify8"}
 
