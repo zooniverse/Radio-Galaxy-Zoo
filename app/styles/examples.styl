@@ -17,7 +17,7 @@
     padding-right: 20px
     cursor: pointer
     left: -75px
-    top: 55px 
+    top: 75px 
     display: inline-block
     background: #428bca
     transition: transform 0.5s ease-in-out
@@ -40,7 +40,7 @@
     width: 330px
     z-index: 10
     transform: translateX(0)
-    top: -20px
+    top: 0
     text-shadow 0 1px 0 rgb(15, 15, 15)
     font-size 14px
 
@@ -49,6 +49,7 @@
 
     > .row
       padding 0
+      border-bottom: 15px solid lighten($workflow-background, 20%)
 
     p
       margin 0
@@ -79,14 +80,15 @@
       height: 620px
       width: inherit
       margin-left: 0
+      box-sizing: border-box
 
       .content
-        margin-top 12px
         min-height 226px
         display: none
 
         &.active
           display: block
+          background lighten($workflow-background, 20%)
 
         .row
           margin: 0 auto

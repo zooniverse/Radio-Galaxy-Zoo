@@ -66,6 +66,7 @@
       background-repeat no-repeat
       background-position center center
       background-size: 80% 80%
+      background-color: transparent
       cursor pointer
       text-align center
       vertical-align middle
@@ -77,6 +78,10 @@
       right: -65px
       top: 0
       border-radius: 50%
+      border-width: 2px
+
+      &:hover
+        background-color: #111
 
     .toggle-contours
       background-image url('../images/hide-contours.png')
@@ -150,7 +155,18 @@
 
     .cancel
       background-color #fb3a3a
+      border-color: #fb3a3a
+      float: left
 
       div
         padding-right 0
         padding-left 0
+
+    .done, .next
+      width: 120px
+      text-align: center
+      font-weight: 700
+
+    .favorite.active
+      background-color #fb3a3a
+      border-color: #fb3a3a
