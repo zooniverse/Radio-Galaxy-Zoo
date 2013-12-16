@@ -13,7 +13,6 @@ class Classification extends Backbone.Model
   }
 
   initialize: ->
-    console.log(@get('subject'))
     @classification = new ZooClassification({subject: @get('subject')})
 
     @loadContours()
@@ -103,6 +102,8 @@ class Classification extends Backbone.Model
   step3: ->
     @set('selected_contours', [])
     @set('ir_markings', [])
-    @classification.send()
+
+  toggleFavorite: ->
+    @classification.favorite = not @classification.favorite
 
 module.exports = Classification

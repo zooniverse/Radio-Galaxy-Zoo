@@ -129,6 +129,7 @@ class Classify extends Section
     @model.set('step', 0)
 
   nextSubject: ->
+    @model.classification.send()
     Subject.next()
 
   toggleKeyboardGuide: ->
