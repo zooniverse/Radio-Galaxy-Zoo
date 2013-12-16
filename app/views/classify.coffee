@@ -51,7 +51,8 @@ class Classify extends Section
       @model = new Model({subject: sub})
     else
       @model = @next or new Model({subject: Subject.current})
-    @next = new Model({subject: Subject.instances[1]}) if Subject.instances[1]?
+    Subject.instances.pop()
+    @next = new Model({subject: Subject.instances[0]}) if Subject.instances[0]?
     @listenTo(@model, 'change:ir_opacity', @setSlider)
     
     if @steps? and @classifier?
@@ -68,8 +69,10 @@ class Classify extends Section
     @slider.val(0.5)
 
   userChange: =>
-    if User.current? and User.current.project?.tutorial_done
-      Subject.next()
+    if User.current? and User.current.preferences?.radio?.tutorial_done
+      if @tut
+        @tut.end()
+      Subject.next().then(=> console.log(@next))
     else
       @startTutorial() if @isVisible() and not @tut?
 

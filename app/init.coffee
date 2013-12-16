@@ -18,7 +18,7 @@ module.exports = ->
       path: '/proxy'
     })
 
-  zooniverse.models.Subject.next()
+    #  zooniverse.models.Subject.next()
   topBar = new zooniverse.controllers.TopBar
   zooniverse.models.User.fetch()
   topBar.el.appendTo 'body'
