@@ -138,3 +138,28 @@ zlib.gzip($.html(), function(err, result) {
       console.log('Uploaded index.html');
   });
 });
+
+console.log("Upload Tutorial Contours");
+
+zlib.gzip
+
+fs.readFile('./public/S311.json', function(err, result) {
+  if (err)
+    throw err;
+  zlib.gzip(result, function(err, result) {
+    if (err)
+      throw err;
+    s3bucket.putObject({
+      ACL: 'public-read',
+      Body: result,
+      Key: 'beta2/S311.json',
+      ContentEncoding: 'gzip',
+      ContentType: 'application/json'
+    }, function(err) {
+      if (err)
+        console.log(err);
+      else
+        console.log("Uploaded Tutorial Contours");
+    });
+  });
+});
