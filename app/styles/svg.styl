@@ -1,30 +1,4 @@
-$green = #00FF00
-$blue = #0079AE 
-
-@keyframes pulsate {
-  0% { opacity: 1 }
-  50% { opacity: 0 }
-  100% { opacity: 1 }
-}
-
-@keyframes pulsate-75 {
-  0% { opacity: 1 }
-  50% { opacity: 0.25 }
-  100% { opacity: 1 }
-}
-
-@keyframes pulsate-and-hide {
-  0% { opacity: 0}
-  50% { opacity: 1}
-  100% { opacity: 0}
-}
-
-@keyframes pulsate-to-white {
-  0% { opacity: 1}
-  50% { opacity: 0}
-  100% { opacity: 1}
-}
-
+@import "colors"
 div.contours
   
   &.fade-contour
@@ -35,31 +9,15 @@ div.contours
   svg
     width 100%
     height 100%
-    fill $green
+    fill $selectedColor
     fill-opacity 0
-    stroke #FFF
+    stroke $contourColor
     opacity 1
-    
-    circle.source, circle.tutorial
-      stroke-width 2px
-      stroke $green
-      cursor pointer
-    
-    circle.tutorial
-      animation-duration 1s
-      animation-timing-function ease-in-out
-      animation-iteration-count 2
-      &.pulsate
-        opacity 1
-        animation-name pulsate
-      &.pulsate-and-hide
-        opacity 0
-        animation-name pulsate-and-hide
-        
-        path
-          stroke $green
-          fill-opacity 0.4
-    
+
+    rect
+      stroke: none
+      fill: none
+   
     g.contours
       transition opacity 200ms linear
       
@@ -70,7 +28,7 @@ div.contours
           
         &.selected
           path
-            stroke $green
+            stroke $selectedColor
             fill-opacity 0.08
         &.matched
           display none
@@ -82,7 +40,7 @@ div.contours
           animation-iteration-count 2
           
           path
-            stroke $green
+            stroke $selectedColor
             fill-opacity 0.08
         
         &.pulsate-to-white
@@ -99,11 +57,11 @@ div.contours
         
         circle
           fill #000
-          stroke $blue 
+          stroke $circleColor 
           stroke-width 2px
           
           &.handle
-            fill $green
+            fill $selectedColor
             fill-opacity 1
             cursor pointer
             
@@ -125,7 +83,7 @@ div.contours
         &.active
           circle
             &.annotation
-              stroke $blue 
+              stroke $circleColor 
           text
             display block
 
@@ -183,7 +141,7 @@ div.contours
           
           &.matched
             display block
-            stroke $green
+            stroke $selectedColor
             opacity 0.8
             
       g.infrared
@@ -205,7 +163,7 @@ div.contours
       g.contours
         g.contour-group
           display block
-          stroke $green
+          stroke $selectedColor
           animation-name pulsate
           animation-duration 1.25s
           animation-timing-function ease-in-out
