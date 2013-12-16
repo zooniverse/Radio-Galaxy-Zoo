@@ -36,11 +36,15 @@ class Classifier extends Backbone.View
   
   drawContours: (m) =>
     contourGroups = m.get("contours")
+    if contourGroups.contours?
+      {contours, height, width} = contourGroups
+      contourGroups = contours
     svg = d3.select("svg.svg-contours g.contours")
-    factor = @imageDimension / @fitsImageDimension
+    xFactor = @imageDimension / (width || @fitsImageDimension)
+    yFactor = @imageDimension / (height || @fitsImageDimension)
     path = d3.svg.line()
-      .x( (d) -> factor * d.x)
-      .y( (d) -> factor * d.y)
+      .x( (d) -> xFactor * d.x)
+      .y( (d) -> yFactor * d.y)
       .interpolate("linear")
 
     cGroups = svg.selectAll("g.contour-group")

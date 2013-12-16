@@ -10,7 +10,7 @@ import cmath
 
 EPSILON = 1e-10
 
-LEVELS = [3.0, 5.196152422706632, 8.999999999999998, 15.588457268119893, 26.999999999999993, 46.765371804359674, 80.99999999999997, 140.296115413079, 242.9999999999999, 420.88834623923697, 728.9999999999995, 1262.6650387177108, 2186.9999999999986, 3787.9951161531317, 6560.9999999999945]
+LEVELS = [5.196152422706632, 8.999999999999998, 15.588457268119893, 26.999999999999993, 46.765371804359674, 80.99999999999997, 140.296115413079, 242.9999999999999, 420.88834623923697, 728.9999999999995, 1262.6650387177108, 2186.9999999999986, 3787.9951161531317, 6560.9999999999945]
 
 THRESHOLD = 8
 
@@ -321,7 +321,7 @@ def contour_list(contours):
       s = s.cdr
   return sorted(l, key=lambda n: n['k'])
 
-def contour(f):
+def contour(f, rms):
   BBox = namedtuple('BBox', 'max_x max_y min_x min_y')
   def filter_small(c):
     box = c['bbox']
@@ -354,12 +354,12 @@ def contour(f):
   width = len(data[0])
   idx = range(1, height+1)
   jdx = range(1, width+1) 
-  cs = contour_list(conrec(data, 0, height - 1, 0, width - 1, idx, jdx, len(LEVELS), LEVELS))
+  cs = contour_list(conrec(data, 0, height - 1, 0, width - 1, idx, jdx, len(LEVELS), map(lambda l: l * rms, LEVELS)))
 
   k0contours = map(bounding_box, filter(lambda c: c['k'] == 0, cs))
   subcontours = filter(lambda c: c['k'] != 0, cs)
 
-  return map(group_contours, filter(filter_small, k0contours))
+  return {'height': height, 'width': width, 'contours': map(group_contours, filter(filter_small, k0contours))}
 
 def points_to_dict(g):
   for i,c in enumerate(g): 
@@ -368,10 +368,11 @@ def points_to_dict(g):
   return g
 
 if __name__ == '__main__':
-  if len(sys.argv) < 2:
-    print "Usage: python make_contours.py [file]"
+  if len(sys.argv) < 3:
+    print "Usage: python make_contours.py [file] [RMS]"
     sys.exit()
   f = sys.argv[1]
-  cs = contour(f)
+  rms = float(sys.argv[2])
+  cs = contour(f, rms)
   cs = map(points_to_dict, cs)
   print json.dumps(cs)
