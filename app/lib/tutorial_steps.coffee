@@ -52,7 +52,8 @@ module.exports =
       className: "arrow-left"
       next: {
         'click .next-radio' : "classify5"
-        'click #1.contour-group' : "classify5"
+        'click #1.contour-group' : "classify55"
+        'click #3.contour-group' : "classify525"
       }
 
     classify5: new Step
@@ -62,6 +63,14 @@ module.exports =
       attachment: "-0.2 0.1 #1.contour-group right center"
       className: "arrow-left"
       next: {'click #1.contour-group' : "classify55"}
+
+    classify525: new Step
+      number: 8 
+      header: "Pairing a Second Source."
+      details: "Next click on the second contour of the Galaxy. Then click on 'Done'."
+      attachment: "-0.2 0.1 #1.contour-group right center"
+      className: "arrow-left"
+      next: {"click .done" : "classify6"}
 
     classify55: new Step
       number: 8
