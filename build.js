@@ -11,6 +11,10 @@ var s3bucket = new AWS.S3({params: {Bucket: 'radio.galaxyzoo.org'}});
 var $ = cheerio.load(fs.readFileSync("./public/index.html"));
 var version = require('./package').version
 
+if (version.match(/beta/))
+  prefix = prefix
+else
+  prefix = ''
 console.log("Building RGZ Version: ", version);
 
 // Upload Images
@@ -35,7 +39,7 @@ uploadImgs = function(dir) {
           s3bucket.putObject({
             ACL: 'public-read',
             Body: file,
-            Key: 'beta2/' + d + '/' + img,
+            Key: prefix + d + '/' + img,
             ContentType: contentType 
           }, function(err) {
             if (err)
@@ -70,7 +74,7 @@ zlib.gzip(css, function(err, result) {
   s3bucket.putObject({
     ACL: 'public-read',
     Body: result,
-    Key: 'beta2/css/style.' + version + '.css',
+    Key: prefix + 'css/style.' + version + '.css',
     ContentEncoding: 'gzip',
     ContentType: 'text/css'
   }, function(err) {
@@ -99,7 +103,7 @@ zlib.gzip(js.code, function(err, result) {
   s3bucket.putObject({
     ACL: 'public-read',
     Body: result,
-    Key: 'beta2/js/app.' + version + '.js',
+    Key: prefix + 'js/app.' + version + '.js',
     ContentEncoding: 'gzip',
     ContentType: 'application/javascript'
   }, function(err) {
@@ -127,7 +131,7 @@ zlib.gzip($.html(), function(err, result) {
   s3bucket.putObject({
     ACL: 'public-read',
     Body: result,
-    Key: 'beta2/index.html',
+    Key: prefix + 'index.html',
     ContentEncoding: 'gzip',
     CacheControl: 'no-cache, must-revalidate',
     ContentType: 'text/html'
@@ -139,7 +143,7 @@ zlib.gzip($.html(), function(err, result) {
   });
 });
 
-console.log("Upload Tutorial Contours");
+console.log("Uploading Tutorial Contours...");
 
 zlib.gzip
 
@@ -152,7 +156,7 @@ fs.readFile('./public/S311.json', function(err, result) {
     s3bucket.putObject({
       ACL: 'public-read',
       Body: result,
-      Key: 'beta2/S311.json',
+      Key: prefix + 'S311.json',
       ContentEncoding: 'gzip',
       ContentType: 'application/json'
     }, function(err) {
@@ -162,4 +166,22 @@ fs.readFile('./public/S311.json', function(err, result) {
         console.log("Uploaded Tutorial Contours");
     });
   });
+});
+
+console.log("Uploading favicon...");
+
+fs.readFile('./public/favicon.ico', function(err, result) {
+  if (err)
+    throw err;
+  s3bucket.putObject({
+      ACL: 'public-read',
+      Body: result,
+      Key: prefix + "favicon.ico",
+      ContentType: "image/x-icon"
+  }, function(err) {
+    if (err)
+      console.log(err);
+    else
+      console.log("Uploaded favicon.ico"); 
+  })
 });
