@@ -200,7 +200,7 @@ module.exports = [
   {
     name: "Anna Kapinska"
     insitution: "Universeity of Western Australia"
-    bio: "nna is interested in radio galaxies and quasars at various stages of
+    bio: "Anna is interested in radio galaxies and quasars at various stages of
 their life, from small young radio sources to large old radio
 galaxies. She works on radio jets in particular from these
 supermassive black holes and studies how they affect the galaxies
