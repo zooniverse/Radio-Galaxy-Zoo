@@ -132,6 +132,7 @@ class Classify extends Section
     @model.set('step', 0)
 
   nextSubject: ->
+    @$('.favorite').removeClass('active')
     @model.classification.send()
     Subject.next()
 
