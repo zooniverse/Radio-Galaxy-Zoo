@@ -52,9 +52,7 @@ class Classify extends Section
     else
       @model = @next or new Model({subject: Subject.current})
     Subject.instances.pop()
-    if Subject.instances[0]? and Subject.instances[0]._id isnt @model.get('subject')._id
-      console.log("here")
-      @next = new Model({subject: Subject.instances[0]})
+    @next = new Model({subject: Subject.instances[1]}) if Subject.instances[1]?
     @listenTo(@model, 'change:ir_opacity', @setSlider)
     
     if @steps? and @classifier?
@@ -93,7 +91,7 @@ class Classify extends Section
 
   show: ->
     super
-    _.defer(@userChange)
+    _.defer(@userChange) unless User.current?
 
   hide: ->
     super
