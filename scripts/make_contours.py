@@ -323,11 +323,15 @@ def contour_list(contours):
 
 def contour(f, rms):
   BBox = namedtuple('BBox', 'max_x max_y min_x min_y')
+  data = fits.getdata(f)[::-1]
+  height = len(data)
+  width = len(data[0])
+
   def filter_small(c):
     box = c['bbox']
     x = box.max_x - box.min_x
     y = box.max_y - box.min_y
-    return cmath.sqrt(x*x + y*y).real > THRESHOLD
+    return cmath.sqrt(x*x + y*y).real > (THRESHOLD * (width / 301))
 
   def group_contours(c):
     group = []
@@ -349,9 +353,6 @@ def contour(f, rms):
     c['bbox'] = BBox(max_x, max_y, min_x, min_y)
     return c
 
-  data = fits.getdata(f)[::-1]
-  height = len(data)
-  width = len(data[0])
   idx = range(1, height+1)
   jdx = range(1, width+1) 
   cs = contour_list(conrec(data, 0, height - 1, 0, width - 1, idx, jdx, len(LEVELS), map(lambda l: l * rms, LEVELS)))
@@ -374,5 +375,5 @@ if __name__ == '__main__':
   f = sys.argv[1]
   rms = float(sys.argv[2])
   cs = contour(f, rms)
-  cs = map(points_to_dict, cs)
+  cs['contours'] = map(points_to_dict, cs['contours'])
   print json.dumps(cs)
