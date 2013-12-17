@@ -39,6 +39,7 @@ class Classify extends Section
   }
 
   initialize: ->
+    @unseen = true 
     User.on('change', @userChange)
     Subject.on('select', => @loadSubject())
     @slider = @$('input.image-opacity')
@@ -86,12 +87,13 @@ class Classify extends Section
 
   endTutorial: =>
     delete @tut
+    @unseen = false
     if User.current
       User.current.setPreference('tutorial_done', true)
 
   show: ->
     super
-    _.defer(@userChange) unless User.current?
+    _.defer(@userChange) if @unseen and not User.current?
 
   hide: ->
     super
