@@ -60,7 +60,10 @@ class Classification extends Backbone.Model
       matched_contours: contour_ids.concat(@get('matched_contours'))
     })
     bboxes = _.chain(contour_ids)
-        .map((cid) => @get('contours')[cid][0].bbox)
+        .map((cid) => 
+          contours = @get('contours')
+          contours = contours.contours || contours
+          contours[cid][0].bbox)
         .map((bb) -> _.object(['xmax', 'ymax', 'xmin', 'ymin'], bb))
         .value()
     @classification.annotate({

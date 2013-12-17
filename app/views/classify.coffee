@@ -52,7 +52,9 @@ class Classify extends Section
     else
       @model = @next or new Model({subject: Subject.current})
     Subject.instances.pop()
-    @next = new Model({subject: Subject.instances[0]}) if Subject.instances[0]?
+    if Subject.instances[0]? and Subject.instances[0]._id isnt @model.get('subject')._id
+      console.log("here")
+      @next = new Model({subject: Subject.instances[0]})
     @listenTo(@model, 'change:ir_opacity', @setSlider)
     
     if @steps? and @classifier?
@@ -72,7 +74,7 @@ class Classify extends Section
     if User.current? and User.current.preferences?.radio?.tutorial_done
       if @tut
         @tut.end()
-      Subject.next().then(=> console.log(@next))
+      Subject.next()
     else
       @startTutorial() if @isVisible() and not @tut?
 
