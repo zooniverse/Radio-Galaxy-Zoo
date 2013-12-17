@@ -19,6 +19,9 @@ class Steps extends Backbone.View
 
     @$("div.contours").removeClass("step-#{m.previous("step")}")
     @$("div.contours").addClass("step-#{step}")
+    
+    if step is 3
+      @$('a.discuss').attr('href', @model.get('subject').talkHref())
 
   reset: ->
     @$("div.contours").removeClass("step-#{@model.get("step")}")
