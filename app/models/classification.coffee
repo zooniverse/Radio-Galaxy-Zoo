@@ -35,7 +35,7 @@ class Classification extends Backbone.Model
     @radioImage()
 
   loadContours: ->
-    $.get(@get('subject').location.contour).then((response) =>
+    $.get(@get('subject').location.contours).then((response) =>
       @set('contours', response))
 
   selectContour: (id) ->
