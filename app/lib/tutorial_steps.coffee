@@ -59,7 +59,7 @@ module.exports =
     classify5: new Step
       number: 7
       header: "Pairing a Second Source."
-      details: "Then click on the first contour of the brighter Galaxy." 
+      details: "Then click on the first group of contours of the brighter Galaxy." 
       attachment: "-0.2 0.1 #1.contour-group right center"
       className: "arrow-left"
       next: {'click #1.contour-group' : "classify55"}
@@ -67,7 +67,7 @@ module.exports =
     classify525: new Step
       number: 8 
       header: "Pairing a Second Source."
-      details: "Next click on the second contour of the Galaxy. Then click on 'Done'."
+      details: "Next click on the second group of contours of the Galaxy. Then click on 'Done'."
       attachment: "-0.2 0.1 #1.contour-group right center"
       className: "arrow-left"
       next: {"click .done" : "classify6"}
