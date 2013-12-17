@@ -19,8 +19,8 @@ nav
     margin: 0 auto
   
   ul
-    padding 0
-    margin 0
+    padding: 0
+    margin: 0
     display: inline-block
 
     &.pull-right
@@ -59,13 +59,12 @@ nav
       display: inline-block
 
     ul
-
+      
       li
         line-height 76px
         display inline-block
         text-align center
-        position relative
-        margin-right: 80px
+        width 80px
 
         &:last-child
           margin-right: 0
@@ -73,6 +72,13 @@ nav
 
         &:first-child
           text-align: left
+
+          
+      &.pull-right
+        margin-right: 80px
+
+      &.pull-left
+        margin-left: 80px
 
 @media (max-width: 1000px)
   nav
