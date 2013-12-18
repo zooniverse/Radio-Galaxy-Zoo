@@ -1,17 +1,8 @@
-!app/lib/zooniverse*.js
-
 public/
 .DS_Store
-docs/
 node_modules/
 bower_components/
-build/
-data-import/
-*.map
 scripts/radio-galaxy-zoo-*
-*rgz*
-*rgz_fits*
-*subjects*
 .env
 *.fits
 *.fits.gz
