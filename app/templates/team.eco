@@ -1,7 +1,7 @@
 <div class="row">
   <% for bio in @: %>
     <div class="bio"
-      <h5><%- bio.name %> <% if bio.twitter: %><a target="_blank" href="http://twitter.com/<%- bio.twitter %>">@<%- bio.twitter %></a><% end %></h5>
+      <h5><%- bio.name %><% if bio.title: %> - <%- bio.title %><% end %> <% if bio.twitter: %><a target="_blank" href="http://twitter.com/<%- bio.twitter %>">@<%- bio.twitter %></a><% end %></h5>
       <p><%- bio.institution %></p>
       <p><%- bio.bio %></p>
     </div>
