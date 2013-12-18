@@ -1,15 +1,14 @@
-
 # Radio Galaxy Zoo
   
-    # Run to get development dependencies
-    npm install
-    
-    # Run to get javascript dependencies
-    ./setup.sh
-    
-    # Run application on a local web server
-    npm start
-
+## Getting started
+* Install (if you don't have them; likely need root or sudo):
+    * [Node.js](http://nodejs.org): `brew install node` on OS X, [see here](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager#ubuntu-mint-elementary-os) for Ubuntu. 
+    * [Brunch](http://brunch.io): `npm install -g brunch`
+    * [Bower](http://bower.io): `npm install -g bower`
+* Run:
+    * `npm install` -- installs brunch plugins
+    * `bower install` -- installs library dependencies (Underscore, Backbone, and jQuery) 
+    * `brunch watch --server` — watches the project with continuous rebuild. This will also launch HTTP server with [pushState](https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Manipulating_the_browser_history).
 
 ## Steps Before Launching App with New Data
 
