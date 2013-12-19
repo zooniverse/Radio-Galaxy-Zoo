@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, user-scalable=no" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
 
-    <title>Radio Galaxy Zoo</title>
+    <title data-t7e-key="title">Radio Galaxy Zoo</title>
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,400italic,700|Open+Sans+Condensed:700,500,300" />
     <link class="removeable" rel="stylesheet" href="./css/vendor.css" type="text/css" charset="utf-8" />
     <link class="removeable" rel="stylesheet" href="./css/app.css" type="text/css" charset="utf-8" />
@@ -13,29 +13,29 @@
 
   <body>
     <nav>
-      <a class="logo" href="#/"><img src="images/rgz_logo.png" /></a>
+      <a class="logo" href="#/"><img alt="Radio Galaxy Zoo" src="images/rgz_logo.png" /></a>
       <ul class="pull-left">
-        <li><a href="#/classify">Classify</a></li>
-        <li><a href="#/science">Science</a></li>
-        <li><a href="#/team">Team</a></li>
+        <li><a data-t7e-key="nav.classify" href="#/classify">Classify</a></li>
+        <li><a data-t7e-key="nav.science" href="#/science">Science</a></li>
+        <li><a data-t7e-key="nav.team" href="#/team">Team</a></li>
       </ul>
       <ul class="pull-right">
-        <li><a href="#/profile">Profile</a></li>
-        <li><a target="_blank" href="http://radiotalk.galaxyzoo.org/">Discuss</a></li>
-        <li><a target="_blank" href="http://blog.galaxyzoo.org/">Blog</a></li>
+        <li><a data-t7e-key="nav.profile" href="#/profile">Profile</a></li>
+        <li><a data-t7e-key="nav.discuss" target="_blank" href="http://radiotalk.galaxyzoo.org/">Discuss</a></li>
+        <li><a data-t7e-key="nav.blog" target="_blank" href="http://blog.galaxyzoo.org/">Blog</a></li>
       </ul>
 
     </nav>
 
     <section id="index">
-      <div class="headline row">
+      <div data-t7e-key="index.header" class="headline row">
         <h1>In Search of Erupting Black Holes</h1>
         <p class="call-to-action">Help astronomers discover supermassive black holes observed by the Australia Telescope Large Area Survey.</p>
       </div>
       <div class="slider row">
         <div class="slide-element radio-galaxy-zoo">
-          <p class="credit">NASA, ESA, S. Baum and C. O'Dea (RIT), R. Perley and W. Cotton (NRAO/AUI/NSF), and the Hubble Heritage Team (STScI/AURA)</p>
-          <div class="left">
+          <p data-t7e-key="index.image_credit" class="credit">NASA, ESA, S. Baum and C. O'Dea (RIT), R. Perley and W. Cotton (NRAO/AUI/NSF), and the Hubble Heritage Team (STScI/AURA)</p>
+          <div data-t7e-key="index.call" class="left">
             <p class="header-title">Search for Black Holes</p>
             <p class="description">Black holes are found at the center of most, if not all, galaxies. The bigger the galaxy, the bigger the black hole and the more sensational the effect it can have on the host galaxy. These supermassive black holes drag in nearby material, growing to billions of times the mass of our sun and occasionally producing spectacular jets of material traveling nearly as fast as the speed of light. These jets often can't be detected in visible light, but are seen using radio telescopes. Astronomers need your help to find these jets and match them to the galaxy that hosts them.</p>
             <a class="blue-button" href="#/classify">Begin Hunting</a>
@@ -44,13 +44,13 @@
       </div>
 
       <div class="row">
-        <div class="column half">
+        <div data-t7e-key="index.left" class="column half">
           <h2>Why do astronomers need your help?</h2>
           <p class="description">Black holes cannot be directly observed, since light cannot escape from them; but we can detect them by observing the effect they have on their surroundings. There are a number of methods for probing those surroundings, but for the supermassive black holes found at the center of galaxies, any optical or infrared light is obscured by large amounts of gas and dust. Fortunately, the jets of material spewed out by these supermassive black holes can be observed in the radio wavelengths.</p>
 
           <p class="description">There is a great deal of valuable information that can be obtained from the radio images of these jets, but we need to understand the host galaxy too. For instance, observing the host galaxy allows us to determine its distance, which is critical to understanding how big and how luminous the black hole actually is.</p>
         </div>
-        <div class="column half">
+        <div data-t7e-key="index.right" class="column half">
           <h2>What do astronomers hope to learn?</h2>
           <p class="description"> Astronomers have a good understanding of how small black holes (those that are several to tens of times more massive than our Sun) are formed. The picture is less clear for the supermassive black holes found in the center of galaxies. In order to better understand how these black holes form and evolve over time, astronomers need to observe many of them at different stages of their lifecycles. To do this, they need to find them first!</p>
           <p class="description">In order to better understand how supermassive black holes form, astronomers need more data to input into their models. Ideally, they need information about black holes at all stages of their lifecycle. To accomplish this, we want to identify as many black hole/jet pairs as possible and associate them with their host galaxies; with a large enough sample (from your classifications), we can pick out black holes at different stages and build a better picture of their origins.<a href="#/science">More ...</a></p>
@@ -60,25 +60,25 @@
 
     <section id="classify">
       <div class="example-container">
-        <div class="row example-selection">
+        <div data-t7e-key="guide.title" class="row example-selection">
           Spotter's Guide
         </div>
         <div class="examples row">
-          <span class="example active" data-type="compact">Compact</span>
-          <span class="example" data-type="extended">Extended</span>          
-          <span class="example" data-type="multiple">Multiple</span>
+          <span data-t7e-key="guide.compact_title" class="example active" data-type="compact">Compact</span>
+          <span data-t7e-key="guide.extended_title" class="example" data-type="extended">Extended</span>          
+          <span data-t7e-key="guide.multiple_title" class="example" data-type="multiple">Multiple</span>
 
           <div class="row example-box">
             <div id="compact-examples" class="content active">
               <div class="row">
-                <p>A compact object is where there is a single radio galaxy that looks like a circle or oval and usually lies directly on top of an infrared source.</p>
+                <p data-t7e-key="guide.compact">A compact object is where there is a single radio galaxy that looks like a circle or oval and usually lies directly on top of an infrared source.</p>
               </div>
               <div class="row">
                 <div class="ex-img-container">
                   <img src="images/examples/compact/S1138_radio.png" />
                   <img class="ir-ex" src="images/examples/compact/S1138_heatmap+contours.png" />
                 </div>
-                <span class="pull-left">Radio</span><span class="pull-right">IR</span>
+                <span data-t7e-key="radio" class="pull-left">Radio</span><span data-t7e-key="ir" class="pull-right">IR</span>
                 <input type="range" min="0" max="1" step="0.1" class="opacity" value="0" />
               </div>
               <div class="row">
@@ -86,7 +86,7 @@
                   <img src="images/examples/compact/S1224_radio.png" />
                   <img class="ir-ex" src="images/examples/compact/S1224_heatmap+contours.png" />
                 </div>
-                <span class="pull-left">Radio</span><span class="pull-right">IR</span>
+                <span data-t7e-key="radio" class="pull-left">Radio</span><span data-t7e-key="ir" class="pull-right">IR</span>
                 <input type="range" min="0" max="1" step="0.1" class="opacity" />
               </div>
               <div class="row">
@@ -94,21 +94,21 @@
                   <img src="images/examples/compact/S150_radio.png" />
                   <img class="ir-ex" src="images/examples/compact/S150_heatmap+contours.png" />
                 </div>
-                <span class="pull-left">Radio</span><span class="pull-right">IR</span>
+                <span data-t7e-key="radio" class="pull-left">Radio</span><span data-t7e-key="ir" class="pull-right">IR</span>
                 <input type="range" min="0" max="1" step="0.1" class="opacity" value="0" />
               </div>
             </div>
 
             <div id="extended-examples" class="content">
               <div class="row">
-                <p>An extended object is where a single radio galaxy stretches away from the central infrared source.</p>
+                <p data-t7e-key="guide.extended">An extended object is where a single radio galaxy stretches away from the central infrared source.</p>
               </div>
               <div class="row">
                 <div class="ex-img-container">
                   <img src="images/examples/extended/S1058_radio.png" />
                   <img class="ir-ex" src="images/examples/extended/S1058_heatmap+contours.png" />
                 </div>
-                <span class="pull-left">Radio</span><span class="pull-right">IR</span>
+                <span data-t7e-key="radio" class="pull-left">Radio</span><span data-t7e-key="ir" class="pull-right">IR</span>
                 <input type="range" min="0" max="1" step="0.1" class="opacity" value="0" />
               </div>
               <div class="row">
@@ -116,7 +116,7 @@
                   <img src="images/examples/extended/S1110_radio.png" />
                   <img class="ir-ex" src="images/examples/extended/S1110_heatmap+contours.png" />
                 </div>
-                <span class="pull-left">Radio</span><span class="pull-right">IR</span>
+                <span data-t7e-key="radio" class="pull-left">Radio</span><span data-t7e-key="ir" class="pull-right">IR</span>
                 <input type="range" min="0" max="1" step="0.1" class="opacity" value="0" />
               </div>
               <div class="row">
@@ -124,7 +124,7 @@
                   <img src="images/examples/extended/S311_radio.png" />
                   <img class="ir-ex" src="images/examples/extended/S311_heatmap+contours.png" />
                 </div>
-                <span class="pull-left">Radio</span><span class="pull-right">IR</span>
+                <span data-t7e-key="radio" class="pull-left">Radio</span><span data-t7e-key="ir" class="pull-right">IR</span>
                 <input type="range" min="0" max="1" step="0.1" class="opacity" value="0" />
               </div>
               <div class="row">
@@ -132,21 +132,21 @@
                   <img src="images/examples/extended/S586_radio.png" />
                   <img class="ir-ex" src="images/examples/extended/S586_heatmap+contours.png" />
                 </div>
-                <span class="pull-left">Radio</span><span class="pull-right">IR</span>
+                <span data-t7e-key="radio" class="pull-left">Radio</span><span data-t7e-key="ir" class="pull-right">IR</span>
                 <input type="range" min="0" max="1" step="0.1" class="opacity" value="0" />
               </div>
             </div>
 
             <div id="multiple-examples" class="content">
               <div class="row">
-                <p>A multiple object is where there are more then one radio galaxy overlapping with one or more infrared sources.</p>
+                <p data-t7e-key="guide.multiple">A multiple object is where there are more then one radio galaxy overlapping with one or more infrared sources.</p>
               </div>
               <div class="row">
                 <div class="ex-img-container">
                   <img src="images/examples/multiple/S1192_radio.png" />
                   <img class="ir-ex" src="images/examples/multiple/S1192_heatmap+contours.png" />
                 </div>
-                <span class="pull-left">Radio</span><span class="pull-right">IR</span>
+                <span data-t7e-key="radio" class="pull-left">Radio</span><span data-t7e-key="ir" class="pull-right">IR</span>
                 <input type="range" min="0" max="1" step="0.1" class="opacity" value="0" />
               </div>
               <div class="row">
@@ -154,7 +154,7 @@
                   <img src="images/examples/multiple/S132_radio.png" />
                   <img class="ir-ex" src="images/examples/multiple/S132_heatmap+contours.png" />
                 </div>
-                <span class="pull-left">Radio</span><span class="pull-right">IR</span>
+                <span data-t7e-key="radio" class="pull-left">Radio</span><span data-t7e-key="ir" class="pull-right">IR</span>
                 <input type="range" min="0" max="1" step="0.1" class="opacity" value="0" />
               </div>
               <div class="row">
@@ -162,7 +162,7 @@
                   <img src="images/examples/multiple/S179_radio.png" />
                   <img class="ir-ex" src="images/examples/multiple/S179_heatmap+contours.png" />
                 </div>
-                <span class="pull-left">Radio</span><span class="pull-right">IR</span>
+                <span data-t7e-key="radio" class="pull-left">Radio</span><span data-t7e-key="ir" class="pull-right">IR</span>
                 <input type="range" min="0" max="1" step="0.1" class="opacity" value="0" />
               </div>
               <div class="row">
@@ -170,7 +170,7 @@
                   <img class="ir-ex" src="images/examples/multiple/S923_heatmap+contours.png" />
                   <img src="images/examples/multiple/S923_radio.png" />
                 </div>
-                <span class="pull-left">Radio</span><span class="pull-right">IR</span>
+                <span data-t7e-key="radio" class="pull-left">Radio</span><span data-t7e-key="ir" class="pull-right">IR</span>
                 <input type="range" min="0" max="1" step="0.1" class="opacity" value="0" />
               </div>
             </div>
@@ -179,13 +179,14 @@
       </div>
 
       <div class="keyboard-modal">
-        <h2>Keyboard Shortcuts</h2>
-        <ul>
+        <h2 data-t7e-key="guide.keyboard_title">Keyboard Shortcuts</h2>
+        <ul data-t7e-key="guide.keyboard">
           <li>Space: Next Step</li>
           <li>Shift+Space: Prev Step</li>
           <li>c: Toggle Contours</li>
           <li>t: Start Tutorial</li>
           <li>r: Toggle Wavelength</li>
+          <li>n: Mark No Contours/No Infrared</li>
         </ul>
       </div>
 
@@ -207,51 +208,51 @@
 
           <div class="row controls">
             <div class="image-slider">
-              <p class="band" data-band="radio">Radio</p>
+              <p data-t7e-key="radio" class="band" data-band="radio">Radio</p>
               <input class='image-opacity' type="range" min="0" max="1" step="0.01" value="0" />
-              <p class="band" data-band="infrared">IR</p>
+              <p data-t7e-key="ir" class="band" data-band="infrared">IR</p>
             </div>
           </div>
 
 
           <div class='row instruction'>
             <div data-step="0">
-              <p>Click on any radio contour or pair of jets</p>
+              <p data-t7e-key="classify.step0">Click on any radio contour or pair of jets</p>
             </div>
 
             <div data-step="1">
-              <p>Click the associated infrared source(s)</p>
+              <p data-t7e-key="classify.step1">Click the associated infrared source(s)</p>
             </div>
 
             <div data-step="2">
-              <p>Are there any more sources?</p>
+              <p data-t7e-key="classify.step2">Are there any more sources?</p>
             </div>
 
             <div data-step="3">
-              <p>Great work!</p>
+              <p data-t7e-key="classify.step3">Great work!</p>
             </div>
           </div>
 
           <div class='buttons row'>
             <div data-step="0">
-              <button class="btn cancel">Cancel</button>
-              <button class="btn no-contours">No Contours</button>
-              <button class="btn done">Done</button>
+              <button data-t7e-key="classify.cancel" class="btn cancel">Cancel</button>
+              <button data-t7e-key="classify.no_contours" class="btn no-contours">No Contours</button>
+              <button data-t7e-key="classify.done" class="btn done">Done</button>
             </div>
             <div data-step="1">
-              <button class="btn cancel">Cancel</button>
-              <button class="btn grey no-infrared">No Infrared</button>
-              <button class="btn done">Done</button>
+              <button data-t7e-key="classify.cancel" class="btn cancel">Cancel</button>
+              <button data-t7e-key="classify.no_infrared" class="btn grey no-infrared">No Infrared</button>
+              <button data-t7e-key="classify.done" class="btn done">Done</button>
             </div>
             <div data-step="2">
-              <button class="btn cancel">Cancel</button>
-              <button class="btn next-radio">Mark Another</button>
-              <button class="btn done">Finish</button>
+              <button data-t7e-key="classify.cancel" class="btn cancel">Cancel</button>
+              <button data-t7e-key="classify.mark_another" class="btn next-radio">Mark Another</button>
+              <button data-t7e-key="classify.finish" class="btn done">Finish</button>
             </div>
             <div data-step="3">
-              <button class="btn grey favorite">Favorite</button>
-              <a target="_blank" class="btn grey discuss">Discuss</a>
-              <button class="btn next">Next</button>
+              <button data-t7e-key="classify.fav" class="btn grey favorite">Favorite</button>
+              <a data-t7e-key="classify.disucss" target="_blank" class="btn grey discuss">Discuss</a>
+              <button data-t7e-key="classify.next" class="btn next">Next</button>
             </div>
           </div>
         </div>
@@ -259,11 +260,11 @@
     </section>
     <section id="team">
       <div class="lead-bios"></div>
-      <h2>Development Team</h2>
+      <h2 data-t7e-key="team.dev">Development Team</h2>
       <div class="developer-bios"></div>
-      <h2>Education Team</h2>
+      <h2 data-t7e-key="team.edu">Education Team</h2>
       <div class="edu-bios"></div>
-      <h2>Science Team</h2>
+      <h2 data-t7e-key="team.sci">Science Team</h2>
       <div class="science-bios"></div>
     </section>
     <section id="science">
@@ -272,24 +273,24 @@
           <span class="content-image">
             <a href="http://www.atnf.csiro.au/people/Emil.Lenc/Gallery/"><span class="image-credit">Image Credit: Emil Lenc</span></a>
             <img src="./images/science/atlas.jpg" class="science-image"/>
-            <h2>Radio Images</h2>
+            <h2 data-t7e-key="science.radio.head">Radio Images</h2>
           </span>
-          <p class="description"> Most of the radio data in Radio Galaxy Zoo comes from the Faint Images of the Radio Sky at Twenty-Centimeters (<a href="http://sundog.stsci.edu/">FIRST</a>), a deep survey which covers more than 10,000 square degrees. This is about one quarter of the entire sky! The data were taken with the Very Large Array (<a href="https://public.nrao.edu/telescopes/vla">VLA</a>), a 27-dish telescope in New Mexico, USA (and made famous in the film <i>Contact</i>). The images were taken between 1993 and 2011. About 175,000 total images in Radio Galaxy Zoo come from FIRST; you're helping us match these jets to their host galaxies by using images from the infrared WISE satellite. &rarr;</p>
-          <p class="description"> Additional radio data comes from the Australia Telescope Large Area Survey (<a href="http://www.atnf.csiro.au/research/deep/">ATLAS</a>), a deep radio survey of six square degrees of the sky (about 30 times the size of the full Moon). This field contains about 6000 sources. The data were taken with the Australia Telescope Compact Array (<a href="http://www.narrabri.atnf.csiro.au/">ATCA</a>) in rural New South Wales. The images were taken between 2006 and 2011. With only 6000 sources, we can simultaneously have experts examine these sources by eye AND compare them to results from Radio Galaxy Zoo volunteers. We'll combine these to develop and refine our techniques for the upcoming, larger Evolutionary Map of the Universe (<a href="http://www.atnf.csiro.au/people/rnorris/emu/">EMU</a>) and MeerKAT-MIGHTEE surveys.</p>
-          <p class="description">EMU and MIGHTEE will be performed with the newly constructed Australian SKA Pathfinder (<a href="http://www.atnf.csiro.au/projects/askap/">ASKAP</a>) telescope in Western Australia and the <a href="http://www.ska.ac.za/meerkat/">MeerKAT</a> telescope in South Africa. They will discover about 100 million radio sources, increasing our knowledge of the radio sky by almost a factor of 50! Even more importantly, they will probe far more deeply than other telescopes, giving us millions of examples of types of galaxies of which only a few hundred are currently known.</p>
+          <p data-t7e-key="science.radio.p1" class="description"> Most of the radio data in Radio Galaxy Zoo comes from the Faint Images of the Radio Sky at Twenty-Centimeters (<a href="http://sundog.stsci.edu/">FIRST</a>), a deep survey which covers more than 10,000 square degrees. This is about one quarter of the entire sky! The data were taken with the Very Large Array (<a href="https://public.nrao.edu/telescopes/vla">VLA</a>), a 27-dish telescope in New Mexico, USA (and made famous in the film <i>Contact</i>). The images were taken between 1993 and 2011. About 175,000 total images in Radio Galaxy Zoo come from FIRST; you're helping us match these jets to their host galaxies by using images from the infrared WISE satellite. &rarr;</p>
+          <p data-t7e-key="science.radio.p2" class="description"> Additional radio data comes from the Australia Telescope Large Area Survey (<a href="http://www.atnf.csiro.au/research/deep/">ATLAS</a>), a deep radio survey of six square degrees of the sky (about 30 times the size of the full Moon). This field contains about 6000 sources. The data were taken with the Australia Telescope Compact Array (<a href="http://www.narrabri.atnf.csiro.au/">ATCA</a>) in rural New South Wales. The images were taken between 2006 and 2011. With only 6000 sources, we can simultaneously have experts examine these sources by eye AND compare them to results from Radio Galaxy Zoo volunteers. We'll combine these to develop and refine our techniques for the upcoming, larger Evolutionary Map of the Universe (<a href="http://www.atnf.csiro.au/people/rnorris/emu/">EMU</a>) and MeerKAT-MIGHTEE surveys.</p>
+          <p data-t7e-key="science.radio.p3" class="description">EMU and MIGHTEE will be performed with the newly constructed Australian SKA Pathfinder (<a href="http://www.atnf.csiro.au/projects/askap/">ASKAP</a>) telescope in Western Australia and the <a href="http://www.ska.ac.za/meerkat/">MeerKAT</a> telescope in South Africa. They will discover about 100 million radio sources, increasing our knowledge of the radio sky by almost a factor of 50! Even more importantly, they will probe far more deeply than other telescopes, giving us millions of examples of types of galaxies of which only a few hundred are currently known.</p>
           
-          <p class="description">The VLA is operated by <a href="http://www.nrao.edu">NRAO</a> in the United States. Both ATCA and ASKAP are operated by <a href="http://www.csiro.au/">CSIRO</a> in Australia. MeerKAT is operated by <a href="http://www.ska.ac.za">SKA South Africa</a>.</p>
+          <p data-t7e-key="science.radio.p4" class="description">The VLA is operated by <a href="http://www.nrao.edu">NRAO</a> in the United States. Both ATCA and ASKAP are operated by <a href="http://www.csiro.au/">CSIRO</a> in Australia. MeerKAT is operated by <a href="http://www.ska.ac.za">SKA South Africa</a>.</p>
         </div>
         <div class="column half">
           <span class="content-image">
             <a href="http://commons.wikimedia.org/wiki/File:Spitzer_space_telescope.jpg"><span class="image-credit">Image Credit: NASA/JPL-Caltech</span></a>
             <img src="./images/science/spitzer.jpg" class="science-image"/>
-            <h2>Infrared Images</h2>
+            <h2 data-t7e-key="science.ir.head">Infrared Images</h2>
           </span>
-          <p class="description"> Most of infrared images that you're using to identify the host galaxies of black holes come from the Wide-Field Infrared Survey Explorer (<a href="http://wise.ssl.berkeley.edu/">WISE</a>), an orbiting telescope which was operated by NASA from 2009&ndash;2011. WISE took images of the entire sky at four infrared wavelengths: 3.4, 4,6, 12, and 22 micrometers. The images in Radio Galaxy Zoo come from the 3.4 micrometer band; these means that the galaxies we're looking at emit their light as a combination of cool stars, warm dust that's been heated by starlight, and emission from a supermassive black hole. The 175,000 WISE images have been matched to FIRST data from the VLA, and cover most of the Northern and Southern Galactic Cap regions.
-          <p class="description">Some additional infrared images come from the <a href="http://www.jpl.nasa.gov/missions/spitzer-space-telescope/">Spitzer Space Telescope</a>, an infrared observatory launched by NASA in 2003. It studies objects ranging from our own Solar System to the distant reaches of the Universe. In the early days of the <i>Spitzer</i> mission, the telescope was cryogenically cooled so that its three instruments (two cameras and a spectrograph) could observe the Universe at wavelengths from 3 to 180 micrometers. After its helium supply was exhausted in 2009, the telescope has continued to operate its IRAC camera in "Warm Mode", which it can do without the need for cryogenics.</p>
-          <p class="description">The Spitzer infrared images you see in Radio Galaxy Zoo were taken as part of a program in this warm mode, called the Spitzer Wide-Area Infrared Extragalactic Survey (<a href="http://swire.ipac.caltech.edu//swire/swire.html">SWIRE</a>). These were taken with the IRAC camera at a wavelength of 3.6 micrometers. The observed wavelength is similar to the WISE images, but have a higher resolution and sensitivity (in part because Spitzer's mirror is bigger than WISE's). There are about 6,000 images from this survey in Radio Galaxy Zoo, each of which are matched to radio data from ATLAS.</p>
-          <p class="description"><i>Spitzer</i> and WISE are both operated by <a href="http://www.nasa.gov/">NASA</a>.</p>
+          <p data-t7e-key="science.ir.p1" class="description"> Most of infrared images that you're using to identify the host galaxies of black holes come from the Wide-Field Infrared Survey Explorer (<a href="http://wise.ssl.berkeley.edu/">WISE</a>), an orbiting telescope which was operated by NASA from 2009&ndash;2011. WISE took images of the entire sky at four infrared wavelengths: 3.4, 4,6, 12, and 22 micrometers. The images in Radio Galaxy Zoo come from the 3.4 micrometer band; these means that the galaxies we're looking at emit their light as a combination of cool stars, warm dust that's been heated by starlight, and emission from a supermassive black hole. The 175,000 WISE images have been matched to FIRST data from the VLA, and cover most of the Northern and Southern Galactic Cap regions.</p>
+          <p data-t7e-key="science.ir.p2" class="description">Some additional infrared images come from the <a href="http://www.jpl.nasa.gov/missions/spitzer-space-telescope/">Spitzer Space Telescope</a>, an infrared observatory launched by NASA in 2003. It studies objects ranging from our own Solar System to the distant reaches of the Universe. In the early days of the <i>Spitzer</i> mission, the telescope was cryogenically cooled so that its three instruments (two cameras and a spectrograph) could observe the Universe at wavelengths from 3 to 180 micrometers. After its helium supply was exhausted in 2009, the telescope has continued to operate its IRAC camera in "Warm Mode", which it can do without the need for cryogenics.</p>
+          <p data-t7e-key="science.ir.p3" class="description">The Spitzer infrared images you see in Radio Galaxy Zoo were taken as part of a program in this warm mode, called the Spitzer Wide-Area Infrared Extragalactic Survey (<a href="http://swire.ipac.caltech.edu//swire/swire.html">SWIRE</a>). These were taken with the IRAC camera at a wavelength of 3.6 micrometers. The observed wavelength is similar to the WISE images, but have a higher resolution and sensitivity (in part because Spitzer's mirror is bigger than WISE's). There are about 6,000 images from this survey in Radio Galaxy Zoo, each of which are matched to radio data from ATLAS.</p>
+          <p data-t7e-key="science.ir.p4" class="description"><i>Spitzer</i> and WISE are both operated by <a href="http://www.nasa.gov/">NASA</a>.</p>
         </div>
       </div>
 
@@ -298,20 +299,20 @@
           <span class="content-image">
             <img src="./images/science/complex.jpg" class="science-image"/>
             <span class="image-credit"></span>
-            <h2>Why can’t computers do this task?</h2>
+            <h2 data-t7e-key="science.comp.head">Why can’t computers do this task?</h2>
           </span>
-          <p class="description">The jets visible in the radio wavelengths and the host galaxy visible in the optical wavelengths sometimes overlap. In this case, computer programs can tell automatically that they are associated with each other. This simple case is known to astronomers as a ‘compact source’. However, the matching becomes much more complex when we start to consider sitations where there is a great deal of mixed up radio emission or very complex arrangement sof multiple sources &mdash; as in the example above.</p>   
-          <p class="description">If we see three blobs of radio emission, that could either be three separate galaxies or a black hole and its two jets. It's possible for a human to tell by comparing the radio and infrared images – if the infrared shows three galaxies in a row, lining up with the respective radio spots, then it’s probably three separate galaxies. If the only infrared source is in the centre, then it’s probably a black hole and two jets. Computer programs cannot currently compete with the human brain for pattern recognition, especially if the radio emission is uneven or distorted.</p>
+          <p data-t7e-key="science.comp.p1" class="description">The jets visible in the radio wavelengths and the host galaxy visible in the optical wavelengths sometimes overlap. In this case, computer programs can tell automatically that they are associated with each other. This simple case is known to astronomers as a ‘compact source’. However, the matching becomes much more complex when we start to consider sitations where there is a great deal of mixed up radio emission or very complex arrangement sof multiple sources &mdash; as in the example above.</p>   
+          <p data-t7e-key="science.comp.p2" class="description">If we see three blobs of radio emission, that could either be three separate galaxies or a black hole and its two jets. It's possible for a human to tell by comparing the radio and infrared images – if the infrared shows three galaxies in a row, lining up with the respective radio spots, then it’s probably three separate galaxies. If the only infrared source is in the centre, then it’s probably a black hole and two jets. Computer programs cannot currently compete with the human brain for pattern recognition, especially if the radio emission is uneven or distorted.</p>
         </div>
 
         <div class="column half">
           <span class="content-image">
             <img src="./images/science/greenpeas.jpg" class="science-image"/>
             <span class="image-credit"></span>
-            <h2>Serendipitous Discoveries</h2>
+            <h2 data-t7e-key="science.ser.head">Serendipitous Discoveries</h2>
           </span>
-          <p class="description">A great bonus of having humans match these radio and infrared images of galaxies is the possibility of unexpected results. Computer programs only detect or measure what a human requires them too. Humans, on the other hand, are curious by nature and will question and explore unusual features that they see. Other citizen science projects built by the Zooniverse have lead to unexpected and amazing discoveries: this includes objects like <a href="http://en.wikipedia.org/wiki/Hanny%27s_Voorwerp">Hanny's Voorwerp</a> and the <a href="http://en.wikipedia.org/wiki/Pea_galaxy">Green Peas</a> in Galaxy Zoo, or the potentially new seaworm species discovered in Seafloor Explorer.</p>
-          <p class="description">While examining the radio and infrared images, you will be often be asked if you want to ‘TALK’. This is our online discussion tool, where volunteers and the Radio Galaxy Zoo scientists can chat about things that interest them or they are unsure about. Feel free to ask about any image that piques your curiosity. It may be easy to explain, or it might just be something completely unexpected!</p>
+          <p data-t7e-key="science.ser.p1" class="description">A great bonus of having humans match these radio and infrared images of galaxies is the possibility of unexpected results. Computer programs only detect or measure what a human requires them too. Humans, on the other hand, are curious by nature and will question and explore unusual features that they see. Other citizen science projects built by the Zooniverse have lead to unexpected and amazing discoveries: this includes objects like <a href="http://en.wikipedia.org/wiki/Hanny%27s_Voorwerp">Hanny's Voorwerp</a> and the <a href="http://en.wikipedia.org/wiki/Pea_galaxy">Green Peas</a> in Galaxy Zoo, or the potentially new seaworm species discovered in Seafloor Explorer.</p>
+          <p data-t7e-key="science.ser.p2" class="description">While examining the radio and infrared images, you will be often be asked if you want to ‘TALK’. This is our online discussion tool, where volunteers and the Radio Galaxy Zoo scientists can chat about things that interest them or they are unsure about. Feel free to ask about any image that piques your curiosity. It may be easy to explain, or it might just be something completely unexpected!</p>
         </div>
       </div>
 
@@ -320,20 +321,20 @@
           <span class="content-image">
             <a href="http://www.atnf.csiro.au/people/Emil.Lenc/Gallery/"><span class="image-credit">Image Credit: Emil Lenc</span></a>
             <img src="./images/science/pictor.jpg" class="science-image"/>
-            <h2>How do supermassive black holes form?</h2>
+            <h2 data-t7e-key="science.sup.head">How do supermassive black holes form?</h2>
           </span>
-          <p class="description">Astronomers have plenty of evidence that small black holes (roughly a few times the mass of our Sun) form when a large star reaches the end of its life. We're less certain about how supermassive black holes (billions of times the size of our Sun) form and grow. We think that small black holes might merge together to form larger black holes. These larger black holes then swallow surrounding material, merge again with other black holes, and so on until they become the supermassive black holes we observe at the center of massive galaxies.</p>
-          <p class="description">The problem is that this process of repeated black hole merging takes many billions of years, yet we’ve found evidence for supermassive black holes less than a billion years after the Big Bang! That's not enough time for them to have grown to the sizes we observe.</p>
-          <p class="description">In order to better understand how supermassive black holes form, astronomers need more data. Ideally, they need information about black holes at all stages of their lives. So we want to identify as many black hole/jet pairs as possible and associate them with their host galaxies. With a large enough sample &mdash; from your classifications &mdash; we can pick out black holes at different stages and build a better picture of their origins.</p>
+          <p data-t7e-key="science.sup.p1" class="description">Astronomers have plenty of evidence that small black holes (roughly a few times the mass of our Sun) form when a large star reaches the end of its life. We're less certain about how supermassive black holes (billions of times the size of our Sun) form and grow. We think that small black holes might merge together to form larger black holes. These larger black holes then swallow surrounding material, merge again with other black holes, and so on until they become the supermassive black holes we observe at the center of massive galaxies.</p>
+          <p data-t7e-key="science.sup.p2" class="description">The problem is that this process of repeated black hole merging takes many billions of years, yet we’ve found evidence for supermassive black holes less than a billion years after the Big Bang! That's not enough time for them to have grown to the sizes we observe.</p>
+          <p data-t7e-key="science.sup.p3" class="description">In order to better understand how supermassive black holes form, astronomers need more data. Ideally, they need information about black holes at all stages of their lives. So we want to identify as many black hole/jet pairs as possible and associate them with their host galaxies. With a large enough sample &mdash; from your classifications &mdash; we can pick out black holes at different stages and build a better picture of their origins.</p>
         </div>
         <div class="column half">
           <span class="content-image">
             <a href="http://www.atnf.csiro.au/people/Emil.Lenc/Gallery/"><span class="image-credit">Image Credit: Emil Lenc</span></a>
             <img src="./images/science/scope.jpg" class="science-image"/>
-            <h2>Supermassive black holes and their host galaxies</h2>
+            <h2 data-t7e-key="science.gal.head">Supermassive black holes and their host galaxies</h2>
           </span>
-          <p class="description">There is strong circumstantial evidence that the supermassive black holes can change the rate at which stars form in their host galaxies. It is possible that the jets from the supermassive black hole heat up and disrupt the gas within the galaxy. This might either regulate the star formation rate by expelling and heating the gas; alternatively, it might compress the gas in some parts of the galaxy and actually increase the star formation rate. Our best understanding of which of these processes dominate galaxies will be helped with bigger samples of galaxies to observe, which we hope to get from your classifications.</p>
-          <p class="description">The radio/infrared data on this site, combined with your clicks, will help us to better understand these objects and how they affect their host galaxies</p>
+          <p data-t7e-key="science.gal.p1" class="description">There is strong circumstantial evidence that the supermassive black holes can change the rate at which stars form in their host galaxies. It is possible that the jets from the supermassive black hole heat up and disrupt the gas within the galaxy. This might either regulate the star formation rate by expelling and heating the gas; alternatively, it might compress the gas in some parts of the galaxy and actually increase the star formation rate. Our best understanding of which of these processes dominate galaxies will be helped with bigger samples of galaxies to observe, which we hope to get from your classifications.</p>
+          <p data-t7e-key="science.gal.p2" class="description">The radio/infrared data on this site, combined with your clicks, will help us to better understand these objects and how they affect their host galaxies</p>
         </div>
       </div>
     </section>

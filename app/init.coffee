@@ -1,9 +1,23 @@
 Router = require('lib/router')
+enUS = require('lib/en-us')
 
 zooniverse.models.Subject.prototype.talkHref = ->
   "http://radiotalk.galaxyzoo.org/#/subjects/#{@zooniverse_id}"
 
 module.exports = ->
+  t7e.load(enUS)
+
+  languageManager = new zooniverse.LanguageManager({
+    translations: {
+      en: { label: "English", strings: enUS }
+    }
+  })
+
+  languageManager.on('change-language', (e, code, languageStrings) ->
+    t7e.load(languageStrings)
+    t7e.refresh()
+  )
+
   host = if window.location.port is "9296" then "http://0.0.0.0:3000" else "https://dev.zooniverse.org"
   if window.location.port is "" and (window.location.pathname isnt "/beta2/")
     new zooniverse.GoogleAnalytics
