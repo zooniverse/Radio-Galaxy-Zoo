@@ -56,7 +56,7 @@ module.exports =
     no_infrared: "No Infrared"
     finish: "Finish"
     mark_another: "Mark Another"
-    next: "next"
+    next: "Next"
     fav: "Favorite"
     discuss: "Discuss"
   team:
