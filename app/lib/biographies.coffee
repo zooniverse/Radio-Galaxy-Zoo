@@ -101,8 +101,8 @@ module.exports = [
     type: "science"
     name: "Nick Seymour"
     institution: "CSIRO Astronomy and Space Science, Australia"
-    twitter: null
-    bio: null
+    twitter: "nseymouruk"
+    bio: "Radio astronomer enjoying life down under and working on the largest radio survey with the Australian SKA Pathfinder, CSIRO." 
   },
   {
     type: "lead"
@@ -180,7 +180,7 @@ module.exports = [
   {
     type: "science"
     name: "Anna Kapinska"
-    institution: "Curtin University, Australia"
+    institution: "Universe of Western Australia"
     bio: "Anna is interested in radio galaxies and quasars at various stages of their life, from small young radio sources to large old radio galaxies. She works on radio jets and studies how they affect the galaxies which host them at various stages of the Universe’s evolution."
   },
   {
@@ -188,6 +188,6 @@ module.exports = [
     name: "Sugata Kaviraj"
     institution: "University of Hertfordshire, UK"
     bio: "Works on the formation and evolution of galaxies, and the role black holes play in these processes."
-  }
+  },
 ]
   
