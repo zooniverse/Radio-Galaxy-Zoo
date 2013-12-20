@@ -69,10 +69,11 @@ module.exports = [
     bio: "Karen’s research uses data from large surveys to search for clues as to how galaxies form and evolve &mdash; she’s particularly worked on red spirals, and galactic bars in recent years using classifications from Galaxy Zoo. Karen has a background in radio astronomy (her first telescope was Arecibo) and is really excited to see Galaxy Zoo expand into radio frequencies."
   },
   {
+    type: "science"
     name: "Enno Middelberg"
     institution: "Ruhr-University Bochum, Germany"
     twitter: null
-    bio: "Enno's main interest is galaxy evolution and the role that active galactic nuclei play. He has helped develop new observational methods to connect radio telescopes from all over the world (called Very Long Baseline Interferometry, or VLBI) and to simultaneously observe hundreds of RGZ objects with these telescopes. Enno generated the radio contour and infrared heatmap images for the COSMOS-Spitzer data sets in Radio Galaxy Zoo."
+    bio: "Enno’s main interest is galaxy evolution and the role that Active Galactic Nuclei play. He has helped develop new observational methods to connect radio telescopes from all over the world (Very Long Baseline Interferometry, or VLBI) and to simultaneously observe hundreds of RGZ objects with these telescopes."
   },
   {
     type: "lead"
@@ -180,7 +181,7 @@ module.exports = [
   {
     type: "science"
     name: "Anna Kapinska"
-    institution: "Universe of Western Australia"
+    institution: "University of Western Australia"
     bio: "Anna is interested in radio galaxies and quasars at various stages of their life, from small young radio sources to large old radio galaxies. She works on radio jets and studies how they affect the galaxies which host them at various stages of the Universe’s evolution."
   },
   {
