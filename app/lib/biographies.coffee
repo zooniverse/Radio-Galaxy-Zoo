@@ -139,7 +139,7 @@ module.exports = [
     name: "Heinz Andernach"
     institution: "University of Guanajuato, Mexico"
     twitter: null
-    bio: "Heinz has been studying radio galaxies since the late 1970's, mainly those in clusters of galaxies. Over the past 25 years he has been collecting (or digitizing by himself) the radio source lists of over 2000 different research papers with the aim of creating the largest public database on celestial radio sources."
+    bio: "Heinz has been studying radio galaxies since the late 1970's, mainly those in clusters of galaxies. He compiled the largest collection of radio source lists to create a public database. He is interested in how diverse radio galaxies can be and how large they can grow."
   },
   {
     type: "developer"
