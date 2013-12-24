@@ -13,7 +13,7 @@ module.exports =
   index:
     header: """ 
         <h1>In Search of Erupting Black Holes</h1>
-        <p class="call-to-action">Help astronomers discover supermassive black holes observed by the Australia Telescope Large Area Survey.</p>"""
+        <p class="call-to-action">Help astronomers discover supermassive black holes observed by the KG Jansky Very Large Array (NRAO) and the Australia Telescope Compact Array (CSIRO)</p>""" 
     image_credit: "NASA, ESA, S. Baum and C. O'Dea (RIT), R. Perley and W. Cotton (NRAO/AUI/NSF), and the Hubble Heritage Team (STScI/AURA)"
     call: """ 
             <p class="header-title">Search for Black Holes</p>
