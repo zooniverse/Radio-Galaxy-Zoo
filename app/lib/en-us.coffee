@@ -33,7 +33,7 @@ module.exports =
     title: "Spotter's Guide"
     compact_title: 'Compact'
     extended_title: 'Extended'
-    multiple_title: 'Mutliple'
+    multiple_title: 'Multiple'
     compact: "A compact object is where there is a single radio galaxy that looks like a circle or oval and usually lies directly on top of an infrared source."
     extended: "An extended object is where a single radio galaxy stretches away from the central infrared source."
     multiple: "A multiple object is where there are more then one radio galaxy overlapping with one or more infrared sources."
