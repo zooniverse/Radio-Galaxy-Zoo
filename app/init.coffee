@@ -19,19 +19,19 @@ module.exports = ->
   )
 
   host = if window.location.port is "9296" then "http://0.0.0.0:3000" else "https://dev.zooniverse.org"
-  if window.location.port is "" and (window.location.pathname isnt "/beta2/")
+  if window.location.port is "3333" or (window.location.pathname is "/beta2/")
+    api = new zooniverse.Api({
+      project: 'radio'
+      host: host
+      path: '/proxy'
+    })
+  else
     new zooniverse.GoogleAnalytics
       account: "UA-1224199-49"
     
     api = new zooniverse.Api({
       project: 'radio'
       host: "https://api.zooniverse.org"
-      path: '/proxy'
-    })
-  else
-    api = new zooniverse.Api({
-      project: 'radio'
-      host: host
       path: '/proxy'
     })
 
