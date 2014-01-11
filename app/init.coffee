@@ -37,6 +37,7 @@ module.exports = ->
 
     #  zooniverse.models.Subject.next()
   topBar = new zooniverse.controllers.TopBar
+    talkProfileHref: "http://radiotalk.galaxyzoo.org/#/profile"
   zooniverse.models.User.fetch()
   topBar.el.appendTo 'body'
 
