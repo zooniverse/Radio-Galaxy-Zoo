@@ -137,6 +137,7 @@ window.base64 = {
     signInForProfile: 'Sign in to see your profile.',
     footerHeading: 'The Zooniverse is a collection of web-based citizen science projects that use the efforts of volunteers to help researchers deal with the flood of data that confronts them.',
     privacyPolicy: 'Privacy policy',
+    forkOnGitHub: 'Source & bugs',
     recents: 'Recents',
     favorites: 'Favorites',
     none: 'none'
@@ -702,50 +703,10 @@ window.base64 = {
 }).call(this);
 
 (function() {
-  var offset, _base;
-
-  offset = function(el, from) {
-    var currentElement, left, top;
-    left = 0;
-    top = 0;
-    currentElement = el;
-    while (currentElement != null) {
-      if (!isNaN(currentElement.offsetLeft)) {
-        left += currentElement.offsetLeft;
-      }
-      if (!isNaN(currentElement.offsetTop)) {
-        top += currentElement.offsetTop;
-      }
-      currentElement = currentElement.offsetParent;
-    }
-    left += parseFloat(getComputedStyle(document.body.parentNode).marginLeft);
-    top += parseFloat(getComputedStyle(document.body.parentNode).marginTop);
-    return {
-      left: left,
-      top: top
-    };
-  };
-
-  if (window.zooniverse == null) {
-    window.zooniverse = {};
-  }
-
-  if ((_base = window.zooniverse).util == null) {
-    _base.util = {};
-  }
-
-  window.zooniverse.util.offset = offset;
-
-  if (typeof module !== "undefined" && module !== null) {
-    module.exports = offset;
-  }
-
-}).call(this);
-
-(function() {
   var $, EventEmitter, LanguageManager, _ref,
     __hasProp = {}.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+    __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   EventEmitter = ((_ref = window.zooniverse) != null ? _ref.EventEmitter : void 0) || require('./event-emitter');
 
@@ -761,7 +722,7 @@ window.base64 = {
     LanguageManager.prototype.code = 'en';
 
     function LanguageManager(_arg) {
-      var lang, _ref1, _ref2, _ref3, _ref4, _ref5,
+      var lang, _base, _name, _ref1, _ref2, _ref3, _ref4, _ref5,
         _this = this;
       _ref1 = _arg != null ? _arg : {}, this.translations = _ref1.translations, this.code = _ref1.code;
       if (this.translations == null) {
@@ -775,7 +736,7 @@ window.base64 = {
         }
       }
       if (this.code == null) {
-        this.code = (_ref3 = location.search.match(/lang=(\w+)/)) != null ? _ref3[1] : void 0;
+        this.code = (_ref3 = location.search.match(/lang=([^&]+)/)) != null ? _ref3[1] : void 0;
       }
       if (this.code == null) {
         this.code = localStorage.getItem('zooniverse-language-code');
@@ -789,6 +750,14 @@ window.base64 = {
       if (this.code == null) {
         this.code = this.constructor.prototype.code;
       }
+      if (__indexOf.call(this.code, '/') >= 0 || __indexOf.call(this.code, '.json') >= 0) {
+        if ((_base = this.translations)[_name = this.code] == null) {
+          _base[_name] = {
+            label: this.code,
+            strings: this.code
+          };
+        }
+      }
       this.constructor.current = this;
       setTimeout(function() {
         return _this.setLanguage(_this.code);
@@ -796,26 +765,26 @@ window.base64 = {
     }
 
     LanguageManager.prototype.setLanguage = function(code, done, fail) {
-      var localStrings, request, _ref1,
+      var localStrings, pathToStrings, request, _ref1, _ref2,
         _this = this;
       this.code = code;
       if (typeof ((_ref1 = this.translations[this.code]) != null ? _ref1.strings : void 0) === 'string') {
+        pathToStrings = (_ref2 = this.translations[this.code]) != null ? _ref2.strings : void 0;
         localStrings = JSON.parse(localStorage.getItem("zooniverse-language-strings-" + this.code));
         if (localStrings != null) {
           this.translations[this.code].strings = localStrings;
-          return this.setLanguage(this.code, done, fail);
-        } else {
-          request = $.getJSON(this.translations[this.code].strings);
-          request.done(function(data) {
-            localStorage.setItem("zooniverse-language-strings-" + _this.code, JSON.stringify(data));
-            _this.translations[_this.code].strings = data;
-            return _this.setLanguage(_this.code, done, fail);
-          });
-          return request.fail(function() {
-            _this.trigger('language-fetch-fail');
-            return typeof fail === "function" ? fail.apply(null, arguments) : void 0;
-          });
+          this.setLanguage(this.code, done, fail);
         }
+        request = $.getJSON(pathToStrings);
+        request.done(function(data) {
+          localStorage.setItem("zooniverse-language-strings-" + _this.code, JSON.stringify(data));
+          _this.translations[_this.code].strings = data;
+          return _this.setLanguage(_this.code, done, fail);
+        });
+        return request.fail(function() {
+          _this.trigger('language-fetch-fail');
+          return typeof fail === "function" ? fail.apply(null, arguments) : void 0;
+        });
       } else {
         localStorage.setItem('zooniverse-language-code', this.code);
         this.trigger('change-language', [this.code, this.translations[this.code].strings]);
@@ -883,9 +852,6 @@ window.base64 = {
       string = (_ref11 = translate.strings[(_ref12 = LanguageManager.current) != null ? _ref12.code : void 0]) != null ? _ref11[value] : void 0;
       string || (string = (_ref13 = translate.strings[LanguageManager.prototype.code]) != null ? _ref13[value] : void 0);
       string || (string = value);
-      if (typeof console !== "undefined" && console !== null) {
-        console.log("Translating " + property + ", " + value);
-      }
       if (element.hasAttribute(property)) {
         _results.push(element.setAttribute(property, string));
       } else {
@@ -2481,11 +2447,11 @@ template = function(__obj) {
     
       __out.push(groupIconSvg());
     
-      __out.push('</button>\n    </div>\n  </div>\n\n  <div class="messages piece">\n    <a href="http://talk.');
+      __out.push('</button>\n    </div>\n  </div>\n\n  <div class="messages piece">\n    <a href="');
     
-      __out.push(__sanitize(location.hostname.replace(/^www\./, '')));
+      __out.push(this.talkProfileHref);
     
-      __out.push('/#/profile" class="message-link">\n      ');
+      __out.push('" class="message-link">\n      ');
     
       __out.push(mailIconSvg());
     
@@ -2937,17 +2903,17 @@ template = function(__obj) {
   }
   (function() {
     (function() {
-      var Favorite, location, thumbSrc, _ref, _ref1;
+      var Favorite, location, thumbSrc, _ref, _ref1, _ref2, _ref3;
     
-      Favorite = zooniverse.models.Favorite || require('zooniverse/models/favorite');
+      Favorite = ((_ref = window.zooniverse) != null ? (_ref1 = _ref.models) != null ? _ref1.Favorite : void 0 : void 0) || require('zooniverse/models/favorite');
     
       __out.push('\n\n<div class=\'item\'>\n  <a href="');
     
-      __out.push(__sanitize(((_ref = this.subjects[0]) != null ? _ref.talkHref() : void 0) || '#/SUBJECT_ERROR'));
+      __out.push(__sanitize(((_ref2 = this.subjects[0]) != null ? _ref2.talkHref() : void 0) || '#/SUBJECT_ERROR'));
     
       __out.push('">\n    ');
     
-      location = (_ref1 = this.subjects[0]) != null ? _ref1.location : void 0;
+      location = (_ref3 = this.subjects[0]) != null ? _ref3.location : void 0;
     
       __out.push('\n    ');
     
@@ -3068,11 +3034,15 @@ template = function(__obj) {
         __out.push('\n    </div>\n  ');
       }
     
-      __out.push('\n\n  <div class="zooniverse-footer-general">\n    <!--div class="zooniverse-footer-category"><a href="#">Zooniverse Daily</a></div-->\n    <div class="zooniverse-footer-category"><a href="https://www.zooniverse.org/privacy">');
+      __out.push('\n\n  <div class="zooniverse-footer-general">\n    <!--div class="zooniverse-footer-category"><a href="#">Zooniverse Daily</a></div-->\n    <div class="zooniverse-footer-category">\n      <a href="https://www.zooniverse.org/privacy">');
     
       __out.push(translate('privacyPolicy'));
     
-      __out.push('</a></div>\n  </div>\n</div>\n');
+      __out.push('</a>\n    </div>\n\n    <div class="zooniverse-footer-category">\n      <a href="https://github.com/zooniverse">');
+    
+      __out.push(translate('forkOnGitHub'));
+    
+      __out.push('</a>\n    </div>\n  </div>\n</div>\n');
     
     }).call(this);
     
@@ -4053,13 +4023,11 @@ if (typeof module !== 'undefined') module.exports = template;
 }).call(this);
 
 (function() {
-  var Dropdown, offset, toggleClass, _base, _ref, _ref1,
+  var Dropdown, toggleClass, _base, _ref,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   toggleClass = ((_ref = zooniverse.util) != null ? _ref.toggleClass : void 0) || require('../util/toggle-class');
-
-  offset = ((_ref1 = zooniverse.util) != null ? _ref1.offset : void 0) || require('../util/offset');
 
   Dropdown = (function() {
     var _this = this;
@@ -4073,12 +4041,12 @@ if (typeof module !== 'undefined') module.exports = template;
     Dropdown.elements = [];
 
     Dropdown.closeAll = function(_arg) {
-      var except, instance, _i, _len, _ref2, _results;
+      var except, instance, _i, _len, _ref1, _results;
       except = (_arg != null ? _arg : {}).except;
-      _ref2 = this.instances;
+      _ref1 = this.instances;
       _results = [];
-      for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
-        instance = _ref2[_i];
+      for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
+        instance = _ref1[_i];
         if (instance !== except) {
           _results.push(instance.close());
         } else {
@@ -4088,7 +4056,7 @@ if (typeof module !== 'undefined') module.exports = template;
       return _results;
     };
 
-    addEventListener('click', function(e) {
+    addEventListener('mousedown', function(e) {
       var node, shouldClose;
       shouldClose = true;
       node = e.target.correspondingUseElement || e.target;
@@ -4191,9 +4159,9 @@ if (typeof module !== 'undefined') module.exports = template;
 
     Dropdown.prototype.positionMenu = function() {
       var buttonOffset;
-      buttonOffset = offset(this.button);
-      this.menu.style.left = (buttonOffset.left + (this.button.clientWidth * this.buttonPinning[0])) - (this.menu.clientWidth * this.menuPinning[0]) + 'px';
-      return this.menu.style.top = (buttonOffset.top + (this.button.clientHeight * this.buttonPinning[1])) - (this.menu.clientHeight * this.menuPinning[1]) + 'px';
+      buttonOffset = this.button.getBoundingClientRect();
+      this.menu.style.left = ((buttonOffset.left + pageXOffset) + (this.button.offsetWidth * this.buttonPinning[0])) - (this.menu.offsetWidth * this.menuPinning[0]) + 'px';
+      return this.menu.style.top = ((buttonOffset.top + pageYOffset) + (this.button.offsetHeight * this.buttonPinning[1])) - (this.menu.offsetHeight * this.menuPinning[1]) + 'px';
     };
 
     Dropdown.prototype.onResize = function() {
@@ -4212,15 +4180,15 @@ if (typeof module !== 'undefined') module.exports = template;
     };
 
     Dropdown.prototype.destroy = function() {
-      var _ref2, _ref3;
+      var _ref1, _ref2;
       this.constructor.instances.splice(this.constructor.instances.indexOf(this), 1);
       this.constructor.elements.splice(this.constructor.instances.indexOf(this.button), 1);
       this.constructor.elements.splice(this.constructor.instances.indexOf(this.menu), 1);
       this.button.removeEventListener('click', this.onButtonClick, false);
-      if ((_ref2 = this.button.parentNode) != null) {
-        _ref2.removeChild(this.button);
+      if ((_ref1 = this.button.parentNode) != null) {
+        _ref1.removeChild(this.button);
       }
-      return (_ref3 = this.menu.parentNode) != null ? _ref3.removeChild(this.menu) : void 0;
+      return (_ref2 = this.menu.parentNode) != null ? _ref2.removeChild(this.menu) : void 0;
     };
 
     return Dropdown;
@@ -4399,7 +4367,7 @@ if (typeof module !== 'undefined') module.exports = template;
 }).call(this);
 
 (function() {
-  var Api, BaseController, Dropdown, GroupsMenu, LanguageManager, LanguagesMenu, TopBar, User, loginDialog, signupDialog, template, _base, _base1, _base2, _base3,
+  var Api, BaseController, Dropdown, GroupsMenu, LanguageManager, LanguagesMenu, TopBar, User, defaultTalkProfileHref, loginDialog, signupDialog, template, _base, _base1, _base2, _base3,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -4444,6 +4412,8 @@ if (typeof module !== 'undefined') module.exports = template;
 
   User = zooniverse.models.User || require('../models/user');
 
+  defaultTalkProfileHref = "http://talk." + (location.hostname.replace(/^www\./, '')) + "/#/profile";
+
   TopBar = (function(_super) {
     __extends(TopBar, _super);
 
@@ -4452,6 +4422,8 @@ if (typeof module !== 'undefined') module.exports = template;
     TopBar.prototype.template = template;
 
     TopBar.prototype.messageCheckTimeout = 2 * 60 * 1000;
+
+    TopBar.prototype.talkProfileHref = defaultTalkProfileHref;
 
     TopBar.prototype.events = {
       'click button[name="sign-in"]': 'onClickSignIn',
