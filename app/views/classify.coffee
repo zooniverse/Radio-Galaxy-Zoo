@@ -123,7 +123,6 @@ class Classify extends Section
   nextStep: (ev, key) ->
     return if _.isEmpty(@model.get('selected_contours')) and not key?
 
-    console.log(key, @model.get('step'))
     if key is 'space' and @model.get('step') is 3
       @nextSubject()
     else if key is 'n' and @model.get('step') is 0

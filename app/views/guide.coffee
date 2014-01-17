@@ -34,12 +34,10 @@ class Guide extends Backbone.View
     @$(ev.target).siblings().find('.ir-ex').css('opacity', parseFloat(ev.target.value))
 
   toggleRadio: (ev) ->
-    console.log('here')
     @$(ev.target).siblings().find('.ir-ex').css('opacity', 0)
     @$(ev.target).siblings('input').val(0)
 
   toggleIR: (ev) ->
-    console.log('here')
     @$(ev.target).siblings().find('.ir-ex').css('opacity', 1)
     @$(ev.target).siblings('input').val(1)
 

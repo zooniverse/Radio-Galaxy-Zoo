@@ -62,9 +62,11 @@ class Classification extends Backbone.Model
     bboxes = _.chain(contour_ids)
         .map((cid) => 
           contours = @get('contours')
+          width = contours.width
+          height = contours.height
           contours = contours.contours || contours
-          contours[cid][0].bbox)
-        .map((bb) -> _.object(['xmax', 'ymax', 'xmin', 'ymin'], bb))
+          contours[cid][0].bbox.concat([425 / width, 425 / height]))
+        .map((bb) -> _.object(['xmax', 'ymax', 'xmin', 'ymin', 'scale_width', 'scale_height'], bb))
         .value()
     @classification.annotate({
       radio: if _.isEmpty(bboxes) then "No Contours" else bboxes
