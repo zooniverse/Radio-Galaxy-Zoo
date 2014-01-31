@@ -84,6 +84,10 @@ class Classify extends Section
     unless @tut?
       @tut = new zootorial.Tutorial(tutorialSteps)
       @tut.el.bind('end-tutorial', @endTutorial)
+
+      @tut.el.bind 'start-tutorial enter-tutorial-step', =>
+        t7e.refresh @tut.el.get 0
+
       @tut.start()
 
   endTutorial: =>
