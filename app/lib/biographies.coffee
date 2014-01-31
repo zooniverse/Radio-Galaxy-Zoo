@@ -2,193 +2,193 @@ module.exports = [
   {
     type: "lead"
     name: "Ivy Wong"
-    title: "Project Scientist"
-    institution: "CSIRO Astronomy and Space Science, Australia"
+    title: t7e 'span', 'team.titles.project_scientist'
+    institution: t7e 'span', 'team.institutions.csiro'
     twitter: "owning_ivy"
-    bio: "Ivy wants to know what causes galaxies to start and stop forming stars.  She suspects that radio jets might have some role in this. Ivy is particularly interested in galaxies that have suddenly stopped forming stars (aka ‘post-starburst’ galaxies) and blue spheroidal galaxies."
+    bio: t7e 'span', 'team.bios.ivy_wong'
   },
   {
     type: "science"
     name: "Melanie Gendre"
-    institution: "Jodrell Bank Center for Astrophysics, UK"
-    bio: "Melanie worked on radio galaxy morphologies for her Ph.D. thesis, spending many hours doing exactly what you are doing.  By comparing them, Melanie tried to understand where the different types of shapes come from and what the effects are on the galaxies that host the radio jets.  But most of all, she enjoyed explaining to anyone who would hear why this is so very cool and is excited to share this with you.  She is now working in education."
+    institution: t7e 'span', 'team.institutions.jodrell'
+    bio: t7e 'span', 'team.bios.melanie_gendre'
   },
   {
     type: "lead"
     name: "Julie Banfield"
-    title: "Project Scientist"
-    institution: "CSIRO Astronomy and Space Science, Australia"
+    title: t7e 'span', 'team.titles.project_scientist'
+    institution: t7e 'span', 'team.institutions.csiro'
     twitter: "42jkb"
-    bio: "Julie is interested in the evolution of radio galaxies and how they impact their surrounding environment as they grow. She is excited about Radio Galaxy Zoo as it will provide the necessary link between the radio emission and the host galaxy required to solve the puzzle of radio galaxy evolution."
+    bio: t7e 'span', 'team.bios.julie_banfield'
   },
   {
     type: "science"
     name: "Lucy Fortson"
-    institution: "University of Minnesota, USA"
+    institution: t7e 'span', 'team.institutions.u_of_minnesota'
     twitter: null
-    bio: "Interested in galaxy evolution, black holes and the jets of material beaming from the centers of active galactic nuclei. Started the Zooniverse effort at the Adler Planetarium, now bringing the light to the University of Minnesota. On the odd weekend, when she's not preparing lectures or writing grants, Lucy can be found hanging out with her husband and son at one of Minneapolis' fine dining establishments."
+    bio: t7e 'span', 'team.bios.lucy_fortson'
   },
   {
     type: "science"
     name: "Samuel George"
-    institution: "University of Birmingham, UK"
+    institution: t7e 'span', 'team.institutions.u_of_birmingham'
     twitter: null
-    bio: "Astronomer turned science educator"
+    bio: t7e 'span', 'team.bios.samuel_george'
   },
   {
     type: "edu"
     name: "Robert Hollow"
-    institution: "CSIRO Astronomy and Space Science, Australia"
+    institution: t7e 'span', 'team.institutions.csiro'
     twitter: "roberthollow"
-    bio: "Robert is interested in how the public and schools students interact with and interpret radio astronomy data using citizen science &mdash; especially data sets from ASKAP and the SKA. He coordinates the PULSE@Parkes project where students use the Parkes radio telescope to observe pulsars."
+    bio: t7e 'span', 'team.bios.robert_hollow'
   },
   {
     name: "Matt Jarvis"
-    institution: "University of Hertfordshire, UK"
+    institution: t7e 'span', 'team.institutions.u_of_hertfordshire'
     twitter: null
     bio: null
   },
   {
     name: "Hans-Rainer Klöckner"
-    institution: "Max-Planck-Institut für Radioastronomie, Germany"
+    institution: t7e 'span', 'team.institutions.max_planck'
     twitter: null
     bio: null
   },
   {
     type: "science"
     name: "Chris Lintott"
-    institution: "Oxford University, UK"
+    institution: t7e 'span', 'team.institutions.oxford'
     twitter: "chrislintott"
-    bio: "Runs the Zooniverse collaboration and works on how galaxies form and evolve; particularly interested in the effects of active galactic nuclei and mergers. In his 'spare' time, he hunts for planets, presents the BBC's long-running Sky at Night program and cooks."
+    bio: t7e 'span', 'team.bios.chris_lintott'
   },
   {
     type: "science"
     name: "Karen Masters"
-    institution: "Institute of Cosmology and Gravitation, University of Portsmouth, UK"
+    institution: t7e 'span', 'team.institutions.u_of_portsmouth'
     twitter: "KarenLMasters"
-    bio: "Karen’s research uses data from large surveys to search for clues as to how galaxies form and evolve &mdash; she’s particularly worked on red spirals, and galactic bars in recent years using classifications from Galaxy Zoo. Karen has a background in radio astronomy (her first telescope was Arecibo) and is really excited to see Galaxy Zoo expand into radio frequencies."
+    bio: t7e 'span', 'team.bios.karen_masters'
   },
   {
     type: "science"
     name: "Enno Middelberg"
-    institution: "Ruhr-University Bochum, Germany"
+    institution: t7e 'span', 'team.institutions.ruhr'
     twitter: null
-    bio: "Enno’s main interest is galaxy evolution and the role that Active Galactic Nuclei play. He has helped develop new observational methods to connect radio telescopes from all over the world (Very Long Baseline Interferometry, or VLBI) and to simultaneously observe hundreds of RGZ objects with these telescopes."
+    bio: t7e 'span', 'team.bios.enno_middelberg'
   },
   {
     type: "lead"
     name: "Ray Norris"
-    title: "Project Advisor"
-    institution: "CSIRO Astronomy and Space Science, Australia"
+    title: t7e 'span', 'team.titles.project_advisor'
+    institution: t7e 'span', 'team.institutions.csiro'
     twitter: null
-    bio: "Ray researches how galaxies formed and evolved after the Big Bang, using radio, infrared, and optical telescopes. As a sideline, he also researches the astronomy of Australian Aboriginal people, frequently appears on radio and TV, and has recently published a novel, Graven Images."
+    bio: t7e 'span', 'team.bios.ray_norris'
   },
   {
     type: "lead"
     name: "Larry Rudnick"
-    title: "Project Advisor"
-    institution: "University of Minnesota, USA"
+    title: t7e 'span', 'team.titles.project_advisor'
+    institution: t7e 'span', 'team.institutions.u_of_minnesota'
     twitter: null
-    bio: "Larry has been classifying radio galaxies since the mid-70s. He's saturated, and is thrilled with this effort to bring lots of fresh eyes to the massive new samples coming from modern radio telescopes."
+    bio: t7e 'span', 'team.bios.larry_rudnick'
   },
   {
     type: "science"
     name: "Kevin Schawinski"
-    institution: "ETH Institute for Astronomy, Switzerland"
+    institution: t7e 'span', 'team.institutions.eth'
     twitter: "kevinschawinski"
-    bio: "Kevin works on understanding the role of black holes in the Universe. He came to ETH via Yale University and Oxford, where he did his Ph.D. and was involved in the set-up of the original Galaxy Zoo. Kevin’s work focuses on trying to combine what we know about black holes and galaxies and trying to piece together a coherent story of whether and how the two co-evolve."
+    bio: t7e 'span', 'team.bios.kevin_schawinski'
   },
   {
     type: "science"
     name: "Nick Seymour"
-    institution: "CSIRO Astronomy and Space Science, Australia"
+    institution: t7e 'span', 'team.institutions.csiro'
     twitter: "nseymouruk"
-    bio: "Radio astronomer enjoying life down under and working on the largest radio survey with the Australian SKA Pathfinder, CSIRO." 
+    bio: t7e 'span', 'team.bios.nick_seymour'
   },
   {
     type: "lead"
     name: "Stas Shabala"
-    title: "Project Manager"
-    institution: "University of Tasmania, Australia"
+    title: t7e 'span', 'team.titles.project_manager'
+    institution: t7e 'span', 'team.institutions.u_of_tasmania'
     twitter: null
-    bio: "Stas wants to know why radio galaxies come in so many different shapes, sizes and luminosities, and how they impact their surroundings. He also likes using the radio galaxies for super-accurate positioning on Earth, to help him track earthquakes and changing sea levels."
+    bio: t7e 'span', 'team.bios.stas_shabala'
   },
   {
     type: "science"
     name: "Kyle Willett"
-    institution: "University of Minnesota, USA"
+    institution: t7e 'span', 'team.institutions.u_of_minnesota'
     twitter: "kwwillett"
-    bio: "Kyle has had a lot of experience with radio astronomy, but hasn’t done much of it since starting work with Galaxy Zoo &mdash; that's one reason he is excited about this project. Kyle’s particular scientific interest is in measuring the properties of the interstellar gas in the galaxies that you're helping to identify. In his spare time, he runs probably more than is healthy."
+    bio: t7e 'span', 'team.bios.kyle_willett'
   },
   {
     type: "edu"
     name: "Laura Whyte"
-    institution: "Adler Planetarium, USA"
+    institution: t7e 'span', 'team.institutions.adler'
     twitter: "whytewithawhy"
-    bio: "As a former high school teacher and adult educator, with a Ph.D. in galaxy classification (seriously), joining the Zooniverse as an educator was a natural fit for Laura. Based at the Adler Planetarium in Chicago, she's working to encourage and support teachers to use Zooniverse citizen science projects in the classroom."
+    bio: t7e 'span', 'team.bios.laura_whyte'
   },
   {
     type: "edu"
     name: "Kelly Borden"
-    institution: "Adler Planetarium, USA"
+    institution: t7e 'span', 'team.institutions.adler'
     twitter: "bordenkelly"
-    bio: "Zooniverse and Adler Planetarium educator, museum nerd, accidental science enthusiast, lover of cats"
+    bio: t7e 'span', 'team.bios.kelly_borden'
   },
   {
     type: "science"
     name: "Heinz Andernach"
-    institution: "University of Guanajuato, Mexico"
+    institution: t7e 'span', 'team.institutions.u_of_guanajuato'
     twitter: null
-    bio: "Heinz has been studying radio galaxies since the late 1970's, mainly those in clusters of galaxies. He compiled the largest collection of radio source lists to create a public database. He is interested in how diverse radio galaxies can be and how large they can grow."
+    bio: t7e 'span', 'team.bios.heinz_andernach'
   },
   {
     type: "developer"
     name: "Robert Simpson"
-    institution: "Oxford University, UK"
+    institution: t7e 'span', 'team.institutions.oxford'
     twitter: "orbitingfrog"
-    bio: "Rob is a researcher and web developer as well as Communications Lead for the Zooniverse. His background is in submillimetre astronomy so he's quite used to seeing the kind of 'fried eggs' that Radio Galaxy Zoo has to offer. Rob is also interested in the Zooniverse itself and the motivations of the hundreds of thousands of amazing people who come and classify on sites like Radio Galaxy Zoo. You can follow Rob online at orbitingfrog.com."
+    bio: t7e 'span', 'team.bios.rob_simpson'
   },
   {
     type: "developer"
     name: "Amit Kapadia"
-    institution: "Adler Planetarium, USA"
+    institution: t7e 'span', 'team.institutions.adler'
     twitter: "amitinho"
-    bio: "Amit develops astronomical web applications. He spends his days dreaming of conducting in-browser analyses on astronomical data sets. On occasion he flexes his modest sway to advocate for more modern solutions to data access in astronomy. He believes the scientific world needs to speak more closely with the tech world, and constantly strives to learn more from the latter."
+    bio: t7e 'span', 'team.bios.amit_kapadia'
   },
   {
     type: "lead"
     name: "Ed Paget"
-    title: "Lead Developer"
-    institution: "Adler Planetarium, USA"
+    title: t7e 'span', 'team.titles.lead_developer'
+    institution: t7e 'span', 'team.institutions.adler'
     twitter: "edpaget"
-    bio: "Ed Paget joined Adler's Zooniverse team as a software developer in August 2012. He previously worked as a freelance programmer and photographer. Ed graduated from Northwestern University with a major in Radio/TV/Film."
+    bio: t7e 'span', 'team.bios.ed_paget'
   },
   {
     type: "developer"
     name: "Chris Snyder"
-    institution: "Adler Planetarium, USA"
+    institution: t7e 'span', 'team.institutions.adler'
     twitter: "bumishness"
-    bio: "Chris is the technical project manager for the Zooniverse at the Adler Planetarium in Chicago. He works with developers and science teams to turn project ideas into a reality."
+    bio: t7e 'span', 'team.bios.chris_snyder'
   },
   {
     type: "lead"
     name: "Brooke Simmons"
     title: "Project Engagement Officer"
-    institution: "Oxford University, UK"
+    institution: t7e 'span', 'team.institutions.oxford'
     twitter: "vrooje"
-    bio: "Brooke spends most of her time studying the growth of supermassive black holes and their role in galaxy evolution. She also suspects there is a parallel universe out there where she decided to become a potter and do astronomy on the side."
+    bio: t7e 'span', 'team.bios.brooke_simmons'
   },
   {
     type: "science"
     name: "Anna Kapinska"
-    institution: "University of Western Australia"
-    bio: "Anna is interested in radio galaxies and quasars at various stages of their life, from small young radio sources to large old radio galaxies. She works on radio jets and studies how they affect the galaxies which host them at various stages of the Universe’s evolution."
+    institution: t7e 'span', 'team.institutions.u_of_w_aus'
+    bio: t7e 'span', 'team.bios.anna_kapinska'
   },
   {
     type: "science"
     name: "Sugata Kaviraj"
-    institution: "University of Hertfordshire, UK"
-    bio: "Works on the formation and evolution of galaxies, and the role black holes play in these processes."
+    institution: t7e 'span', 'team.institutions.u_of_hertfordshire'
+    bio: t7e 'span', 'team.bios.sugata_kaviraj'
   },
 ]
   

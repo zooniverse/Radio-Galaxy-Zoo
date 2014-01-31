@@ -41,6 +41,9 @@ class Team extends Section
           _.last(m).push(b)
         m), [[]])
       .each(((b) -> @$('.developer-bios').append(template(b))), @)
+
+    t7e.refresh @el
+
     @
 
   show: ->
