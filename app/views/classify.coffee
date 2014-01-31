@@ -28,6 +28,7 @@ class Classify extends Section
     'click .tutorial' : 'startTutorial'
     'click .keyboard' : 'toggleKeyboardGuide'
     'click .favorite' : 'favoriteSubject'
+    'click .reset' : 'resetClassifier'
   }
 
   keyboardEvents: {
@@ -159,5 +160,8 @@ class Classify extends Section
   favoriteSubject: ->
     @model.toggleFavorite()
     @$('.favorite').toggleClass('active')
+
+  resetClassifier: ->
+    @loadSubject(@model.get('subject'))
 
 module.exports = Classify

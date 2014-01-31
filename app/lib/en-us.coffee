@@ -51,6 +51,7 @@ module.exports =
     step2: "Are there any more sources?"
     step3: "Great work!"
     cancel: "Cancel"
+    reset_all: "Reset All"
     done: "Done"
     no_contours: "No Contours"
     no_infrared: "No Infrared"
