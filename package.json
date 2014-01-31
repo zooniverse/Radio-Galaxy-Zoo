@@ -4,7 +4,8 @@
   "author": "Zooniverse <support@zooniverse.org>",
   "version": "1.2.0",
   "scripts": {
-    "start": "brunch watch --server"
+    "start": "brunch watch --server",
+    "deploy-locale": "seed-translation --project radio --env production --deploy-path translations"
   },
   "dependencies": {
     "javascript-brunch": ">= 1.0 < 1.8",
@@ -18,7 +19,8 @@
     "stylus-brunch": "~1.7.0",
     "uglify-js-brunch": ">= 1.0 < 1.8",
     "clean-css-brunch": ">= 1.0 < 1.8",
-    "coffee-script-brunch": "~1.7.2"
+    "coffee-script-brunch": "~1.7.2",
+    "translator-seed": "~0.1.0"
   },
   "engine": "node >= 0.10.12"
 }
