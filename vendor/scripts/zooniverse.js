@@ -131,6 +131,7 @@ window.base64 = {
     whyRealName: 'This will be used when we thank contributors, for example, in talks or on posters. If you don\'t want to be mentioned publicly, leave this blank.',
     noAccount: 'Don\'t have an account?',
     agreeToPrivacyPolicy: 'I agree to the <a href="https://www.zooniverse.org/privacy" target="_blank">privacy policy</a>.',
+    betaPreference: 'I would like to receive notices with opportunities to test and provide feedback on unreleased Zooniverse projects.',
     forgotPassword: 'Forgot your password?',
     badLogin: 'Incorrect username or password',
     signInFailed: 'Sign in failed.',
@@ -198,7 +199,8 @@ window.base64 = {
     realName: 'Prénom Nom',
     whyRealName: 'Votre nom pourra être utiliser lors du remerciement des contributeurs, par exemple lors de présentation orales ou sur des posters.<br />Si vous ne souhaitez pas qu\'il soit mentionner publiquement, laissez cette case vide.',
     noAccount: 'Vous n\'avez pas encore de compte?',
-    privacyPolicy: 'J\'accepte les <a href="https://www.zooniverse.org/privacy" target="_blank">conditions d\'utilisation </a>.',
+    agreeToPrivacyPolicy: 'J\'accepte les <a href="https://www.zooniverse.org/privacy" target="_blank">conditions d\'utilisation </a>.',
+    betaPreference: 'J\'aimerais être tenu au courant des projets en cours de développement par Zooniverse, afin de participer aux tests et donner mon avis.',
     forgotPassword: 'Mot de passe oublié?',
     badLogin: 'Utilisateur ou mot de passe incorrect',
     signInFailed: 'Échec de la connexion.',
@@ -242,7 +244,7 @@ window.base64 = {
     realName: 'Prawdziwe imię',
     whyRealName: 'Korzystamy z tych danych, kiedy dziękujemy ochotnikom za ich wkład, na przykład podczas rozmów czy na plakatach. <br/> Jeżeli nie chcesz, abyśmy wymieniali Cię publicznie z imienia i nazwiska, zostaw to pole puste.',
     noAccount: 'Nie masz jeszcze konta?',
-    privacyPolicy: 'Zgadzam się z <a href="https://www.zooniverse.org/privacy" target="_blank">polityką prywatności</a>.',
+    agreeToPrivacyPolicy: 'Zgadzam się z <a href="https://www.zooniverse.org/privacy" target="_blank">polityką prywatności</a>.',
     forgotPassword: 'Nie pamiętasz hasła?',
     badLogin: 'Niepoprawna nazwa użytkownika lub hasło',
     signInFailed: 'Nie udało się zalogować',
@@ -266,6 +268,52 @@ window.base64 = {
 
   if (typeof module !== "undefined" && module !== null) {
     module.exports = pl;
+  }
+
+}).call(this);
+
+(function() {
+  var zh_tw, _base;
+
+  zh_tw = {
+    topBarHeading: '「Zooniverse」計畫',
+    signUpHeading: ' "申請新的「Zooniverse」帳號',
+    signInHeading: '以「Zooniverse」帳號登入 ',
+    signUp: '新增帳號',
+    signIn: '登入',
+    signOut: '登出',
+    username: '用戶名',
+    password: '密碼',
+    email: '電子信箱帳號',
+    realName: '真實姓名',
+    whyRealName: '這會用來感謝我們的協力夥伴，譬如放在演講場合或海報上。如果你不願公開真實姓名，可以空白。',
+    noAccount: '還沒開立過帳號嗎？',
+    agreeToPrivacyPolicy: '我同意 <a href="https://www.zooniverse.org/privacy" target="_blank"> 隱私權設定規定</a>.',
+    betaPreference: '我樂意幫忙測試尚未正式上線的「Zooniverse」計畫並協助讓程式更完善，有機會請通知我。',
+    forgotPassword: '忘記密碼?',
+    badLogin: '用戶名稱錯誤或密碼錯誤',
+    signInFailed: '登入失敗。',
+    signInForProfile: '登入查看已分類記錄。',
+    footerHeading: ' 「Zooniverse」網站以網路方式讓一般大眾能參與多種研究主題的科學計畫。志工分類員的協同努力，幫助科學家處理了龐大資料，這海量的資料原本對科學家是個不小的挑戰！',
+    privacyPolicy: '隱私權設定規定',
+    forkOnGitHub: '原始碼及錯誤回報',
+    recents: '最新完成的',
+    favorites: '我的最愛',
+    none: '無'
+  };
+
+  if (window.zooniverse == null) {
+    window.zooniverse = {};
+  }
+
+  if ((_base = window.zooniverse).translations == null) {
+    _base.translations = {};
+  }
+
+  window.zooniverse.translations.zh_tw = zh_tw;
+
+  if (typeof module !== "undefined" && module !== null) {
+    module.exports = zh_tw;
   }
 
 }).call(this);
@@ -809,7 +857,7 @@ window.base64 = {
 }).call(this);
 
 (function() {
-  var LanguageManager, translate, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8,
+  var LanguageManager, translate, _ref, _ref1, _ref10, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9,
     __slice = [].slice;
 
   LanguageManager = ((_ref = window.zooniverse) != null ? _ref.LanguageManager : void 0) || require('./language-manager');
@@ -833,15 +881,16 @@ window.base64 = {
     en: ((_ref1 = window.zooniverse) != null ? (_ref2 = _ref1.translations) != null ? _ref2.en : void 0 : void 0) || require('../translations/en'),
     es: ((_ref3 = window.zooniverse) != null ? (_ref4 = _ref3.translations) != null ? _ref4.es : void 0 : void 0) || require('../translations/es'),
     fr: ((_ref5 = window.zooniverse) != null ? (_ref6 = _ref5.translations) != null ? _ref6.fr : void 0 : void 0) || require('../translations/fr'),
-    pl: ((_ref7 = window.zooniverse) != null ? (_ref8 = _ref7.translations) != null ? _ref8.pl : void 0 : void 0) || require('../translations/pl')
+    pl: ((_ref7 = window.zooniverse) != null ? (_ref8 = _ref7.translations) != null ? _ref8.pl : void 0 : void 0) || require('../translations/pl'),
+    zh_tw: ((_ref9 = window.zooniverse) != null ? (_ref10 = _ref9.translations) != null ? _ref10.zh_tw : void 0 : void 0) || require('../translations/zh-tw')
   };
 
   translate.refresh = function(element, key) {
-    var name, property, string, value, _i, _len, _ref10, _ref11, _ref12, _ref13, _ref9, _results;
-    _ref9 = element.attributes;
+    var name, property, string, value, _i, _len, _ref11, _ref12, _ref13, _ref14, _ref15, _results;
+    _ref11 = element.attributes;
     _results = [];
-    for (_i = 0, _len = _ref9.length; _i < _len; _i++) {
-      _ref10 = _ref9[_i], name = _ref10.name, value = _ref10.value;
+    for (_i = 0, _len = _ref11.length; _i < _len; _i++) {
+      _ref12 = _ref11[_i], name = _ref12.name, value = _ref12.value;
       if (name.slice(0, translate.attr.length) !== translate.attr) {
         continue;
       }
@@ -849,8 +898,8 @@ window.base64 = {
         continue;
       }
       property = name.slice(translate.attr.length + 1) || 'innerHTML';
-      string = (_ref11 = translate.strings[(_ref12 = LanguageManager.current) != null ? _ref12.code : void 0]) != null ? _ref11[value] : void 0;
-      string || (string = (_ref13 = translate.strings[LanguageManager.prototype.code]) != null ? _ref13[value] : void 0);
+      string = (_ref13 = translate.strings[(_ref14 = LanguageManager.current) != null ? _ref14.code : void 0]) != null ? _ref13[value] : void 0;
+      string || (string = (_ref15 = translate.strings[LanguageManager.prototype.code]) != null ? _ref15[value] : void 0);
       string || (string = value);
       if (element.hasAttribute(property)) {
         _results.push(element.setAttribute(property, string));
@@ -862,11 +911,11 @@ window.base64 = {
   };
 
   LanguageManager.on('change-language', function() {
-    var element, _i, _len, _ref9, _results;
-    _ref9 = document.querySelectorAll("[" + translate.attr + "]");
+    var element, _i, _len, _ref11, _results;
+    _ref11 = document.querySelectorAll("[" + translate.attr + "]");
     _results = [];
-    for (_i = 0, _len = _ref9.length; _i < _len; _i++) {
-      element = _ref9[_i];
+    for (_i = 0, _len = _ref11.length; _i < _len; _i++) {
+      element = _ref11[_i];
       _results.push(translate.refresh(element));
     }
     return _results;
@@ -1494,6 +1543,8 @@ window.base64 = {
     Subject.prototype.id = '';
 
     Subject.prototype.zooniverse_id = '';
+
+    Subject.prototype.classification_count = null;
 
     Subject.prototype.coords = null;
 
@@ -2695,9 +2746,13 @@ template = function(__obj) {
     
       __out.push(translate('whyRealName'));
     
-      __out.push('</div>\n</label>\n\n<label>\n  <span></span>\n  <input type="checkbox" required="required" />');
+      __out.push('</div>\n</label>\n\n<label class="checkbox">\n  <span></span>\n  <input type="checkbox" required="required" />');
     
       __out.push(translate('agreeToPrivacyPolicy'));
+    
+      __out.push('\n</label>\n\n<label class="checkbox">\n  <span></span>\n  <input type="checkbox" name="beta-preference" />');
+    
+      __out.push(translate('betaPreference'));
     
       __out.push('\n</label>\n\n<div class="error-message"></div>\n\n<div class="action">\n  <button type="submit">');
     
@@ -3708,7 +3763,153 @@ if (typeof module !== 'undefined') module.exports = template;
 }).call(this);
 
 (function() {
-  var Api, BaseController, LoginForm, User, template, translate, _base, _base1, _base2,
+  var BETA_PREFERENCE_KEY, BaseController, SignupForm, User, translate, _base, _base1, _ref,
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+  if (window.zooniverse == null) {
+    window.zooniverse = {};
+  }
+
+  if ((_base = window.zooniverse).controllers == null) {
+    _base.controllers = {};
+  }
+
+  if ((_base1 = window.zooniverse).models == null) {
+    _base1.models = {};
+  }
+
+  BaseController = zooniverse.controllers.BaseController || require('./base-controller');
+
+  User = zooniverse.models.User || require('../models/user');
+
+  translate = zooniverse.translate || require('../lib/translate');
+
+  BETA_PREFERENCE_KEY = 'beta_opt_in';
+
+  SignupForm = (function(_super) {
+    __extends(SignupForm, _super);
+
+    function SignupForm() {
+      _ref = SignupForm.__super__.constructor.apply(this, arguments);
+      return _ref;
+    }
+
+    SignupForm.prototype.tagName = 'form';
+
+    SignupForm.prototype.className = 'zooniverse-signup-form';
+
+    SignupForm.prototype.events = {
+      'submit*': 'onSubmit'
+    };
+
+    SignupForm.prototype.elements = {
+      'input[name="username"]': 'usernameInput',
+      'input[name="password"]': 'passwordInput',
+      'input[name="email"]': 'emailInput',
+      'input[name="real-name"]': 'realNameInput',
+      'input[name="beta-preference"]': 'betaPreferenceInput',
+      'button[type="submit"]': 'signUpButton',
+      '.error-message': 'errorContainer'
+    };
+
+    SignupForm.prototype.onSubmit = function() {
+      var signup,
+        _this = this;
+      this.el.addClass('loading');
+      this.signUpButton.attr({
+        disabled: true
+      });
+      signup = User.signup({
+        username: this.usernameInput.val(),
+        password: this.passwordInput.val(),
+        email: this.emailInput.val(),
+        real_name: this.realNameInput.val()
+      });
+      signup.done(function(_arg) {
+        var message, success, _ref1;
+        success = _arg.success, message = _arg.message;
+        if (!success) {
+          _this.showError(message);
+        }
+        return (_ref1 = User.current) != null ? _ref1.setPreference(BETA_PREFERENCE_KEY, _this.betaPreferenceInput.prop('checked'), true) : void 0;
+      });
+      signup.fail(function() {
+        return _this.showError(translate('signInFailed'));
+      });
+      return signup.always(function() {
+        _this.el.removeClass('loading');
+        return _this.signUpButton.attr({
+          disabled: false
+        });
+      });
+    };
+
+    SignupForm.prototype.showError = function(message) {
+      return this.errorContainer.html(message);
+    };
+
+    return SignupForm;
+
+  })(BaseController);
+
+  window.zooniverse.controllers.SignupForm = SignupForm;
+
+  if (typeof module !== "undefined" && module !== null) {
+    module.exports = SignupForm;
+  }
+
+}).call(this);
+
+(function() {
+  var Dialog, SignupForm, User, signupDialog, template, _base, _base1, _base2;
+
+  if (window.zooniverse == null) {
+    window.zooniverse = {};
+  }
+
+  if ((_base = window.zooniverse).controllers == null) {
+    _base.controllers = {};
+  }
+
+  if ((_base1 = window.zooniverse).views == null) {
+    _base1.views = {};
+  }
+
+  if ((_base2 = window.zooniverse).models == null) {
+    _base2.models = {};
+  }
+
+  Dialog = zooniverse.controllers.Dialog || require('./dialog');
+
+  SignupForm = zooniverse.controllers.SignupForm || require('./signup-form');
+
+  template = zooniverse.views.signupDialog || require('../views/signup-dialog');
+
+  User = zooniverse.models.User || require('../models/user');
+
+  signupDialog = new Dialog({
+    content: (new SignupForm({
+      template: template
+    })).el
+  });
+
+  User.on('change', function(e, user) {
+    if (user != null) {
+      return signupDialog.hide();
+    }
+  });
+
+  window.zooniverse.controllers.signupDialog = signupDialog;
+
+  if (typeof module !== "undefined" && module !== null) {
+    module.exports = signupDialog;
+  }
+
+}).call(this);
+
+(function() {
+  var Api, BaseController, LoginForm, User, signupDialog, template, translate, _base, _base1, _base2,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -3737,6 +3938,8 @@ if (typeof module !== 'undefined') module.exports = template;
   User = zooniverse.models.User || require('../models/user');
 
   translate = zooniverse.translate || require('../lib/translate');
+
+  signupDialog = zooniverse.controllers.signupDialog || require('./signup-dialog');
 
   LoginForm = (function(_super) {
     __extends(LoginForm, _super);
@@ -3798,6 +4001,10 @@ if (typeof module !== 'undefined') module.exports = template;
           });
         });
       });
+    };
+
+    LoginForm.prototype.onClickSignUp = function() {
+      return signupDialog.show();
     };
 
     LoginForm.prototype.onClickSignOut = function() {
@@ -3876,148 +4083,6 @@ if (typeof module !== 'undefined') module.exports = template;
 
   if (typeof module !== "undefined" && module !== null) {
     module.exports = loginDialog;
-  }
-
-}).call(this);
-
-(function() {
-  var BaseController, SignupForm, User, translate, _base, _base1, _ref,
-    __hasProp = {}.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
-
-  if (window.zooniverse == null) {
-    window.zooniverse = {};
-  }
-
-  if ((_base = window.zooniverse).controllers == null) {
-    _base.controllers = {};
-  }
-
-  if ((_base1 = window.zooniverse).models == null) {
-    _base1.models = {};
-  }
-
-  BaseController = zooniverse.controllers.BaseController || require('./base-controller');
-
-  User = zooniverse.models.User || require('../models/user');
-
-  translate = zooniverse.translate || require('../lib/translate');
-
-  SignupForm = (function(_super) {
-    __extends(SignupForm, _super);
-
-    function SignupForm() {
-      _ref = SignupForm.__super__.constructor.apply(this, arguments);
-      return _ref;
-    }
-
-    SignupForm.prototype.tagName = 'form';
-
-    SignupForm.prototype.className = 'zooniverse-signup-form';
-
-    SignupForm.prototype.events = {
-      'submit*': 'onSubmit'
-    };
-
-    SignupForm.prototype.elements = {
-      'input[name="username"]': 'usernameInput',
-      'input[name="password"]': 'passwordInput',
-      'input[name="email"]': 'emailInput',
-      'input[name="real-name"]': 'realNameInput',
-      'button[type="submit"]': 'signUpButton',
-      '.error-message': 'errorContainer'
-    };
-
-    SignupForm.prototype.onSubmit = function() {
-      var signup,
-        _this = this;
-      this.el.addClass('loading');
-      this.signUpButton.attr({
-        disabled: true
-      });
-      signup = User.signup({
-        username: this.usernameInput.val(),
-        password: this.passwordInput.val(),
-        email: this.emailInput.val(),
-        real_name: this.realNameInput.val()
-      });
-      signup.done(function(_arg) {
-        var message, success;
-        success = _arg.success, message = _arg.message;
-        if (!success) {
-          return _this.showError(message);
-        }
-      });
-      signup.fail(function() {
-        return _this.showError(translate('signInFailed'));
-      });
-      return signup.always(function() {
-        _this.el.removeClass('loading');
-        return _this.signUpButton.attr({
-          disabled: false
-        });
-      });
-    };
-
-    SignupForm.prototype.showError = function(message) {
-      return this.errorContainer.html(message);
-    };
-
-    return SignupForm;
-
-  })(BaseController);
-
-  window.zooniverse.controllers.SignupForm = SignupForm;
-
-  if (typeof module !== "undefined" && module !== null) {
-    module.exports = SignupForm;
-  }
-
-}).call(this);
-
-(function() {
-  var Dialog, SignupForm, User, signupDialog, template, _base, _base1, _base2;
-
-  if (window.zooniverse == null) {
-    window.zooniverse = {};
-  }
-
-  if ((_base = window.zooniverse).controllers == null) {
-    _base.controllers = {};
-  }
-
-  if ((_base1 = window.zooniverse).views == null) {
-    _base1.views = {};
-  }
-
-  if ((_base2 = window.zooniverse).models == null) {
-    _base2.models = {};
-  }
-
-  Dialog = zooniverse.controllers.Dialog || require('./dialog');
-
-  SignupForm = zooniverse.controllers.SignupForm || require('./signup-form');
-
-  template = zooniverse.views.signupDialog || require('../views/signup-dialog');
-
-  User = zooniverse.models.User || require('../models/user');
-
-  signupDialog = new Dialog({
-    content: (new SignupForm({
-      template: template
-    })).el
-  });
-
-  User.on('change', function(e, user) {
-    if (user != null) {
-      return signupDialog.hide();
-    }
-  });
-
-  window.zooniverse.controllers.signupDialog = signupDialog;
-
-  if (typeof module !== "undefined" && module !== null) {
-    module.exports = signupDialog;
   }
 
 }).call(this);
@@ -4794,11 +4859,12 @@ if (typeof module !== 'undefined') module.exports = template;
     };
 
     Profile.prototype.onTurnPage = function(e) {
-      var target, targetType;
+      return this.turnPage($(e.currentTarget).val());
+    };
+
+    Profile.prototype.turnPage = function(targetType) {
       this.pageTurners.removeClass('active');
-      target = $(e.target);
-      target.addClass('active');
-      targetType = target.val();
+      this.pageTurners.filter("[value=\"" + targetType + "\"]").first().addClass('active');
       this.recentsList.el.add(this.favoritesList.el).removeClass('active');
       return this["" + targetType + "List"].el.addClass('active');
     };
