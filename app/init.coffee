@@ -10,6 +10,7 @@ module.exports = ->
   languageManager = new zooniverse.LanguageManager({
     translations: {
       en: { label: "English", strings: enUS }
+      de: { label: "Deutsch", strings: "./translations/de.json" }
     }
   })
 
