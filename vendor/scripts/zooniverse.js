@@ -164,7 +164,30 @@ window.base64 = {
   var es, _base;
 
   es = {
-    topBarHeading: 'Un proyecto de la Zooniverse'
+    topBarHeading: 'Un proyecto de Zooniverse',
+    signUpHeading: 'Regístrate con una nueva cuenta Zooniverse',
+    signInHeading: 'Inicia sesión con tu cuenta de Zooniverse',
+    signUp: 'Suscribirse',
+    signIn: 'Iniciar sesión',
+    signOut: 'Salir',
+    username: 'Nombre de Usuario',
+    password: 'Contraseña',
+    email: 'Email',
+    realName: 'Nombre Real',
+    whyRealName: 'Esto será usado para agradecer a los colaboradores, por ejempl  en las conversaciones o carteles. Si no quieres ser mencionado públicament  déjalo en blanco.',
+    noAccount: '¿No tienes una cuenta?',
+    agreeToPrivacyPolicy: 'Estoy de acuerdo con <a href="https://www.zoonivers  org/privacy" target="_blank"> y su política de privacidad </a>.',
+    betaPreference: 'Me gustaría recibir noticias con oportunidades para probar   proporcionar feedback en los proyectos inéditos de Zooniverse',
+    forgotPassword: '¿Olvidaste tu contraseña?',
+    badLogin: 'Nombre de usuario o contraseña incorrecta',
+    signInFailed: 'Error al iniciar sesión',
+    signInForProfile: 'Inicia sesión para ver tu perfil.',
+    footerHeading: 'Zooniverse es una colección de proyectos de ciencia ciudadan  basados en la web que utiliza el esfuerzo de voluntarios para ayudar a lo investigadores con la avalancha de datos a la que se enfrentan.',
+    privacyPolicy: 'Política de privacidad',
+    forkOnGitHub: 'Fuente y errores',
+    recents: 'Recientes',
+    favorites: 'Favoritos',
+    none: 'ninguno'
   };
 
   if (window.zooniverse == null) {
@@ -273,6 +296,52 @@ window.base64 = {
 }).call(this);
 
 (function() {
+  var ru, _base;
+
+  ru = {
+    topBarHeading: 'Проект Zooniverse',
+    signUpHeading: 'Создать новый аккаунт Zooniverse',
+    signInHeading: 'Войти в ваш аккаунт Zooniverse',
+    signUp: 'Зарегистрироваться',
+    signIn: 'Войти',
+    signOut: 'Выйти',
+    username: 'Имя пользователя',
+    password: 'Пароль',
+    email: 'Адрес E-mail',
+    realName: 'Настоящее имя',
+    whyRealName: 'Используется при выражении нашей благодарности участникам, например, в обсуждениях или объявлениях. Если вы не хотите, чтобы вас упоминали публично, оставьте это поле пустым.',
+    noAccount: 'Нет аккаунта?',
+    agreeToPrivacyPolicy: 'Я согласен с <a href="https://www.zooniverse.org/privacy" target="_blank">политикой конфиденциальности</a>.',
+    betaPreference: 'Я хочу получать приглашения к участию в тестировании новых проектов Zooniverse.',
+    forgotPassword: 'Забыли пароль?',
+    badLogin: 'Неправильное имя пользователя или пароль',
+    signInFailed: 'Вход не выполнен.',
+    signInForProfile: 'Войдите, чтобы увидеть свой профиль.',
+    footerHeading: 'Zooniverse — это группа онлайн-проектов гражданской науки, где добровольцы помогают обрабатывать огромные объемы данных, с которыми приходится сталкиваться учёным.',
+    privacyPolicy: 'Политика конфиденциальности',
+    forkOnGitHub: 'Исходный код и баги',
+    recents: 'Недавние',
+    favorites: 'Избранное',
+    none: 'пусто'
+  };
+
+  if (window.zooniverse == null) {
+    window.zooniverse = {};
+  }
+
+  if ((_base = window.zooniverse).translations == null) {
+    _base.translations = {};
+  }
+
+  window.zooniverse.translations.ru = ru;
+
+  if (typeof module !== "undefined" && module !== null) {
+    module.exports = ru;
+  }
+
+}).call(this);
+
+(function() {
   var zh_tw, _base;
 
   zh_tw = {
@@ -314,6 +383,52 @@ window.base64 = {
 
   if (typeof module !== "undefined" && module !== null) {
     module.exports = zh_tw;
+  }
+
+}).call(this);
+
+(function() {
+  var de, _base;
+
+  de = {
+    topBarHeading: 'Ein Projekt von Zooniverse',
+    signUpHeading: 'Ein neues Zooniverse-Konto erstellen',
+    signInHeading: 'Mit Zooniverse-Konto anmelden',
+    signUp: 'Registrieren',
+    signIn: 'Anmelden',
+    signOut: 'Abmelden',
+    username: 'Benutzername',
+    password: 'Passwort',
+    email: 'E-Mail',
+    realName: 'Tatsächlicher Name',
+    whyRealName: 'Wenn wir Freiwilligen danken, zum Beispiel auf Postern oder in Vorträgen, wird dein tatsächlicher Name verwendet. Falls du nicht öffentlich erwähnt werden willst, lasse diese Zeile offen.',
+    noAccount: 'Kein Benutzerkonto?',
+    agreeToPrivacyPolicy: 'Ich stimme der <a href="https://www.zooniverse.org/privacy" target="_blank">Datenschutzrichtlinie</a> zu.',
+    betaPreference: 'Ich würde gerne eine Nachricht erhalten, wenn die Gelegenheit besteht, neue Zooniverse-Projekte zu testen und meine Meinung abzugeben.',
+    forgotPassword: 'Passwort vergessen?',
+    badLogin: 'Falscher Benutzername oder falsches Passwort',
+    signInFailed: 'Anmeldung fehlgeschlagen.',
+    signInForProfile: 'Melde dich an, um dein Profil zu sehen.',
+    footerHeading: 'Zooniverse ist eine Sammlung von Citizen Science Projekten im Internet, die die Leistungen Freiwilliger nutzen, um Forschern mit der Datenflut zu helfen, mit der sie konfrontiert werden.',
+    privacyPolicy: 'Datenschutzrichtlinie',
+    forkOnGitHub: 'Source & Bugs',
+    recents: 'Neueste',
+    favorites: 'Favoriten',
+    none: 'keine'
+  };
+
+  if (window.zooniverse == null) {
+    window.zooniverse = {};
+  }
+
+  if ((_base = window.zooniverse).translations == null) {
+    _base.translations = {};
+  }
+
+  window.zooniverse.translations.de = de;
+
+  if (typeof module !== "undefined" && module !== null) {
+    module.exports = de;
   }
 
 }).call(this);
@@ -857,7 +972,7 @@ window.base64 = {
 }).call(this);
 
 (function() {
-  var LanguageManager, translate, _ref, _ref1, _ref10, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9,
+  var LanguageManager, translate, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9,
     __slice = [].slice;
 
   LanguageManager = ((_ref = window.zooniverse) != null ? _ref.LanguageManager : void 0) || require('./language-manager');
@@ -882,15 +997,17 @@ window.base64 = {
     es: ((_ref3 = window.zooniverse) != null ? (_ref4 = _ref3.translations) != null ? _ref4.es : void 0 : void 0) || require('../translations/es'),
     fr: ((_ref5 = window.zooniverse) != null ? (_ref6 = _ref5.translations) != null ? _ref6.fr : void 0 : void 0) || require('../translations/fr'),
     pl: ((_ref7 = window.zooniverse) != null ? (_ref8 = _ref7.translations) != null ? _ref8.pl : void 0 : void 0) || require('../translations/pl'),
-    zh_tw: ((_ref9 = window.zooniverse) != null ? (_ref10 = _ref9.translations) != null ? _ref10.zh_tw : void 0 : void 0) || require('../translations/zh-tw')
+    ru: ((_ref9 = window.zooniverse) != null ? (_ref10 = _ref9.translations) != null ? _ref10.ru : void 0 : void 0) || require('../translations/ru'),
+    zh_tw: ((_ref11 = window.zooniverse) != null ? (_ref12 = _ref11.translations) != null ? _ref12.zh_tw : void 0 : void 0) || require('../translations/zh-tw'),
+    de: ((_ref13 = window.zooniverse) != null ? (_ref14 = _ref13.translations) != null ? _ref14.de : void 0 : void 0) || require('../translations/de')
   };
 
   translate.refresh = function(element, key) {
-    var name, property, string, value, _i, _len, _ref11, _ref12, _ref13, _ref14, _ref15, _results;
-    _ref11 = element.attributes;
+    var name, property, string, value, _i, _len, _ref15, _ref16, _ref17, _ref18, _ref19, _results;
+    _ref15 = element.attributes;
     _results = [];
-    for (_i = 0, _len = _ref11.length; _i < _len; _i++) {
-      _ref12 = _ref11[_i], name = _ref12.name, value = _ref12.value;
+    for (_i = 0, _len = _ref15.length; _i < _len; _i++) {
+      _ref16 = _ref15[_i], name = _ref16.name, value = _ref16.value;
       if (name.slice(0, translate.attr.length) !== translate.attr) {
         continue;
       }
@@ -898,8 +1015,8 @@ window.base64 = {
         continue;
       }
       property = name.slice(translate.attr.length + 1) || 'innerHTML';
-      string = (_ref13 = translate.strings[(_ref14 = LanguageManager.current) != null ? _ref14.code : void 0]) != null ? _ref13[value] : void 0;
-      string || (string = (_ref15 = translate.strings[LanguageManager.prototype.code]) != null ? _ref15[value] : void 0);
+      string = (_ref17 = translate.strings[(_ref18 = LanguageManager.current) != null ? _ref18.code : void 0]) != null ? _ref17[value] : void 0;
+      string || (string = (_ref19 = translate.strings[LanguageManager.prototype.code]) != null ? _ref19[value] : void 0);
       string || (string = value);
       if (element.hasAttribute(property)) {
         _results.push(element.setAttribute(property, string));
@@ -911,11 +1028,11 @@ window.base64 = {
   };
 
   LanguageManager.on('change-language', function() {
-    var element, _i, _len, _ref11, _results;
-    _ref11 = document.querySelectorAll("[" + translate.attr + "]");
+    var element, _i, _len, _ref15, _results;
+    _ref15 = document.querySelectorAll("[" + translate.attr + "]");
     _results = [];
-    for (_i = 0, _len = _ref11.length; _i < _len; _i++) {
-      element = _ref11[_i];
+    for (_i = 0, _len = _ref15.length; _i < _len; _i++) {
+      element = _ref15[_i];
       _results.push(translate.refresh(element));
     }
     return _results;
