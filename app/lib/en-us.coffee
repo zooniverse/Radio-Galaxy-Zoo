@@ -46,6 +46,10 @@ module.exports =
         <li>r: Toggle Wavelength</li>
         <li>n: Mark No Contours/No Infrared</li>"""
   classify:
+    action_buttons:
+      toggle_contours: "Show/Hide Contours"
+      start_tutorial: "Tutorial"
+      show_shortcuts: "Keyboard Shortcuts"
     step0: "Click on any radio contour or pair of jets"
     step1: "Click the associated infrared source(s)"
     step2: "Are there any more sources?"
@@ -144,6 +148,7 @@ module.exports =
       lead_developer: "Lead Developer"
 
   tutorial:
+    nextButton: "Continue"
     welcome:
       header: "Welcome to Radio Galaxy Zoo!"
       details: "We’re going to show you two images of the same part of the sky, one from a radio telescope and one from an infrared telescope. \n \n In most images there are many infrared galaxies, but only some of these appear in the radio."
