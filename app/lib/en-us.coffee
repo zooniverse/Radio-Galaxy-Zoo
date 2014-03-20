@@ -64,10 +64,7 @@ module.exports =
     next: "Next"
     fav: "Favorite"
     discuss: "Discuss"
-  team:
-    dev: "Development Team"
-    edu: "Education Team"
-    sci: "Science Team"
+
   science:
     radio:
       head: "Radio Images"
@@ -100,6 +97,9 @@ module.exports =
       p2: """The radio/infrared data on this site, combined with your clicks, will help us to better understand these objects and how they affect their host galaxies"""
 
   team:
+    development_team: "Development Team"
+    education_team: "Education Team"
+    science_team: "Science Team"
     bios:
       ivy_wong: "Ivy wants to know what causes galaxies to start and stop forming stars.  She suspects that radio jets might have some role in this. Ivy is particularly interested in galaxies that have suddenly stopped forming stars (aka ‘post-starburst’ galaxies) and blue spheroidal galaxies."
       melanie_gendre: "Melanie worked on radio galaxy morphologies for her Ph.D. thesis, spending many hours doing exactly what you are doing.  By comparing them, Melanie tried to understand where the different types of shapes come from and what the effects are on the galaxies that host the radio jets.  But most of all, she enjoyed explaining to anyone who would hear why this is so very cool and is excited to share this with you. She is now working in education."
