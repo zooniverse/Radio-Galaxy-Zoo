@@ -388,6 +388,52 @@ window.base64 = {
 }).call(this);
 
 (function() {
+  var zh_cn, _base;
+
+  zh_cn = {
+    topBarHeading: 'Zooniverse计划',
+    signUpHeading: ' "申请新的Zooniverse帐号',
+    signInHeading: '以Zooniverse帐号登入',
+    signUp: '新增帐号',
+    signIn: '登入',
+    signOut: '登出',
+    username: '用户名',
+    password: '密码',
+    email: '电子信箱帐号',
+    realName: '真实姓名',
+    whyRealName: '这会用来感谢我们的协力伙伴，譬如放在演讲场合或海报上。如果你不愿公开真实姓名，可以空白。 ',
+    noAccount: '还没开立过帐号吗？ ',
+    agreeToPrivacyPolicy: '我同意<a href="https://www.zooniverse.org/privacy" target="_blank">隐私权设定规定</a>.',
+    betaPreference: '我乐意帮忙测试尚未正式上线的 "Zooniverse计划" 并协助让程式更完善，有这类机会请通知我。 ',
+    forgotPassword: '忘记密码?',
+    badLogin: '用户名称错误或密码错误',
+    signInFailed: '登入失败。 ',
+    signInForProfile: '登入查看已分类记录。 ',
+    footerHeading: ' Zooniverse网站以网路方式让一般大众能参与多种研究主题的科学计划。海量的资料原本給科学家带来不小的挑战，还好有志愿者分类员协同努力，已帮助科学家处理了大量资料。 ',
+    privacyPolicy: '隐私权设定规定',
+    forkOnGitHub: '原始码及错误回报',
+    recents: '最新完成的',
+    favorites: '我的最爱',
+    none: '无'
+  };
+
+  if (window.zooniverse == null) {
+    window.zooniverse = {};
+  }
+
+  if ((_base = window.zooniverse).translations == null) {
+    _base.translations = {};
+  }
+
+  window.zooniverse.translations.zh_cn = zh_cn;
+
+  if (typeof module !== "undefined" && module !== null) {
+    module.exports = zh_cn;
+  }
+
+}).call(this);
+
+(function() {
   var de, _base;
 
   de = {
@@ -429,6 +475,52 @@ window.base64 = {
 
   if (typeof module !== "undefined" && module !== null) {
     module.exports = de;
+  }
+
+}).call(this);
+
+(function() {
+  var cs, _base;
+
+  cs = {
+    topBarHeading: 'Zooniverse projekt',
+    signUpHeading: 'Vytvoření Zooniverse účtu',
+    signInHeading: 'Přihlašování na Zooniverse účet',
+    signUp: 'Zaregistrovat se',
+    signIn: 'Přihlásit se',
+    signOut: 'Odhlásit se',
+    username: 'Uživatelské jméno',
+    password: 'Heslo',
+    email: 'Email',
+    realName: 'Pravé jméno',
+    whyRealName: 'Toto jméno bývá použito při děkování přispěvatelům, např. v rozhovorech nebo na posterech. Pokud si nepřejete, aby bylo Vaše jméno zveřejněno, nechte políčko prázdné.',
+    noAccount: 'Nemáte ještě účet?',
+    agreeToPrivacyPolicy: 'Souhlasím se <a href="https://www.zooniverse.org/privacy" target="_blank">zásadami ochrany osobních údajů</a>.',
+    betaPreference: 'Chci dostávat oznámení o možnosti testování dosud nezveřejněných Zooniverse projektů a poskytování zpětné vazby.',
+    forgotPassword: 'Zapomněli jste heslo?',
+    badLogin: 'Zadali jste chybné uživatelské jméno, nebo heslo.',
+    signInFailed: 'Přihlášení se nezdařilo.',
+    signInForProfile: 'K zobrazení Vašeho profilu je nutné se přihlásit.',
+    footerHeading: 'Zooniverse je soubor občansko naučných webových projektů, které využívají úsilí dobrovolníků pomoct vědcům zpracovat kvanta dat, jimiž jsou při svém výzkumu zaplaveni.',
+    privacyPolicy: 'Zásady ochrany osobních údajů',
+    forkOnGitHub: 'Zdrojové soubory & chyby',
+    recents: 'Nedávné',
+    favorites: 'Oblíbené',
+    none: 'Žádné'
+  };
+
+  if (window.zooniverse == null) {
+    window.zooniverse = {};
+  }
+
+  if ((_base = window.zooniverse).translations == null) {
+    _base.translations = {};
+  }
+
+  window.zooniverse.translations.cs = cs;
+
+  if (typeof module !== "undefined" && module !== null) {
+    module.exports = cs;
   }
 
 }).call(this);
@@ -886,31 +978,24 @@ window.base64 = {
     LanguageManager.prototype.code = 'en';
 
     function LanguageManager(_arg) {
-      var lang, _base, _name, _ref1, _ref2, _ref3, _ref4, _ref5,
+      var _base, _name, _ref1, _ref2, _ref3, _ref4,
         _this = this;
       _ref1 = _arg != null ? _arg : {}, this.translations = _ref1.translations, this.code = _ref1.code;
       this.languageLabel = __bind(this.languageLabel, this);
       if (this.translations == null) {
         this.translations = {};
       }
-      if (window.AVAILABLE_TRANSLATIONS != null) {
-        _ref2 = window.AVAILABLE_TRANSLATIONS;
-        for (code in _ref2) {
-          lang = _ref2[code];
-          this.translations[code] = lang;
-        }
-      }
       if (this.code == null) {
-        this.code = (_ref3 = location.search.match(/lang=([^&]+)/)) != null ? _ref3[1] : void 0;
+        this.code = (_ref2 = location.search.match(/lang=([^&]+)/)) != null ? _ref2[1] : void 0;
       }
       if (this.code == null) {
         this.code = localStorage.getItem('zooniverse-language-code');
       }
       if (this.code == null) {
-        this.code = (_ref4 = navigator.language) != null ? _ref4.split('-')[0] : void 0;
+        this.code = (_ref3 = navigator.language) != null ? _ref3.split('-')[0] : void 0;
       }
       if (this.code == null) {
-        this.code = (_ref5 = navigator.userLanguage) != null ? _ref5.split('-')[0] : void 0;
+        this.code = (_ref4 = navigator.userLanguage) != null ? _ref4.split('-')[0] : void 0;
       }
       if (this.code == null) {
         this.code = this.constructor.prototype.code;
@@ -933,6 +1018,9 @@ window.base64 = {
       var localStrings, pathToStrings, request, _ref1, _ref2,
         _this = this;
       this.code = code;
+      if (this.translations[this.code] == null) {
+        this.code = this.constructor.prototype.code;
+      }
       if (typeof ((_ref1 = this.translations[this.code]) != null ? _ref1.strings : void 0) === 'string') {
         pathToStrings = (_ref2 = this.translations[this.code]) != null ? _ref2.strings : void 0;
         localStrings = JSON.parse(localStorage.getItem("zooniverse-language-strings-" + this.code));
@@ -959,8 +1047,8 @@ window.base64 = {
     };
 
     LanguageManager.prototype.languageLabel = function() {
-      var _ref1;
-      return (_ref1 = this.translations) != null ? _ref1[this.code].label : void 0;
+      var _ref1, _ref2;
+      return ((_ref1 = this.translations[this.code]) != null ? _ref1.label : void 0) || ((_ref2 = this.translations[this.constructor.prototype.code]) != null ? _ref2.label : void 0);
     };
 
     return LanguageManager;
@@ -980,7 +1068,7 @@ window.base64 = {
 }).call(this);
 
 (function() {
-  var LanguageManager, translate, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9,
+  var LanguageManager, translate, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref18, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9,
     __slice = [].slice;
 
   LanguageManager = ((_ref = window.zooniverse) != null ? _ref.LanguageManager : void 0) || require('./language-manager');
@@ -1007,15 +1095,17 @@ window.base64 = {
     pl: ((_ref7 = window.zooniverse) != null ? (_ref8 = _ref7.translations) != null ? _ref8.pl : void 0 : void 0) || require('../translations/pl'),
     ru: ((_ref9 = window.zooniverse) != null ? (_ref10 = _ref9.translations) != null ? _ref10.ru : void 0 : void 0) || require('../translations/ru'),
     zh_tw: ((_ref11 = window.zooniverse) != null ? (_ref12 = _ref11.translations) != null ? _ref12.zh_tw : void 0 : void 0) || require('../translations/zh-tw'),
-    de: ((_ref13 = window.zooniverse) != null ? (_ref14 = _ref13.translations) != null ? _ref14.de : void 0 : void 0) || require('../translations/de')
+    zh_cn: ((_ref13 = window.zooniverse) != null ? (_ref14 = _ref13.translations) != null ? _ref14.zh_cn : void 0 : void 0) || require('../translations/zh-cn'),
+    de: ((_ref15 = window.zooniverse) != null ? (_ref16 = _ref15.translations) != null ? _ref16.de : void 0 : void 0) || require('../translations/de'),
+    cs: ((_ref17 = window.zooniverse) != null ? (_ref18 = _ref17.translations) != null ? _ref18.cs : void 0 : void 0) || require('../translations/cs')
   };
 
   translate.refresh = function(element, key) {
-    var name, property, string, value, _i, _len, _ref15, _ref16, _ref17, _ref18, _ref19, _results;
-    _ref15 = element.attributes;
+    var name, property, string, value, _i, _len, _ref19, _ref20, _ref21, _ref22, _ref23, _results;
+    _ref19 = element.attributes;
     _results = [];
-    for (_i = 0, _len = _ref15.length; _i < _len; _i++) {
-      _ref16 = _ref15[_i], name = _ref16.name, value = _ref16.value;
+    for (_i = 0, _len = _ref19.length; _i < _len; _i++) {
+      _ref20 = _ref19[_i], name = _ref20.name, value = _ref20.value;
       if (name.slice(0, translate.attr.length) !== translate.attr) {
         continue;
       }
@@ -1023,8 +1113,8 @@ window.base64 = {
         continue;
       }
       property = name.slice(translate.attr.length + 1) || 'innerHTML';
-      string = (_ref17 = translate.strings[(_ref18 = LanguageManager.current) != null ? _ref18.code : void 0]) != null ? _ref17[value] : void 0;
-      string || (string = (_ref19 = translate.strings[LanguageManager.prototype.code]) != null ? _ref19[value] : void 0);
+      string = (_ref21 = translate.strings[(_ref22 = LanguageManager.current) != null ? _ref22.code : void 0]) != null ? _ref21[value] : void 0;
+      string || (string = (_ref23 = translate.strings[LanguageManager.prototype.code]) != null ? _ref23[value] : void 0);
       string || (string = value);
       if (element.hasAttribute(property)) {
         _results.push(element.setAttribute(property, string));
@@ -1036,11 +1126,11 @@ window.base64 = {
   };
 
   LanguageManager.on('change-language', function() {
-    var element, _i, _len, _ref15, _results;
-    _ref15 = document.querySelectorAll("[" + translate.attr + "]");
+    var element, _i, _len, _ref19, _results;
+    _ref19 = document.querySelectorAll("[" + translate.attr + "]");
     _results = [];
-    for (_i = 0, _len = _ref15.length; _i < _len; _i++) {
-      element = _ref15[_i];
+    for (_i = 0, _len = _ref19.length; _i < _len; _i++) {
+      element = _ref19[_i];
       _results.push(translate.refresh(element));
     }
     return _results;
