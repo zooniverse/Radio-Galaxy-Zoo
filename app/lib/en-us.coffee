@@ -22,8 +22,6 @@ module.exports =
     left: """
           <h2>Why do astronomers need your help?</h2>
           <p class="description">Black holes cannot be directly observed, since light cannot escape from them; but we can detect them by observing the effect they have on their surroundings. There are a number of methods for probing those surroundings, but for the supermassive black holes found at the center of galaxies, any optical or infrared light is obscured by large amounts of gas and dust. Fortunately, the jets of material spewed out by these supermassive black holes can be observed in the radio wavelengths.</p>
-
-          <p class="description">There is a great deal of valuable information that can be obtained from the radio images of these jets, but we need to understand the host galaxy too. For instance, observing the host galaxy allows us to determine its distance, which is critical to understanding how big and how luminous the black hole actually is.</p>
           <p class="description">There is a great deal of valuable information that can be obtained from the radio images of these jets, but we need to understand the host galaxy too. For instance, observing the host galaxy allows us to determine its distance, which is critical to understanding how big and how luminous the black hole actually is.</p>"""
     right: """
           <h2>What do astronomers hope to learn?</h2>
