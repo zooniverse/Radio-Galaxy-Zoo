@@ -3,7 +3,7 @@ module.exports = [
     type: "lead"
     name: "Ivy Wong"
     title: t7e 'span', 'team.titles.project_scientist'
-    institution: t7e 'span', 'team.institutions.csiro'
+    institution: t7e 'span', 'team.institutions.u_of_w_aus'
     twitter: "owning_ivy"
     bio: t7e 'span', 'team.bios.ivy_wong'
   },
