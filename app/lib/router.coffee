@@ -1,4 +1,5 @@
 Subject = zooniverse.models.Subject
+Api = zooniverse.Api
 
 AppView = require 'views/app_view'
 
@@ -6,6 +7,7 @@ class Router extends Backbone.Router
   routes: {
     "" : "index"
     "classify(/)" : "classify"
+    "classify/:subject_id": "loadSpecificSubject"
     "science(/)" : "science"
     "science/:category(/)" : "science"
     "team(/)" : "team"
@@ -20,6 +22,10 @@ class Router extends Backbone.Router
 
   classify: ->
     @appView.setActive('classify')
+
+  loadSpecificSubject: (subjectId) =>
+    app.subjectSelector.loadSubject subjectId
+    @classify()
 
   science: ->
     @appView.setActive('science')

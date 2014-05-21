@@ -9,9 +9,9 @@ Guide = require('./guide')
 
 Model = require('models/classification')
 
-Router = require 'lib/router'
 tutorialSubject = require('lib/tutorial_subject')
 tutorialSteps = require('lib/tutorial_steps')
+
 
 class Classify extends Section
   el: "#classify"
@@ -73,21 +73,15 @@ class Classify extends Section
     @classifier = new Classifier({model: @model})
     @slider.val(0.5)
 
-  loadSpecificSubject: (subjectId) =>
-    Api.current.get "projects/#{ Api.current.project }/subjects/#{ subjectId }", (rawSubject) ->
-      return unless rawSubject
-      subject = new Subject rawSubject
-      subject.select()
-
   userChange: =>
     if User.current? and User.current.preferences?.radio?.tutorial_done
       if @tut
         @tut.end()
 
-      subjectId = Backbone.history.fragment.split('/')?[1]
-
-      if subjectId?
-        @loadSpecificSubject subjectId
+      route = Backbone.history.fragment.split '/'
+      
+      if route[0] is 'classify' and typeof route[1] is 'string'
+        app.subjectSelector.loadSubject route[1]
       else
         Subject.next()
 

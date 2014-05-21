@@ -1,5 +1,6 @@
 Router = require('lib/router')
 enUS = require('lib/en-us')
+SubjectSelector = require 'lib/subject-selector'
 
 zooniverse.models.Subject.prototype.talkHref = ->
   "http://radiotalk.galaxyzoo.org/#/subjects/#{@zooniverse_id}"
@@ -40,7 +41,6 @@ module.exports = ->
       path: '/proxy'
     })
 
-    #  zooniverse.models.Subject.next()
   topBar = new zooniverse.controllers.TopBar
     talkProfileHref: "http://radiotalk.galaxyzoo.org/#/profile"
   zooniverse.models.User.fetch()
@@ -49,5 +49,9 @@ module.exports = ->
   footer = new zooniverse.controllers.Footer
   footer.el.appendTo '#footer'
 
-  router = new Router()
+  subjectSelector = new SubjectSelector
+  router = new Router
+
+  window.app = { api, router, subjectSelector }
+
   Backbone.history.start()
