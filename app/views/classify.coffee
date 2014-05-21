@@ -1,3 +1,4 @@
+Api = zooniverse.Api
 Subject = zooniverse.models.Subject
 User = zooniverse.models.User
 
@@ -8,6 +9,7 @@ Guide = require('./guide')
 
 Model = require('models/classification')
 
+Router = require 'lib/router'
 tutorialSubject = require('lib/tutorial_subject')
 tutorialSteps = require('lib/tutorial_steps')
 
@@ -71,11 +73,24 @@ class Classify extends Section
     @classifier = new Classifier({model: @model})
     @slider.val(0.5)
 
+  loadSpecificSubject: (subjectId) =>
+    Api.current.get "projects/#{ Api.current.project }/subjects/#{ subjectId }", (rawSubject) ->
+      return unless rawSubject
+      subject = new Subject rawSubject
+      subject.select()
+
   userChange: =>
     if User.current? and User.current.preferences?.radio?.tutorial_done
       if @tut
         @tut.end()
-      Subject.next()
+
+      subjectId = Backbone.history.fragment.split('/')?[1]
+
+      if subjectId?
+        @loadSpecificSubject subjectId
+      else
+        Subject.next()
+
     else
       @startTutorial() if @isVisible() and not @tut?
 
