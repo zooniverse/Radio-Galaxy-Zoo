@@ -1,4 +1,3 @@
-Api = zooniverse.Api
 Subject = zooniverse.models.Subject
 User = zooniverse.models.User
 
@@ -11,7 +10,6 @@ Model = require('models/classification')
 
 tutorialSubject = require('lib/tutorial_subject')
 tutorialSteps = require('lib/tutorial_steps')
-
 
 class Classify extends Section
   el: "#classify"
@@ -79,11 +77,7 @@ class Classify extends Section
         @tut.end()
 
       route = Backbone.history.fragment.split '/'
-      
-      if route[0] is 'classify' and typeof route[1] is 'string'
-        app.subjectSelector.loadSubject route[1]
-      else
-        Subject.next()
+      unless route[1]? then Subject.next()
 
     else
       @startTutorial() if @isVisible() and not @tut?
