@@ -7,7 +7,6 @@ class Router extends Backbone.Router
   routes: {
     "" : "index"
     "classify(/)" : "classify"
-    "classify/:subject_ids": "loadSpecificSubject"
     "science(/)" : "science"
     "science/:category(/)" : "science"
     "team(/)" : "team"
@@ -22,16 +21,6 @@ class Router extends Backbone.Router
 
   classify: ->
     @appView.setActive('classify')
-
-  loadSpecificSubject: (rawSubjectIds) =>
-    subjectIds = rawSubjectIds.split ','
-    
-    if subjectIds.length > 1
-      app.subjectSelector.loadSubjects subjectIds
-    else
-      app.subjectSelector.loadSubject subjectIds[0]
-
-    @classify()
 
   science: ->
     @appView.setActive('science')

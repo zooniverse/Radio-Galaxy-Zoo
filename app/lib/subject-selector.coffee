@@ -14,6 +14,7 @@ class SubjectSelector
       return unless rawSubjects.length > 0
 
       Subject.destroyAll()
+      Subject.queueMin = 0
 
       new Subject rawSubject for rawSubject in rawSubjects
 

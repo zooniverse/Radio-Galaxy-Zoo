@@ -53,8 +53,8 @@ class Classify extends Section
     if sub?
       @model = new Model({subject: sub})
     else
-      @model = @next or new Model({subject: Subject.current})
-    Subject.instances.pop()
+      @model = new Model({subject: Subject.current})
+    
     @next = new Model({subject: Subject.instances[1]}) if Subject.instances[1]?
     @listenTo(@model, 'change:ir_opacity', @setSlider)
     
@@ -76,8 +76,11 @@ class Classify extends Section
       if @tut
         @tut.end()
 
-      route = Backbone.history.fragment.split '/'
-      unless route[1]? then Subject.next()
+      customSubjects = location.search.match(/subjects=([^&]+)/)?[1]
+      if customSubjects?
+        app.subjectSelector.loadSubjects customSubjects.split ','
+      else
+        Subject.next()
 
     else
       @startTutorial() if @isVisible() and not @tut?

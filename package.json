@@ -2,7 +2,7 @@
   "name": "Radio-Galaxy-Zoo",
   "description": "Cross matching infrared and radio sources.",
   "author": "Zooniverse <support@zooniverse.org>",
-  "version": "1.2.17",
+  "version": "1.2.18",
   "scripts": {
     "start": "brunch watch --server",
     "deploy-locale": "seed-translation --project radio --env production --deploy-path translations"
