@@ -20,7 +20,8 @@
     "uglify-js-brunch": ">= 1.0 < 1.8",
     "clean-css-brunch": ">= 1.0 < 1.8",
     "coffee-script-brunch": "~1.7.2",
-    "translator-seed": "~0.1.1"
+    "translator-seed": "~0.1.1",
+    "execSync": "^1.0.1-pre"
   },
   "engine": "node >= 0.10.12"
 }

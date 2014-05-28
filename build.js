@@ -3,7 +3,8 @@ var fs = require('fs'),
   clean = require('clean-css'),
   uglify = require('uglify-js'),
   zlib = require('zlib'),
-  AWS = require('aws-sdk');
+  AWS = require('aws-sdk'),
+  sh = require('execSync');
 
 AWS.config.loadFromPath('./.aws-cred.json');
 
@@ -53,6 +54,9 @@ uploadImgs = function(dir) {
   });
 };
 
+console.log('Building project...');
+sh.run('brunch build --production');
+
 uploadImgs('./public/images');
 
 console.log("Build CSS");
@@ -86,6 +90,7 @@ zlib.gzip(css, function(err, result) {
 });
 
 
+// Javascript stuff
 console.log("Build JS");
 
 var jsInput = [
