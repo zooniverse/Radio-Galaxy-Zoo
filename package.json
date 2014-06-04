@@ -5,7 +5,8 @@
   "version": "1.2.19",
   "scripts": {
     "start": "brunch watch --server",
-    "deploy-locale": "seed-translation --project radio --env production --deploy-path translations"
+    "deploy-locale": "seed-translation --project radio --env production --deploy-path translations",
+    "deploy": "node ./build.js"
   },
   "dependencies": {
     "javascript-brunch": ">= 1.0 < 1.8",
