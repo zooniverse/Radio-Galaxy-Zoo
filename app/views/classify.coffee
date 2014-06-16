@@ -55,6 +55,8 @@ class Classify extends Section
     else
       @model = new Model({subject: Subject.current})
     
+    app.model = @model
+    
     @next = new Model({subject: Subject.instances[1]}) if Subject.instances[1]?
     @listenTo(@model, 'change:ir_opacity', @setSlider)
     
