@@ -55,10 +55,12 @@ class Classification extends Backbone.Model
   matchContours: ->
     contour_ids = _.clone(@get('selected_contours'))
     sources = _.clone(@get('ir_markings'))
+
     @set({
       ir_matched: sources.concat(@get("ir_matched"))
       matched_contours: contour_ids.concat(@get('matched_contours'))
     })
+
     bboxes = _.chain(contour_ids)
         .map((cid) => 
           contours = @get('contours')
@@ -68,6 +70,7 @@ class Classification extends Backbone.Model
           contours[cid][0].bbox.concat([425 / width, 425 / height]))
         .map((bb) -> _.object(['xmax', 'ymax', 'xmin', 'ymin', 'scale_width', 'scale_height'], bb))
         .value()
+
     @classification.annotate({
       radio: if _.isEmpty(bboxes) then "No Contours" else bboxes
       ir: if _.isEmpty(sources) then "No Sources" else sources
@@ -84,6 +87,7 @@ class Classification extends Backbone.Model
     if step == -1
       @step0()
     else
+      @classification.annotations.pop() if step is 1
       @set('step', step)
 
   stateDispatch: (m, step) ->
