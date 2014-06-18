@@ -15,7 +15,7 @@ var version = require('./package').version
 if (version.match(/beta/))
   prefix = prefix
 else
-  prefix = 'radio.galaxyzoo.org'
+  prefix = 'radio.galaxyzoo.org/'
 console.log("Building RGZ Version: ", version);
 
 // Upload Images
