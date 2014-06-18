@@ -8,14 +8,14 @@ var fs = require('fs'),
 
 AWS.config.loadFromPath('./.aws-cred.json');
 
-var s3bucket = new AWS.S3({params: {Bucket: 'radio.galaxyzoo.org'}});
+var s3bucket = new AWS.S3({params: {Bucket: 'zooniverse-static'}});
 var $ = cheerio.load(fs.readFileSync("./public/index.html"));
 var version = require('./package').version
 
 if (version.match(/beta/))
   prefix = prefix
 else
-  prefix = ''
+  prefix = 'radio.galaxyzoo.org'
 console.log("Building RGZ Version: ", version);
 
 // Upload Images
