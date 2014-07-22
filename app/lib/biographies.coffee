@@ -30,10 +30,10 @@ module.exports = [
   },
   {
     type: "science"
-    name: "Samuel George"
-    institution: t7e 'span', 'team.institutions.u_of_birmingham'
+    name: "Tom Jones"
+    institution: t7e 'span', 'team.institutions.u_of_minnesota'
     twitter: null
-    bio: t7e 'span', 'team.bios.samuel_george'
+    bio: t7e 'span', 'team.bios.tom_jones'
   },
   {
     type: "edu"
