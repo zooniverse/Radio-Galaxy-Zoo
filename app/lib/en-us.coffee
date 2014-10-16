@@ -7,7 +7,7 @@ module.exports =
     science: 'Science'
     team: 'Team'
     profile: 'Profile'
-    discuss: 'Discuss'
+    discuss: 'Talk'
     blog: 'Blog'
 
   index:
