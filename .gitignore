@@ -8,3 +8,4 @@ scripts/radio-galaxy-zoo-*
 *.fits.gz
 scripts/converted
 .aws-cred.json
+/npm-debug.log
