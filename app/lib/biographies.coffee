@@ -80,7 +80,7 @@ module.exports = [
     name: "Ray Norris"
     title: t7e 'span', 'team.titles.project_advisor'
     institution: t7e 'span', 'team.institutions.csiro'
-    twitter: null
+    twitter: 'RayPNorris'
     bio: t7e 'span', 'team.bios.ray_norris'
   },
   {
