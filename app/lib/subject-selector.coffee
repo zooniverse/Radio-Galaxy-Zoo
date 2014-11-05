@@ -2,10 +2,13 @@ Subject = zooniverse.models.Subject
 Api = zooniverse.Api
 
 class SubjectSelector
+  Subject.queueMin = 0
 
   loadSubject: (subjectId) =>
     Api.current.get "projects/#{ Api.current.project }/subjects/#{ subjectId }", (rawSubject) ->
       return unless rawSubject
+
+      Subject.destroyAll()
       subject = new Subject rawSubject
       subject.select()
 
@@ -14,10 +17,7 @@ class SubjectSelector
       return unless rawSubjects.length > 0
 
       Subject.destroyAll()
-      Subject.queueMin = 0
-
       new Subject rawSubject for rawSubject in rawSubjects
-
       Subject.first().select()
 
 module.exports = SubjectSelector
