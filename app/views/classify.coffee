@@ -10,6 +10,7 @@ Model = require('models/classification')
 
 tutorialSubject = require('lib/tutorial_subject')
 tutorialSteps = require('lib/tutorial_steps')
+goldStandard = require('lib/gold_standard')
 
 class Classify extends Section
   el: "#classify"
@@ -41,6 +42,7 @@ class Classify extends Section
   }
 
   initialize: ->
+    @session_counter = 0
     @unseen = true 
     User.on('change', @userChange)
     Subject.on('select', => @loadSubject())
@@ -82,7 +84,7 @@ class Classify extends Section
       if customSubjects?
         app.subjectSelector.loadSubjects customSubjects.split ','
       else
-        Subject.next()
+        @loadNext()
 
     else
       @startTutorial() if @isVisible() and not @tut?
@@ -155,9 +157,31 @@ class Classify extends Section
 
   nextSubject: ->
     @$('.favorite').removeClass('active')
+    seenId = @model.get('subject').zooniverse_id
+    if User.current? && _.contains(goldStandard, seenId)
+      User.current.setPreference('seen_gold', _.uniq(@seenGold().concat(seenId)))
+    @session_counter += 1
     @model.classification.send()
-    Subject.next()
+    @loadNext()
 
+  loadNext: ->
+    if @shouldLoadGold()
+      console.log('here')
+      app.subjectSelector.loadSubject @selectGoldStandard()
+    else
+      Subject.next()
+
+  seenGold: ->
+    User.current?.preferences?.radio?.seen_gold || []
+
+  shouldLoadGold: ->
+    User.current? and
+     (not _.isEmpty(_.difference(goldStandard, @seenGold()))) and
+     @session_counter % 5 is 0
+
+  selectGoldStandard: ->
+    _.chain(goldStandard).difference(@seenGold()).shuffle().first().value()
+    
   toggleKeyboardGuide: ->
     @keyboardButton or= @$('.keyboard')
     @keyboardButton.toggleClass('active')
