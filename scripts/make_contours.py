@@ -3,7 +3,6 @@ import sys
 import glob
 import json
 import numpy as np
-import matplotlib.pyplot as plt
 from astropy.io import fits
 from collections import namedtuple
 import cmath
@@ -363,8 +362,9 @@ def contour(f, rms):
   return {'height': height, 'width': width, 'contours': map(group_contours, filter(filter_small, k0contours))}
 
 def points_to_dict(g):
-  for i,c in enumerate(g): 
-    c['arr'] = map(lambda p: p.to_dict(), c['arr'])
+  for i,c in enumerate(g):
+    if not isinstance(c['arr'][0], dict):
+      c['arr'] = map(lambda p: p.to_dict(), c['arr'])
     g[i] = c
   return g
 
