@@ -166,7 +166,6 @@ class Classify extends Section
 
   loadNext: ->
     if @shouldLoadGold()
-      console?.log('here')
       app.subjectSelector.loadSubject @selectGoldStandard()
     else
       Subject.next()
