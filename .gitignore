@@ -9,3 +9,4 @@ scripts/radio-galaxy-zoo-*
 scripts/converted
 .aws-cred.json
 /npm-debug.log
+.*sw[op]

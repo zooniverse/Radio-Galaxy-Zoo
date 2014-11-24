@@ -3,16 +3,23 @@ import sys
 import glob
 import json
 import numpy as np
-import matplotlib.pyplot as plt
 from astropy.io import fits
 from collections import namedtuple
 import cmath
 
 EPSILON = 1e-10
 
-LEVELS = [5.196152422706632, 8.999999999999998, 15.588457268119893, 26.999999999999993, 46.765371804359674, 80.99999999999997, 140.296115413079, 242.9999999999999, 420.88834623923697, 728.9999999999995, 1262.6650387177108, 2186.9999999999986, 3787.9951161531317, 6560.9999999999945]
-
+NLEVELS = 13
+#LEVEL_SCALE = np.sqrt(5)
 THRESHOLD = 8
+
+def make_levels(NLEVELS,LEVEL_INTERVAL):
+
+  LEVELS = [9./np.sqrt(3)]    # Starting value for the level scaling
+  for l in range(NLEVELS):
+    LEVELS.append(LEVELS[-1]*LEVEL_INTERVAL)
+
+  return LEVELS
 
 class Point:
   def __init__(self, x, y):
@@ -321,7 +328,7 @@ def contour_list(contours):
       s = s.cdr
   return sorted(l, key=lambda n: n['k'])
 
-def contour(f, rms):
+def contour(f, rms, LEVEL_INTERVAL):
   BBox = namedtuple('BBox', 'max_x max_y min_x min_y')
   data = fits.getdata(f)[::-1]
   height = len(data)
@@ -355,7 +362,8 @@ def contour(f, rms):
 
   idx = range(1, height+1)
   jdx = range(1, width+1) 
-  cs = contour_list(conrec(data, 0, height - 1, 0, width - 1, idx, jdx, len(LEVELS), map(lambda l: l * rms, LEVELS)))
+  LEVELS = make_levels(NLEVELS,LEVEL_INTERVAL)
+  cs = contour_list(conrec(data, 0, height - 1, 0, width - 1, idx, jdx, len(LEVELS), map(lambda l: l * rms / LEVELS[0], LEVELS)))
 
   k0contours = map(bounding_box, filter(lambda c: c['k'] == 0, cs))
   subcontours = filter(lambda c: c['k'] != 0, cs)
@@ -363,17 +371,19 @@ def contour(f, rms):
   return {'height': height, 'width': width, 'contours': map(group_contours, filter(filter_small, k0contours))}
 
 def points_to_dict(g):
-  for i,c in enumerate(g): 
-    c['arr'] = map(lambda p: p.to_dict(), c['arr'])
+  for i,c in enumerate(g):
+    if not isinstance(c['arr'][0], dict):
+      c['arr'] = map(lambda p: p.to_dict(), c['arr'])
     g[i] = c
   return g
 
 if __name__ == '__main__':
-  if len(sys.argv) < 3:
-    print "Usage: python make_contours.py [file] [RMS]"
+  if len(sys.argv) < 4:
+    print "Usage: python make_contours.py [file] [RMS] [LEVEL_INTERVAL]"
     sys.exit()
   f = sys.argv[1]
   rms = float(sys.argv[2])
-  cs = contour(f, rms)
+  LEVEL_INTERVAL = float(sys.argv[3])
+  cs = contour(f, rms, LEVEL_INTERVAL)
   cs['contours'] = map(points_to_dict, cs['contours'])
   print json.dumps(cs)
