@@ -54,8 +54,10 @@ class Classify extends Section
     @stopListening(@model)
     if sub?
       @model = new Model({subject: sub})
-    else
+    else if Subject.current?
       @model = new Model({subject: Subject.current})
+    else
+      return @displayFinished()
     
     app.model = @model
     
@@ -74,6 +76,10 @@ class Classify extends Section
     @steps = new Steps({model: @model})
     @classifier = new Classifier({model: @model})
     @slider.val(0.5)
+
+  displayFinished: =>
+    @$('.classifier').hide()
+    @$('.finished-subjects').show()
 
   userChange: =>
     if User.current? and User.current.preferences?.radio?.tutorial_done

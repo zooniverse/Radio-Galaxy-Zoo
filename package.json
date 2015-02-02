@@ -9,6 +9,7 @@
     "deploy": "node ./build.js"
   },
   "dependencies": {
+    "brunch": "1.7.1",
     "javascript-brunch": "1.7.1",
     "css-brunch": "1.7.0",
     "eco-brunch": "1.5.1",
