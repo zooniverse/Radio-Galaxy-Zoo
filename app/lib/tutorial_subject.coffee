@@ -3,8 +3,8 @@ module.exports =
   project_id: '52afdb804d69636532000001'
   workflow_ids: ['52afdb804d69636532000002']
   location:
-    standard: 'http://localhost:3333/images/tutorial_standard.png'
-    radio: 'http://localhost:3333/images/tutorial_radio.png'
+    standard: 'http://radio.galaxyzoo.org/images/tutorial_standard.png'
+    radio: 'http://radio.galaxyzoo.org/images/tutorial_radio.png'
     contour: 'http://localhost:3333/contours/tutorial_contours.json'
   coords: [9.33480833333, -44.1265305556]
   metadata:
