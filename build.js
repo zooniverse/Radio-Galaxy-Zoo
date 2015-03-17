@@ -152,7 +152,7 @@ console.log("Uploading Tutorial Contours...");
 
 zlib.gzip
 
-fs.readFile('./public/contours/tutorial_contours.json', function(err, result) {
+fs.readFile('./public/contours/tutorial_contours_new.json', function(err, result) {
   if (err)
     throw err;
   zlib.gzip(result, function(err, result) {
@@ -161,7 +161,7 @@ fs.readFile('./public/contours/tutorial_contours.json', function(err, result) {
     s3bucket.putObject({
       ACL: 'public-read',
       Body: result,
-      Key: prefix + 'contours/tutorial_contours.json',
+      Key: prefix + 'contours/tutorial_contours_new.json',
       ContentEncoding: 'gzip',
       ContentType: 'application/json'
     }, function(err) {
