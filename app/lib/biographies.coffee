@@ -17,7 +17,7 @@ module.exports = [
     type: "lead"
     name: "Julie Banfield"
     title: t7e 'span', 'team.titles.project_scientist'
-    institution: t7e 'span', 'team.institutions.csiro'
+    institution: t7e 'span', 'team.institutions.anu_arc'
     twitter: "42jkb"
     bio: t7e 'span', 'team.bios.julie_banfield'
   },
@@ -191,4 +191,3 @@ module.exports = [
     bio: t7e 'span', 'team.bios.sugata_kaviraj'
   },
 ]
-  
