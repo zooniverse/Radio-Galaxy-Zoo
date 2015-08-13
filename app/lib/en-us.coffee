@@ -1,4 +1,4 @@
-module.exports = 
+module.exports =
   title: "Radio Galaxy Zoo"
   radio: "Radio"
   ir: 'IR'
@@ -11,11 +11,11 @@ module.exports =
     blog: 'Blog'
 
   index:
-    header: """ 
+    header: """
         <h1>In Search of Erupting Black Holes</h1>
-        <p class="call-to-action">Help astronomers discover supermassive black holes observed by the KG Jansky Very Large Array (NRAO) and the Australia Telescope Compact Array (CSIRO)</p>""" 
+        <p class="call-to-action">Help astronomers discover supermassive black holes observed by the KG Jansky Very Large Array (NRAO) and the Australia Telescope Compact Array (CSIRO)</p>"""
     image_credit: "NASA, ESA, S. Baum and C. O'Dea (RIT), R. Perley and W. Cotton (NRAO/AUI/NSF), and the Hubble Heritage Team (STScI/AURA)"
-    call: """ 
+    call: """
             <p class="header-title">Search for Black Holes</p>
             <p class="description">Black holes are found at the center of most, if not all, galaxies. The bigger the galaxy, the bigger the black hole and the more sensational the effect it can have on the host galaxy. These supermassive black holes drag in nearby material, growing to billions of times the mass of our sun and occasionally producing spectacular jets of material traveling nearly as fast as the speed of light. These jets often can't be detected in visible light, but are seen using radio telescopes. Astronomers need your help to find these jets and match them to the galaxy that hosts them.</p>
             <a class="blue-button" href="#/classify">Begin Hunting</a>"""
@@ -111,7 +111,7 @@ module.exports =
       ray_norris: "Ray researches how galaxies formed and evolved after the Big Bang, using radio, infrared, and optical telescopes. As a sideline, he also researches the astronomy of Australian Aboriginal people, frequently appears on radio and TV, and has recently published a novel, Graven Images."
       larry_rudnick: "Larry has been classifying radio galaxies since the mid-70s. He's saturated, and is thrilled with this effort to bring lots of fresh eyes to the massive new samples coming from modern radio telescopes."
       kevin_schawinski: "Kevin works on understanding the role of black holes in the Universe. He came to ETH via Yale University and Oxford, where he did his Ph.D. and was involved in the set-up of the original Galaxy Zoo. Kevin’s work focuses on trying to combine what we know about black holes and galaxies and trying to piece together a coherent story of whether and how the two co-evolve."
-      nick_seymour: "Radio astronomer enjoying life down under and working on the largest radio survey with the Australian SKA Pathfinder, CSIRO." 
+      nick_seymour: "Radio astronomer enjoying life down under and working on the largest radio survey with the Australian SKA Pathfinder, CSIRO."
       stas_shabala: "Stas wants to know why radio galaxies come in so many different shapes, sizes and luminosities, and how they impact their surroundings. He also likes using the radio galaxies for super-accurate positioning on Earth, to help him track earthquakes and changing sea levels."
       kyle_willett: "Kyle has had a lot of experience with radio astronomy, but hasn’t done much of it since starting work with Galaxy Zoo &mdash; that's one reason he is excited about this project. Kyle’s particular scientific interest is in measuring the properties of the interstellar gas in the galaxies that you're helping to identify. In his spare time, he runs probably more than is healthy."
       laura_whyte: "As a former high school teacher and adult educator, with a Ph.D. in galaxy classification (seriously), joining the Zooniverse as an educator was a natural fit for Laura. Based at the Adler Planetarium in Chicago, she's working to encourage and support teachers to use Zooniverse citizen science projects in the classroom."
@@ -139,6 +139,7 @@ module.exports =
       u_of_guanajuato: "University of Guanajuato, Mexico"
       u_of_w_aus: "University of Western Australia"
       u_of_tasmania: "University of Tasmania, Australia"
+      anu_arc: "ARC Centre of Excellence for All-Sky Astrophysics, Australian National University"
     titles:
       project_scientist: "Project Scientist"
       project_advisor: "Project Advisor"
@@ -150,7 +151,7 @@ module.exports =
     welcome:
       header: "Welcome to Radio Galaxy Zoo!"
       details: "We’re going to show you two images of the same part of the sky, one from a radio telescope and one from an infrared telescope. \n \n In most images there are many infrared galaxies, but only some of these appear in the radio."
-    wavelengths: 
+    wavelengths:
       header: "Different Wavelengths"
       details: "Here are two galaxies seen at radio wavelengths - one small one lower down and one large, double-lobed object in the centre. We use contours to show their radio brightness. \n \n To see how the galaxies appear in the infrared, move the slider over to the IR position. The goal is to match up the radio contours to their galaxy images in the IR."
     classify1:
@@ -167,7 +168,7 @@ module.exports =
       details: "Now let's mark the other Galaxy. First select 'Mark Another'."
     classify5:
       header: "Pairing a Second Source."
-      details: "Then click on the first group of contours of the brighter Galaxy." 
+      details: "Then click on the first group of contours of the brighter Galaxy."
     classify525:
       header: "Pairing a Second Source."
       details: "Next click on the second group of contours of the Galaxy. Then click on 'Done'."
@@ -182,10 +183,10 @@ module.exports =
       details: "That's all the pairs in this image. Click 'Finish' to advance."
     que:
       header: "What's Going on?"
-      details: "The large, bright radio object shows us where two jets were emitted by a supermassive black hole at center of that galaxy. The fainter radio object shows emission from newly-formed stars in the galaxy." 
+      details: "The large, bright radio object shows us where two jets were emitted by a supermassive black hole at center of that galaxy. The fainter radio object shows emission from newly-formed stars in the galaxy."
     guide:
       header: "More Objects"
       details: "You can see many more examples in the ‘Guide’, showing how the science team marked more complex objects."
-    next: 
+    next:
       header: "Next"
       details: "You can favourite images to see again later, or discuss images with the community on our forum, Talk. \n \n Click ‘Next’ to move on to the next image. "
