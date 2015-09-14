@@ -2,6 +2,7 @@ Router = require('lib/router')
 enUS = require('lib/en-us')
 SubjectSelector = require 'lib/subject-selector'
 
+zooniverse.models.Subject.group = true
 zooniverse.models.Subject.prototype.talkHref = ->
   "http://radiotalk.galaxyzoo.org/#/subjects/#{@zooniverse_id}"
 
