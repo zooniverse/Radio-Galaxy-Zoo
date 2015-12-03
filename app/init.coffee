@@ -27,22 +27,13 @@ module.exports = ->
     t7e.refresh()
   )
 
-  host = if window.location.port is "9296" then "http://0.0.0.0:3000" else "https://dev.zooniverse.org"
-  if window.location.port is "3333" or (window.location.pathname is "/beta2/")
-    api = new zooniverse.Api({
-      project: 'radio'
-      host: host
-      path: '/proxy'
-    })
+  api = if window.location.hostname is 'radio.galaxyzoo.org'
+    new zooniverse.Api project: 'radio', host: 'http://radio.galaxyzoo.org', path: '/_ouroboros_api/proxy'
   else
-    new zooniverse.GoogleAnalytics
-      account: "UA-1224199-49"
-    
-    api = new zooniverse.Api({
-      project: 'radio'
-      host: "https://api.zooniverse.org"
-      path: '/proxy'
-    })
+    new zooniverse.Api project: 'radio'
+
+  new zooniverse.GoogleAnalytics
+    account: "UA-1224199-49"
 
   topBar = new zooniverse.controllers.TopBar
     talkProfileHref: "http://radiotalk.galaxyzoo.org/#/profile"
