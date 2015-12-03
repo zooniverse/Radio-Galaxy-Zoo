@@ -6,7 +6,7 @@
   "scripts": {
     "start": "brunch watch --server",
     "deploy-locale": "seed-translation --project radio --env production --deploy-path translations",
-    "deploy": "node ./build.js"
+    "deploy": "rm -rf public && brunch build && node ./build.js"
   },
   "dependencies": {
     "brunch": "1.7.1",
