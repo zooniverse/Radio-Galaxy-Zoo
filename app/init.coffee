@@ -28,7 +28,7 @@ module.exports = ->
   )
 
   api = if window.location.hostname is 'radio.galaxyzoo.org'
-    new zooniverse.Api project: 'radio', host: 'http://radio.galaxyzoo.org', path: '/_ouroboros_api/proxy'
+    new zooniverse.Api project: 'radio', host: 'https://radio.galaxyzoo.org', path: '/_ouroboros_api/proxy'
   else
     new zooniverse.Api project: 'radio'
 
