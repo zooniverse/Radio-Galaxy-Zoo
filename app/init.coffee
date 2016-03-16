@@ -4,7 +4,7 @@ SubjectSelector = require 'lib/subject-selector'
 
 zooniverse.models.Subject.group = true
 zooniverse.models.Subject.prototype.talkHref = ->
-  "http://radiotalk.galaxyzoo.org/#/subjects/#{@zooniverse_id}"
+  "https://radiotalk.galaxyzoo.org/#/subjects/#{@zooniverse_id}"
 
 module.exports = ->
   t7e.load(enUS)
@@ -36,7 +36,7 @@ module.exports = ->
     account: "UA-1224199-49"
 
   topBar = new zooniverse.controllers.TopBar
-    talkProfileHref: "http://radiotalk.galaxyzoo.org/#/profile"
+    talkProfileHref: "https://radiotalk.galaxyzoo.org/#/profile"
   zooniverse.models.User.fetch()
   topBar.el.appendTo 'body'
 
