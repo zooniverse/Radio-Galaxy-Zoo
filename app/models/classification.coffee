@@ -23,11 +23,13 @@ class Classification extends Backbone.Model
   irImage: ->
     @irImg or= new Image()
     @irImg.src or= @get('subject').location.standard
+    @irImg.src = @irImg.src.replace /^http:/, 'https:'
     return @irImg.src
 
   radioImage: ->
     @rImg or= new Image()
     @rImg.src or= @get('subject').location.radio
+    @rImg.src = @irImg.src.replace /^http:/, 'https:'
     return @rImg.src
 
   loadImages: ->
@@ -46,7 +48,7 @@ class Classification extends Backbone.Model
     else
       @set('selected_contours', selected.concat(id))
 
-  addMarking: ([x, y]) -> 
+  addMarking: ([x, y]) ->
     @set('ir_markings', @get('ir_markings').concat({x: x, y: y}))
 
   removeMarking: ({x, y}) ->
@@ -62,7 +64,7 @@ class Classification extends Backbone.Model
     })
 
     bboxes = _.chain(contour_ids)
-        .map((cid) => 
+        .map((cid) =>
           contours = @get('contours')
           width = contours.width
           height = contours.height
