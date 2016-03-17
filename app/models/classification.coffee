@@ -22,14 +22,12 @@ class Classification extends Backbone.Model
 
   irImage: ->
     @irImg or= new Image()
-    @irImg.src or= @get('subject').location.standard
-    @irImg.src = @irImg.src.replace /^http:/, 'https:'
+    @irImg.src or= @get('subject').location.standard.replace /^http:/, 'https:'
     return @irImg.src
 
   radioImage: ->
     @rImg or= new Image()
-    @rImg.src or= @get('subject').location.radio
-    @rImg.src = @irImg.src.replace /^http:/, 'https:'
+    @rImg.src or= @get('subject').location.radio.replace /^http:/, 'https:'
     return @rImg.src
 
   loadImages: ->
@@ -38,7 +36,9 @@ class Classification extends Backbone.Model
 
   loadContours: ->
     subjectLocs = @get('subject').location
-    $.get(subjectLocs.contours || subjectLocs.contour).then((response) =>
+    contourUrl = subjectLocs.contours || subjectLocs.contour
+    contourUrl = contourUrl.replace /^http:/, 'https:'
+    $.get(contourUrl).then((response) =>
       @set('contours', response))
 
   selectContour: (id) ->
