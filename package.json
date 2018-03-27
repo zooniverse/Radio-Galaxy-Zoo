@@ -18,7 +18,7 @@
     "clean-css": "1.0.12",
     "uglify-js": "2.4.15",
     "cheerio": "0.12.4",
-    "stylus-brunch": "git://github.com/chrissnyder/stylus-brunch.git#99beb62d6d",
+    "stylus-brunch": "git://github.com/zooniverse/stylus-brunch.git#rgz-fork",
     "uglify-js-brunch": "1.7.7",
     "clean-css-brunch": "1.7.1",
     "coffee-script-brunch": "1.7.3",
