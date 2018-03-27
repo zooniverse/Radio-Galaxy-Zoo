@@ -9,7 +9,7 @@
     "deploy": "rm -rf public && brunch build && node ./build.js"
   },
   "dependencies": {
-    "brunch": "1.7.1",
+    "brunch": "2.10.12",
     "javascript-brunch": "1.7.1",
     "css-brunch": "1.7.0",
     "eco-brunch": "1.5.1",
@@ -18,7 +18,7 @@
     "clean-css": "1.0.12",
     "uglify-js": "2.4.15",
     "cheerio": "0.12.4",
-    "stylus-brunch": "git://github.com/chrissnyder/stylus-brunch.git#99beb62d6d",
+    "stylus-brunch": "2.10.0",
     "uglify-js-brunch": "1.7.7",
     "clean-css-brunch": "1.7.1",
     "coffee-script-brunch": "1.7.3",
